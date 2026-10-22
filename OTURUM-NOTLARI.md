@@ -13,7 +13,8 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 - Bütün dosyalar `taslak`; `bos` kalmadı. Kullanıcı gözden geçirmesi bekleniyor.
 - `main` push edildi; `dogrulama-2026-10-22` branch'i silindi. Önceki sohbetin transkripti silindi (içeriği bu dosyaya aktarıldı).
-- **Madde 1 (trade-data-app) bitti:** README indeks + 5 alt dosya. Sıradaki madde 2 (HftSrvProd).
+- **Madde 1 (trade-data-app) bitti:** README indeks + 5 alt dosya. 
+- **Devam eden: madde 2 (HftSrvProd, `4275ccc` değişmedi).** Alt dosyalar yazılıyor: `komutlar-ve-grpc.md`, `strateji-cekirdegi.md`, `emir-yasam-dongusu.md`, `itch-entegrasyonu.md`, `config.md`; sonra README indeks.
 - Yöntem: konu başına paralel agent alt dosya yazar → çelişkileri koddan kontrol et → README'yi indekse çevir → ACIK-KONULAR'a tek satır ekle → CHANGELOG → push.
 - Remote: `seyfullah-meeapps/algo-docs` (kişisel hesap). Planlanan `MeeApps/algo-docs` (org) değil; bilinçli mi, sorulmadı.
 
