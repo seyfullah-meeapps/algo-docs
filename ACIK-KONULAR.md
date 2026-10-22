@@ -59,6 +59,38 @@ Ayrıntılar alt dosyaların kendi "şüpheli davranışlar" bölümlerinde.
 | K-42 | bug? | `cors` anahtarı yoksa boş regex her origin'i kabul ediyor | [config](10-servisler/trade-data-app/config.md) § `server` |
 | K-43 | doğrula | LimitControlService'in workspace'te istemcisi yok; harici sağlayıcı kim? | [api](10-servisler/trade-data-app/api.md) § 6 |
 
+## HftSrvProd
+
+Ayrıntılar alt dosyaların kendi "şüpheli davranışlar" bölümlerinde.
+
+| # | Tür | Konu | Ayrıntı |
+|---|-----|------|---------|
+| K-44 | bug? | Çıplak `BaseStrategyCommand` somut tipe `static_pointer_cast` ediliyor (SubscribeToOrderbook, AlgoSetAccountStrategy, SetBalance) — tanımsız davranış | [komutlar-ve-grpc](10-servisler/hftsrvprod/komutlar-ve-grpc.md) § Şüpheli |
+| K-45 | bug? | `handleTheoreticalOrder` null kontrolsüz `dynamic_pointer_cast`; `getTickSize` bilinmeyen kitapta 0, çağıranlar kontrol etmiyor | [komutlar-ve-grpc](10-servisler/hftsrvprod/komutlar-ve-grpc.md) § Şüpheli |
+| K-46 | bug? | CancelAll/ClosePosition `Orderbook_Id=0` ile bütün hesaplardaki stratejileri durduruyor; replay gate'e bakmıyor | [emir-yasam-dongusu](10-servisler/hftsrvprod/emir-yasam-dongusu.md) § Cancel-all |
+| K-47 | bug? | Manuel EnterOrder SDK hesabın sahibiyken `false` dönse de OK yanıtı veriyor; emir sessizce gitmiyor | [komutlar-ve-grpc](10-servisler/hftsrvprod/komutlar-ve-grpc.md) § 3.2 |
+| K-48 | bug? | `userTokenMap` kilitsiz, token süresiz; `globalCommandQueue` sınırsız, birden çok stream'de mesajlar bölünüyor | [komutlar-ve-grpc](10-servisler/hftsrvprod/komutlar-ve-grpc.md) § 5.1 |
+| K-49 | doğrula | Restart sonrası stratejiler durmuş ve bakiye 0 geliyor (`Strategy_Start`/bakiye kalıcı değil) — kasıtlı mı? | [strateji-cekirdegi](10-servisler/hftsrvprod/strateji-cekirdegi.md) § Servis restart'ı |
+| K-50 | bug? | Strateji silme yolu yok (`removeStrategy`/`stopAllStrategies` çağrılmıyor); `stopAllStrategies` yanlış kilit | [strateji-cekirdegi](10-servisler/hftsrvprod/strateji-cekirdegi.md) § Silme |
+| K-51 | bug? | `periodicJobsMap` strateji başına tek job (second rule ezilebilir), raw `OrderAccepted*` taşıyor, worker sleep'siz dönüyor | [strateji-cekirdegi](10-servisler/hftsrvprod/strateji-cekirdegi.md) § Periyodik işler |
+| K-52 | bug? | `AlgoWorker::addStrategy` çalışan worker'ın vektörüne kilitsiz ekliyor; `strategyToWorkerMap_` kilitsiz | [strateji-cekirdegi](10-servisler/hftsrvprod/strateji-cekirdegi.md) § Kilitler |
+| K-53 | bug? | Tavan/Taban kendi `isRunning`'iyle taban sınıfınkini gölgeliyor; `strategyType` iki sınıfta tanımlı | [strateji-cekirdegi](10-servisler/hftsrvprod/strateji-cekirdegi.md) § Şüpheli |
+| K-54 | bug? | Durdurmada `unregisterStrategyForHandle` çağrılmıyor (HFT Classic, Varant, Teorik); Teorik her başlatmada yeni abonelik açıyor; handle'lar 65536'da sessizce düşüyor | [itch-entegrasyonu](10-servisler/hftsrvprod/itch-entegrasyonu.md) § Şüpheli |
+| K-55 | bug? | Gün içi handoff gate'i tekrar kapatınca kuyruk birikiyor, açılınca bayat olaylar işleniyor | [strateji-cekirdegi](10-servisler/hftsrvprod/strateji-cekirdegi.md) § Replay gate |
+| K-56 | bug? | Handoff öncesi yerel ret (1001–1006) hem stratejiye ret olarak dönüyor hem order-service'e gidiyor; hard cap (1003) fiilen aşılıyor | [emir-yasam-dongusu](10-servisler/hftsrvprod/emir-yasam-dongusu.md) § Şüpheli |
+| K-57 | doğrula | Replay, order-service yolunda işlenmiş fill'leri yeniden getiriyor; strateji `match_id` kontrolü yok | [emir-yasam-dongusu](10-servisler/hftsrvprod/emir-yasam-dongusu.md) § Çift kayıt koruması |
+| K-58 | bug? | OUCH kopunca reconnect callback'i yok; tek kurtarma yeni handoff, gate yeniden kurulmuyor (`replaysRegistered` static) | [emir-yasam-dongusu](10-servisler/hftsrvprod/emir-yasam-dongusu.md) § Kopma senaryoları |
+| K-59 | bug? | `tokens`/`refs` havuzları (100 000) wrap etmiyor; Tavan her girişte `refs` harcıyor | [emir-yasam-dongusu](10-servisler/hftsrvprod/emir-yasam-dongusu.md) § Şüpheli |
+| K-60 | bug? | Kilitsiz paylaşılan durum: `orderTokenToOuchClientUsername`, SDK `account_routes_`, `globalOrderbookStates_` | [emir-yasam-dongusu](10-servisler/hftsrvprod/emir-yasam-dongusu.md) § Şüpheli |
+| K-61 | doğrula | SDK yolu SMP alanlarını göndermiyor (eski `toBISTBytes` gönderiyordu); `DE` hesaplarda `client_cat` House | [emir-yasam-dongusu](10-servisler/hftsrvprod/emir-yasam-dongusu.md) § Şüpheli |
+| K-62 | bug? | Seans durumu haritası `SurekliMuzayede` ile başlıyor; gün içi restart'ta ilk değişime kadar her kitap sürekli işlem sayılıyor | [itch-entegrasyonu](10-servisler/hftsrvprod/itch-entegrasyonu.md) § 6 |
+| K-63 | bug? | Tavan `shouldCancelPositionViaVolume`: header hiç güncellenmediği için kontrol hep true, fonksiyonda `return` eksik | [itch-entegrasyonu](10-servisler/hftsrvprod/itch-entegrasyonu.md) § Şüpheli |
+| K-64 | bug? | Hazır olma yalnızca Spot snapshot-end'e bağlı; yalnız VİOP kurulumda sonsuz bekler | [itch-entegrasyonu](10-servisler/hftsrvprod/itch-entegrasyonu.md) § 2 |
+| K-65 | bug? | `[[markets]]` partition `id`'si SDK partition'ı değil; biri kapatılınca diğerleri kayıyor | [config](10-servisler/hftsrvprod/config.md) § `[[markets]]` |
+| K-66 | bug? | Etkisiz config anahtarları (`coreAffinity`, `internalOuch*`, `ouchWorkerCount`, `minHotDwellUpdates`, `[[viop_ouch_users]]`, `license*`); `loadConfiguration` şifreleri stdout'a basıyor | [config](10-servisler/hftsrvprod/config.md) § Lisans ve okunup kullanılmayanlar |
+| K-67 | doğrula | HFT `grpcPort` ile trade-data-app `extServices` hft portu A1, Alnus, Alnus-Algo, Global, Marbas'ta uyuşmuyor | [config](10-servisler/hftsrvprod/config.md) § Müşteri config'leri |
+| K-68 | doğrula | 7 müşteride `logLevel=debug` (ITCH SDK da debug'a geçiyor); strateji kuyruğu düşürme sayacı loglanmıyor | [config](10-servisler/hftsrvprod/config.md) § Müşteri config'leri |
+
 ## Borsa kuralları
 
 | # | Tür | Konu | Ayrıntı |

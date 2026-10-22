@@ -2,6 +2,26 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-22 — HftSrvProd derinleştirme
+
+Kaynak: HftSrvProd `4275ccc` (değişmedi). Karşı taraf için MAOrderSDK, ouch-sdk ve order-service de okundu.
+
+- `10-servisler/hftsrvprod/` alt dosyalara bölündü: `komutlar-ve-grpc.md`, `strateji-cekirdegi.md`, `emir-yasam-dongusu.md`, `itch-entegrasyonu.md`, `config.md`. README artık giriş ve indeks.
+- **README düzeltmeleri:**
+  - Kuyruk dolunca eski değil, **yeni** olay düşüyor.
+  - `FetchAllUniqueKeys` ve `UpdateExtSettings` HFT'de UNIMPLEMENTED. `SubscribeToCommands` abonelik tutmuyor, yalnız anlık durum yolluyor.
+  - Yerel `onRejected` çağıran thread'de senkron geliyor.
+  - `ownsAccount` canlı bağlantı istiyor; OUCH koparsa emirler order-service'e düşüyor.
+  - Replay gate'te 20 sn watchdog'a ek olarak 60 sn zorunlu açılma var; sonraki handoff gate'i yeniden kapatıyor.
+  - HFT Classic second rule emri periyodik thread'den gönderiliyor.
+  - `hotWorkerCount` bir bayrak.
+  - `sdkLockMemory` ve `mainCpuCores` müşteri config'lerinde açık olabiliyor.
+- **`[[ouch_users]]`:** `isActive=true` girişler açılışta SDK'ya kaydediliyor; handoff'ta handoff verisi yerine config verisi kullanılıyor. Müşteri config'lerinde giriş yok. Kodla doğrulandı; sistem haritası düzeltildi.
+- **`StrType`:** `StrategyService`'in iki mesajı ayrı strateji numaralandırması kullanıyor (sözlük ve strateji kataloğu düzeltildi).
+- **Varant Toplu olayları:** HFT'de istemci başına yönlendirme yok (`varant-toplu.md` düzeltildi).
+- **Restart:** HFT stratejileri durmuş ve bakiye 0 olarak geliyor (`30-akislar/README.md` düzeltildi).
+- **Yeni açık konular:** K-44–K-68.
+
 ## 2026-10-22 — trade-data-app derinleştirme
 
 Kaynak: trade-data-app `1cca9a8` (değişmedi).

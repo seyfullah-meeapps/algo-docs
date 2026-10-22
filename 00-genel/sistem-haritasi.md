@@ -131,7 +131,7 @@ Sabah emirleri (09:40 civarı, config'e bağlı) order-service'ten gönderilir. 
 
 Sonuçlar:
 - Aynı emir hem order-service yolundan hem replay'den gelebilir. Çift kayıt `OrderRegistry` + `claimGlobalAcceptedToken` ile engellenir (`HftMain.cpp` `onAccepted`).
-- HFT, OUCH kullanıcılarını config'den **okumaz**; handoff'tan öğrenir. Config'deki `[[ouch_users]]` yalnızca recv-thread ayar tablosu olarak kullanılır.
+- HFT, OUCH kullanıcılarını handoff'tan öğrenir. Config'deki `[[ouch_users]]`'ın `isActive=false` girişleri yalnızca recv-thread ayar tablosudur. `isActive=true` giriş açılışta SDK'ya önceden kaydedilir ve handoff gelince handoff verisi yerine config'teki ip/şifre kullanılır — müşteri config'lerinde (Algo-Setup `development`, 2026-10-22) hiç `[[ouch_users]]` girişi yok, pratikte bu yol kullanılmıyor ([emir-yasam-dongusu](../10-servisler/hftsrvprod/emir-yasam-dongusu.md)).
 
 Kod: order-service `Managers/Sdk/MAOSdkManager.cpp` (`TriggerOuchDisconnect`, `TryDisconnectUser`), `OrderServiceApplication.cpp` (geç başlatma); HFT `src/Clients/OuchManager.cpp` (`orderUserDisconnected`), `src/Main/HftMain.cpp` (MAOrderSDK boot + callback'ler).
 

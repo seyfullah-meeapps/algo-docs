@@ -19,7 +19,7 @@ durum: taslak
 
 # Strateji kataloğu
 
-`StrategyType` bir **wire değeridir**: proto'larda (`common.proto`), DB'de, `unique_key`'de ve UI'da aynı sayı kullanılır. Numaralar değiştirilmez.
+`StrategyType` bir **wire değeridir**: proto'larda (`common.proto`), DB'de, `unique_key`'de ve UI'da aynı sayı kullanılır. Numaralar değiştirilmez. İstisna: HFT `SubscribeToOrderbookRequest.strategy_type` ve `StrategyOrder.strategy_type` ayrı `StrType` numaralandırmasını kullanır ([komutlar-ve-grpc](../10-servisler/hftsrvprod/komutlar-ve-grpc.md)).
 
 Strateji kimliği (`unique_key`): `<orderbookId>_<hesap>_<strategyIdentifier>_<StrategyType>`. Bkz. HFT `StrategyManager::findStrategy`.
 

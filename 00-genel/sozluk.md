@@ -46,7 +46,7 @@ Bu dosya yeni bilgi içermez. Tanımlar bu repodaki diğer dokümanlardan derlen
 
 | Terim | Anlam | Ayrıntı |
 |-------|-------|---------|
-| **StrategyType** | Strateji tipinin wire numarası; proto, DB, `unique_key` ve UI'da aynı. Değiştirilmez. | [strateji kataloğu](../20-stratejiler/README.md) |
+| **StrategyType** | Strateji tipinin wire numarası; proto, DB, `unique_key` ve UI'da aynı. Değiştirilmez. ⚠ HFT `StrategyService`'in iki mesajı (`SubscribeToOrderbookRequest`, `StrategyOrder`) ayrı bir numaralandırma (`StrType`) kullanır. | [strateji kataloğu](../20-stratejiler/README.md) |
 | **unique_key** | Strateji kimliği: `<orderbookId>_<hesap>_<strategyIdentifier>_<StrategyType>`. | [strateji kataloğu](../20-stratejiler/README.md) |
 | **Tavan / Taban** | Günlük fiyat limitinin üst / alt sınırı; aynı adlı stratejiler (MaxPrice 9, MinPrice 14). | [tavan](../20-stratejiler/tavan.md), [taban](../20-stratejiler/taban.md) |
 | **Second rule** | Emirden belirli süre sonra çalışan çıkış/bekleme kuralı. **Birimi stratejiye göre değişir** (HFT saniye, Tavan/Taban ms). | [hft-classic](../20-stratejiler/hft-classic.md#second-rule-saniye-kuralı) |

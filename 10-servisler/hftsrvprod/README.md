@@ -1,5 +1,5 @@
 ---
-kapsam: HftSrvProd (HFT strateji motoru) — dizin haritası, açılış, thread modeli, ITCH dağıtımı, emir yolu, gRPC katmanı, config, build, yeni strateji ekleme
+kapsam: HftSrvProd (HFT strateji motoru) — giriş ve indeks; dizin haritası, açılış özeti, thread modeli özeti, emir gönderme deseni, config özeti, build, yeni strateji ekleme
 kaynak:
   - repo: HftSrvProd
     branch: development
@@ -10,66 +10,67 @@ durum: taslak
 
 # HftSrvProd
 
-HFT strateji motoru (C++20). Stratejiler için: [`20-stratejiler/`](../../20-stratejiler/README.md). Sistem içindeki yeri: [`00-genel/sistem-haritasi.md`](../../00-genel/sistem-haritasi.md).
+HFT strateji motoru (C++20). Strateji mantığı: [`20-stratejiler/`](../../20-stratejiler/README.md). Sistem içindeki yeri: [`00-genel/sistem-haritasi.md`](../../00-genel/sistem-haritasi.md).
+
+## Alt dosyalar
+
+| Dosya | Soru |
+|-------|------|
+| [`komutlar-ve-grpc.md`](komutlar-ve-grpc.md) | `StrategyService` RPC'leri, UI'da "Başlat"a basınca ne olur, manuel emir komutları, command pattern ve `map<string, Any>` wire biçimi, GUI'ye dönen mesajlar, yeni wire alanı ekleme |
+| [`strateji-cekirdegi.md`](strateji-cekirdegi.md) | `Strategy` taban sınıfı, `StrategyManager` (registry, oluşturma, replay gate, periyodik işler, durum push), thread/kilit modeli ayrıntısı, açılış/durdurma/restart senaryoları |
+| [`emir-yasam-dongusu.md`](emir-yasam-dongusu.md) | Emir modeli ve ölçek, yol seçimi (MAOrderSDK / order-service), bölme, callback'ler ve stratejiye eşleme, handoff'un HFT tarafı, çift kayıt koruması, ret kodları, kopma senaryoları |
+| [`itch-entegrasyonu.md`](itch-entegrasyonu.md) | ITCH SDK başlatma, hazır olma koşulu, abonelik tipleri × strateji matrisi, olay dağıtımı, seans durumu, fiyat ölçeği/tick, enstrüman bilgisinin kaynağı, uptick |
+| [`config.md`](config.md) | `Configuration.toml` anahtar referansı, env değişkenleri, prod'da kapalı tutulanlar, müşteri config farkları |
 
 ## Dizin haritası (`src/`)
 
 | Klasör | İçerik |
 |--------|--------|
 | `Main/HftMain.cpp` | `main()`: config, CPU pin, logger, PerfSDK, ITCH SDK, MAOrderSDK boot ve callback'leri, servislerin başlatılması, kapanış |
-| `Strategy/` | `Strategy` taban sınıfı, strateji sınıfları, `StrategyDepth` / `StrategyLevel` (kendi emir derinliğimiz), `Service/StrategyServiceImpl` (gRPC stream'leri) |
-| `Commands/` | GUI'den gelen komutlar. Strateji başına bir command, emir komutları (`EnterOrder`, `Cancel`, `Replace`, `CancelAll`, `SetBalance`, `ClosePosition`), durum/özet komutları. Fabrika: `CommandFactory.h`. |
-| `Managers/StrategyManager` | Strateji kayıt defteri (`unique_key` → strateji), oluşturma, periyodik işler (second rule timer'ları), durum push'ları, replay gate |
-| `Workers/` | `AlgoWorker` / `AlgoWorkerManager`: stratejileri işleyen thread'ler. `OuchWorker*` eski internal-OUCH kalıntısı. |
-| `Clients/ItchSdkClient` | `libMAItchSDK` sarmalayıcısı. Abonelikler (header, level, execute, denge fiyatı, fiyat eşiği) ve olayların stratejilere dağıtımı. |
-| `Clients/OuchManager` | ouch-sdk istemcisi (order-service'e): handoff öncesi yedek emir yolu, strateji kaydı, `orderUserDisconnected` (handoff), enstrüman cache'i |
-| `Clients/OrderRegistry` | MAOrderSDK yolunun accept edilmiş emirleri (`client_order_id` → emir). Token-only execute/cancel olaylarını çözmek için kullanılır. |
-| `Clients/DatabaseServiceClient` | trade-data-app gRPC `AlgoService` istemcisi (enstrümanlar, hesaplar, ayarlar) |
-| `GUI/GUIManager` | gRPC sunucusu (:`grpcPort`, varsayılan 9050). GUI komutlarını dağıtır, manuel emirleri işler. |
-| `Messages/` | OUCH/ITCH mesaj modelleri, `MsgConvert` (HFT ↔ MAOrderSDK dönüşümleri) |
+| `Strategy/` | `Strategy` taban sınıfı, strateji sınıfları, `StrategyDepth` / `StrategyLevel`, `Service/StrategyServiceImpl` (gRPC stream'leri) |
+| `Commands/` | GUI komutları: strateji başına bir command, emir komutları, durum/özet komutları. Fabrika: `CommandFactory.h` |
+| `Managers/StrategyManager` | Strateji registry'si (`unique_key` → strateji), oluşturma, periyodik işler, durum push'ları, replay gate |
+| `Workers/` | `AlgoWorker` / `AlgoWorkerManager`. `OuchWorker*` ölü kalıntı. |
+| `Clients/ItchSdkClient` | `libMAItchSDK` sarmalayıcısı: abonelikler ve olay dağıtımı |
+| `Clients/OuchManager` | ouch-sdk istemcisi (order-service): handoff öncesi yedek emir yolu, strateji kaydı, handoff (`orderUserDisconnected`) |
+| `Clients/OrderRegistry` | MAOrderSDK yolunda accept edilmiş emirler (`client_order_id` → emir) |
+| `Clients/DatabaseServiceClient` | trade-data-app `AlgoService` istemcisi |
+| `GUI/GUIManager` | gRPC sunucusu (`grpcPort`, varsayılan 9050), komut dispatch'i |
+| `Messages/` | OUCH/ITCH mesaj modelleri, `MsgConvert` (HFT ↔ MAOrderSDK) |
 | `Configuration/` | `Configuration.toml` (örnek), `ConfigurationManager` |
-| `Globals/` | `GuiConstants.h` (**wire alan adları, tek otorite**), `Enumarations.h`, `GlobalConstants.h` (ret kodları vb.) |
-| `License/` | Lisans kontrolü. `HftMain`'de yorum satırında, **çalışmıyor**. |
-| `*.proto` | `strategies.proto` (StrategyService), `algo.proto` (AlgoService istemcisi), `ouch-data.proto`, `common.proto`. `buf generate` ile üretilir. |
+| `Globals/` | `GuiConstants.h` (wire alan adları; bazı giden anahtarlar ayrıca string literal), `Enumarations.h`, `GlobalConstants.h` (ret kodları) |
+| `License/` | Lisans kontrolü; `HftMain`'de yorum satırında, **çalışmıyor** |
+| `*.proto` | `strategies.proto`, `algo.proto`, `ouch-data.proto`, `common.proto` (`buf generate`) |
 
 ## Açılış sırası (`HftMain.cpp`)
 
-1. Argüman olarak config dosyası verilir. Onload derlemesinde `LD_PRELOAD=libonload.so` ile kendini yeniden başlatır.
-2. Config yüklenir. Main thread `mainCpuCores`'a pinlenir (boşsa pin yok). Strateji ITCH kuyruk sınırı (`strategyQueueMaxEvents`) uygulanır. `sdkLockMemory` açıksa `mlockall`.
-3. Logger başlar (Quill, `<logFile>/hft.txt`, 1 GB'ta döner, 30 dosya). PerfSDK başlar (`monitoringEnabled`).
-4. **ITCH SDK** başlar (`ItchSdkClient::startItchSdkClient`), orderbook durum abonelikleri kurulur. MAOrderSDK combiner ITCH'e ihtiyaç duyduğu için önce bu yapılır.
-5. **MAOrderSDK boot**, adımların sırası zorunludur:
-   1. `OuchConfig`
-   2. `OrderSdkConfig` (combiner, onload, recv pin, replay quiet window, hard cap)
-   3. `setInstrumentLimits` (DB'den max emir değeri, ondalık, brüt takas)
-   4. `setStartArguments` + `bootstrapOnloadIfRequested`
-   5. callback'ler (`onAccepted`, `onRejected`, `onExecuted`, `onWireExecuted`, `onReplaced`, `onCanceled`, `onReplayCompleted`)
-   6. `start`
-   - **Login yapılmaz**; OUCH kullanıcıları handoff ile gelir (bkz. sistem haritası → OUCH handoff).
-6. `AlgoWorkerManager`, `GUIManager` (gRPC), `ItchManager`, `StrategyManager` periyodik işleri ve durum worker'ı başlar.
-7. Konsola durum kutusu basılır: Onload, DB, bağlı OUCH kullanıcı sayısı, worker sayısı, uptick, monitoring, combiner, log seviyesi. Linklenen bütün MeeApps kütüphanelerinin git sürümü de basılır (`ma::build::PrintAll`).
-8. Ana döngü sinyal bekler. Kapanış main thread'de yapılır; sinyal handler yalnızca bayrak çevirir.
+Özet; ayrıntı ilgili alt dosyalarda.
+
+1. Config dosyası argümanla verilir. Onload derlemesinde `LD_PRELOAD=libonload.so` ile kendini yeniden başlatır.
+2. Config yüklenir; main thread `mainCpuCores`'a pinlenir (boşsa pin yok); `sdkLockMemory` açıksa `mlockall`.
+3. Logger (Quill, `<logFile>/hft.txt`) ve PerfSDK (`monitoringEnabled`).
+4. **ITCH SDK** ([itch-entegrasyonu](itch-entegrasyonu.md)). Combiner ITCH'e ihtiyaç duyduğu için MAOrderSDK'dan önce.
+5. **MAOrderSDK boot** (sıra zorunlu): `OuchConfig` → `OrderSdkConfig` → `setInstrumentLimits` → `setStartArguments` + Onload → callback'ler → `start`. **Login yapılmaz**; OUCH kullanıcıları handoff ile gelir ([emir-yasam-dongusu](emir-yasam-dongusu.md#4-handoff--hft-tarafı)).
+6. `AlgoWorkerManager`, `GUIManager` (gRPC), `ItchManager`, `StrategyManager` periyodik işleri ve durum worker'ı.
+7. Konsola durum kutusu ve linklenen MeeApps kütüphanelerinin sürümleri basılır.
+8. Ana döngü sinyal bekler; kapanış main thread'de. Kapanışta emir iptali veya state kaydı yapılmaz.
 
 ## Thread modeli
 
+Özet; ayrıntı, kilit sırası ve kuyruklar: [strateji-cekirdegi § 3](strateji-cekirdegi.md#3-thread-modeli-ayrıntısı).
+
 | Thread | Ne yapar |
 |--------|----------|
-| ITCH SDK thread'leri (`libMAItchSDK` içi) | Multicast alımı, emir defteri, abonelik callback'leri → `ItchSdkClient` olayı stratejinin kuyruğuna koyar |
-| **AlgoWorker** (`workerCount`) | Stratejiler worker'lara round-robin dağıtılır. Her worker döngüde kendi stratejilerinin `processSingleEvent()`'ini çağırır (busy-loop). Strateji kararları burada verilir. |
-| MAOrderSDK OUCH recv thread'leri (kullanıcı başına) | `onAccepted` / `onRejected` / `onReplaced` / `onCanceled` / `onWireExecuted` → `strategy->addOrder/rejectOrder/...` |
-| Combiner (açıksa) | `onExecuted` **ITCH client thread'inden** gelebilir (ITCH'te görülen fill OUCH'tan önce uygulanır). GUI'ye giden fill ise `onWireExecuted` ile OUCH thread'inden gider; sıra korunur. |
-| gRPC (GUIManager) | GUI komutları. `setCommand` buradan çağrılır. |
-| StrategyManager periodic jobs | Second rule / reClose timer'ları. Karar vermez, olay kuyruğa atar veya `sendSecondRuleOrder` çağırır. |
-| StrategyStatesWorker | Dirty işaretli stratejilerin durum/özet push'u |
+| ITCH SDK thread'leri | Alım, emir defteri, abonelik callback'leri → olay stratejinin kuyruğuna |
+| **AlgoWorker** (`workerCount`) | Stratejiler worker'lara dağıtılır; worker busy-loop'ta `processSingleEvent()` çağırır. Kararlar burada. |
+| MAOrderSDK OUCH recv (kullanıcı başına) | Accept/cancel/replace/execute callback'leri. Yerel `onRejected` ise çağıran thread'de (AlgoWorker/gRPC) senkron gelir. |
+| Combiner (açıksa) | `onExecuted` ITCH thread'inden gelebilir; GUI'ye giden fill `onWireExecuted` ile OUCH thread'inden |
+| gRPC (GUIManager) | GUI komutları, `setCommand` |
+| StrategyManager periyodik işler | Second rule / reClose timer'ları. Tavan/Taban'da yalnızca olay kuyruğa atar; HFT Classic'te emri bu thread'de gönderir. |
+| StrategyStatesWorker | Dirty stratejilerin durum/özet push'u |
 
-**Hot/cold öncelik:**
-- `hotWorkerCount > 0` ise worker'lar önce `isHot` stratejileri, sonra soğukları işler.
-- `realHotReadyQueue` (veya env `HFT_REAL_HOT_READY_QUEUE=1`) açıksa hot stratejinin olayı worker'ın hazır kuyruğuna doğrudan konur.
-- Tavan/Taban fiyat eşiğine göre hot/cold geçer. Ayrıntı [tavan.md](../../20-stratejiler/tavan.md).
-
-**Kuyruk sınırı:** Strateji başına ITCH kuyruğu `strategyQueueMaxEvents` (örnekte 50000). Aşılırsa eski olaylar düşürülür (`getDroppedItchEvents`).
-
-**Kilitler:** Her strateji kendi `buySellInfoMutex`'ini kullanır (`recursive_timed_mutex`). HFT Classic ITCH yolunda kilidi 100 µs dener ve alamazsa olayı düşürür. Stratejiye özel kilitler (`warrantMutex`, `derivativeMutex`) ilgili strateji dokümanlarında.
+- **Hot/cold:** `hotWorkerCount > 0` (sayı değil bayrak) ise worker'lar önce hot stratejileri işler; `realHotReadyQueue` hot olayları hazır kuyruğa koyar.
+- **Kuyruk sınırı:** strateji başına `strategyQueueMaxEvents`; dolunca **yeni gelen** olay düşürülür.
 
 ## Emir gönderme deseni
 
@@ -82,66 +83,40 @@ if (!maosdk || !maosdk->enterOrder(HftConvert::toSdkMsg(order, account, fatherRe
 }
 ```
 
-- SDK hesabın sahibiyse (handoff sonrası) emir doğrudan BIST'e gider.
-- SDK hesabın sahibi değilse (handoff öncesi) emir ouch-sdk üzerinden order-service'e gider.
-- SDK sahip olduğu halde `false` dönerse (bağlantı yok vb.) emir **gönderilmez**. Strateji kendi kurtarma mantığına güvenir.
-- Replace/cancel için `ownsOrder(token)` kullanılır.
-- **Father order ref:** Büyük emirler parçalanabilir. Aynı father ref'i taşıyan parçaların accept'leri toplanarak "ailenin tamamı kabul edildi" bilgisi çıkarılır (Tavan/Taban `orderCompletelyAccepted`).
-- **Replay gate:** Handoff sonrası OUCH replay bitene kadar (`ouchReplayComplete()`) stratejiler emir göndermez, çoğu ITCH olayı da işlemez.
-- **Çift accept koruması:** Handoff replay'i order-service yolunda işlenmiş bir accept'i tekrar getirebilir. `OrderRegistry::addAcceptedOrder` + `OuchManager::claimGlobalAcceptedToken` stratejiye yalnızca ilk kaydın ulaşmasını sağlar.
+- SDK hesabın sahibiyse (handoff sonrası, bağlantı canlı) emir doğrudan BIST'e gider; değilse order-service'e.
+- `ownsAccount` canlı bağlantı ister: OUCH koparsa emirler order-service'e düşer. SDK sahipken `false` dönerse emir **gönderilmez**.
+- **Father order ref:** parçalanan emirlerin accept'leri toplanır (Tavan/Taban `orderCompletelyAccepted`).
+- **Replay gate:** handoff sonrası replay bitene kadar stratejiler emir göndermez (20 sn watchdog, 60 sn zorunlu açılma).
+- **Çift accept koruması:** `OrderRegistry` + `OuchManager::claimGlobalAcceptedToken`.
+
+Ayrıntı ve istisnalar: [emir-yasam-dongusu](emir-yasam-dongusu.md).
 
 ## gRPC (`StrategyService`, :9050)
 
-İstemci trade-data-app'tir.
-
-| RPC | Ne |
-|-----|----|
-| `StrategyLogin` | trade-data-app login |
-| `SetCommandRequest` | Strateji komutu (başlat/durdur/ayar), emir komutu (`Command_Type_OrderRequest`), cancel-all, set balance… → `GUIManager` dispatch |
-| `FetchCommands` (stream) | Strateji snapshot'ları, durum ve özet mesajları, Varant Toplu olayları → GUI |
-| `FetchOrders` (stream) | Emir olayları (accepted / executed / replaced / canceled / rejected, latency alanlarıyla) → GUI |
-| `SubscribeToCommands` / `UnsubscribeFromCommands` | GUI istemcisinin hangi stratejileri dinlediği |
-| `SubscribeToOrderbook` | Strateji emir defteri işaretleri |
-| `AlgoSetAccountStrategy` | Hesap–strateji eşlemesi (toplu emirlerde kullanılır) |
-| `FetchAllUniqueKeys` | Var olan stratejiler |
-| `UpdateExtSettings` | Ek ayar güncellemesi |
-
-Wire biçimi: `map<string, google.protobuf.Any>`. Alan adları ve tipleri `src/Globals/GuiConstants.h`'ta tanımlıdır. Yeni bir alan için trade-data-app'te proto değişikliği **gerekmez**, alan generic map'te taşınır. DB'ye kalıcı olması için `StrategyAttributes` satırı eklenmelidir.
+İstemci trade-data-app. RPC'ler, stream semantiği ve implement edilmeyenler (`FetchAllUniqueKeys`, `UpdateExtSettings` → UNIMPLEMENTED): [komutlar-ve-grpc](komutlar-ve-grpc.md). Wire biçimi `map<string, google.protobuf.Any>`; yeni alan için proto değişikliği gerekmez, DB'de kalıcı olması için `StrategyAttributes` satırı gerekir ([trade-data-app/sema](../trade-data-app/sema.md)).
 
 ## Config (`Configuration.toml`)
 
-Önemli anahtarlar. Değerler ortama göre `algo-configs` / `Algo-Setup`'tadır; gizli bilgiler burada yer almaz.
+Tam referans: [config.md](config.md). Sık karıştırılanlar:
 
 | Anahtar | Anlam |
 |---------|-------|
-| `workerCount`, `algoWorkerCores` | AlgoWorker sayısı ve CPU pinleri (boş = pin yok) |
-| `hotWorkerCount`, `realHotReadyQueue` | Hot öncelik |
-| `activationPctFromPreviousClose` (6.5), `demoteBandTicks` (2), `minTierBandTicks` (1), `minHotDwellMs` (250), `coldReentryCooldownMs` (250), `emergencyReentryTicks` (2) | Tavan tiering eşikleri (parantez içi varsayılanlar) |
-| `mainCpuCores` | Main ve yardımcı thread'lerin pini. ⚠ 2026-06'da host'u kilitlediği için kapalı tutuluyor. |
-| `strategyQueueMaxEvents` | Strateji ITCH kuyruk sınırı |
-| `sdk*` | MAOrderSDK: `sdkLockMemory` (kapalı, host hang), `sdkUseOnload`, `sdkRecvPinCore`, `sdkReplayQuietWindowMs` (10000, prod doğrulaması olmadan kısaltmayın), `sdkOrderHardCapTry` (tek emir notional sınırı, tam TL), `sdkHeartbeatIntervalMs`, `sdkTokenPoolSize` |
-| `[[ouch_users]]` | Yalnızca recv-thread ayar tablosu. Kullanıcılar handoff'tan öğrenilir. |
 | `dbIp`/`dbPort` | **trade-data-app gRPC** (MySQL değil) |
 | `ouchIp`/`ouchPort` | **order-service MARpc** (BIST değil) |
-| `grpcPort` | StrategyService portu |
-| `combinerEnabled` | MAOrderSDK ITCH+OUCH execute combiner |
-| `uptickRule` | Uptick kuralı, **global**: bütün orderbook'lar için `ItchSdkClient::hasUptickRule` bunu döner (HFT Classic bait + chase). |
-| `uptickEnabled` | `ConfigurationManager` okur ama kodda kullanılmaz. |
-| `monitoringEnabled`, `monitoringPort`, `perf*` | PerfSDK → ClickHouse (`perfDb*`). `monitoringPort` artık kullanılmıyor; kod yorumlarındaki "Prometheus" eski. Bkz. [performance-sdk](../performance-sdk/README.md). |
-| `[[markets]]` | Spot (4 partition) ve Future (6 partition): ITCH multicast, Glimpse, Rewinder adresleri, birincil/ikincil hat |
-| `onloadStackName`, `itchOnloadStackName` | Onload stack adları |
-| `logLevel` | `debug` ITCH yükünde log seli yaratır |
+| `[[ouch_users]]` | `isActive=false`: recv-thread ayar tablosu. `isActive=true`: açılışta SDK'ya önceden kaydedilir. Müşteri config'lerinde giriş yok. |
+| `uptickRule` | Global uptick bayrağı; `uptickEnabled` kullanılmaz |
+| `sdkLockMemory`, `mainCpuCores` | Repo örneğinde kapalı; müşteri config'lerinde farklı (bkz. config.md) |
 
 ## Build
 
-- CMake + `buf generate` (`src/`). Bağımlılıklar `/usr/local/lib`'den alınır: `libouchSDK`, `libMAItchSDK`, `libMAOrderSDK`, `libMAPerfSDK`, cpprest, gRPC/protobuf, OpenSSL, OpenMP. Onload (`onload_ext`) veya Mellanox (`vma`) bulunursa hızlandırma derlenir.
+- CMake + `buf generate` (`src/`). Bağımlılıklar `/usr/local/lib`'den: `libouchSDK`, `libMAItchSDK`, `libMAOrderSDK`, `libMAPerfSDK`, cpprest, gRPC/protobuf, OpenSSL, OpenMP. Onload (`onload_ext`) veya Mellanox (`vma`) bulunursa hızlandırma derlenir.
 - CI: [`00-genel/branch-ve-ortamlar.md`](../../00-genel/branch-ve-ortamlar.md). Regular ve Onload binary'leri Algo-Setup `HFT/HftSrvProd/` altına yazılır.
 
 ## Yeni strateji eklemek (kontrol listesi)
 
-1. `common.proto` `StrategyType` enum'una değer ekle. **Bütün repolarda aynı numarayla**: HftSrvProd, order-service, trade-data-app, ouch-sdk enum'u, UI `app/types/index.ts`.
+1. `common.proto` `StrategyType` enum'una değer ekle, **bütün repolarda aynı numarayla**: HftSrvProd, order-service, trade-data-app, ouch-sdk enum'u, UI `app/types/index.ts`. Gerekirse `StrType` karşılığı da ([komutlar-ve-grpc](komutlar-ve-grpc.md)).
 2. `Commands/<X>Command.{h,cpp}`: alanları `GuiConstants.h`'a ekle; `toClientMessage` ve `getDefaultSettings` yaz.
-3. `Strategy/<X>.{h,cpp}`: `Strategy`'den türet; `setCommand`, `processSingleEvent`, OUCH callback'leri.
-4. `CommandFactory::createStrategyCommand` ve `StrategyManager::createStrategy`'ye case ekle. İkisinden biri eksikse strateji oluşmaz (OrderChase örneği).
-5. trade-data-app: `getApplicationFromStrategyType` (gui_api.go), WS `getApplicationFromStrategyType` / `ConvertStrategyType`, `StrategyAttributes` SQL satırları.
+3. `Strategy/<X>.{h,cpp}`: `Strategy`'den türet; `setCommand`, `processSingleEvent`, OUCH callback'leri ([strateji-cekirdegi](strateji-cekirdegi.md)).
+4. `CommandFactory::createStrategyCommand` ve `StrategyManager::createStrategy`'ye case ekle. Biri eksikse strateji oluşmaz (OrderChase örneği).
+5. trade-data-app: `getApplicationFromStrategyType` (REST ve WS kopyası), `ConvertStrategyType`, `StrategyAttributes` SQL satırları.
 6. UI: `STRATEGY_WORKSPACE_CONFIGS`, route, paneller.

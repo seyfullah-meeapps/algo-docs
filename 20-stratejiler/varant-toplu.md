@@ -114,7 +114,7 @@ Varant (13) ile **hiçbir sözleşmeyi paylaşmaz**. Payload, fiyat ölçekleri 
 
 - **Ayar snapshot'ı:** `HftWarrantAdvancedCommand::toClientMessage`. Durdur/başlat ve pasife çekmede geri yollanır.
 - **Özet (per-warrant durum, pozisyon, K/Z):** hesap özeti `commandType 5` (`SUMMARY_<hesap>`), saniyede en fazla bir. Pozisyon bilgisi balance mesajından değil, buradan gelir.
-- **Anlık olaylar** (`WarrantAdvancedEventCommand`, `Command_Type_HftWarrantDerivativeResponse`): `BuySent`, `ReplaceSent` (order token + gönderim anındaki dayanak kitabı ile), `Frozen`, `Raised`, `ManualSellBlocked`, alış/satış red olayları. Yalnızca o stratejiye abone istemcilere gider, replay edilmez.
+- **Anlık olaylar** (`WarrantAdvancedEventCommand`, `Command_Type_HftWarrantDerivativeResponse`): `BuySent`, `ReplaceSent` (order token + gönderim anındaki dayanak kitabı ile), `Frozen`, `Raised`, `ManualSellBlocked`, alış/satış red olayları. HFT'de istemci başına yönlendirme yok: tek global kuyruktan `FetchCommands` stream'ine gider (birden çok stream açıksa her mesaj yalnızca birine). Filtreleme, varsa, trade-data-app tarafındadır. Replay edilmez ([komutlar-ve-grpc](../10-servisler/hftsrvprod/komutlar-ve-grpc.md)).
 - Order History'deki "Dayanak Bid/Ask" kolonu `BuySent` / `ReplaceSent` olaylarından beslenir ve OUCH token ile eşlenir.
 
 ## Fiyat ve birimler
