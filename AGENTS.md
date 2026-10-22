@@ -11,6 +11,12 @@ Bu repo, MeeApps'in BIST algo/HFT stack'inin **AI agent'lar için yazılmış** 
 - **Gizli bilgi yok.** IP, kullanıcı adı, şifre, token `<PROD_IP>`, `<OUCH_USER>`, `<REDACTED>` gibi placeholder'larla maskelidir. Gerçek değeri tahmin etme, uydurma.
 - **Bilmiyorsan söyle.** Dokümanda olmayan bir şeyi "muhtemelen" diye doldurma; "dokümanda yok, şu dosyaya bakılmalı" de.
 
+## Çalışma oturumu (dokümanı yazan/güncelleyen agent için)
+
+- **Başlarken** `OTURUM-NOTLARI.md`'yi oku: kararlar, mevcut durum, sıradaki işler orada.
+- **Çalışırken** karar alındıkça ve iş bittikçe `OTURUM-NOTLARI.md`'yi güncelle; oturum bitmeden "Şu an" ve "Sıradaki" güncel olsun (context dolarsa sonraki oturum buradan devam eder).
+- Bulunan sorun / şüphe / doğrulanmamış iddia → `ACIK-KONULAR.md`'ye **tek satır** + ayrıntı dosyasına link. Ayrıntı ilgili dosyada yazılır, indekste büyütülmez.
+
 ## Harita — hangi soru, hangi dosya
 
 | Soru tipi | Bak |
@@ -23,6 +29,8 @@ Bu repo, MeeApps'in BIST algo/HFT stack'inin **AI agent'lar için yazılmış** 
 | Bir servisin/kütüphanenin iç yapısı | `10-servisler/<repo>/README.md` |
 | Bir verinin/emrin uçtan uca yolculuğu | `30-akislar/` |
 | Kurulum, deploy, config, açılış log'ları | `40-operasyon/` |
+| Bilinen sorunlar, şüpheli davranışlar, doğrulanmamış iddialar | `ACIK-KONULAR.md` |
+| Doküman çalışması nerede kaldı, hangi kararlar alındı? | `OTURUM-NOTLARI.md` |
 | Bu dokümanlar nasıl güncellenir? | `_surec/guncelleme.md` |
 | Dosyalar nasıl yazılır (frontmatter, kurallar)? | `_surec/yazim-kurallari.md` |
 
@@ -34,6 +42,8 @@ Her repo için tek satırlık görev, referans branch ve doğrulama commit'i: `m
 AGENTS.md            ← buradasın
 manifest.yaml        ← repo → branch → doğrulanan commit → doküman yeri
 CHANGELOG.md         ← her güncelleme oturumunun kaydı
+ACIK-KONULAR.md      ← açık sorunlar; tek satır + link
+OTURUM-NOTLARI.md    ← kararlar, mevcut durum, sıradaki işler
 00-genel/            ← cross-cutting: harita, branch/ortam, sözlük, borsa kuralları
 10-servisler/<repo>/ ← repo başına bir klasör; README.md giriş noktası
 20-stratejiler/      ← strateji başına bir dosya (motor + wire + UI birlikte)
