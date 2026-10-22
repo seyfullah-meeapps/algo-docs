@@ -59,7 +59,7 @@ Fazla pasif miktar `updateLevelQuantity` / `updateOrdersExcessQuantity` ile kü�
 
 ## PTRM
 
-Ret kodu `-850002`, `-850004` veya `-850044` ise strateji durur.
+Ret kodu `-850002`, `-850004` veya `-850044` ise strateji durur (`TradeByVolume.cpp` ret kontrolü). AlgoProd bu üç kodu tanımlar (`Globals/GlobalDefinitions.h`). HFT'deki `-850064` (margin user blocked) AlgoProd'da **tanımlı değildir**; bu kodla gelen ret stratejiyi durdurmaz. Kasıtlı mı, bilinmiyor.
 
 ## Overall (`TradeByVolumeOverall`)
 

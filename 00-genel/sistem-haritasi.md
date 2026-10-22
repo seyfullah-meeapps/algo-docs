@@ -95,7 +95,7 @@ Portlar `development`'taki örnek config'lerden; ortamlara göre değişebilir (
 | order-service → trade-data-app | gRPC :6620 `DataService` | OUCH/FIX kullanıcıları, stratejiler, pozisyonlar, emir kalıcılığı |
 | trade-data-app → HFT | gRPC :9050 `StrategyService` | GUI komutları (`SetCommandRequest`), komut/emir stream'leri (`FetchCommands`, `FetchOrders`) |
 | trade-data-app → AlgoProd | gRPC :9098 `StrategyService` | Aynı sözleşme (AlgoProd kendi proto kopyasını kullanır) |
-| trade-data-app → order-service | gRPC :9035 `OrderService` | Toplu emir gönderme (`SetOrders`), emir stream'i (`SubscribeToOrders`) |
+| trade-data-app → order-service | gRPC :9035 `OrderService` | Toplu emir gönderme (`SendOrder`; trade-data-app'teki Go sarmalayıcısının adı `OrderService.SetOrders`), emir stream'i (`SubscribeToOrders`) |
 | mtrader-trade-ui → trade-data-app | REST :6621 (grpc-gateway) + WebSocket :6623 | Bkz. aşağıdaki WS feed listesi |
 | Admin paneli → trade-data-app | REST, `AdminService` grpc-gateway (:6688); müşteri başına `admin<musteri>.meeapps.com.tr` domain'i (`mtrader-frontend-apps/.github/workflows/adminui.yml`). ❓ doğrulanmadı: domain → :6688 yönlendirmesi reverse proxy'de. | Kullanıcı/hesap/OUCH kullanıcısı yönetimi |
 | HFT, order-service, AlgoProd → izleme | ClickHouse HTTP push (MAPerfSDK, ayrı thread) | Latency metrikleri |
@@ -111,7 +111,7 @@ Bir emrin hangi yoldan BIST'e gittiği, **kimin gönderdiğine** ve **saate** ba
 | HFT strateji emri, handoff **sonrası** | HFT → MAOrderSDK → BIST OUCH. En hızlı yol (hot path). |
 | HFT strateji emri, handoff **öncesi** | HFT → ouch-sdk → order-service → BIST. Yedek yol; `OuchManager::enterOrder` WARN log'u basar. |
 | AlgoProd strateji emri | AlgoProd → ouch-sdk → order-service → BIST. 🚧 Yolda: AlgoProd'a MAOrderSDK + OUCH handoff geliştirmesi `add-order-sdk` branch'inde (12 commit, son 2026-10-15; `MAOrderSdkManager`, `MAOrderSdkRouter`, `OrderEventDispatcher`). Merge edilince AlgoProd da HFT gibi handoff sonrası doğrudan gönderecek. |
-| GUI'den sabah / açılış / akşam / YİP emri (`OrderType` MORNING / OPENING / EVENING) | UI → trade-data-app REST `GuiSendOrders` → order-service gRPC `SetOrders` → zamanı gelince order-service gönderir (`repeatableOrders`, `openingOrders` config'i). |
+| GUI'den sabah / açılış / akşam / YİP emri (`OrderType` MORNING / OPENING / EVENING) | UI → trade-data-app REST `GuiSendOrders` → order-service gRPC `SendOrder` → order-service emirleri `BulkInsert*Order` ile DB'ye yazar (`DataService.SetOrders`) ve GUI'ye yayınlar → zamanı gelince gönderir (`repeatableOrders`, `openingOrders` config'i). |
 | GUI'den strateji ekranında manuel emir (`OrderType` STRATEGY) | UI → trade-data-app → ilgili motora komut (`Command_Type_OrderRequest`) → motor kendi yolundan gönderir. |
 
 Hangi `StrategyType`'ın hangi motora gittiği: trade-data-app `getApplicationFromStrategyType` (`pkg/servicemodels/gui_api.go`). Liste için `20-stratejiler/README.md`.

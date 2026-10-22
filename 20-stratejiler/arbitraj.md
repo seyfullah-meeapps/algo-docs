@@ -47,6 +47,7 @@ AlgoProd'un worker havuzunda (`runsOnWorkerPool`) periyodik çalışır.
    - Saat alanları İstanbul günün saniyesidir; kod 3 saati düşüp UTC ile karşılaştırır.
 2. **Tavan/taban koruması:** Dayanak tavan veya tabana değerse (iki vadeli tipler hariç) strateji durur.
 3. **Güvenlik:** `drvPos < 0` ise strateji durur.
+   - **PTRM:** Türev emri `-850002`, `-850004`, `-850044` veya `-420131` (`RX_OUTSIDE_ALLOWED_LIMIT`) ile reddedilirse strateji durur. Eşleme kod veya ret metni üzerinden yapılır. `-850064` AlgoProd'da tanımlı değildir (bkz. [vwap.md](vwap.md#ptrm)).
 4. Header'lar okunur, pasif emirler kontrol edilir (`checkPassiveUndOrders`, `checkPassiveDrvOrders`).
 5. **`runStrategy`:**
    1. Türev dolumu var mı? Varsa spot emrini gönder (`checkDrvExecution` → `sendUnderlyingOrder`).
@@ -127,4 +128,4 @@ GUI'ye giden mesajlar: `ArbitrageStrategyActivity`, `ArbitragePackageActivity` (
 
 - **Ne yapar:** BIST30 endeks vadelisini endeks bileşenlerinden oluşan bir sepete karşı arbitrajlar. Ağırlıklar endeks tanımından gelir (`XU30_INSTRUMENT_ID`). Wire tipi yine `Arbitrage` (6), iç komut `'E'`.
 - **Parametreler:** `Deposit`, faiz, temettü verimi, satılacak enstrümanlar, minimum kapama kâr oranları.
-- ❓ Kullanımda mı? Yeni GUI'de route'u yok. Kullanıcıya sorulacak.
+- **Henüz kullanılmıyor** (kullanıcı beyanı, 2026-10-22). Yeni GUI'de route'u yok.

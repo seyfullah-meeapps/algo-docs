@@ -158,7 +158,7 @@ Hisseyi hızla tavana koşturup oradan satan manipülatörlere karşı koruma.
 | `Is_Set_To_One` | Bool | |
 | `Close_Position_First` | Bool | Başlarken pozisyonu açık say (`isPositionOpen` başlangıç değeri) |
 | `Is_Tavan_Mode` | Bool | |
-| `Profit_Percentage` | Int | ❓ Kodda kullanımı görülmedi |
+| `Profit_Percentage` | Int | **Kullanılmıyor.** `MaxPriceCommand` parse eder ve snapshot'ta geri yollar, `HftMaxPrice` üyeye kopyalar ama hiçbir kararda okunmaz. Yeni GUI göndermez. |
 | `Start_Time` / `Stop_Time` (çıkışta) / `End_Time` (girişte) | Long | **Günün saniyesi, İstanbul saati** (36000 = 10:00, 64800 = 18:00). ⚠ `getDefaultSettings` 600/1200 yazıyor; saniye olarak yorumlanırsa 00:10–00:20 olur. UI doğru değeri gönderiyor olmalı. ❓ |
 
 ## GUI'ye giden durum

@@ -126,7 +126,7 @@ Varant (13) ile **hiçbir sözleşmeyi paylaşmaz**. Payload, fiyat ölçekleri 
 ## UI (yeni GUI)
 
 - Workspace route `bulk-warrant`, kod `app/components/dockview/warrant-bulk/`.
-- Ayrıntılı UI kuralları (yoğun tablo, mini emir defteri, toplu ayar modalı, dosya yükleme `/v1/parseWarrantFile`, Call/Put rozeti): mtrader-trade-ui `AGENTS.md` → "HFT_WARRANT_ADVANCED (Varant Toplu)".
+- Ayrıntılı UI kuralları (yoğun tablo, mini emir defteri, toplu ayar modalı, dosya yükleme `/v1/parseWarrantFile` (CSV'yi [Warrant-Selector](../10-servisler/warrant-selector/README.md) üretir), Call/Put rozeti): mtrader-trade-ui `AGENTS.md` → "HFT_WARRANT_ADVANCED (Varant Toplu)".
 - DB attribute satırları: trade-data-app `scripts/sql/hft_warrant_advanced.sql`.
 - Eski GUI'de karşılığı `VarantTopluTrackerForm`. ❓ Eski GUI'de prod'da kullanılıyor mu, doğrulanmadı.
 

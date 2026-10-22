@@ -53,7 +53,7 @@ Panel kapsamı eşit değildir: VWAP'ın tracker'ı yok, Teorik'in ayar modalı 
 ### Backend sözleşmesi
 
 - **REST:** trade-data-app :6621 (grpc-gateway, protojson; 64-bit sayılar **string** gelir).
-- **WebSocket:** :6623 (Go json, sayılar **number**). Altı socket: market, command, order, bounds, equilibrium, itch.
+- **WebSocket:** :6623 (Go json, sayılar **number**). `socketStore`'un merkezi yönettiği altı socket ve feed karşılıkları: market → `/ws/v1/best`, command → `/ws/v1/strategy`, order → `/ws/v1/orders`, bounds, equilibrium, itch. Yedinci feed `/ws/v1/passive-orders` merkezi değildir; yalnızca pasif emirler paneli (`StrategyPassiveOrders.tsx`) açar.
 - Endpoint listesi: [trade-data-app](../trade-data-app/README.md).
 - Login başarısız olsa da HTTP **200** döner, sonuç gövdededir. OTP penceresi 120 sn'dir.
 

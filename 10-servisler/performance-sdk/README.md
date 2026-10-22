@@ -14,7 +14,8 @@ Uygulama içi latency dağılımlarını HdrHistogram ile tutar ve isteğe bağl
 
 **Kullananlar:**
 - HftSrvProd: strateji T2T (tick-to-trade) zaman damgaları `ts1..ts6`, `hft::perf`.
-- order-service, AlgoProd, MAOrderSDK: kullanıcı başına bağlantı metrikleri.
+- order-service, MAOrderSDK: kullanıcı başına bağlantı metrikleri.
+- AlgoProd: ITCH ve emir defteri olay metrikleri (`itchEventReceived`, `orderbookEventReceived`), arbitraj döngü metrikleri (`arb_hdr`, `arb_loop`, `arb_spot`, `arb_rplc`), `TIME_MEASUREMENT` makrosu (`Utilities/TimeUtility.h`). AlgoProd MAOrderSDK kullanmadığı için bağlantı metriği yoktur.
 - itch-sdk: port başına alım metrikleri.
 
 ## Çalışma şekli

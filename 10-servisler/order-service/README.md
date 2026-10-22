@@ -49,11 +49,11 @@ Sistem içindeki yeri: [`00-genel/sistem-haritasi.md`](../../00-genel/sistem-har
 
 ## Toplu emir akışları
 
-GUI'den `OrderType` MORNING / OPENING / EVENING ile girilen emirler trade-data-app → `SetOrders` → DB yolunu izler. order-service bunları config'teki saatte gönderir.
+GUI'den `OrderType` MORNING / OPENING / EVENING ile girilen emirler trade-data-app'ten gRPC `SendOrder` ile gelir (`OrderServiceImpl::SendOrder` → `InsertCollectiveOrder`). order-service bunları `BulkInsertMorningOrder` / `Opening` / `Evening` ile DB'ye yazar (`DataService.SetOrders`), GUI'ye yayınlar (`PublishCollectiveOrders`) ve config'teki saatte gönderir.
 
 | Akış | Config | Ne yapar |
 |------|--------|----------|
-| **Sabah** (`repeatableOrders.ouch[type=morning]`, `morning_viop`; FIX için `repeatableOrders.fix`) | saat:dk:sn.ms, `duration`, `repeatSellOrders`, `repeatLastShot`, `timeoutOrderCount`, `packOrders` | Emirler OUCH kullanıcılarına dağıtılır (her kullanıcı izinli hesaplarının **tüm** emirlerini gönderir). Tekrar sayısı `min(repeatCount, (capacity − tekrarsız) / tekrarlı)`. Her kullanıcı ayrı thread'de (FIFO, `coreToPin`) tam saatte başlar. Seans açılmadan giden emir `-110023` ("Illegal transaction at this time") ile reddedilir; kabul edilene kadar yeniden gönderilir (son atış stratejileri). Amaç kuyruk önceliğidir. |
+| **Sabah** (`repeatableOrders.ouch[type=morning]`, `morning_viop`; FIX için `repeatableOrders.fix`) | saat:dk:sn.ms, `duration`, `repeatSellOrders`, `repeatLastShot`, `timeoutOrderCount`, `packOrders` | Emirler OUCH kullanıcılarına dağıtılır (her kullanıcı izinli hesaplarının **tüm** emirlerini gönderir). Tekrar sayısı `min(repeatCount, (capacity − tekrarsız) / tekrarlı)`. Her kullanıcı ayrı thread'de (FIFO, `coreToPin`) tam saatte başlar. Seans açılmadan giden emir `-110023` ("Illegal transaction at this time") ile reddedilir; kabul edilene kadar yeniden gönderilir (son atış stratejileri). Amaç kuyruk önceliğidir. **Fazla kopyaların iptali** (`OrderManager::CancelRepeatedOrders`): gönderimden 2 sn sonra kabul edilen kopyalar (hesap-strateji, fiyat, yön, miktar, TIF, tip) ile gruplanır. Gruplama **bütün OUCH kullanıcıları üzerinden** yapılır. Hesap başına en erken `OrderRepeatRemainingCount` kadarı tutulur, kalanı iptal edilir. Yalnızca hesapta iptal izni varsa (`IsCancelAllowed`) çalışır. |
 | **Açılış** (`openingOrders.derivative` / `equity` / `warrant`) | saat | Grup başına bir thread. Varant ve sertifikalar 10:02'de (10:00–10:02 yalnız piyasa yapıcı kotasyonu). |
 | **YİP** (`openingOrders.yip.sessions`) | seans saatleri | Yakın İzleme Pazarı (tek fiyat) satırları sıradaki seansa gönderilir, sonra pasife alınır. |
 | **Teorik** (`repeatableOrders.fix[type=theoric]`) | saat | Kapanış müzayedesi emirleri (FIX) |

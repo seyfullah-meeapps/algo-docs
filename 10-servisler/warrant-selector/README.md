@@ -14,7 +14,7 @@ Python aracı (CLI + Flask web arayüzü). Seçilen BIST30 dayanağı ve ihraç�
 
 Stack servislerine bağlı değildir.
 
-❓ Varant Toplu ile ilişkisi doğrulanmadı. Çıktıdaki alanlar (varant tipi, kullanım fiyatı, vade, kotasyon lotu) Varant Toplu'nun `Warrant_List` alanlarıyla birebir örtüşüyor. Bu araç Varant Toplu'ya yüklenen varant dosyasını (`/v1/parseWarrantFile`) üretiyor olabilir.
+**Varant Toplu ile ilişkisi:** Bu aracın ürettiği CSV, [Varant Toplu](../../20-stratejiler/varant-toplu.md) stratejisine UI'dan yüklenen varant dosyasıdır (`/v1/parseWarrantFile`; kullanıcı beyanı, 2026-10-22). Çıktı alanları (varant tipi, kullanım fiyatı, vade, kotasyon lotu) `Warrant_List` alanlarına karşılık gelir.
 
 ## Kullanım
 

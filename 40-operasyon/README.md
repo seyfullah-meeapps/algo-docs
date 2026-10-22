@@ -35,6 +35,7 @@ Bu bilgi tabanı kodu esas alır. İş tanımıyla çelişki görürsen ikisini 
 
 1. Algo-Setup CI (`algosetup.yml`) `main`, `development` ve `preprod` push'larında **müşteri başına kurulum zip'i** üretir ve S3'e yükler.
    - Matris: Piramit, A1, Alnus, Alnus Algo, Marbas, Global.
+   - ❓ **Kanjo matriste yok**, oysa GUI (`algo_gui.yaml`) ve admin paneli (`adminui.yml`) deploy'larında var. Kanjo kurulumunun nasıl yapıldığı doğrulanmadı.
    - Her müşteri için `setup_mode` ve ağ hızlandırma seçimi (`onload` / `mlx` / normal) ayrıca tanımlıdır.
 2. Müşteri sunucusunda kurulum: zip açılır, `install.sh` içinde `setup_mode` ayarlanır, `./install.sh` çalıştırılır. Script şunları yapar:
    - Docker ve docker-compose kurulumu

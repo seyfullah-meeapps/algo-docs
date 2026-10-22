@@ -100,7 +100,7 @@ Bilinen sınır: Uygulama seviyesinde ping/pong yok. Yazılamayan istemci kapat�
 
 | Uygulama | Port | Kullanılan RPC'ler |
 |----------|------|--------------------|
-| `orderserv` | 9035 | `SubscribeToOrders` (stream), `SendOrder` / `SetOrders` |
+| `orderserv` | 9035 | `SubscribeToOrders` (stream), `SendOrder`. Go tarafındaki sarmalayıcının adı `OrderService.SetOrders`'tır (`orderservice.go`); aynı isimli `DataService.SetOrders` RPC'siyle karıştırma. |
 | `hft` | 9050 | `SetCommandRequest`, `FetchCommands` / `FetchOrders` (stream), `SubscribeToCommands`, `SubscribeToOrderbook`, `AlgoSetAccountStrategy` |
 | `algotrading` | 9098 | Aynı sözleşme + vadeli abonelikleri |
 
@@ -132,7 +132,7 @@ Bağlantılar koparsa yeniden bağlanır. `StrategyType` → uygulama eşlemesi:
 | `server.port` / `restPort` / `adminApiPort` | gRPC / REST / Admin REST |
 | `gui.port`, `gui.hostname`, sertifika yolları | WS sunucusu |
 | `database.*` | MySQL |
-| `itchEnabled`, `itchWorkerCount`, `itchTriggerWorkerCount`, `onloadStackName`, `itchConfigurations[]` | ITCH (Spot 4 + VİOP 4 partition örneği) |
+| `itchEnabled`, `itchWorkerCount`, `itchTriggerWorkerCount`, `onloadStackName`, `itchConfigurations[]` | ITCH. Repodaki örnek `config.json` Spot 4 + **VİOP 4** partition tanımlar; HFT ve AlgoProd örnekleri VİOP için 6 tanımlar. ❓ Prod'daki trade-data-app config'inin VİOP 5–6. partition'ları içerip içermediği doğrulanmadı (müşteri config'i: Algo-Setup `Configs/<Müşteri>/dbservice-config.json`). |
 | `historyManagerEnabled`, `interestRate` | Geçmiş, volatilite |
 | `tradeVerifier`, `datastore`, `akd`, `byf` | Entegrasyonlar |
 | `extServices[]` | Dış uygulamalar (`application`, ip, port, kullanıcı, `applicationUser`) |

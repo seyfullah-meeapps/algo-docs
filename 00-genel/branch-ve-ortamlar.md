@@ -95,6 +95,8 @@ Kaynak: kullanıcı beyanı, 2026-10-22 (repodan çıkarılamıyor). Değişirse
 | Alnus (`alnus` subdomain) | eski |
 | Alnus_Yeni (`alnusyeni` subdomain) | yeni |
 | Kanjo | eski |
-| Global, Marbas, Piramit_Algo | ❓ belirtilmedi |
+| Global | eski |
+| Marbas | eski |
+| Piramit_Algo | ❓ belirtilmedi |
 
 Bir GUI sorusu cevaplanırken **müşterinin hangi GUI'yi kullandığı** belirleyicidir. Eski ve yeni GUI'nin davranış farkları: `10-servisler/mtrader-trade-ui/`.

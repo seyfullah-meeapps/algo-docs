@@ -125,7 +125,8 @@ Wire biçimi: `map<string, google.protobuf.Any>`. Alan adları ve tipleri `src/G
 | `ouchIp`/`ouchPort` | **order-service MARpc** (BIST değil) |
 | `grpcPort` | StrategyService portu |
 | `combinerEnabled` | MAOrderSDK ITCH+OUCH execute combiner |
-| `uptickEnabled` / `uptickRule` | Uptick kuralı |
+| `uptickRule` | Uptick kuralı, **global**: bütün orderbook'lar için `ItchSdkClient::hasUptickRule` bunu döner (HFT Classic bait + chase). |
+| `uptickEnabled` | `ConfigurationManager` okur ama kodda kullanılmaz. |
 | `monitoringEnabled`, `monitoringPort`, `perf*` | PerfSDK → ClickHouse (`perfDb*`). `monitoringPort` artık kullanılmıyor; kod yorumlarındaki "Prometheus" eski. Bkz. [performance-sdk](../performance-sdk/README.md). |
 | `[[markets]]` | Spot (4 partition) ve Future (6 partition): ITCH multicast, Glimpse, Rewinder adresleri, birincil/ikincil hat |
 | `onloadStackName`, `itchOnloadStackName` | Onload stack adları |

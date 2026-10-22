@@ -120,7 +120,8 @@ Tahmin yanlış çıkarsa (kademe kırılmazsa) pozisyondan çıkış mekanizmas
 
 ## Bait + chase (uptick)
 
-- **Satış tipi:** `Send_Sell_Orders_Instead_Of_Short` açıksa veya enstrümanda uptick kuralı varsa (`ItchSdkClient::hasUptickRule`) satış emri `SELL` gider, yoksa `SHORT_SELL`.
+- **Satış tipi:** `Send_Sell_Orders_Instead_Of_Short` açıksa veya uptick kuralı açıksa (`ItchSdkClient::hasUptickRule`) satış emri `SELL` gider, yoksa `SHORT_SELL`.
+  - ⚠ `hasUptickRule` enstrümana bakmaz; **bütün orderbook'lar için** config'teki `uptickRule` bayrağını döner (örnek config'te `false`). Borsa kuralı yalnızca ilan edilen günlerde uygulanır; o günlerde bayrağın elle açılması gerekir. ❓ Operasyonda nasıl yönetildiği doğrulanmadı.
 - **Chase miktarı:** `Chase_Buy_Passive` açıkken, alış header'ının bir altındaki kendi alışlarımızın miktarı.
   - Uptick yoksa bu miktar doğrudan satış miktarına eklenir.
   - Uptick varsa: alış kademesi tamamen eriyince önce 1 lot **bait** satış (alış header − 1 tick, tip `ChaseBait`), ardından **chase** açığa satış (alış header'ı, tip `Chase`) gönderilir.

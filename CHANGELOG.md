@@ -2,6 +2,22 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-22 — Çelişki doğrulaması ve borsa kuralları
+
+Kaynak repoların HEAD'leri manifest'teki doğrulama commit'leriyle aynı (değişiklik yok). Düzeltmeler bu commit'lere karşı kodla doğrulandı.
+
+- **Toplu emir yolu:** trade-data-app → order-service RPC'si `SendOrder`, `SetOrders` değil. Go sarmalayıcının adı yanıltıcı. order-service emirleri `BulkInsert*Order` ile DB'ye yazar (sistem haritası, akışlar, order-service, trade-data-app).
+- **Sabah emri fazla kopya iptali** (`CancelRepeatedOrders`) order-service'e yazıldı.
+- **UI WebSocket'leri:** 6 merkezi socket ↔ feed eşlemesi; `passive-orders` yalnız pasif emir paneli.
+- **performance-sdk:** AlgoProd'un metrikleri düzeltildi (bağlantı metriği yok).
+- **PTRM:** AlgoProd `-850064`'ü tanımıyor (VWAP, Arbitraj). Arbitraj'ın PTRM'de durması ve `-420131` eklendi.
+- **Uptick:** HFT'de enstrüman bazlı değil, global config bayrağı (`uptickRule`); `uptickEnabled` kullanılmıyor.
+- **Tavan:** `Profit_Percentage` kullanılmıyor.
+- **trade-data-app:** Örnek config VİOP'ta 4 partition tanımlıyor (HFT/AlgoProd 6). ❓ olarak işaretlendi.
+- **Algo-Setup:** Kurulum matrisinde Kanjo yok. ❓ olarak işaretlendi.
+- **Kullanıcı beyanları:** Sepet arbitraj henüz kullanılmıyor; Warrant-Selector Varant Toplu'ya yüklenen CSV'yi üretiyor; Global ve Marbas eski GUI'de.
+- `00-genel/borsa-kurallari.md` yazıldı (`bos` → `taslak`): fiyat adımı, limitler, seanslar, uptick, ret kodları. Her bölümde "kodda" ve "borsada (referans)" ayrımı var. Borsa sitesine bu ortamdan erişilemedi; dış bilgiler arama sonuçlarından derlendi, kesinleşmeyenler ❓.
+
 ## 2026-10-22 — İlk sürüm (devam ediyor)
 
 - Repo oluşturuldu; eski `meeapps-ai` bilgi tabanının yerini alır.

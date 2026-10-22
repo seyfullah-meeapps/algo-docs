@@ -58,7 +58,7 @@ Her akış ilgili ayrıntı dokümanına link verir; burada yalnızca sıra ve s
 
 ## 4. Sabah emri ve OUCH handoff
 
-1. Operatör gün içinde (sabah saatinden önce) Toplu Emirler ekranından `OrderType = MORNING` emir girer → `POST /v1/sendOrders` → trade-data-app → order-service `SetOrders` → DB.
+1. Operatör gün içinde (sabah saatinden önce) Toplu Emirler ekranından `OrderType = MORNING` emir girer → `POST /v1/sendOrders` → trade-data-app → order-service gRPC `SendOrder` → DB (`DataService.SetOrders`).
    - Kademeli emirler `LevelCount` ile açılır.
 2. order-service sabah thread'i config'teki saatte (ör. 09:40:00.144) emirleri DB'den çeker ve OUCH kullanıcılarına dağıtır. Her kullanıcı ayrı FIFO thread'de aynı anda göndermeye başlar.
 3. Seans açılmadan giden emirler `-110023` ile reddedilir; kabul edilene kadar tekrar gönderilir. Kabul edilen ilk emir kuyruk önceliğini alır, fazlalar iptal edilir ([order-service](../10-servisler/order-service/README.md#toplu-emir-akışları)).
