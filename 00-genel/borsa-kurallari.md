@@ -11,9 +11,15 @@ kaynak:
     branch: development
     commit: 0dc32a7
 dis_kaynak:
-  - url: https://borsaistanbul.com/tr/sayfa/493/pay-piyasasi-piyasa-isleyisi
+  - url: https://www.borsaistanbul.com/files/pay-piyasasi-proseduru.pdf
     erisim: 2026-10-22
-    not: Sayfaya bu ortamdan doğrudan erişilemedi; içerik arama motoru özetinden alındı. Sayfada tarih yok.
+    not: Resmi Pay Piyasası Prosedürü (02.PRO.01), sürüm 3.34, revizyon 21/09/2026. Fiyat adımı, marj, seans saatleri ve tek fiyat seansları buradan.
+  - url: https://www.bloomberght.com/bist-ten-fiyat-adimi-ve-kotasyon-araliklarina-yeni-duzenleme-2337339
+    erisim: 2026-10-22
+    not: 2023 fiyat adımı düzenlemesi (yürürlük 06/11/2023); prosedürdeki tabloyla aynı.
+  - url: https://www.garantibbva.com.tr/isim-icin/yatirim/viop
+    erisim: 2026-10-22
+    not: VİOP seans saatleri — ikincil kaynak, resmi VİOP prosedürüyle karşılaştırılmadı.
   - url: https://www.cnnturk.com/ekonomi/borsa-istanbul-aciga-satis-islemlerinde-bugun-yukari-adim-kuralinin-uygulanacagini-duyurdu-2244665
     erisim: 2026-10-22
   - url: https://www.garantibbva.com.tr/borsa-hisse-senetleri/bist-islem-saatleri
@@ -26,7 +32,7 @@ durum: taslak
 
 **Önce kod.** Sistem fiyat adımını, tavan/tabanı ve seans durumunu borsadan (ITCH, VERDA) çalışma anında alır. Bu dosyadaki borsa kuralları **referans** içindir. Bir değerin sistemde nasıl kullanıldığı sorulursa koda ve ilgili dokümana bak. Resmi spesifikasyonlar algo-configs `doc/BIST-Dökümanlar/`'dadır ([40-operasyon](../40-operasyon/README.md#algo-configs-doc-insan-için-yazılmış-kaynaklar)).
 
-Dış kaynaklı bilgiler BIST'in resmi sayfasından doğrudan okunamadı (ağ erişimi yok); arama sonuçlarından derlendi. Kritik bir cevapta "resmi kaynaktan teyit edilmedi" de.
+Pay piyasası kuralları resmi **Pay Piyasası Prosedürü**'nden (sürüm 3.34, revizyon 21/09/2026) alındı. VİOP saatleri ikincil kaynaktandır; kritik bir cevapta "resmi VİOP prosedüründen teyit edilmedi" de. Borsa bu değerleri Yönetim Kurulu kararıyla değiştirebilir; prosedürün güncel sürümüne bakılmalı.
 
 ## Fiyat adımı (tick)
 
@@ -37,15 +43,22 @@ Dış kaynaklı bilgiler BIST'in resmi sayfasından doğrudan okunamadı (ağ er
 
 **Borsada (paylar, referans):**
 
-| Baz fiyat aralığı (TL) | Fiyat adımı (TL) |
-|------------------------|------------------|
-| 0,01 – 19,99 | 0,01 |
-| 20,00 – 49,98 | 0,02 |
-| 50,00 – 99,95 | 0,05 |
-| 100,00 – 249,90 | 0,10 |
-| 250,00 ve üzeri | 0,25'ten başlayıp artan kademeler |
+Prosedür Tablo-7 (paylar ve yeni pay alma hakları):
 
-❓ 250 TL üstü kademeler ve tablonun yürürlük tarihi doğrulanmadı. Bilinen son değişiklik 6 Kasım 2023'te yürürlüğe girdi (paylar ve BYF'ler için ayrı tablolar, piyasa yapıcı kotasyon aralıkları dahil). BYF ve varantların tabloları farklıdır.
+| Fiyat seviyesi (TL) | Fiyat adımı (TL) |
+|---------------------|------------------|
+| 0,01 – 19,99 | 0,01 |
+| 20,00 – 49,99 | 0,02 |
+| 50,00 – 99,99 | 0,05 |
+| 100,00 – 249,99 | 0,10 |
+| 250,00 – 499,99 | 0,25 |
+| 500,00 – 999,99 | 0,50 |
+| 1.000,00 – 2.499,99 | 1,00 |
+| 2.500,00 ve üzeri | 2,50 |
+
+- **Adım baz fiyata değil, emrin fiyat seviyesine bağlıdır.** Baz fiyatı 19,97 olan payda 20,00'ye kadar adım 0,01, üstünde 0,02'dir (prosedür örneği). Kodun bantları tek tek yürümesi bu yüzdendir.
+- Tablo 6 Kasım 2023'te yürürlüğe girdi; prosedürün 2026-09 sürümünde değişmemiş.
+- BYF'lerin tablosu ayrıdır (Tablo-8). Varant, sertifika, emtia sertifikası ve TAS işlemlerinde her seviyede adım **0,01**.
 
 ## Günlük fiyat limitleri (tavan / taban)
 
@@ -59,7 +72,8 @@ Dış kaynaklı bilgiler BIST'in resmi sayfasından doğrudan okunamadı (ağ er
 - Tavana veya tabana gelmek işlemi durdurmaz; o fiyattan karşı emir varsa eşleşme sürer.
 - Hesaplanan limit fiyat adımına denk gelmezse tavan aşağı, taban yukarı yuvarlanır. Bu kural pay vadelilerinde açıkça belirtilmiştir.
 - Pay vadeli sözleşmelerinde günlük limit, baz fiyatın ±%20'sidir.
-- ❓ Pay piyasası marj yüzdesi (yaygın bilinen ±%10) resmi kaynaktan doğrulanmadı. [Taban](../20-stratejiler/taban.md) dokümanı tabanı −%10 diye anlatır.
+- **Marj (prosedür § 5.1.11):** Paylarda **Yıldız Pazar ±%20, Ana Pazar ±%15, Alt Pazar, YİP ve PÖİP ±%10**. BYF ±%20, GMF ve girişim sermayesi fonları ±%20, yeni pay alma hakları ±%50, gayrimenkul ve emtia sertifikaları ±%5. Varantlarda baz fiyat yoktur (serbest marj).
+- Yaygın bilinen "±%10" yalnız Alt Pazar, YİP ve PÖİP için doğrudur. Yıldız Pazar hissesinde taban −%20'dir. Kod yüzdeye dayanmaz, tavan/tabanı VERDA'dan okur.
 
 ## Seanslar
 
@@ -70,23 +84,39 @@ Dış kaynaklı bilgiler BIST'in resmi sayfasından doğrudan okunamadı (ağ er
 | Strateji emirleri yalnız sürekli işlemde gider (`continuousSession()`). Seans durumu ITCH orderbook state'inden gelir. | [hft-classic](../20-stratejiler/hft-classic.md#tetik-erime) |
 | Sabah emirleri seans açılmadan gönderilir, `-110023` ("Illegal transaction at this time") reddi alındıkça, kabul alınana kadar (en çok 900 ms, yalnız `repeatLastShot: true` iken) son atış yeniden gönderilir. | [order-service](../10-servisler/order-service/toplu-emirler.md) |
 | Sabah emri saati config'tedir (örnek 09:40:00.144). Açılış emirleri payda 10:00, varant/sertifikada 10:02. | aynı yer |
-| Müzayedede denge fiyatı yayınlanır; Eşleştirme durumunda Teorik Fiyat stratejisi değerlendirme yapar. UTC 12:00 öncesi "sabah", sonrası "akşam" sayılır. | [teorik-fiyat](../20-stratejiler/teorik-fiyat.md) |
+| Müzayedede denge fiyatı yayınlanır; Eşleştirme durumunda Teorik Fiyat stratejisi değerlendirme yapar. Denge güncellemesinin saati UTC 13:00'ten (İstanbul 16:00) önceyse "sabah", sonrası "akşam" sayılır. | [teorik-fiyat](../20-stratejiler/teorik-fiyat.md) |
 | Strateji saat alanları İstanbul saatiyle günün saniyesidir (36000 = 10:00). | strateji dosyaları |
 
-**Borsada (pay piyasası, referans):**
+**Borsada (pay piyasası, prosedür Ek-9, tam iş günü):**
 
 | Bölüm | Saat |
 |-------|------|
-| Açılış seansı: emir toplama | 09:40 – 09:55 |
-| Açılış: eşleştirme | 09:55 – 10:00 |
+| Açılış: emir toplama | 09:40 – 09:55 (+30 sn içinde rastgele bitiş) |
+| Açılış: fiyat belirleme | 09:55 (+) |
 | Sürekli işlem | 10:00 – 18:00 |
-| Kapanış seansı (marj yayını, emir toplama, kapanış fiyatından işlem) | 18:00 – 18:10 |
+| Kapanış: marj yayını | 18:00 – 18:01 |
+| Kapanış: emir toplama | 18:01 – 18:05 |
+| Kapanış: fiyat belirleme | 18:05 (+) |
+| Kapanış fiyatından / tek fiyattan işlemler: marj yayını | 18:07 – 18:08 |
+| Kapanış fiyatından / tek fiyattan işlemler | 18:08 – 18:10 |
 
-- Varant ve sertifikalarda 10:00–10:02 arası yalnızca piyasa yapıcı kotasyonu vardır (order-service config'iyle uyumlu).
-- BYF açılış seansı: emir toplama 09:40–09:56, eşleştirme 09:56–10:00.
-- Arife günleri seans öğleden sonra kapanır (ör. 12:40).
-- ❓ Kaynak 2016 tarihli Yönetim Kurulu kararı. Sonraki değişiklikler, gün ortası tek fiyat bölümü ve VİOP saatleri doğrulanmadı.
-- **YİP** (Yakın İzleme Pazarı) payları tek fiyat seanslarıyla işlem görür. order-service seans saatlerini config'ten alır (`openingOrders.yip.sessions`; örnek config 10:00, 13:00, 14:00). ❓ Borsanın güncel YİP seans takvimi doğrulanmadı.
+- **BYF:** açılış emir toplama 09:40 – 09:56.
+- **Varant ve sertifika:** açılış seansına girmez. Seans 10:00:10'da başlar; 10:00 – 10:02 arası yalnız piyasa yapıcı kotasyonu kabul edilir (`P_SALTKOTASYON`). order-service config'indeki 10:02 gönderimiyle uyumlu.
+- **Yarım iş günü (arife):** 09:40 – 12:40. Sürekli işlem 10:00 – 12:30, kapanış 12:30 – 12:37, kapanış fiyatından işlemler 12:37 – 12:40.
+- **Gün ortası tek fiyat** sürekli işlem gören pazarlarda (Yıldız, Ana, Alt) **yoktur**. Yalnız tek fiyat yöntemiyle işlem gören araçlarda vardır.
+- **YİP ve PÖİP: günde 5 kez tek fiyat** (prosedür Tablo-4 ve Tablo-10):
+
+  | Tek fiyat süreci | Bölüm | Emir toplama | Fiyat belirleme |
+  |------------------|-------|--------------|-----------------|
+  | 1. Açılış | 09:40 – 10:00 | 09:40 – 09:55 | 09:55 (+) |
+  | 2. | 10:00 – 13:00 | 10:00 – 12:55 | 12:55 (+) |
+  | 3. Gün ortası | 13:00 – 14:00 | 13:00 – 13:55 | 13:55 (+) |
+  | 4. | 14:00 – 18:00 | 14:00 – 17:55 | 17:55 (+) |
+  | 5. Kapanış | 18:01 – 18:07 | 18:01 – 18:05 | 18:05 (+) |
+
+  Ardından 18:08 – 18:10 kapanış fiyatından işlemler. Eşleşmeyen geçerli emirler bir sonraki sürece aktarılır. order-service örnek config'indeki YİP seansları (10:00, 13:00, 14:00) 2.–4. süreçlerin emir toplama başlangıçlarıdır ([toplu-emirler](../10-servisler/order-service/toplu-emirler.md)).
+
+**VİOP (ikincil kaynak):** Gün içi seans 09:20'de emir toplamayla açılır, sürekli müzayede 09:30 – 18:15 arasındadır (bazı kaynaklar kapanışı 18:10 verir). Akşam seansı 19:00 – 23:00 arasındadır; endeks ve bazı emtia sözleşmeleri girer, yarım günlerde yapılmaz. order-service config'indeki VİOP sabah (09:20) ve vadeli açılış (09:30) saatleriyle uyumludur. ❓ Resmi VİOP prosedüründen teyit edilmedi.
 
 ## Açığa satış ve yukarı adım (uptick) kuralı
 

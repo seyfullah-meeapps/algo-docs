@@ -2,6 +2,22 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-22 — Doğrulamalar (madde 9)
+
+Kaynak: Borsa İstanbul **Pay Piyasası Prosedürü** (02.PRO.01, sürüm 3.34, revizyon 21/09/2026) PDF'i; HftSrvProd `development` `4275ccc`.
+
+- **K-10 kapandı:** Fiyat adımı tablosu prosedür Tablo-7'den eksiksiz yazıldı; 250 TL üstünde 0,25 / 0,50 / 1,00 / 2,50 kademeleri var. Adım baz fiyata değil, emrin fiyat seviyesine bağlı. Tablo 6 Kasım 2023'ten beri değişmemiş.
+- **K-11 kapandı:** Marj tek bir ±%10 değil. Yıldız Pazar ±%20, Ana Pazar ±%15; Alt Pazar, YİP ve PÖİP ±%10. `taban.md`'deki "−%10" düzeltildi.
+- **K-12 kapandı:**
+  - Kapanış seansının alt bölümleri yazıldı.
+  - Varant ve sertifikada seans 10:00:10'da başlıyor; 10:02'ye kadar yalnız piyasa yapıcı kotasyonu.
+  - Yarım gün takvimi yazıldı.
+  - Gün ortası tek fiyat yalnız tek fiyat yöntemli pazarlarda var. YİP ve PÖİP'te günde 5 tek fiyat süreci var; takvimi yazıldı.
+  - VİOP saatleri yalnız ikincil kaynaktan (K-193).
+- **K-04 netleşti, açık kaldı (kasıtlı?):** `executeOrder` yalnız log basıyor. Kod yorumla birlikte `c819f28`'de (2025-12-01) geldi. Dolan emir `orderMap`'te kalıyor; sabah modunda sonraki Eşleştirme'de bu emre ters emir gidebilir. Kasıt sorusu ekibe soruluyor.
+- **Teorik Fiyat düzeltmesi:** "Sabah" sınırı UTC 12:00 değil 13:00, yani İstanbul 16:00 (`hour <= 12`). Saat `packetTs`'ten hesaplanıyor; bu değer 0 gelirse akşamda da sabah moduna düşülüyor (K-192).
+- Yeni konular: K-192, K-193.
+
 ## 2026-10-22 — Operasyon derinleştirme (madde 8)
 
 Kaynak: Algo-Setup `development` `2a3c5d5` (`main` `2907757` ve `preprod` `346306a` farkları `git show` ile), algo-configs `master` `ab35dde` (`Sabah_Kontrolleri.docx` dahil); servis repoları manifest'teki commit'lerde.

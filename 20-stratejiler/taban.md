@@ -10,7 +10,7 @@ durum: taslak
 
 # Taban (`MinPrice`, 14)
 
-**Fikir:** Taban fiyatında (−%10) duran satış duvarını alıcılar eritmeye başladığında fiyat tabandan kalkmak üzeredir. Strateji duvar incelince taban fiyatından **KIE alış** yapar ve sıçramaya satar.
+**Fikir:** Taban fiyatında (pazara göre −%10 / −%15 / −%20, [borsa-kurallari](../00-genel/borsa-kurallari.md#günlük-fiyat-limitleri-tavan--taban)) duran satış duvarını alıcılar eritmeye başladığında fiyat tabandan kalkmak üzeredir. Strateji duvar incelince taban fiyatından **KIE alış** yapar ve sıçramaya satar.
 - Yalnız long çalışır.
 - Günü tabanda pozisyonla bitirmek kötü senaryodur; bu yüzden kaçış kuralları baskındır.
 

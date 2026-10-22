@@ -18,7 +18,7 @@ Tür: **bug?** olası hata · **doğrula** kodla/borsayla teyit gerekli · **eks
 | K-01 | bug? | itch-sdk snapshot-end pazar başına sabit Partition 1–4 bekliyor (`isMarketGlimpseComplete`); 6 partition'lı VİOP'ta P5–P6 tamamlanmaya dahil değil, 4'ten azında pazar hiç canlıya geçmez. `partId` yalnız log etiketi. ⏸ ertelendi | [alim-yolu](10-servisler/itch-sdk/alim-yolu.md#8-partition-varsayımları-ve-partid-k-01--ertelendi) |
 | K-02 | bug? | trade-data-app ITCH config'i `Part` 1–4'ü tanıyor, 5–6 Partition1'e düşüyor; 6 partition'lı VİOP'ta (Piramit_Algo) son iki partition gelmiyor, A1/Alnus-Algo zaten 4 tanımlı. ⏸ ertelendi | [config](10-servisler/trade-data-app/config.md) § `itchConfigurations[]` |
 | K-03 | bug? | Tavan: yeni stratejide DB'ye 600/1200 varsayılan saat yazılıyor, UI 36000–64800 bekliyor; yanlış değer UI'dan geri gidebilir | [tavan](20-stratejiler/tavan.md) § Wire alanları |
-| K-04 | doğrula | Teorik Fiyat `executeOrder` pozisyonu güncellemiyor (kod yorumda); kasıtlı mı? | [teorik-fiyat](20-stratejiler/teorik-fiyat.md) § Bilinen durumlar |
+| K-04 | kasıtlı? | Teorik Fiyat `executeOrder` yalnız log basıyor: pozisyon güncellenmiyor, dolan emir `orderMap`'ten silinmiyor; sabah modunda sonraki Eşleştirme'de dolmuş emre ters emir gidebilir (kod `c819f28`'de yorumla geldi). Ekibe sorulmalı | [teorik-fiyat](20-stratejiler/teorik-fiyat.md#bilinen-durumlar) |
 
 ## trade-data-app
 
@@ -86,6 +86,7 @@ Ayrıntılar alt dosyaların kendi "şüpheli davranışlar" bölümlerinde.
 | K-66 | bug? | Etkisiz config anahtarları (`coreAffinity`, `internalOuch*`, `ouchWorkerCount`, `minHotDwellUpdates`, `[[viop_ouch_users]]`, `license*`); `loadConfiguration` şifreleri stdout'a basıyor | [config](10-servisler/hftsrvprod/config.md) § Lisans ve okunup kullanılmayanlar |
 | K-67 | doğrula | HFT `grpcPort` ile trade-data-app `extServices` hft portu A1, Alnus, Alnus-Algo, Global, Marbas'ta uyuşmuyor | [config](10-servisler/hftsrvprod/config.md) § Müşteri config'leri |
 | K-68 | doğrula | 7 müşteride `logLevel=debug` (ITCH SDK da debug'a geçiyor); strateji kuyruğu düşürme sayacı loglanmıyor | [config](10-servisler/hftsrvprod/config.md) § Müşteri config'leri |
+| K-192 | bug? | Teorik Fiyat sabah/akşam ayrımı `packetTs`'ten; Glimpse/XLIO'da 0 → akşam müzayedesinde iptal yerine ters emir | [teorik-fiyat](20-stratejiler/teorik-fiyat.md#akış) |
 
 ## order-service
 
@@ -245,9 +246,7 @@ Ayrıntılar alt dosyaların kendi "Şüpheli" bölümlerinde. Sistem genelindek
 
 | # | Tür | Konu | Ayrıntı |
 |---|-----|------|---------|
-| K-10 | doğrula | Fiyat adımı: 250 TL üstü kademeler ve tablonun yürürlük tarihi | [borsa-kurallari](00-genel/borsa-kurallari.md) § Fiyat adımı |
-| K-11 | doğrula | Pay piyasası günlük marj yüzdesi (±%10?) resmi kaynaktan | [borsa-kurallari](00-genel/borsa-kurallari.md) § Günlük fiyat limitleri |
-| K-12 | doğrula | Seans saatleri (2016 kararı sonrası), gün ortası tek fiyat, VİOP saatleri, YİP takvimi | [borsa-kurallari](00-genel/borsa-kurallari.md) § Seanslar |
+| K-193 | doğrula | VİOP seans saatleri (09:20/09:30–18:15, akşam 19:00–23:00) yalnız ikincil kaynaktan; resmi VİOP prosedürüyle teyit | [borsa-kurallari](00-genel/borsa-kurallari.md#seanslar) |
 
 ## Yolda / takip
 
