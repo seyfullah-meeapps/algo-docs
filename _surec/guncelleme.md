@@ -40,7 +40,7 @@ Onaylanan değişiklikler için:
 - İlgili dosyaları güncelle; frontmatter'da `commit` ve `dogrulama`'yı yenile.
 - `manifest.yaml`'da `dogrulanan_commit`, `commit_tarihi`, `son_guncelleme`.
 - `CHANGELOG.md`'ye oturum kaydı ekle.
-- Branch aç, PR gönder; kullanıcı merge eder.
+- `main`'e commit'le ve push et (içerik kullanıcı onayından geçtiği için ayrı PR gerekmez).
 
 ## Notlar
 
