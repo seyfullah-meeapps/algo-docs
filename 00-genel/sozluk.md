@@ -38,7 +38,7 @@ Bu dosya yeni bilgi içermez. Tanımlar bu repodaki diğer dokümanlardan derlen
 | **FaK** | Fill and Kill; AlgoProd arbitrajda aktif türev emri. | [arbitraj](../20-stratejiler/arbitraj.md) |
 | **DAY** | Gün sonuna kadar geçerli limit emir. | |
 | **Father order ref** | Büyük emir parçalandığında parçaları bağlayan referans. | [hftsrvprod](../10-servisler/hftsrvprod/README.md#emir-gönderme-deseni) |
-| **Combiner** | MAOrderSDK'nın kendi fill'lerimizi OUCH'tan önce ITCH'ten yakalayan bileşeni. | [MAOrderSDK](../10-servisler/maordersdk/README.md#combiner-itch--ouch-execute) |
+| **Combiner** | MAOrderSDK'nın kendi fill'lerimizi OUCH'tan önce ITCH'ten yakalayan bileşeni. | [MAOrderSDK](../10-servisler/maordersdk/emir-akisi.md#9-combiner-srccombiner) |
 | **Max-size / momentum** | Agresif emrin enstrümanın azami emir büyüklüğüne ulaşması (`isMaxSizeExecution`). | [itch-sdk](../10-servisler/itch-sdk/README.md) |
 | **Denge (teorik) fiyatı** | Müzayede seansında oluşacak eşleşme fiyatı. | [teorik-fiyat](../20-stratejiler/teorik-fiyat.md) |
 

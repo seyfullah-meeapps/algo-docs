@@ -52,7 +52,7 @@ Dış kaynaklı bilgiler BIST'in resmi sayfasından doğrudan okunamadı (ağ er
 **Kodda:**
 - Tavan, taban ve maks emir değeri günlük **VERDA** dosyalarından gelir. Bunları `Instrument` tablosuna yazan tek yer trade-data-app TradeVerifier'dır ([trade-data-app](../10-servisler/trade-data-app/README.md#açılış-sırası-cmddataappmaingo)). Kod limit yüzdesini kendisi hesaplamaz.
 - **Brüt takas** enstrümanlarına MAOrderSDK emir göndermez (yerel ret 1002).
-- **Maks emir değeri** (`max_order_value`, tam TL): aşan emir bölünür; tek lot bile aşıyorsa yerel ret 1004 ([MAOrderSDK](../10-servisler/maordersdk/README.md#emir-gönderme)).
+- **Maks emir değeri** (`max_order_value`, tam TL): aşan emir bölünür; tek lot bile aşıyorsa yerel ret 1004 ([MAOrderSDK](../10-servisler/maordersdk/emir-akisi.md)).
 
 **Borsada (referans):**
 - Baz fiyat normalde önceki günün kapanış fiyatıdır. Sermaye artırımı, temettü, bölünme gibi olaylarda düzeltilmiş baz fiyat kullanılır.

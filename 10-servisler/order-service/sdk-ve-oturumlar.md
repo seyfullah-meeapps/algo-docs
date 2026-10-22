@@ -127,7 +127,8 @@ Kod: `Managers/Sdk/MAOSdkManager.*`, `Managers/Sdk/SdkSessionManager.*`. Başka 
 
 | Durum | SDK davranışı | order-service sonucu |
 |-------|---------------|----------------------|
-| Yerel validasyon (1001–1006), split'te route yok (1) | Token atanır + senkron `onRejected` | `OrderRejected` uygulamaya ve GUI'ye gider (§5) |
+| Yerel validasyon (1001–1006); split'te route var ama bağlı bağlantı yok (1) | Token atanır + senkron `onRejected` | `OrderRejected` uygulamaya ve GUI'ye gider (§5) |
+| Split'te hesabın `account_routes_` kaydı hiç yok (1) | `onRejected` `client_order_id = ""` ile, token atanmaz | `context_for("")` kayıt bulamaz, olay atılır ([maordersdk/emir-akisi](../maordersdk/emir-akisi.md)) |
 | Encode / soket / duplicate (4/5/6/15) | `notify_send_failure` → `onRejected` | Aynı |
 | Bölünmeyen emir, hesabın **bağlı** connection'ı yok (handoff sonrası, kopma, exact-route kullanıcısı düşük) | `onSdkError(1)`, token yok, ret yok | Yalnız `LOG_CRIT "MAOrderSDK error code=1"`. **Uygulamaya cevap gitmez** (Şüpheli #3) |
 
@@ -296,10 +297,10 @@ Değişmez kural: BIST'in kabul ettiği şifre her zaman {DB `password`, DB `pen
 
 | Senaryo | Ne olur (koddan) |
 |---------|------------------|
-| **OUCH TCP koptu** (handoff dışı kullanıcı) | Recv loop biter → `onUserDisconnected` → shim 1 s aralıkla yeniden bağlanır. Arada o kullanıcıya route edilen emirler: hesabın başka bağlı kullanıcısı varsa ona gider. Yoksa `onSdkError(1)`, sessiz kayıp (§4.3). Açık emirlerin cancel'ı `onSdkError(10)`. Bağlanınca replay; accept/replace/cancel/execute dedup'ı proses içi state ile çalışır, pozisyon tekrar yazılmaz. |
+| **OUCH TCP koptu** (handoff dışı kullanıcı) | Recv loop biter → `onUserDisconnected` → shim 1 s aralıkla yeniden bağlanır. End of Session (`Z`) paketinde `onUserDisconnected` gelmez, shim tetiklenmez ([maordersdk/ouch-protokolu](../maordersdk/ouch-protokolu.md)). Arada o kullanıcıya route edilen emirler: hesabın başka bağlı kullanıcısı varsa ona gider. Yoksa `onSdkError(1)`, sessiz kayıp (§4.3). Açık emirlerin cancel'ı `onSdkError(10)`. Bağlanınca replay; accept/replace/cancel/execute dedup'ı proses içi state ile çalışır, pozisyon tekrar yazılmaz. |
 | **OUCH heartbeat timeout** (veri yok, TCP açık) | SDK yalnız `onHeartbeatTimeout` çağırır, soketi kapatmaz. order-service yalnız log basar; reconnect **yok** (Şüpheli #6). |
 | **Handoff edilmiş kullanıcı koptu** | order-service etkilenmez (zaten bağlı değil). HFT tarafı: [emir-yasam-dongusu § 6](../hftsrvprod/emir-yasam-dongusu.md). |
-| **FIX koptu** | QuickFIX `reconnectInterval` (örnek config 3600 s) sonra yeniden dener. Gate temizlenir. Şifre akışları bu pencereye bağlıdır. |
+| **FIX koptu** | QuickFIX `reconnectInterval` (örnek config 3600 s) sonra yeniden dener. Açılıştaki ilk bağlanma ≤30 s içinde olur (QuickFIX varsayılanı), sonrakiler bu pencerede ([maordersdk/fix](../maordersdk/fix.md)). Gate temizlenir. Şifre akışları bu pencereye bağlıdır. |
 | **trade-data-app yok** (açılışta) | `GetUsers` boş döner (`LOG_CRIT`); hiç kullanıcı yüklenmez. ❓ doğrulanmadı: `DatabaseClient::Connect`'in bunu önceden bloklayıp bloklamadığı ([kalicilik-ve-config.md](kalicilik-ve-config.md)). |
 | **Gün içi restart, sabah saatinden sonra** | (1) DB'den emirler `entered_orders`'a (OrderID=0). (2) **Bütün** OUCH kullanıcılarına login denenir; morning-only kullanıcı HFT'deyse ikinci login'in sonucu BIST'e bağlıdır (❓ doğrulanmadı: reddedilir mi). Reddedilirse shim 1 s aralıkla denemeye başlar. (3) Yol C: HFT order-service'e bağlıyken `markIntendedDown` shim'i durdurur. Bağlı olmayan connection'a `disconnectUser` callback üretmez. `UserDisconnected` HFT'ye yeniden gider; HFT connection'ı zaten bağlıysa `connectUser` → `AlreadyConnected`. (4) Login olan kullanıcılarda replay: accept'ler yeniden işlenir, risk'e ve uygulamalara yeniden yayılır (`OrderID` 0 olduğundan dedup yok). Execute'larda pozisyon yazımı yalnız `parseBistLoopStart`'tan sonraki 10 s içinde bastırılır (Şüpheli #4). Rejected/canceled haritaları boş olduğu için bunlar da yeniden yayılır. |
 | **Gün içi restart, sabah saatinden önce** | Normal açılış; yol B zamanlayıcıları kurulur. |

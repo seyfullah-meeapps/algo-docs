@@ -2,6 +2,22 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-22 — MAOrderSDK derinleştirme
+
+Kaynak: MAOrderSDK `a788782` (değişmedi). Host tarafı için HftSrvProd ve order-service, FIX config'leri için Algo-Setup/algo-configs de okundu.
+
+- `10-servisler/maordersdk/` alt dosyalara bölündü: `api-ve-yasam-dongusu.md`, `emir-akisi.md`, `ouch-protokolu.md`, `fix.md`. README artık giriş ve indeks.
+- **README düzeltmeleri:**
+  - Bölünen emrin parçaları yalnız host `client_order_id` verirse ana emre bağlanıyor; HFT ve order-service vermediği için iptal yayılmıyor.
+  - Yerel ret tablosu tamamlandı (1005, 1006, sentetik 1/4/5/6/15). Hard cap yalnız limit tablosu doluysa ve `price > 0` ise.
+  - `onWireExecuted` FIX'te QuickFIX thread'inden. `setCallbacks` Onload bootstrap'tan önce olmalı.
+  - Failover yalnız TCP seviyesinde. `onReplayCompleted` logon başına en fazla bir kez. Mlx varyantı. Data dictionary XML'leri çalışma anında okunuyor.
+- **Diğer dosyalarda düzeltmeler (kodla doğrulandı):**
+  - `hftsrvprod/emir-yasam-dongusu.md`: replace sonrası callback'ler HFT id'siyle gelir, wire token farklıdır; hard cap koşulu; `onSdkError` kodları (11 `setFavoriteOuch`, 5, 15); End of Session istisnası; replay sequence 1 ve `onReplayCompleted` thread'i ❓'leri kapandı.
+  - `order-service/sdk-ve-oturumlar.md`: route'suz split reddi boş id'yle gelir ve atılır; End of Session'da shim tetiklenmez; FIX ilk bağlanma ≤30 s.
+  - `order-service/kalicilik-ve-config.md`: FIX `fileStorePath`/`fileLogPath` dizindir; OUCH sequence 1 ❓'si kapandı.
+- **Yeni açık konular:** K-100–K-125.
+
 ## 2026-10-22 — order-service derinleştirme
 
 Kaynak: order-service `b86c0cf` (değişmedi). Karşı taraf için MAOrderSDK, ouch-sdk, network-sdk, trade-data-app ve Algo-Setup müşteri config'leri de okundu.

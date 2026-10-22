@@ -105,7 +105,7 @@ Sunucu tarafı: [trade-data-app/api.md §4](../trade-data-app/api.md) ve [sema.m
 
 1. Açılış: `Login` çağrılır, ardından instruments, strategies, account strategies ve positions yüklenir. Pozisyonlar DB'deki delta toplamıdır.
 2. `RetrieveSentOrders` çalışır (yukarıda).
-3. **OUCH:** `connectUser`. ❓ doğrulanmadı: MAOrderSDK'nın OUCH login'inde sequence=1 isteyip günün olaylarını replay ettiği README'de yazıyor, burada SDK kodu doğrulanmadı ([sdk-ve-oturumlar.md](sdk-ve-oturumlar.md)).
+3. **OUCH:** `connectUser`. MAOrderSDK her OUCH login'inde sequence 1 ister (`OuchCodec::encode_login`), günün olayları baştan replay edilir ([maordersdk/ouch-protokolu](../maordersdk/ouch-protokolu.md)).
    - OUCH olaylarında `is_replay` bayrağı yoktur (`MAOrderStruct.h`: bayrak yalnız FIX PossDup için set edilir).
    - Pozisyonun iki kez yazılmasını yalnız bir zaman penceresi önler: `sdk_->start()`'tan sonraki **10 sn** içinde (`PARSE_LOOP_START_TIMEOUT`) gelen OUCH fill'leri `SetPosition`'a yazılmaz.
    - Aynı oturumdaki tekrarlar `processed_execution_keys_` (bellek içi) ile atlanır. Restart sonrası bu küme boştur.
@@ -203,7 +203,7 @@ Hepsi `MAOSdkManager::StartProperly`'de `sdk_config.fix_session`'a birebir kopya
 | Anahtar | Tip | Varsayılan | Not |
 |---------|-----|-----------|-----|
 | `connectionType`, `beginString`, `defaultApplVerID` | string | zorunlu | `initiator`, `FIXT.1.1`, `FIX.5.0SP2` |
-| `fileStorePath`, `fileLogPath` | string | zorunlu | Örnekte `incoming.log`/`outgoing.log`. İsimler ters görünüyor: store dosyasının adı "incoming" konmuş. |
+| `fileStorePath`, `fileLogPath` | string | zorunlu | Örnekte `incoming.log`/`outgoing.log`. QuickFIX'te bunlar dosya değil **dizin**; store `incoming.log/` altında oturum başına `.seqnums/.body/.header/.session` dosyaları tutar ([maordersdk/fix § 3](../maordersdk/fix.md#3-sessionsettings-fixenginebuild_session_settings)). |
 | `allowUnknownMsgFields`, `validateUserDefinedFields`, `validateUserDefinedMessages` | bool | zorunlu | QuickFIX |
 | `resetOnLogon`, `resetOnLogout`, `resetOnDisconnect` | bool | zorunlu | false = sequence korunur ve restart replay'i mümkün olur |
 | `useDataDictionary`, `dataDictionary`, `useTransportDataDictionary`, `transportDataDictionary` | bool / string (dosya yolu) | zorunlu | QuickFIX spec dosyaları |

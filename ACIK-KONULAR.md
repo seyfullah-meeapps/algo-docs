@@ -127,6 +127,37 @@ Ayrıntılar alt dosyaların kendi "şüpheli davranışlar" bölümlerinde.
 | K-98 | doğrula | `STRATEGY` satırları tarihsiz yükleniyor; Alnus ve Alnus-Algo'da gece temizleme (`dbNightEvent.sh`) yok | [kalicilik-ve-config](10-servisler/order-service/kalicilik-ve-config.md#şüpheli) |
 | K-99 | doğrula | CI'da Alnus_Algo `Configs/Alnus`'u kullanıyor; Piramit_Algo matriste yok; Onload derlemesinde `use_onload=false` | [kalicilik-ve-config](10-servisler/order-service/kalicilik-ve-config.md#şüpheli) |
 
+## MAOrderSDK
+
+| # | Tür | Konu | Ayrıntı |
+|---|-----|------|---------|
+| K-100 | bug? | İç haritalar (`orders_by_token`, `wire_by_client`, `split_parents_`) biten emirde silinmiyor; bellek büyüyor, `ownsOrder` bitmiş emirde true | [emir-akisi](10-servisler/maordersdk/emir-akisi.md#şüpheli) |
+| K-101 | bug? | `cancel_one`/`replace_one` `onSdkError` 9/10/4'ü `maps_mutex` altında çağırıyor; host SDK'ya geri girerse deadlock | [emir-akisi](10-servisler/maordersdk/emir-akisi.md#şüpheli) |
+| K-102 | bug? | Cancel/replace soket yazım hatası sessiz: ne `onSdkError` ne ret, yalnız `false`; HFT yedek yola da gitmiyor | [emir-akisi](10-servisler/maordersdk/emir-akisi.md#şüpheli) |
+| K-103 | bug? | Split'te hesabın route'u yoksa ret boş `client_order_id` ile geliyor, token callback'i yok; order-service olayı atıyor | [emir-akisi](10-servisler/maordersdk/emir-akisi.md#şüpheli) |
+| K-104 | bug? | Limit tablosu boşsa `order_hard_cap_try` hiç uygulanmıyor; market emri ve negatif fiyat 1001–1003 ve bölmeyi atlıyor (brüt takasa market emri gidebilir) | [emir-akisi](10-servisler/maordersdk/emir-akisi.md#şüpheli) |
+| K-105 | doğrula | Split replace kısmen dolmuş child'a girişteki miktarı yazıyor; `max_order_value == 0` enstrümanda her emir 1004 | [emir-akisi](10-servisler/maordersdk/emir-akisi.md#şüpheli) |
+| K-106 | doğrula | Combiner: `poison_all` tek bağlantı kopunca bütün kullanıcıları zehirliyor; aynı süreçte reconnect replay'i fill'leri tekrar teslim ediyor; replace'te ITCH `order_id` değişmezse çift fill | [emir-akisi](10-servisler/maordersdk/emir-akisi.md#şüpheli) |
+| K-107 | bug? | `connectUser(OuchUser)` `protocol` alanını yok sayıyor; FIX kullanıcısı için OUCH bağlantısı kuruluyor | [api-ve-yasam-dongusu](10-servisler/maordersdk/api-ve-yasam-dongusu.md#şüpheli) |
+| K-108 | bug? | `ownsAccount` ile routing tutarsız: OUCH kopuk + FIX logon'lu ya da exact-route kullanıcısı kopukken emir sessizce düşüyor | [api-ve-yasam-dongusu](10-servisler/maordersdk/api-ve-yasam-dongusu.md#şüpheli) |
+| K-109 | bug? | `onSdkError(6)` iki anlamlı (`mlockall` ve wire send); Onload hata kodu 7 `setCallbacks`'ten önce kayboluyor | [api-ve-yasam-dongusu](10-servisler/maordersdk/api-ve-yasam-dongusu.md#şüpheli) |
+| K-110 | doğrula | Host callback'inden fırlayan istisna recv thread'inde `std::terminate`; aynı kullanıcıya eşzamanlı `connectUser` `recv_thread_` yeniden atamasında terminate riski | [api-ve-yasam-dongusu](10-servisler/maordersdk/api-ve-yasam-dongusu.md#şüpheli) |
+| K-111 | doğrula | OUCH `onUserConnected` recv thread başladıktan sonra çağıran thread'de; replay olaylarıyla sıra garantisi yok | [api-ve-yasam-dongusu](10-servisler/maordersdk/api-ve-yasam-dongusu.md#şüpheli) |
+| K-112 | kasıtlı? | `setOuchConfig` geçersiz `market`'te `std::exit(1)`; `OuchUser.market` başlatılmamış | [api-ve-yasam-dongusu](10-servisler/maordersdk/api-ve-yasam-dongusu.md#şüpheli) |
+| K-113 | bug? | End of Session'da `onUserDisconnected` yok; combiner zehirlenmez, soket açık kalır, order-service reconnect shim'i tetiklenmez | [ouch-protokolu](10-servisler/maordersdk/ouch-protokolu.md#şüpheli) |
+| K-114 | bug? | Sistemin değiştirdiği emirde Replacement Token boşluk; `""` ile adopt edilip host'a boş id gidiyor; Order State (sahiplik kaybı) okunmuyor | [ouch-protokolu](10-servisler/maordersdk/ouch-protokolu.md#şüpheli) |
+| K-115 | doğrula | Heartbeat timeout yalnız bildirim; soket kapanmıyor, yarı açık TCP'de bağlı görünüyor | [ouch-protokolu](10-servisler/maordersdk/ouch-protokolu.md#şüpheli) |
+| K-116 | doğrula | Kesmeler: fiyat int64→int32, orderbook uint64→uint32 kontrolsüz; 12 baytlık Match ID'nin üst 4 baytı atılıyor (dedup/combiner riski) | [ouch-protokolu](10-servisler/maordersdk/ouch-protokolu.md#şüpheli) |
+| K-117 | doğrula | GTC, GTD, AtCrossing TIF'leri sessizce Day gidiyor (OUCH ve MARpc) | [ouch-protokolu](10-servisler/maordersdk/ouch-protokolu.md#şüpheli) |
+| K-118 | doğrula | Kısmi yazım + 1 s timeout'ta yarım OUCH çerçevesi kalıyor; 256 bayttan uzun paket bağlantıyı düşürüyor; Replace 125 bayt (spec 122) | [ouch-protokolu](10-servisler/maordersdk/ouch-protokolu.md#şüpheli) |
+| K-119 | doğrula | Login reddinde ikincil endpoint'e geçilmiyor; failover yalnız TCP seviyesinde | [ouch-protokolu](10-servisler/maordersdk/ouch-protokolu.md#şüpheli) |
+| K-120 | bug? | FIX oturum Reject (35=3) ve BusinessMessageReject (35=j) host'a callback üretmiyor; emir askıda kalır | [fix](10-servisler/maordersdk/fix.md#10-şüpheli) |
+| K-121 | bug? | FIX miktar replace'inden sonra `order.quantity` kalan miktara dönüyor; sonraki replace/cancel kısmi dolmuş emirde yanlış `38` gönderiyor | [fix](10-servisler/maordersdk/fix.md#10-şüpheli) |
+| K-122 | doğrula | FIX fiyat böleni sabit (pay 1000, VİOP 100), `decimal_count` kullanılmıyor; bölme/hard cap `10^decimal_count` ile — ölçekler ayrışabilir | [fix](10-servisler/maordersdk/fix.md#10-şüpheli) |
+| K-123 | doğrula | `armFixPasswordChange` sonrası herhangi bir Logout şifre değişimi başarısız sayılıp oturum devre dışı kalıyor | [fix](10-servisler/maordersdk/fix.md#10-şüpheli) |
+| K-124 | doğrula | FIX: ExecType `H`/`G` (trade cancel/correct) sessizce düşüyor; ClOrdID uzunluk kontrolü yok; yabancı ClOrdID'ler sahipleniliyor | [fix](10-servisler/maordersdk/fix.md#10-şüpheli) |
+| K-125 | doğrula | QuickFIX oturum penceresi sabit kodlu 05:00–03:00 UTC (06:00–08:00 TR oturum dışı) | [fix](10-servisler/maordersdk/fix.md#10-şüpheli) |
+
 ## Borsa kuralları
 
 | # | Tür | Konu | Ayrıntı |

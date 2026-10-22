@@ -70,11 +70,11 @@ Genel desen ve handoff özeti başka dosyalarda; burada tekrar edilmez:
 
 ### Kimlik: token / `client_order_id`
 
-- **SDK yolu:** `toSdkMsg` `client_order_id`'yi **bilerek boş** bırakır. SDK 14 baytlık OUCH token'ı üretir ve bütün callback'lerde onu `client_order_id` olarak döner ("SDK-owned token" modeli; bkz. [maordersdk § Callback'ler](../maordersdk/README.md#callbackler)).
+- **SDK yolu:** `toSdkMsg` `client_order_id`'yi **bilerek boş** bırakır. SDK 14 baytlık OUCH token'ı üretir ve bütün callback'lerde onu `client_order_id` olarak döner ("SDK-owned token" modeli; bkz. [maordersdk § Callback'ler](../maordersdk/api-ve-yasam-dongusu.md#5-callbackler)).
   - Strateji token'ı gönderim anında öğrenmez, `onAccepted` ile öğrenir.
-  - Replace'te yeni id'yi HFT kendisi üretir: `UtilityClass::generateToken()`, 14 karakter `[0-9a-zA-Z]`.
+  - Replace'te yeni id'yi HFT kendisi üretir: `UtilityClass::generateToken()`, 14 karakter `[0-9a-zA-Z]`. SDK wire için **ayrı** bir OUCH token'ı üretir (`Impl::replace_one`, `generate_ouch_token`); replace'ten sonra callback'ler HFT'nin id'siyle gelir, wire token'ı farklıdır ([maordersdk/emir-akisi](../maordersdk/emir-akisi.md)).
 - **OS yolu:** `OuchManager::enterOrder` havuzdan bir token atar (`tokens[token_index++]`), ama bu token yalnız `hftEnterOrder` sarmalayıcısında kalır; MARpc `EnterOrder` (network-sdk `sdk/Models/orders.fbs`) ve ouch-sdk `EnterOrder`'da token alanı yoktur. order-service emri kendi MAOrderSDK'sıyla, SDK'nın ürettiği token'la gönderir (`MAOSdkManager.cpp`, `msg.client_order_id.clear()`; bkz. [order-service/arayuzler](../order-service/arayuzler.md)).
-  - Dolayısıyla HFT'ye dönen accept token'ı her iki yolda da **BIST wire token'ıdır**. Çift kayıt koruması bu eşitliğe dayanır (§4).
+  - Dolayısıyla HFT'ye dönen **ilk** accept token'ı her iki yolda da **BIST wire token'ıdır**. Çift kayıt koruması bu eşitliğe dayanır (§4). SDK yolunda replace edilmiş emirde eşitlik bozulur (yukarı).
 - **Stratejiye eşleme anahtarı:** `OuchManager::findStrategy` anahtarı `"<orderbookId>_<account>_<strategyIdentifier>_<strategyType>"` olarak kurar.
   - Bu, `StrategyManager` kayıt defterinin `unique_key`'idir (`Strategy::getStrategyKey` aynı formatı üretir).
   - Anahtarla bulunamazsa türev fallback'ine düşer: `StrategyManager::getStrategyByDerivative` (varant emirleri).
@@ -133,7 +133,7 @@ Bütün strateji gönderim noktaları aynı kalıbı kullanır:
 - Hesap, raw birimle yapılır:
   - `limit_raw = max_order_value × 10^decimal_count`
   - `quantity > limit_raw / price` ise çocuk başına `max_child_qty = limit_raw / price` lot olur, kalan miktar son çocuğa gider.
-- Önce statik `order_hard_cap_try` (config `sdkOrderHardCapTry`, tam TL) kontrol edilir. Aşılırsa 1003 ile reddedilir. Kap 0 ise **her emir** 1003 alır.
+- Önce statik `order_hard_cap_try` (config `sdkOrderHardCapTry`, tam TL) kontrol edilir. Aşılırsa 1003 ile reddedilir. Kap 0 ise her **limitli** emir 1003 alır. Kontrol yalnız limit tablosu boş değilse ve `price > 0` ise koşar (`enterOrder`); tablo boşsa hard cap hiç uygulanmaz, market emirleri muaftır.
 - HFT parent id vermediği için (`client_order_id` boş) SDK `split_parents_` kaydı tutmaz:
   - Her çocuk ayrı token'la ayrı bir emir olarak `onAccepted`'e düşer.
   - Çocukları birbirine bağlayan şey yalnızca father ref'tir.
@@ -153,6 +153,8 @@ Bütün strateji gönderim noktaları aynı kalıbı kullanır:
   - 4: duplicate yeni id
   - 8: boş id
   - 12: bölünmüş emrin miktarı değiştirilemez
+  - 5: encode hatası; 15: token atama callback'i hatası
+  - Soket yazım hatası hiçbir callback üretmez. Tam tablo: [maordersdk/emir-akisi](../maordersdk/emir-akisi.md).
   - Bu durumda `false` döner. `ownsOrder` true olduğundan OS yoluna da gitmez; **cancel/replace sessizce düşer**.
 
 ### Cancel-all ve pozisyon kapatma
@@ -179,7 +181,7 @@ Bütün strateji gönderim noktaları aynı kalıbı kullanır:
 | `onWireExecuted` | Her zaman emrin recv thread'i | Kayıt yoksa düşer | — | `EXECUTED` |
 | `onReplaced` | Recv thread | `getAcceptedOrder(prev)`, sonra `rekeyAcceptedOrder(prev → new)` | `updateOrder` | `REPLACED`. `prevPrice` mutasyondan **önce** yakalanır; GUI replace'i bununla eşler. |
 | `onCanceled` | Recv thread | `getAcceptedOrder(token)` | `deleteOrder(can, side)` + `onCancelResponse` | `CANCELED` |
-| `onReplayCompleted` | Recv thread ❓ doğrulanmadı | — | `StrategyManager::notifyUserReplayCompleted` (§4) | — |
+| `onReplayCompleted` | OUCH recv thread (`OuchConnection::maybe_fire_replay_completed`) | — | `StrategyManager::notifyUserReplayCompleted` (§4) | — |
 
 - **`OrderRegistry`** (`src/Clients/OrderRegistry.h`): `client_order_id` → `shared_ptr<Hft::OrderAccepted>` tutar, tek mutex'le korunur.
   - **Kayıtlar hiç silinmez.** Bu kasıtlıdır: strateji depth'leri bu nesnelere ham pointer tutar. Bellek gün boyu büyür.
@@ -308,7 +310,7 @@ Aynı accept iki kez gelebilir:
 | 1005 | Fiyat 0 (market emri değil) | 〃 |
 | 1006 | Miktar 0 | 〃 |
 
-- `onSdkError` kodları (ret değil, yalnız WARN log): 1 hesap sahibi yok, 8–12 cancel/replace hataları (§2), 7 Onload, 13 combiner.
+- `onSdkError` kodları (ret değil, yalnız WARN log): 1 hesap sahibi yok, 4/5/8/9/10/12/15 cancel/replace hataları (§2), 11 `setFavoriteOuch`, 7 Onload, 13 combiner. Tam tablo: [maordersdk/api-ve-yasam-dongusu](../maordersdk/api-ve-yasam-dongusu.md).
 - Bölünmemiş emirde "connection yok" durumu **ret üretmez**, yalnızca `false` döner.
 
 ### BIST kodları (HFT'nin tanıdıkları, `src/Globals/GlobalConstants.h`)
@@ -332,7 +334,7 @@ Strateji özelindeki ayrıntı: [taban](../../20-stratejiler/taban.md#tolerans-v
 
 | Senaryo | Ne olur (koddan) |
 |---------|------------------|
-| **OUCH koptu** (handoff sonrası) | `is_connected` false olur, combiner `poison_all` yapar. HFT `onUserDisconnected`/`onHeartbeatTimeout` callback'lerini **set etmez**. SDK kendiliğinden yeniden bağlanmaz (heartbeat thread yalnızca bağlı olanlara heartbeat yollar). Hesabın başka canlı connection'ı varsa round-robin onu kullanır. Yoksa `ownsAccount` false olur ve **yeni emirler OS yoluna düşer**. Açık emirlerin cancel/replace'i `ownsOrder` true olduğu için OS'ye gitmez; `onSdkError(10)` ile düşer. order-service'te hesabın bağlı başka OUCH kullanıcısı yoksa SDK `onSdkError(1)` + `false` döner; ret gitmez, emir sessizce kaybolur ([order-service/sdk-ve-oturumlar](../order-service/sdk-ve-oturumlar.md)). Kullanıcıyı geri almanın tek yolu yeni bir `orderUserDisconnected`'dır. `replaysRegistered` statik olduğu için ikinci tur gate'i yeniden kurmaz. |
+| **OUCH koptu** (handoff sonrası) | `is_connected` false olur, combiner `poison_all` yapar (End of Session `Z` paketinde değil: o durumda yalnız `connected_` false olur, poison ve `onUserDisconnected` yoktur; [maordersdk/ouch-protokolu](../maordersdk/ouch-protokolu.md)). HFT `onUserDisconnected`/`onHeartbeatTimeout` callback'lerini **set etmez**. SDK kendiliğinden yeniden bağlanmaz (heartbeat thread yalnızca bağlı olanlara heartbeat yollar). Hesabın başka canlı connection'ı varsa round-robin onu kullanır. Yoksa `ownsAccount` false olur ve **yeni emirler OS yoluna düşer**. Açık emirlerin cancel/replace'i `ownsOrder` true olduğu için OS'ye gitmez; `onSdkError(10)` ile düşer. order-service'te hesabın bağlı başka OUCH kullanıcısı yoksa SDK `onSdkError(1)` + `false` döner; ret gitmez, emir sessizce kaybolur ([order-service/sdk-ve-oturumlar](../order-service/sdk-ve-oturumlar.md)). Kullanıcıyı geri almanın tek yolu yeni bir `orderUserDisconnected`'dır. `replaysRegistered` statik olduğu için ikinci tur gate'i yeniden kurmaz. |
 | **order-service koptu** | Handoff sonrası SDK yolu etkilenmez. OS yolu (handoff öncesi emirler, FIX kanallı GUI emirleri, OUCH kopmuş hesaplar) çalışmaz. ❓ doğrulanmadı: ouch-sdk/MARpc'nin yeniden bağlanma ve login davranışı. `OuchManager` constructor'ı login başarısızsa exception atar; açılışta order-service yoksa HFT kalkmaz. Handoff hiç gelmezse 20 s watchdog gate'i açar ve stratejiler OS yoluna emir dener. |
 | **Replay sırasında** | Gate kapalıdır; stratejiler ITCH işlemez, emir göndermez. GUI manuel emirleri **geçer**. Replay'deki accept'ler §4 tablosuna göre ayıklanır; execute'lar ayıklanmaz. 60 s içinde bütün kullanıcılar `onReplayCompleted` vermezse gate zorla açılır. Login'i başarısız olan bir kullanıcı replay vermediği için gate 60 s'yi bekler. |
 | **connectUser hepsi başarısız** | O kullanıcının hesapları OS yolunda kalır (`ownsAccount` false). order-service ise kullanıcıdan logout olmuştur (2026-08-03 olayında gün boyu OUCH yoktu; retry o olaydan sonra eklendi). |
@@ -343,7 +345,7 @@ Strateji özelindeki ayrıntı: [taban](../../20-stratejiler/taban.md#tolerans-v
    - Strateji ret alır (HftClassic `sent=false` yapar, Tavan/Taban father-ref miktarını serbest bırakır), emir ise order-service'ten gider.
    - Hard-cap (1003) handoff öncesi fiilen bypass edilir.
    - Split-route retinde token boş string'dir.
-2. **Replay execute'ları dedup edilmiyor.** Handoff öncesi OS yolunda stratejiye işlenmiş fill'ler, replay'de SDK `onExecuted` ile tekrar `executeOrder`'a gelebilir. Stratejilerde match_id kontrolü yoktur (grep). `globalExecutedMatches` yazılır ama okunmaz. ❓ doğrulanmadı: SDK'nın replay'i hangi sequence'tan istediği; tekrarın fiilen oluşup oluşmadığı.
+2. **Replay execute'ları dedup edilmiyor.** Handoff öncesi OS yolunda stratejiye işlenmiş fill'ler, replay'de SDK `onExecuted` ile tekrar `executeOrder`'a gelebilir. Stratejilerde match_id kontrolü yoktur (grep). `globalExecutedMatches` yazılır ama okunmaz. SDK her login'de sequence 1 ister (`OuchCodec::encode_login`), yani günün bütün mesajları baştan gelir ([maordersdk/ouch-protokolu](../maordersdk/ouch-protokolu.md)). ❓ doğrulanmadı: tekrarın fiilen oluşup oluşmadığı.
 3. **OS yolu ret miktarı 0.** `ouchSDK::orderRejected` `OrderRejected::quantity`'yi set etmez; Tavan/Taban father-ref'ten 0 lot serbest bırakır.
 4. **`isActive=true` kullanıcıda handoff verisi yok sayılır.** `MAOrderSDK::connectUser` aynı isimli kayıtlı bağlantıyı yeniden kullanır; config'deki ip/şifre geçerli olur. Müşteri config'lerinde (Algo-Setup `development`, 2026-10-22) `[[ouch_users]]` girişi yok; pratikte tetiklenmez.
 5. **Handoff ouch-sdk thread'ini bloke ediyor.** `orderUserDisconnected` retry uykuları (≤10 s) ve blocking `connectUser` süresince aynı thread'deki OS yolu olayları bekler.

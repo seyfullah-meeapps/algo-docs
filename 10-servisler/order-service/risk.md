@@ -15,7 +15,7 @@ durum: taslak
 
 Bu dosya risk mantığını anlatır. Başka konular kardeş dosyalarda:
 - Emrin MARpc/gRPC'den dispatcher'a gelişi, `OrderRejected`'ın istemciye taşınması: [arayuzler.md](arayuzler.md)
-- MAOrderSDK oturumları, SDK callback'leri, yerel retler: [sdk-ve-oturumlar.md](sdk-ve-oturumlar.md), [maordersdk](../maordersdk/README.md#emir-gönderme)
+- MAOrderSDK oturumları, SDK callback'leri, yerel retler: [sdk-ve-oturumlar.md](sdk-ve-oturumlar.md), [maordersdk](../maordersdk/emir-akisi.md)
 - Toplu emir akışları: [toplu-emirler.md](toplu-emirler.md)
 - Config, emir kalıcılığı, `RetrieveSentOrders`: [kalicilik-ve-config.md](kalicilik-ve-config.md)
 - Sunucu tarafı (`pkg/limits`, `RiskManagerService`): [trade-data-app api § 6](../trade-data-app/api.md#6-limitcontrolservice-ve-riskmanagerservice-limit_controlproto-risk_managerproto), [entegrasyonlar § Limits](../trade-data-app/entegrasyonlar.md#limits-pkglimits)
@@ -254,7 +254,7 @@ Olaylar MAOrderSDK callback'lerinden (`MAOSdkManager::ConfigureSdkCallbacks`) ge
 
 - `maordersdk.orderHardCapTry` (`ConfigurationManager` → `SdkLimitsConfig`, varsayılan 50 000 000). `0` verilirse `LOG_CRIT` atılır ve SDK varsayılanı korunur (`MAOSdkManager` init).
 - İki mekanizma birbirinden habersizdir. RiskManager'ın geçirdiği emir hard cap'e takılabilir. Brüt takas enstrümanı iki yerde de reddedilir (önce RiskManager).
-- Ayrıntı: [maordersdk § Emir gönderme](../maordersdk/README.md#emir-gönderme), [kalicilik-ve-config.md](kalicilik-ve-config.md).
+- Ayrıntı: [maordersdk § Emir gönderme](../maordersdk/emir-akisi.md), [kalicilik-ve-config.md](kalicilik-ve-config.md).
 
 ## 12. Thread ve kilit modeli
 
