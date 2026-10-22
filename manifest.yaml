@@ -1,0 +1,145 @@
+# Repo → referans branch → doğrulanan commit → doküman yeri.
+#
+# dogrulanan_commit: dokümanların bu repo için en son tam olarak kontrol edildiği commit.
+#   Tek tek dosyaların kendi frontmatter'ı daha yeni bir commit gösterebilir.
+# Güncelleme yaparken: _surec/guncelleme.md
+
+olusturma: 2026-10-22
+son_guncelleme: 2026-10-22
+branch_akisi: development → preprod → master
+
+repolar:
+  - repo: HftSrvProd
+    gorev: Ana strateji motoru (C++) — HFT Classic, Tavan, Taban, Teorik, Varant, Varant Toplu
+    branch: development
+    dogrulanan_commit: 4275ccc031973bf3600b65ce3d4848e46f264ca1
+    commit_tarihi: 2026-10-19
+    dokuman: 10-servisler/hftsrvprod/
+    durum: bos
+
+  - repo: AlgorithmicTrading
+    gorev: İkinci strateji motoru (C++, "AlgoProd") — Arbitraj, VWAP, fon takibi
+    branch: development
+    dogrulanan_commit: 0dc32a7da21b73a9ae1a61326ea6f4a58e61ea68
+    commit_tarihi: 2026-10-13
+    dokuman: 10-servisler/algorithmic-trading/
+    durum: bos
+
+  - repo: itch-sdk
+    gorev: BIST ITCH piyasa verisi SDK'sı (C++) — multicast, Glimpse, Rewinder
+    branch: development
+    dogrulanan_commit: 35a3b5c267cf50bdf186bb2de730a1a9e74f36ec
+    commit_tarihi: 2026-10-07
+    dokuman: 10-servisler/itch-sdk/
+    durum: bos
+
+  - repo: MAOrderSDK
+    gorev: BIST'e doğrudan OUCH emir SDK'sı (C++)
+    branch: development
+    dogrulanan_commit: a7887827a305e9f445adaa183d7a1c9498183518
+    commit_tarihi: 2026-09-24
+    dokuman: 10-servisler/maordersdk/
+    durum: bos
+
+  - repo: order-service
+    gorev: OUCH/FIX emir gateway'i (C++) — manuel, sabah, harici emirler; risk
+    branch: development
+    dogrulanan_commit: b86c0cf8966661c0617a77b2cb56338d96324af6
+    commit_tarihi: 2026-10-20
+    dokuman: 10-servisler/order-service/
+    durum: bos
+
+  - repo: ouch-sdk
+    gorev: order-service'e bağlanan client SDK'sı (C++) — BIST'e doğrudan bağlanmaz
+    branch: development
+    dogrulanan_commit: 0c3589e015ab6471905434e95ab621a209c22105
+    commit_tarihi: 2026-10-19
+    dokuman: 10-servisler/ouch-sdk/
+    durum: bos
+
+  - repo: network-sdk
+    gorev: Servisler arası düşük gecikmeli RPC kütüphanesi (C++, MARpc)
+    branch: development
+    dogrulanan_commit: 3c1b42f3e3d7baa03f31d4f92ebe526f5e86c495
+    commit_tarihi: 2026-10-19
+    dokuman: 10-servisler/network-sdk/
+    durum: bos
+
+  - repo: performance-sdk
+    gorev: Performans/latency ölçüm kütüphanesi (C++)
+    branch: development
+    dogrulanan_commit: 6e47f203c6b0c8b9cf8a72085e9578d319a375ed
+    commit_tarihi: 2026-09-14
+    dokuman: 10-servisler/performance-sdk/
+    durum: bos
+
+  - repo: trade-data-app
+    gorev: Merkez hub (Go, MADatabaseService) — DB, GUI gateway (REST/WS), gRPC
+    branch: development
+    dogrulanan_commit: 1cca9a8ff8ecd45a8c196ed3e40ffba1a73c0193
+    commit_tarihi: 2026-10-21
+    dokuman: 10-servisler/trade-data-app/
+    durum: bos
+    not: master'da development'ta olmayan 6 commit var (2026-10-22 itibarıyla) — prod hotfix'leri olabilir.
+
+  - repo: mtrader-trade-ui
+    gorev: Operatör arayüzü (TS/React)
+    branch: development
+    dogrulanan_commit: b0474c3f564a8f2513352014c3c1c80841d5a068
+    commit_tarihi: 2026-10-22
+    dokuman: 10-servisler/mtrader-trade-ui/
+    durum: bos
+    not: >
+      development = yeni GUI (sıfırdan yazıldı, 2026-09-14'te development'a merge edildi, 7e14a00).
+      main = eski GUI (Ionic/Capacitor/Electron). Müşteriler parçalı geçişte; ikisi de prod'da.
+      Eski GUI'nin development'taki son hali: 59f168916c5b0db4587849e84fddc571d361d2f1.
+
+  - repo: mtrader-frontend-apps
+    gorev: Admin paneli — müşteri tarafında DB ayarlarının arayüzden yönetimi
+    branch: main
+    dogrulanan_commit: db10c12f2226821f35693b24b57bffd5a71204dc
+    commit_tarihi: 2026-09-17
+    dokuman: 10-servisler/mtrader-frontend-apps/
+    durum: bos
+    not: development branch'i 2026-03'ten beri güncellenmiyor; canlı branch main.
+
+  - repo: Algo-Setup
+    gorev: Kurulum/deploy reposu — derlenmiş binary'ler, SDK kütüphaneleri (MAProdEnv), docker-compose'lar, müşteri config'leri (Configs/), kurulum ve tuning scriptleri
+    branch: development
+    dogrulanan_commit: 2a3c5d58a4615d2af431e95fc46be214a00e9698
+    commit_tarihi: 2026-10-21
+    dokuman: 40-operasyon/
+    durum: bos
+    not: Branch'ler ortamı temsil eder (development/preprod/main); birbirine merge edilmez.
+
+  - repo: algo-configs
+    gorev: Container imajları, lisans uygulaması, testler ve doc/ (BIST spesifikasyonları, iş dokümanları). İsmine rağmen çalışma config'i değil; müşteri config'leri Algo-Setup/Configs'te.
+    branch: master
+    dogrulanan_commit: ab35ddec50b80359332f9d15b06ff2252747c4af
+    commit_tarihi: 2026-10-20
+    dokuman: 40-operasyon/
+    durum: bos
+    not: development branch'i 2022'den beri güncellenmiyor; canlı branch master.
+
+  - repo: Warrant-Selector
+    gorev: Varant takas tarayıcısı (Python) — dış kurum takas payı ve kotasyon lotuna göre varant listesi
+    branch: main
+    dogrulanan_commit: 582987f2993edf607188318653689c702f06b7dc
+    commit_tarihi: 2026-10-20
+    dokuman: 10-servisler/warrant-selector/
+    durum: bos
+
+  - repo: Itch-Replayer
+    gorev: Kaydedilmiş ITCH verisini tekrar oynatma aracı (C++)
+    branch: main
+    dogrulanan_commit: c4b60294c059155439680efffa75d859093c0f9f
+    commit_tarihi: 2026-09-02
+    dokuman: 10-servisler/itch-replayer/
+    durum: bos
+
+kapsam_disi:
+  - Algo-GUI          # emekli C# masaüstü arayüz
+  - mtrader-new       # kişisel repo; içeriği mtrader-trade-ui development'a taşındı
+  - Backoffice-*      # ayrı uygulama
+  - mate              # ayrı uygulama
+  - Kripdome-*, DTA-*, Kripto-Trade  # kripto ürünleri
