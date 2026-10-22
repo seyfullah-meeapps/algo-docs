@@ -13,7 +13,8 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 - Bütün dosyalar `taslak`; `bos` kalmadı. Kullanıcı gözden geçirmesi bekleniyor.
 - `main` push edildi; `dogrulama-2026-10-22` branch'i silindi. Önceki sohbetin transkripti silindi (içeriği bu dosyaya aktarıldı).
-- **Devam eden:** Madde 1 (trade-data-app). Alt dosyalar yazılıyor: `api.md`, `sema.md`, `veri-akisi.md`, `entegrasyonlar.md`, `config.md`; sonra README indekse çevrilecek. Yapı kararı: servis büyüyünce konu başına alt dosya, README = giriş + indeks.
+- **Madde 1 (trade-data-app) bitti:** README indeks + 5 alt dosya. Sıradaki madde 2 (HftSrvProd).
+- Yöntem: konu başına paralel agent alt dosya yazar → çelişkileri koddan kontrol et → README'yi indekse çevir → ACIK-KONULAR'a tek satır ekle → CHANGELOG → push.
 - Remote: `seyfullah-meeapps/algo-docs` (kişisel hesap). Planlanan `MeeApps/algo-docs` (org) değil; bilinçli mi, sorulmadı.
 
 ## Sıradaki
@@ -22,7 +23,7 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 Boşluk analizi (2026-10-22): yeni KB ~3.100 satır, eski `meeapps-ai` ~25.000 satır; yeni dosyalar özet seviyesinde. Eski içerik kopyalanmaz, güncel koda karşı yeniden yazılır. Eksik derinlik:
 
-1. **trade-data-app:** REST/gRPC API yüzeyi, DB şeması (K-08), veri akışı, dış entegrasyonlar (VERDA/Datastore/AKD/BYF), config referansı.
+1. ~~trade-data-app~~ ✅ 2026-10-22
 2. **HftSrvProd:** command pattern + GUI gRPC sözleşmesi, strateji base class, emir yaşam döngüsü, config/açılış.
 3. **order-service:** risk kontrolleri, kalıcılık, emir yönlendirme, config referansı.
 4. **MAOrderSDK:** bağlantı yaşam döngüsü, emir akışı, OUCH mesajları.
@@ -57,6 +58,6 @@ Kullanıcıyla alınmış kararlar; aksi söylenmedikçe geçerli.
 
 En yeni en üstte; oturum başına birkaç satır.
 
-- **2026-10-22 (3. oturum):** Kullanıcının `dogrulama-2026-10-22` branch'i main'e alındı (borsa kuralları, sözlük, ❓ temizliği — bkz. CHANGELOG). `ACIK-KONULAR.md` ve bu dosya açıldı. Push kuralı kondu; transkript silindi.
+- **2026-10-22 (3. oturum):** Kullanıcının `dogrulama-2026-10-22` branch'i main'e alındı (borsa kuralları, sözlük, ❓ temizliği — bkz. CHANGELOG). `ACIK-KONULAR.md` ve bu dosya açıldı. Push kuralı kondu; transkript silindi. Öncelik: doküman tamamlama (boşluk analizi). trade-data-app derinleştirildi.
 - **2026-10-22 (2. oturum, transkript dışı):** `dogrulama-2026-10-22` branch'inde ❓'ler koddan kapatıldı, `borsa-kurallari.md` ve `sozluk.md` yazıldı.
 - **2026-10-22 (1. oturum):** Yapı kuruldu; sistem haritası, 9 strateji, 13 servis, operasyon ve akışlar taslak yazıldı. Kullanım limitinde kesildi.

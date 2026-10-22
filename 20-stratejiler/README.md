@@ -68,4 +68,4 @@ Yeni GUI'de ayrıca **Toplu Emirler** (`collective-orders`) workspace'i var: sab
 
 ## Motor yönlendirmesi
 
-UI'dan gelen bir komutun hangi motora gideceğine trade-data-app karar verir: `pkg/servicemodels/gui_api.go` `getApplicationFromStrategyType`. Bu fonksiyona yeni bir tip eklenmezse komut düşer. Varant Toplu (15) için bu eksik bulunmuş ve düzeltilmişti (mtrader-trade-ui `AGENTS.md`).
+UI'dan gelen bir komutun hangi motora gideceğine trade-data-app karar verir: `pkg/servicemodels/gui_api.go` `getApplicationFromStrategyType`. Bu fonksiyona yeni bir tip eklenmezse komut düşer. WS tarafında (`ws_listener.go`) aynı isimli ikinci bir kopya var; ikisi tip 1 ve 12'de ayrışıyor. Yeni tip eklerken ikisi birden güncellenir. Tablo: [trade-data-app/veri-akisi.md](../10-servisler/trade-data-app/veri-akisi.md).

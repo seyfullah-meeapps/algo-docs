@@ -22,7 +22,7 @@ Kod: `algoSrc/Strategy/FundTracker/FundTracker.{h,cpp}`, `algoSrc/Commands/FundT
 
 ## Veri: PCF (fon sepeti)
 
-- trade-data-app açılışta BYF dosyasını indirir ve sepeti DB'ye yazar (`config.json` → `byf`: `byfFileUrl`, satır indeksleri; `UpdateBYFSettings`).
+- trade-data-app açılışta BYF dosyasını indirir ve sepeti **bellekte** tutar; DB'ye yazmaz, gün içinde yenilenmez (`config.json` → `byf`; `UpdateBYFSettings`). Ayrıntı: [trade-data-app/entegrasyonlar.md](../10-servisler/trade-data-app/entegrasyonlar.md).
 - AlgoProd sepeti `AlgoService.GetByfSettings` ile okur (`readPcfFile`). Her sepet hissesini sembol önekiyle tradable enstrümana eşler.
 - Eşlenemeyen sembol olursa strateji durur.
 - Her hisse için ağırlıktan hesaplanan bir lot (`calculatedLotCount`) ve fonun minimum işlem birimine karşılık gelen fon lotu (`calculatedRequiredLotCount`) bulunur.

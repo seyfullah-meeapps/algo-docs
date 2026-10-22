@@ -2,6 +2,24 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-22 — trade-data-app derinleştirme
+
+Kaynak: trade-data-app `1cca9a8` (değişmedi).
+
+- `10-servisler/trade-data-app/` alt dosyalara bölündü. README artık giriş ve indeks; ayrıntılar: `api.md`, `veri-akisi.md`, `sema.md`, `entegrasyonlar.md`, `config.md`.
+- **README'deki düzeltmeler:**
+  - WS ve REST'te process içi TLS yok; sertifika anahtarları okunmuyor.
+  - TradeVerifier her snapshot'ta değil, bootstrap bildirimiyle yalnızca bir kez tekrar uygulanıyor.
+  - Emir geçmişi order-service yeniden bağlanınca sıfırlanıyor.
+  - LimitControlService'i order-service çağırmıyor; yalnızca RiskManagerService'i çağırıyor.
+  - AlgoProd `FetchOrders` kullanmıyor; onun yerine `FetchAllUniqueKeys` ve `UpdateExtSettings` kullanıyor.
+  - `logLevel` üst seviyede etkisiz.
+- **Tablo listesi:** `Instrument_Futures` ve `Volatility` eklendi. Şema yönetimi: migration yok; `scripts/sql/` elle çalıştırılıyor. K-08 kapandı (kolonlar koddan `sema.md`'de; tipler ve unique key'ler K-39).
+- **`getApplicationFromStrategyType`:** Varant Toplu eksik değil. Gerçek fark iki kopyanın tip 1 ve 12'de ayrışması (`20-stratejiler/README.md` düzeltildi).
+- **`fon-takibi.md`:** BYF sepeti DB'ye değil belleğe yazılıyor.
+- **K-02:** ITCH config'i `Part` 5–6'yı Partition1'e düşürüyor.
+- **Yeni açık konular:** K-16–K-43.
+
 ## 2026-10-22 — ❓ temizliği, sözlük, manifest
 
 Commit'ler değişmedi; hepsi manifest'teki doğrulama commit'lerine karşı.
