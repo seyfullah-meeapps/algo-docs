@@ -63,7 +63,7 @@ Ret kodu `-850002`, `-850004` veya `-850044` ise strateji durur (`TradeByVolume.
 
 ## Overall (`TradeByVolumeOverall`)
 
-Birden çok VWAP'ı bir "ana" stratejiye bağlar. Ana stratejinin AKD durumu ve karşı fiyatı çocuk stratejilere aktarılır. ❓ Yeni GUI'de kullanımı doğrulanmadı.
+Birden çok VWAP'ı bir "ana" stratejiye bağlar. Ana stratejinin AKD durumu ve karşı fiyatı çocuk stratejilere aktarılır. Yeni GUI'de karşılığı yok (Overall'ı oluşturan bir ekran veya payload bulunmuyor).
 
 ## Wire alanları
 
@@ -76,7 +76,7 @@ Birden çok VWAP'ı bir "ana" stratejiye bağlar. Ana stratejinin AKD durumu ve 
 | `Ratio` | ULongLong | Piyasa hacminin 1/Ratio'su kadar katıl |
 | `Stop_Loss_Level` | Long | Stop fiyatı (raw); 0 = kapalı |
 | `Base_Interest` | Long | Vadelide teorik fiyat faizi |
-| `Trade_Pay_Limit`, `Trade_Vade1_Limit`, `Trade_Vade2_Limit` | ULongLong | ❓ Takas vadesine göre limitler; kullanım doğrulanmadı |
+| `Trade_Pay_Limit`, `Trade_Vade1_Limit`, `Trade_Vade2_Limit` | ULongLong | **Kullanılmıyor.** Yalnızca command'da parse edilir. |
 | `Broker_Alis_Count`, `Broker_Alis_List`, `Broker_Percentage_Alis`, `Broker_Lot_Alis` | | AKD alış filtresi |
 | `Broker_Satis_Count`, `Broker_Satis_List`, `Broker_Percentage_Satis`, `Broker_Lot_Satis` | | AKD satış filtresi |
 | `Channel_Enum` | Int | OUCH / FIX |

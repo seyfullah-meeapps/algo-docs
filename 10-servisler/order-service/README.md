@@ -55,9 +55,9 @@ GUI'den `OrderType` MORNING / OPENING / EVENING ile girilen emirler trade-data-a
 |------|--------|----------|
 | **Sabah** (`repeatableOrders.ouch[type=morning]`, `morning_viop`; FIX için `repeatableOrders.fix`) | saat:dk:sn.ms, `duration`, `repeatSellOrders`, `repeatLastShot`, `timeoutOrderCount`, `packOrders` | Emirler OUCH kullanıcılarına dağıtılır (her kullanıcı izinli hesaplarının **tüm** emirlerini gönderir). Tekrar sayısı `min(repeatCount, (capacity − tekrarsız) / tekrarlı)`. Her kullanıcı ayrı thread'de (FIFO, `coreToPin`) tam saatte başlar. Seans açılmadan giden emir `-110023` ("Illegal transaction at this time") ile reddedilir; kabul edilene kadar yeniden gönderilir (son atış stratejileri). Amaç kuyruk önceliğidir. **Fazla kopyaların iptali** (`OrderManager::CancelRepeatedOrders`): gönderimden 2 sn sonra kabul edilen kopyalar (hesap-strateji, fiyat, yön, miktar, TIF, tip) ile gruplanır. Gruplama **bütün OUCH kullanıcıları üzerinden** yapılır. Hesap başına en erken `OrderRepeatRemainingCount` kadarı tutulur, kalanı iptal edilir. Yalnızca hesapta iptal izni varsa (`IsCancelAllowed`) çalışır. |
 | **Açılış** (`openingOrders.derivative` / `equity` / `warrant`) | saat | Grup başına bir thread. Varant ve sertifikalar 10:02'de (10:00–10:02 yalnız piyasa yapıcı kotasyonu). |
-| **YİP** (`openingOrders.yip.sessions`) | seans saatleri | Yakın İzleme Pazarı (tek fiyat) satırları sıradaki seansa gönderilir, sonra pasife alınır. |
+| **YİP** (`openingOrders.yip.sessions`; örnek config: 10:00:00.035, 13:00:00.040, 14:00:00.045) | seans saatleri | Yakın İzleme Pazarı (tek fiyat) satırları sıradaki seansa gönderilir, sonra pasife alınır. |
 | **Teorik** (`repeatableOrders.fix[type=theoric]`) | saat | Kapanış müzayedesi emirleri (FIX) |
-| **Akşam** (`eveningSessionStart`) | saat | ❓ Akşam seansı emirleri; ayrıntı doğrulanmadı |
+| **Akşam / seans dışı** (`eveningSessionStart`, örnek 19:00:00) | saat | Bu saat bir **gönderim akışı değildir**. O andan sonra gönderilen bütün OUCH emirleri `OffHours` bayrağıyla gider (`OrderManager` `offhours_invertor` thread'i → MAOrderSDK `msg.off_hours`). `OrderType = EVENING` ile DB'ye yazılan emirleri **Teorik** akışı gönderir (`kTheoric` → `GetEveningOrders`). |
 
 Kademeli emir: GUI'den `LevelCount` > 1 ile girilen emir, trade-data-app'te ana emir ve alt emirlere (her biri bir tick uzakta) açılır.
 
@@ -96,7 +96,7 @@ Ayrıntı: [sistem haritası → OUCH handoff](../../00-genel/sistem-haritasi.md
 | `server.grpcPort` | gRPC (trade-data-app) |
 | `database.*` | **trade-data-app gRPC** adresi ve kullanıcısı (MySQL değil); `riskControl` |
 | `monitoring.*` | PerfSDK → ClickHouse (`port` artık kullanılmıyor); `appName` boşsa `ordersvc-<hostname>`. MAOrderSDK kullanıcı başına metrikleri de buraya gider. |
-| `license.*` | Lisans sunucusu ❓ (kontrolün etkin olup olmadığı doğrulanmadı) |
+| `license.*` | Lisans sunucusu. **Kontrol kapalı**: `main.cpp`'deki `LicenseManager::hasValidLicense` çağrısı yorum satırında. |
 | `repeatableOrders.settings.schedPolicy` | Bulk thread'leri: `FIFO` (öncelik 99) veya `OTHER` |
 | `repeatableOrders.ouch[]` / `.fix[]` | Sabah ve teorik akışlar (yukarıda) |
 | `openingOrders.*` | Açılış ve YİP |

@@ -46,7 +46,10 @@ NIC ─► ItchReceiver (RX thread, pinli, SCHED_FIFO) ─► SPSC ring (port×p
 - **Glimpse** (TCP): gün içinde açılışta partition başına snapshot alır, baseline sequence'i belirler. `itchsdk_is_glimpse_finished(market, partition)`.
   - ⚠ Yeni davranış (2026-10): Canlı ITCH paketleri Glimpse snapshot'ı bitene kadar **tamponlanır**, bitince sırayla işlenir. Snapshot emirleri sıralanır, flush'ta emir başına delete üretilir.
 - **Rewinder** (UDP): sequence boşluğu görülünce eksik paketler istenir. Kurtarma bitince normal akışa dönülür.
-- Birincil/ikincil hat (`ip`/`secondaryIp`) config'tedir. ❓ Çalışma sırasında hat değiştirip değiştirmediği doğrulanmadı (eski not: yalnızca açılışta seçiliyor).
+- **Birincil/ikincil hat** (`ip`/`secondaryIp`) config'tedir. Seçim **açılışta ve process genelinde** yapılır, çalışma sırasında failover yoktur (`ItchClient.cpp` yorumu: "start-time only").
+  - Varsayılan birincildir. Glimpse TCP bağlantısı birincilde başarısız olursa ya da zaman aşımına uğrarsa global seçim ikincile döner (`ITCHTCPConnection::Connect`). Bu Rewinder dahil sonraki bütün bağlantıları etkiler ve geri dönmez.
+  - Multicast alımında demux iki hattın kaynak IP'lerini de tanır (`setMarketSourceIps`).
+- **Partition kimliği:** `partId` Spot 1–4, VİOP 5–8 (`partition + 4`). Bu kural VİOP'ta 4'ten fazla partition'ı öngörmüyor, oysa HFT config'leri 6 tanımlıyor. ❓ 5–6. VİOP partition'larında `partId` çakışması olup olmadığı incelenmedi; [trade-data-app](../trade-data-app/README.md) partition farkıyla birlikte ertelenen konu.
 
 ## Abonelik API'si (`Public/itch_sdk.h`, C)
 

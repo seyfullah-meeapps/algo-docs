@@ -86,7 +86,7 @@ Dış kaynaklı bilgiler BIST'in resmi sayfasından doğrudan okunamadı (ağ er
 - BYF açılış seansı: emir toplama 09:40–09:56, eşleştirme 09:56–10:00.
 - Arife günleri seans öğleden sonra kapanır (ör. 12:40).
 - ❓ Kaynak 2016 tarihli Yönetim Kurulu kararı. Sonraki değişiklikler, gün ortası tek fiyat bölümü ve VİOP saatleri doğrulanmadı.
-- **YİP** (Yakın İzleme Pazarı) payları tek fiyat seanslarıyla işlem görür. order-service seans saatlerini config'ten alır (`openingOrders.yip.sessions`). ❓ Seans saatleri doğrulanmadı.
+- **YİP** (Yakın İzleme Pazarı) payları tek fiyat seanslarıyla işlem görür. order-service seans saatlerini config'ten alır (`openingOrders.yip.sessions`; örnek config 10:00, 13:00, 14:00). ❓ Borsanın güncel YİP seans takvimi doğrulanmadı.
 
 ## Açığa satış ve yukarı adım (uptick) kuralı
 

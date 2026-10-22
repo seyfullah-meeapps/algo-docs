@@ -15,7 +15,7 @@ repolar:
     dogrulanan_commit: 4275ccc031973bf3600b65ce3d4848e46f264ca1
     commit_tarihi: 2026-10-19
     dokuman: 10-servisler/hftsrvprod/
-    durum: bos
+    durum: taslak
 
   - repo: AlgorithmicTrading
     gorev: İkinci strateji motoru (C++, "AlgoProd") — Arbitraj, VWAP, fon takibi
@@ -23,7 +23,7 @@ repolar:
     dogrulanan_commit: 0dc32a7da21b73a9ae1a61326ea6f4a58e61ea68
     commit_tarihi: 2026-10-13
     dokuman: 10-servisler/algorithmic-trading/
-    durum: bos
+    durum: taslak
 
   - repo: itch-sdk
     gorev: BIST ITCH piyasa verisi SDK'sı (C++) — multicast, Glimpse, Rewinder
@@ -31,7 +31,7 @@ repolar:
     dogrulanan_commit: 35a3b5c267cf50bdf186bb2de730a1a9e74f36ec
     commit_tarihi: 2026-10-07
     dokuman: 10-servisler/itch-sdk/
-    durum: bos
+    durum: taslak
 
   - repo: MAOrderSDK
     gorev: BIST'e doğrudan OUCH emir SDK'sı (C++)
@@ -39,7 +39,7 @@ repolar:
     dogrulanan_commit: a7887827a305e9f445adaa183d7a1c9498183518
     commit_tarihi: 2026-09-24
     dokuman: 10-servisler/maordersdk/
-    durum: bos
+    durum: taslak
 
   - repo: order-service
     gorev: OUCH/FIX emir gateway'i (C++) — manuel, sabah, harici emirler; risk
@@ -47,7 +47,7 @@ repolar:
     dogrulanan_commit: b86c0cf8966661c0617a77b2cb56338d96324af6
     commit_tarihi: 2026-10-20
     dokuman: 10-servisler/order-service/
-    durum: bos
+    durum: taslak
 
   - repo: ouch-sdk
     gorev: order-service'e bağlanan client SDK'sı (C++) — BIST'e doğrudan bağlanmaz
@@ -55,7 +55,7 @@ repolar:
     dogrulanan_commit: 0c3589e015ab6471905434e95ab621a209c22105
     commit_tarihi: 2026-10-19
     dokuman: 10-servisler/ouch-sdk/
-    durum: bos
+    durum: taslak
 
   - repo: network-sdk
     gorev: Servisler arası düşük gecikmeli RPC kütüphanesi (C++, MARpc)
@@ -63,7 +63,7 @@ repolar:
     dogrulanan_commit: 3c1b42f3e3d7baa03f31d4f92ebe526f5e86c495
     commit_tarihi: 2026-10-19
     dokuman: 10-servisler/network-sdk/
-    durum: bos
+    durum: taslak
 
   - repo: performance-sdk
     gorev: Performans/latency ölçüm kütüphanesi (C++)
@@ -71,7 +71,7 @@ repolar:
     dogrulanan_commit: 6e47f203c6b0c8b9cf8a72085e9578d319a375ed
     commit_tarihi: 2026-09-14
     dokuman: 10-servisler/performance-sdk/
-    durum: bos
+    durum: taslak
 
   - repo: trade-data-app
     gorev: Merkez hub (Go, MADatabaseService) — DB, GUI gateway (REST/WS), gRPC
@@ -79,7 +79,7 @@ repolar:
     dogrulanan_commit: 1cca9a8ff8ecd45a8c196ed3e40ffba1a73c0193
     commit_tarihi: 2026-10-21
     dokuman: 10-servisler/trade-data-app/
-    durum: bos
+    durum: taslak
     not: master'da development'ta olmayan 6 commit var (2026-10-22 itibarıyla) — prod hotfix'leri olabilir.
 
   - repo: mtrader-trade-ui
@@ -88,7 +88,7 @@ repolar:
     dogrulanan_commit: b0474c3f564a8f2513352014c3c1c80841d5a068
     commit_tarihi: 2026-10-22
     dokuman: 10-servisler/mtrader-trade-ui/
-    durum: bos
+    durum: taslak
     not: >
       development = yeni GUI (sıfırdan yazıldı, 2026-09-14'te development'a merge edildi, 7e14a00).
       main = eski GUI (Ionic/Capacitor/Electron). Müşteriler parçalı geçişte; ikisi de prod'da.
@@ -100,7 +100,7 @@ repolar:
     dogrulanan_commit: db10c12f2226821f35693b24b57bffd5a71204dc
     commit_tarihi: 2026-09-17
     dokuman: 10-servisler/mtrader-frontend-apps/
-    durum: bos
+    durum: taslak
     not: development branch'i 2026-03'ten beri güncellenmiyor; canlı branch main.
 
   - repo: Algo-Setup
@@ -109,7 +109,7 @@ repolar:
     dogrulanan_commit: 2a3c5d58a4615d2af431e95fc46be214a00e9698
     commit_tarihi: 2026-10-21
     dokuman: 40-operasyon/
-    durum: bos
+    durum: taslak
     not: Branch'ler ortamı temsil eder (development/preprod/main); birbirine merge edilmez.
 
   - repo: algo-configs
@@ -118,7 +118,7 @@ repolar:
     dogrulanan_commit: ab35ddec50b80359332f9d15b06ff2252747c4af
     commit_tarihi: 2026-10-20
     dokuman: 40-operasyon/
-    durum: bos
+    durum: taslak
     not: development branch'i 2022'den beri güncellenmiyor; canlı branch master.
 
   - repo: Warrant-Selector
@@ -127,7 +127,7 @@ repolar:
     dogrulanan_commit: 582987f2993edf607188318653689c702f06b7dc
     commit_tarihi: 2026-10-20
     dokuman: 10-servisler/warrant-selector/
-    durum: bos
+    durum: taslak
 
   - repo: Itch-Replayer
     gorev: Kaydedilmiş ITCH verisini tekrar oynatma aracı (C++)
@@ -135,7 +135,7 @@ repolar:
     dogrulanan_commit: c4b60294c059155439680efffa75d859093c0f9f
     commit_tarihi: 2026-09-02
     dokuman: 10-servisler/itch-replayer/
-    durum: bos
+    durum: taslak
 
 kapsam_disi:
   - Algo-GUI          # emekli C# masaüstü arayüz

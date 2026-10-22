@@ -43,10 +43,10 @@ AlgoProd stratejileri iç `Commands` enum'u ile oluşturulur (`algoSrc/Globals/E
 | # | Wire adı | Türkçe ad | Sınıf (`algoSrc/Strategy/`) | İç komut | Yeni GUI route | Dosya |
 |---|----------|-----------|-----------------------------|----------|----------------|-------|
 | 6 | `Arbitrage` | Arbitraj (spot–vadeli) | `Arbitrage/ArbitrageTracker` | `ArbitrageTracker` `'3'` | `arbitrage` | [arbitraj.md](arbitraj.md) |
-| 6 ❓ | `Arbitrage` | Sepet Arbitraj (endeks vadeli) — **henüz kullanılmıyor** | `BasketArbitrage/BasketArbitrageTracker` | `BasketArbitrageTracker` `'E'` | — | [arbitraj.md](arbitraj.md) |
+| 6 | `Arbitrage` | Sepet Arbitraj (endeks vadeli) — **henüz kullanılmıyor** | `BasketArbitrage/BasketArbitrageTracker` | `BasketArbitrageTracker` `'E'` | — | [arbitraj.md](arbitraj.md) |
 | 7 | `VWAP` | VWAP | `TradeByVolume/TradeByVolume`, `TradeByVolumeOverall` | `TradeByVolume` `'6'`, `TradeByVolumeOverall` `'V'` | `vwap` | [vwap.md](vwap.md) |
 | 10 | `FundTracker` | Fon Takibi (BYF) | `FundTracker/FundTracker` | `FundTracker` `'d'` | `fund-tracker` | [fon-takibi.md](fon-takibi.md) |
-❓ Sepet arbitrajın wire tipi doğrulanmadı.
+Sepet arbitraj wire'da da `Arbitrage` (6) olarak gider: `BasketArbitrageTracker` taban sınıfa `MyOrderType::ArbitrageTracker` verir, `convertMyOrderStrategy` bunu `ARBITRAGE`'a çevirir. İç komut (`'E'`) farklıdır.
 
 🚧 AlgoProd'un MAOrderSDK + handoff geçişi `add-order-sdk` branch'inde (bkz. `00-genel/sistem-haritasi.md`).
 

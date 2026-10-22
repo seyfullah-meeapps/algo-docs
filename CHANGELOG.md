@@ -2,6 +2,33 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-22 — ❓ temizliği, sözlük, manifest
+
+Commit'ler değişmedi; hepsi manifest'teki doğrulama commit'lerine karşı.
+
+- **Kullanılmayan alanlar** (parse edilip geri yollanıyor, karar vermiyor):
+  - HFT Classic `Start_Time`/`Stop_Time`
+  - Fon Takibi `Byf_Package_Limit`
+  - VWAP `Trade_Pay_Limit`/`Trade_Vade*_Limit`
+  - Arbitraj `First/Second/Third_Future`
+- **Arbitraj `Optional_Underlying`:** Açıkken komuttaki `Underlying_Multiplier` kullanılıyor; iki vadeli tiplerde çarpan 1.
+- **Sepet arbitraj wire tipi:** `Arbitrage` (6), doğrulandı.
+- **Tavan saat alanları:**
+  - `End_Time` okunuyor, `Stop_Time` olarak geri yollanıyor.
+  - `getDefaultSettings`'in 600/1200 varsayılanı UI'dan geri gidebilir; ❓ test edilmedi.
+- **order-service:**
+  - `eveningSessionStart` bir gönderim akışı değil: o saatten sonraki emirlere `OffHours` bayrağı koyuyor.
+  - EVENING emirlerini teorik akışı gönderiyor.
+  - Lisans kontrolü kapalı.
+  - YİP örnek seans saatleri eklendi.
+- **Varant Toplu:** Eski GUI'de yok. Önceki "`VarantTopluTrackerForm`" iddiası yanlıştı.
+- **VWAP Overall:** Yeni GUI'de karşılığı yok.
+- **itch-sdk:**
+  - Hat seçimi açılışta ve process genelinde yapılıyor; Glimpse bağlantısı başarısız olursa ikincile tek yönlü geçiliyor.
+  - `partId` VİOP için 5–8 aralığını varsayıyor. HFT'nin 6 VİOP partition'ıyla olası çakışma, ertelenen VİOP konusuna eklendi.
+- `00-genel/sozluk.md` yazıldı (`bos` → `taslak`). Yalnızca mevcut dokümanlardan derlendi, terimler kaynaklarına linkli.
+- `manifest.yaml`: 15 reponun `durum: bos` alanı `taslak` yapıldı (dokümanların frontmatter'ıyla uyumlu).
+
 ## 2026-10-22 — Çelişki doğrulaması ve borsa kuralları
 
 Kaynak repoların HEAD'leri manifest'teki doğrulama commit'leriyle aynı (değişiklik yok). Düzeltmeler bu commit'lere karşı kodla doğrulandı.

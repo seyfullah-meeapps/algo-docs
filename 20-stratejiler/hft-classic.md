@@ -192,7 +192,7 @@ Kaynak: `src/Globals/GuiConstants.h`, `HftClassicCommand.cpp`.
 | `Second_Rule_Duration` | Long | 1 | **Saniye**; 0 → 1 |
 | `Hft_Buy_Active_Style` / `Hft_Sell_Active_Style` | Bool | false | |
 | `Time_In_Force` | Long | 0 | |
-| `Start_Time` / `Stop_Time` | Long | 600 / 1200 | ❓ Birim ve kullanım doğrulanmadı |
+| `Start_Time` / `Stop_Time` | Long | 600 / 1200 | **Kullanılmıyor.** `HftClassicCommand` parse eder ve geri yollar; strateji okumaz. Yeni GUI formunda alanlar var ama etkisiz. |
 
 Tüm fiyatlar **raw** (enstrümanın `decimalCount` ölçeğinde).
 

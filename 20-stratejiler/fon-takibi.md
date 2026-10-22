@@ -52,7 +52,7 @@ Kod: `algoSrc/Strategy/FundTracker/FundTracker.{h,cpp}`, `algoSrc/Commands/FundT
 | `Byf_Spread_Buy` / `Byf_Spread_Sell` | Long | Teorik fiyattan uzaklık (kuruş) |
 | `Byf_Lot_Count_Buy` / `Byf_Lot_Count_Sell` | Long | Kotasyon miktarı (fon lotu) |
 | `Byf_Package_Limit_Buy` / `Byf_Package_Limit_Sell` | Long | Taraf başına paket sınırı |
-| `Byf_Package_Limit` | Long | ❓ Genel paket sınırı; kullanım doğrulanmadı |
+| `Byf_Package_Limit` | Long | **Kullanılmıyor.** Parse edilir, yalnızca loglanır; sınırlar taraf bazlı alanlarla uygulanır. |
 | `Byf_Start_Time` / `Byf_Stop_Time` | Long | Çalışma aralığı |
 
 **UI notu:** Yeni GUI'deki fon ayar modalındaki "Alış/Satış Miktar" kutuları **bilerek etkisizdir**. Değer gönderilmez, eski GUI'nin davranışı birebir korunmuştur. `Byf_Lot_Count_*` snapshot'tan aynen geri yollanır. Bunu bug diye "düzeltmeyin" (mtrader-trade-ui `AGENTS.md` → "FUND_TRACKER dead lot boxes").

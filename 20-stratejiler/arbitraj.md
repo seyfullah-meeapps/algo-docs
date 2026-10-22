@@ -64,7 +64,7 @@ AlgoProd'un worker havuzunda (`runsOnWorkerPool`) periyodik çalışır.
 
 ## Spot (dayanak) emri
 
-- Miktar = dolan kontrat × `Underlying_Multiplier` (varsayılan 100).
+- Miktar = dolan kontrat × çarpan. Komuttaki `Underlying_Multiplier` yalnızca `Optional_Underlying` açıkken kullanılır; iki vadeli tiplerde çarpan 1'dir.
 - Fiyat: Below açılışta spot alış header'ı, Above açılışta spot satış header'ı.
 - `Stop_Loss_Type`:
   - `A` Aktif: spot emri **piyasa** emri olarak gider.
@@ -112,7 +112,8 @@ AlgoProd'da fiyat birimleri karışıktır. Değiştirmeden önce koda bak.
 | `Stop_Manual_Mode`, `Stop_Loss_Type` (`A`/`P`), `Stop_Loss_Second`, `Stop_Loss_Level` | | Stop parametreleri |
 | `Passive_Barrier` | Long | |
 | `Adaptive_Spread_Enabled`, `Adaptive_Spread_Level` | Bool / Long | |
-| `First_Future`, `Second_Future`, `Third_Future`, `Optional_Underlying` | Bool | ❓ Kontrat seçimi; kullanım ayrıntısı doğrulanmadı |
+| `First_Future`, `Second_Future`, `Third_Future` | Bool | **Kullanılmıyor.** Parse edilir ve geri yollanır, strateji okumaz. |
+| `Optional_Underlying` | Bool | Açıksa spot miktarı komuttaki `Underlying_Multiplier` ile hesaplanır (paket tutarlılık kontrolü dahil). Kapalıysa stratejinin kendi çarpanı kullanılır; iki vadeli tiplerde bu 1'dir. |
 | `Start_Time`, `Stop_Time` | Long | Günün saniyesi |
 | `Channel_Enum` | Int | OUCH / FIX |
 

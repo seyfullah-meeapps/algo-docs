@@ -159,7 +159,11 @@ Hisseyi hızla tavana koşturup oradan satan manipülatörlere karşı koruma.
 | `Close_Position_First` | Bool | Başlarken pozisyonu açık say (`isPositionOpen` başlangıç değeri) |
 | `Is_Tavan_Mode` | Bool | |
 | `Profit_Percentage` | Int | **Kullanılmıyor.** `MaxPriceCommand` parse eder ve snapshot'ta geri yollar, `HftMaxPrice` üyeye kopyalar ama hiçbir kararda okunmaz. Yeni GUI göndermez. |
-| `Start_Time` / `Stop_Time` (çıkışta) / `End_Time` (girişte) | Long | **Günün saniyesi, İstanbul saati** (36000 = 10:00, 64800 = 18:00). ⚠ `getDefaultSettings` 600/1200 yazıyor; saniye olarak yorumlanırsa 00:10–00:20 olur. UI doğru değeri gönderiyor olmalı. ❓ |
+| `Start_Time` / `Stop_Time` (çıkışta) / `End_Time` (girişte) | Long | **Günün saniyesi, İstanbul saati** (36000 = 10:00, 64800 = 18:00). Giriş/çıkış yalnız `Start_Time < şimdi < End_Time` iken (`HftMaxPrice`, header snapshot hariç). Ayrıntı tablonun altında. |
+
+**Saat alanları:**
+- **Ad asimetrisi:** Motor bitişi `End_Time` adıyla okur, snapshot'ta `Stop_Time` adıyla geri yollar. Yeni GUI ikisini de okur ve `End_Time` gönderir (`maxPricePayload.ts`).
+- **Varsayılanlar:** Parser alan yoksa 36000 / 64800 kullanır. `getDefaultSettings` (yeni strateji için DB'ye yazılan) ise 600 / 1200 yazar. UI 36000–64800 aralığını kullanır (`MAX_PRICE_MIN_TIME` / `MAX_PRICE_MAX_TIME`), ama gönderirken mevcut değer doluysa onu korur (`value("Start_Time") || 36000`). ❓ DB'deki 600 varsayılanının UI'dan aynen geri gidip gitmediği (gidiyorsa strateji gün boyu pencere dışı kalır) test edilmedi.
 
 ## GUI'ye giden durum
 
