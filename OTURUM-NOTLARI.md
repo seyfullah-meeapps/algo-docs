@@ -13,6 +13,7 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 - Bütün dosyalar `taslak`; `bos` kalmadı. Kullanıcı gözden geçirmesi bekleniyor.
 - `main` push edildi; `dogrulama-2026-10-22` branch'i silindi. Önceki sohbetin transkripti silindi (içeriği bu dosyaya aktarıldı).
+- **Devam eden:** Madde 1 (trade-data-app). Alt dosyalar yazılıyor: `api.md`, `sema.md`, `veri-akisi.md`, `entegrasyonlar.md`, `config.md`; sonra README indekse çevrilecek. Yapı kararı: servis büyüyünce konu başına alt dosya, README = giriş + indeks.
 - Remote: `seyfullah-meeapps/algo-docs` (kişisel hesap). Planlanan `MeeApps/algo-docs` (org) değil; bilinçli mi, sorulmadı.
 
 ## Sıradaki
@@ -49,6 +50,7 @@ Kullanıcıyla alınmış kararlar; aksi söylenmedikçe geçerli.
 - **VİOP partition konusu** (K-01, K-02): incelemesi ertelendi.
 - **Push:** Her adımdan sonra `main` commit'lenip push edilir (onay beklenmez). İşi biten branch'ler silinebilir.
 - **Öncelik:** Önce doküman tamamlanır; sorun düzeltme/inceleme (ACIK-KONULAR bug?/iş) sonra.
+- **Servis klasör yapısı:** Servis tek README'ye sığmıyorsa konu başına alt dosya; README giriş + indeks, ayrıntı alt dosyada (tekrar yok).
 - **Not tutma:** Açık sorunlar `ACIK-KONULAR.md`'de tek satır + link; oturum devamlılığı bu dosyada.
 
 ## Geçmiş
