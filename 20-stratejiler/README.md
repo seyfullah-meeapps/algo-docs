@@ -64,7 +64,7 @@ Kodda duran ama uzun süredir kimsenin kullanmadığı tipler (kullanıcı beyan
 | 1 | `Algo_User` / `User` | Serbest (manuel) emir. order-service ve AlgoProd yolu. |
 | 12 | `HFT_User` | HFT üzerinden serbest emir. |
 
-Yeni GUI'de ayrıca **Toplu Emirler** (`collective-orders`) workspace'i var: sabah / açılış / akşam / YİP emirleri. Backend'de `StrategyType`'ı yok; emirler `OrderType` (MORNING=1, OPENING=2, STRATEGY=3, EVENING=4) ile order-service'e gider. Bkz. `00-genel/sistem-haritasi.md` → Emir yolları.
+Yeni GUI'de ayrıca **Toplu Emirler** (`collective-orders`) workspace'i var (eski GUI'de "Sabah Emri" kartı; ikisinde de görünürlük `/v1/getAllowedStrategies`'in `COLLECTIVE_ORDERS` önekli bir izin adı döndürmesine bağlı): sabah / açılış / akşam / YİP emirleri. Backend'de `StrategyType`'ı yok; emirler `OrderType` (MORNING=1, OPENING=2, STRATEGY=3, EVENING=4) ile order-service'e gider. Bkz. `00-genel/sistem-haritasi.md` → Emir yolları.
 
 ## Motor yönlendirmesi
 

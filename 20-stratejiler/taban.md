@@ -119,4 +119,4 @@ Tavan'ın tersine çalışır: satış fiyatı yukarıdan tabana yaklaşınca ho
 
 `MinPriceStateCommand` (`Command_Type_MaxPriceStateResponse` zarfıyla, Tavan ile aynı store). Alanlar: `Taban_State`, `Has_Passive_Buy_Order`, `Has_Passive_Sell_Order_At_Taban`, `Stopped_By_Ptrm`, tolerans sayacı, çalışma durumu.
 
-UI (route `min-price`): "Taban Lot" kolonu bounds feed'indeki `minBidLot`'tan gelir. Satır yedi farklı durum rengiyle gösterilir.
+UI (yeni GUI, route `min-price`): "Taban Lot" kolonu bounds feed'indeki `minBidLot`'tan gelir. ⚠ Eski GUI (prod) aynı kolonu `maxAskLot`'tan okuyor ([eski-gui § 3.5](../10-servisler/mtrader-trade-ui/eski-gui.md#35-tavan-9-ve-taban-14-tavan-taban-orderbooktavansettingstsx-tabansettingstsx), K-164). Satır yedi farklı durum rengiyle gösterilir.

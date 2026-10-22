@@ -1,5 +1,5 @@
 ---
-kapsam: mtrader-trade-ui — operatör arayüzü; yeni GUI (development) ve eski GUI (main) yapısı, backend sözleşmesi, deploy, iki sürüm arasındaki farklar
+kapsam: mtrader-trade-ui — operatör arayüzü; giriş ve indeks; iki GUI'nin karşılaştırması, alt dosyalar, kısa özetler, deploy
 kaynak:
   - repo: mtrader-trade-ui
     branch: development
@@ -13,73 +13,54 @@ durum: taslak
 
 # mtrader-trade-ui
 
-Operatör arayüzü. **Aynı repoda iki ayrı uygulama var.** Hangi müşterinin hangisini kullandığı: [`00-genel/branch-ve-ortamlar.md`](../../00-genel/branch-ve-ortamlar.md#eski-gui--yeni-gui-parçalı-geçiş).
+Operatör arayüzü. **Aynı repoda iki ayrı uygulama var**, ikisi de prod'da (parçalı geçiş). Hangi müşterinin hangisini kullandığı: [`00-genel/branch-ve-ortamlar.md`](../../00-genel/branch-ve-ortamlar.md#eski-gui--yeni-gui-parçalı-geçiş). Bir GUI sorusunda önce müşterinin hangi GUI'de olduğunu belirle.
 
 | | Yeni GUI | Eski GUI |
 |-|----------|----------|
 | Branch | `development` (preprod'a da gidiyor) | `main` (prod imajı) |
 | Kaynak | `app/` | `src/` |
-| Teknoloji | React 19, React Router 8 (framework mode, `ssr:false`), Vite, Zustand, TanStack Query, Dockview, Tailwind v4, TypeScript 7 | Vite + Ionic/Capacitor (Android/iOS) + Electron, React, context'ler |
-| Geçmiş | Kişisel repoda (`mtrader-new`) sıfırdan yazıldı, 2026-09-14'te merge edildi (`7e14a00`) | Development'taki son hali `59f1689`. `main`'de bunun üstüne yalnızca deploy commit'leri var (Alnus/VPN, `algo_gui.yaml`). |
+| Teknoloji | React 19, React Router (framework mode, `ssr:false`), Vite, Zustand, TanStack Query, Dockview, Tailwind v4 | Vite + Ionic + Electron, React, context'ler |
+| Geçmiş | Kişisel repoda (`mtrader-new`) sıfırdan yazıldı, 2026-09-14'te merge edildi (`7e14a00`) | Development'taki son hali `59f1689`; `main`'de üstüne yalnız deploy commit'leri |
 | Varant Toplu | Var (`bulk-warrant`) | **Yok** |
-| Toplu Emirler workspace'i | Var (`collective-orders`) | Sabah emri ekranları var (`src/pages/...`, "Sabah Emri") |
+| Toplu emirler | Toplu Emirler workspace'i (`collective-orders`): sabah, açılış, akşam, YİP | Tek ekran: "Sabah Emri" kartı (`COLLECTIVE_ORDERS` izni) → `OrderForm.tsx`; sabah, açılış, akşam. YİP yok |
+| Fiyat ölçeği | Enstrümanın `decimalCount`'u | Çoğu yerde sabit ×1000 (VİOP'ta sapma riski, K-163) |
+| WebSocket yeniden bağlanma | Var (sınırsız, jitter'lı; pasif emirler paneli hariç) | Yok |
 
-**Yeni GUI için asıl kaynak repodaki `AGENTS.md`'dir** (~1500 satır, güncel tutuluyor). Bu doküman onu tekrar etmez, yalnızca harita verir. GUI davranışıyla ilgili bir soruda önce oraya bak:
-- **Strateji kuralları:** HFT gizli alanlar, Varant Toplu, Fon Takibi etkisiz kutular, Tavan/Taban farkları.
-- **WebSocket kuralları:** kendi kendine iyileşme, order socket aboneliği, paylaşılan itch socket, replay.
-- **Fiyat ölçeği.**
-- **Ürün kararları:** "Decisions and Boundaries".
+**Yeni GUI'nin asıl ayrıntı kaynağı repodaki `AGENTS.md`'dir** (~1500 satır, güncel tutuluyor). Bu bilgi tabanı onu tekrar etmez; hangi başlığın hangi soruyu cevapladığı [yeni-gui § 8](yeni-gui.md#8-repo-agentsmd-başlık-haritası)'de.
 
-## Yeni GUI (`development`)
+## Alt dosyalar
 
-### Yapı (`app/`)
+| Dosya | Soru |
+|-------|------|
+| [`backend-sozlesmesi.md`](backend-sozlesmesi.md) | İki GUI ortak: bağlantı ayarları, login → OTP → token ve oturum, REST uçları (yeni/eski GUI kullanım sütunlu), WebSocket feed'leri ve iki GUI'nin socket yönetimi, strateji komut payload'u, emir gönderme, JSON lehçesi ve **ölçek tablosu** |
+| [`yeni-gui.md`](yeni-gui.md) | Yeni GUI: teknoloji ve build, route ağacı ve guard'lar, workspace modeli, panel kataloğu, store'lar ve React Query anahtarları, ortak UI kuralları, eski GUI'den bilerek korunan/değiştirilen davranışlar, `AGENTS.md` başlık haritası |
+| [`eski-gui.md`](eski-gui.md) | Eski GUI (prod): platformlar, routing, ekranlar, context'ler, tarayıcı depolaması, strateji ekranları ve fiyat ölçeği, emir ekranları, socket yönetimi, panel düzeni, auth, yeni GUI ile farklar, kod okuma ipucu |
 
-| Yer | İçerik |
-|-----|--------|
-| `routes.ts` | Açık route tanımları (dosya tabanlı routing yok). `_auth` (login, otp, forgot/reset password), `_protected`, `_strategy`, `strategy-select`, `strategies/StrategyWorkspace.tsx`. |
-| `lib/strategyWorkspace.ts` | **`STRATEGY_WORKSPACE_CONFIGS`**: strateji başına route, paneller, abonelik anahtarları, komut tipleri, gereken socket'ler. `matchesStrategyKey`: `HFT_WARRANT_ADVANCED` ⊃ `HFT_WARRANT` ⊃ `HFT` önek çakışmasını çözer. |
-| `components/dockview/` | Paneller: tracker formları, emir defteri, emir geçmişi, emir gönderme, özetler, pasif emirler; strateji klasörleri (`hft/`, `max-price/`, `min-price/`, `warrant/`, `warrant-bulk/`, `arbitrage/`, `fund-tracker/`, `theoretical-price/`, `collective-order/`) |
-| `api/` | REST istemcileri (Axios), React Query sorguları ve mutation'ları, WebSocket sınıfları (`api/socket/`) |
-| `stores/` | Zustand store'ları ve yüksek frekanslı dış store'lar (`socketStore`, `marketDataStore`, `strategyDataStore`, `maxPriceStateStore`, `orderSnapshotStore`, `instrumentStore`) |
-| `types/index.ts` | `StrategyType` (wire değerleri, değiştirilmez) |
-| `locales/tr`, `locales/en` | Çeviriler (`npm run check:i18n`) |
+Strateji başına UI ayrıntısı strateji dosyalarının "UI" bölümlerindedir ([`20-stratejiler/`](../../20-stratejiler/README.md)); bunlar çoğunlukla yeni GUI'yi anlatır, eski GUI farkları `eski-gui.md` § 3'te.
 
-### Workspace'ler
+## Kısa özetler
 
-HFT (`hft`), Arbitraj (`arbitrage`), VWAP (`vwap`), Tavan (`max-price`), Taban (`min-price`), Teorik Fiyat (`theoretical-price`), Varant (`warrant`), Varant Toplu (`bulk-warrant`), Fon Takibi (`fund-tracker`), Toplu Emirler (`collective-orders`, backend `StrategyType`'ı yok).
+Ayrıntı alt dosyalarda; burada yalnız yön bulmak için.
 
-Panel kapsamı eşit değildir: VWAP'ın tracker'ı yok, Teorik'in ayar modalı yok, Fon Takibi'nde tracker yerine paketler var.
+- **Backend:** trade-data-app. REST :6621 (grpc-gateway, protojson; 64-bit sayılar **string**), WebSocket :6623 (Go json, sayılar **number**). Login başarısız olsa da HTTP **200** döner, sonuç gövdededir; OTP 120 sn ([backend-sozlesmesi § 2](backend-sozlesmesi.md#2-kimlik-doğrulama-ve-oturum)).
+- **WS feed'leri:** Yeni GUI `socketStore`'da altı merkezi socket tutar (market → `/ws/v1/best`, command → `/ws/v1/strategy`, order → `/ws/v1/orders`, bounds, equilibrium, itch). `/ws/v1/passive-orders`'ı yalnız pasif emirler paneli açar ([backend-sozlesmesi § 4](backend-sozlesmesi.md#4-websocket-feedleri)).
+- **Strateji komutu:** `POST /v1/setStrategyCommands`, `map<string, Any>` alanlar; yeni GUI her komutta tam payload gönderir ([backend-sozlesmesi § 5](backend-sozlesmesi.md#5-strateji-komut-sözleşmesi-post-v1setstrategycommands)).
+- **Workspace modeli:** `STRATEGY_WORKSPACE_CONFIGS` strateji başına route, panel, abonelik ve socket'i tanımlar; `matchesStrategyKey` `HFT_WARRANT_ADVANCED` ⊃ `HFT_WARRANT` ⊃ `HFT` önek çakışmasını çözer ([yeni-gui § 3](yeni-gui.md#3-workspace-modeli-applibstrategyworkspacets)).
+- **Panel kapsamı eşit değil:** VWAP'ın tracker'ı yok; Teorik'in ayar modalı yok; Fon Takibi'nde tracker yok, strateji emir defteri üzerinden yönetilir, paketler ayrı özet panelinde.
+- **Eski GUI'de tarayıcı depolaması:** token ve (OTP yeniden gönderimi için) şifre `sessionStorage`'da ([eski-gui § 2.5](eski-gui.md#25-tarayıcı-depolaması-önemli)).
 
-### Backend sözleşmesi
+Açık sorunlar: [`ACIK-KONULAR.md`](../../ACIK-KONULAR.md) § mtrader-trade-ui.
 
-- **REST:** trade-data-app :6621 (grpc-gateway, protojson; 64-bit sayılar **string** gelir).
-- **WebSocket:** :6623 (Go json, sayılar **number**). `socketStore`'un merkezi yönettiği altı socket ve feed karşılıkları: market → `/ws/v1/best`, command → `/ws/v1/strategy`, order → `/ws/v1/orders`, bounds, equilibrium, itch. Yedinci feed `/ws/v1/passive-orders` merkezi değildir; yalnızca pasif emirler paneli (`StrategyPassiveOrders.tsx`) açar.
-- Endpoint listesi: [trade-data-app](../trade-data-app/README.md).
-- Login başarısız olsa da HTTP **200** döner, sonuç gövdededir. OTP penceresi 120 sn'dir.
-
-### Komutlar
+## Komutlar (yeni GUI)
 
 ```
 npm install
 npm run dev            # geliştirme
 npm run check          # typecheck + lint + format + i18n + contrast (CI'da YOK; push öncesi elle)
-npm run build          # deploy workflow yalnızca install + build yapar; Vite type-check etmez
+npm run build          # deploy workflow yalnız install + build yapar; Vite type-check etmez
 ```
 
-Node ≥ 22.22 (`.nvmrc`). Test script'i yok; bu bir ürün kararı.
-
-## Eski GUI (`main`, referans `59f1689`)
-
-- **Yapı:** `src/pages/<Ekran>` (Arbitrage, Hft, Tavan, Taban, Varant, TheoreticForm, OrderBook, OrderForm, OrderHistory, SelectStrategy, StrategySettings, CreatePanel, DockView, Login/Otp/ForgetPassword, FundTrackerSummaryView, VWAPSummaryView), `src/ApiService.ts`, `src/contexts`, `src/Functions`, `src/structs`.
-- **Platformlar:** Web, Electron (`electron/`), Android/iOS (Capacitor, `android/`, `ios/`).
-- **Backend:** Aynı REST ve WS uçlarını kullanır. `/v1/parseWarrantFile` hariç; Varant Toplu yok.
-- **Kod okuma:** Branch değiştirmeden okunabilir:
-  ```bash
-  git show 59f1689:src/pages/<dosya>
-  git ls-tree --name-only 59f1689 src/
-  ```
-- **Davranış farkları:** Yeni GUI eski GUI'nin birçok davranışını **bilerek** korur ya da **bilerek** değiştirir. Yeni GUI kodundaki "previous frontend …" yorumları bu kararları kaydeder. Bir farkın bug mı karar mı olduğunu anlamak için o yorumlara ve `AGENTS.md`'ye bak.
-- **Eski branch:** `origin/eski_gui` aynı kod tabanının 2026-03 haliyle duruyor; `59f1689` tercih edilmelidir.
+Node: `.nvmrc` `22.23.1`, `package.json` `engines` `>=22.22.0`. Test script'i yok; bu bir ürün kararı.
 
 ## Deploy
 
@@ -89,3 +70,4 @@ Node ≥ 22.22 (`.nvmrc`). Test script'i yok; bu bir ürün kararı.
   - `preprod` → `mtrader-frontend-preprod`
   - `main` → `mtrader-frontend`
 - Ayrıntı: [`00-genel/branch-ve-ortamlar.md`](../../00-genel/branch-ve-ortamlar.md#gui-dağıtımı-mtrader-trade-ui).
+- ⚠ Workflow'daki müşteri kataloğunda SSH bilgileri düz metin (K-15).

@@ -61,4 +61,4 @@ GUI'ye giden mesajlar: `FundTrackerStrategyActivity`, `FundTrackerUnderlyingPric
 
 ## UI
 
-Yeni GUI route `fund-tracker`. Tracker yerine paket listesi gösterilir.
+Yeni GUI route `fund-tracker`. Tracker paneli yok; strateji emir defteri üzerinden yönetilir (`FundTrackerControlsOverlay`), ekleme "+" ile doğrudan ayar modalını açar. Paketler ayrı bir özet panelindedir (`fund_tracker_summary_view`, Sidebar'dan açılır).

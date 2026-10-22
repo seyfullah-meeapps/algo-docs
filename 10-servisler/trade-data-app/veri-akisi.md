@@ -150,7 +150,7 @@ Subscribe (3) / unsubscribe (10): `{"AccountName": [string], "Types": [StrategyT
 
 ### 4.4 `/ws/v1/strategy/start` — strateji komut/durum
 
-Subscribe (4): `{"StrategyType": uint8, "Commands": [{"CommandType": uint8, "UniqueKey": string}]}`. `CommandType`: 1 Strategy, 2 Package, 3 Balance, 4 Order, 5 Summary, 6 ExecuteUnderlying. Unsubscribe (11): `{"StrategyType", "UnsubscribeAll": bool, "Commands": [...]}`.
+Subscribe (4): `{"StrategyType": uint8, "Commands": [{"CommandType": uint8, "UniqueKey": string}]}`. `CommandType`: 1 Strategy, 2 Package, 3 Balance, 4 Order, 5 Summary, 6 ExecuteUnderlying (sunucu sabitleri 0–6). Yeni GUI ayrıca `8` (tavan/taban durumu) gönderir; değer uint8 olarak motora aynen geçer ([mtrader-trade-ui/backend-sozlesmesi § 4.2](../mtrader-trade-ui/backend-sozlesmesi.md#42-feed-tablosu)). Unsubscribe (11): `{"StrategyType", "UnsubscribeAll": bool, "Commands": [...]}`.
 
 - Anahtarlar istemcinin `subbedKeys` listesine eklenir; ardından `getApplicationFromStrategyType` (WS kopyası, §5.5) ile motor seçilir. Motor tanımlı değil/bağlı değilse `"... service is not available/connected"` hatası döner — **anahtarlar yine de eklenmiş kalır**. Bilinmeyen tip için hiçbir şey yapılmaz, hata da dönmez.
 - Motora `SubscribeToCommands` (unary) çağrısı ayrı goroutine'de yapılır. Metadata: `authorization`, `strategytype`; `SummaryRequest` varsa `userid` (JWT'den gelen kullanıcı). Hata yalnızca log'a yazılır, istemciye dönmez.

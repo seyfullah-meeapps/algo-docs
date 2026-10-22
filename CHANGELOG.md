@@ -2,6 +2,27 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-22 — mtrader-trade-ui derinleştirme
+
+Kaynak: mtrader-trade-ui `development` `b0474c3` (yeni GUI) ve `main` `6715182` (eski GUI; salt okunur export), trade-data-app `1cca9a8`.
+
+- `10-servisler/mtrader-trade-ui/` alt dosyalara bölündü: `backend-sozlesmesi.md` (iki GUI ortak), `yeni-gui.md`, `eski-gui.md`. README artık giriş, karşılaştırma tablosu ve indeks.
+- **README düzeltmeleri:**
+  - Eski GUI'de toplu emirler tek "Sabah Emri" ekranı (`OrderForm`, `COLLECTIVE_ORDERS` izni), YİP yok.
+  - İki GUI de bazı uçları kullanmıyor (`getSelectedAccountStrategies`, `getStrategyKeys`, `subscribeToArbitrage(s)`).
+  - Fon Takibi'nde "paketler tracker yerine" değil, ayrı özet panelinde.
+  - Node sürümü `.nvmrc` 22.23.1.
+- **Diğer dosyalarda:**
+  - `fon-takibi`: UI bölümü düzeltildi.
+  - `taban`: eski GUI'nin `maxAskLot` okuduğu işaretlendi.
+  - `20-stratejiler/README`: Toplu Emirler görünürlüğü `COLLECTIVE_ORDERS` iznine bağlı.
+  - `trade-data-app/veri-akisi`: yeni GUI'nin `CommandType 8`'i eklendi.
+- **Repo dışı not:** mtrader-trade-ui `AGENTS.md` "15 için trade-data-app case'i development'ta yok" diyor; `1cca9a8`'de var. Repoya dokunulmadı.
+- **Yeni konular K-163 – K-178** (ACIK-KONULAR § mtrader-trade-ui). Öne çıkanlar (eski GUI, prod):
+  - K-163: fiyat sabit ×1000, VİOP'ta 10× sapma riski. Kodla doğrulandı.
+  - K-164: Taban Lot alanı.
+  - K-168: socket'ler yeniden bağlanmıyor.
+
 ## 2026-10-22 — ouch-sdk / network-sdk derinleştirme
 
 Kaynak: ouch-sdk `0c3589e`, network-sdk `3c1b42f` (değişmedi). Host tarafı için HftSrvProd, AlgorithmicTrading ve order-service; eski notlar için `meeapps-ai` (salt okunur) okundu.

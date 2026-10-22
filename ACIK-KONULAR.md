@@ -205,6 +205,27 @@ Ayrıntılar alt dosyaların kendi "Şüpheli" bölümlerinde. Sistem genelindek
 | K-161 | doğrula | network-sdk/ouch-sdk thread'leri yield'siz busy-spin (CPU, Onload etkisi); iki tarafın tamponları dolunca send/recv kilitlenmesi | [baglanti](10-servisler/network-sdk/baglanti-ve-threadler.md#şüpheli) |
 | K-162 | eksik | `ouchSDKApp/main.cpp`'de sabit IP/kullanıcı/şifre düz metin; `Application::OUCH` (3) order-service'te `APP_UNKNOWN` | [ouch-sdk](10-servisler/ouch-sdk/README.md#93-ouchsdkapp) |
 
+## mtrader-trade-ui
+
+| # | Tür | Konu | Ayrıntı |
+|---|-----|------|---------|
+| K-163 | bug? | Eski GUI (prod) fiyatı çoğu yerde sabit ×1000 ile çeviriyor (`OrderForm` sabah emri dahil), `decimalCount` kullanılmıyor; VİOP'ta (`decimalCount=2`) emir 10× sapar | [eski-gui](10-servisler/mtrader-trade-ui/eski-gui.md#33-fiyat-ve-birim-ölçeği) |
+| K-164 | doğrula | Taban "Taban Lot" kolonu: eski GUI (prod) `maxAskLot`, yeni GUI `minBidLot` okuyor; hangisi doğru? | [eski-gui](10-servisler/mtrader-trade-ui/eski-gui.md#35-tavan-9-ve-taban-14-tavan-taban-orderbooktavansettingstsx-tabansettingstsx) |
+| K-165 | bug? | Eski GUI Tavan pasif satış vurgusu hiç yanmıyor (`Has_Passive_Sell_Order` okunuyor, motor `…_At_Tavan` yolluyor) | [eski-gui](10-servisler/mtrader-trade-ui/eski-gui.md#35-tavan-9-ve-taban-14-tavan-taban-orderbooktavansettingstsx-tabansettingstsx) |
+| K-166 | bug? | Eski GUI Varant varsayılan `criteriaValue`/`toleranceCount` 0; motor komutu sessizce düşürüyor | [eski-gui](10-servisler/mtrader-trade-ui/eski-gui.md#36-varant-13-varantvaranttrackerform) |
+| K-167 | bug? | Eski GUI Teorik başlat/durdur `strategyType: 4` ve `Strategy_Id` = hesap adı gönderiyor | [eski-gui](10-servisler/mtrader-trade-ui/eski-gui.md#37-teorik-fiyat-8-theoreticformtheoreticformtsx) |
+| K-168 | bug? | Eski GUI socket'leri yeniden bağlanmıyor; ilk bağlantıda `client_id` 0 gelirse auth gönderilmiyor, socket ölü kalıyor (paneller donar, sayfa yenilemesi gerekir) | [backend-sozlesmesi](10-servisler/mtrader-trade-ui/backend-sozlesmesi.md#44-eski-gui-socket-yönetimi) |
+| K-169 | bug? | Eski GUI `setStrategyCommands` yanıtında olmayan `response.status`'a bakıyor; toplu iptal başarılı olsa da hata toast'ı | [backend-sozlesmesi](10-servisler/mtrader-trade-ui/backend-sozlesmesi.md#şüpheli) |
+| K-170 | bug? | Eski GUI 401 sonrası yalnız localStorage token'ını siliyor, `sessionStorage` token'ı kalıyor; şifre OTP yeniden gönderimi için `sessionStorage`'da düz metin; Electron `nodeIntegration: true`, CSP `unsafe-eval` | [eski-gui](10-servisler/mtrader-trade-ui/eski-gui.md#25-tarayıcı-depolaması-önemli) |
+| K-171 | doğrula | Eski GUI emir aboneliğinde 12 (HFT_User) ve 15 yok; HFT serbest emirleri emir geçmişine düşmüyor olabilir; order socket yeniden açılınca çift emir | [backend-sozlesmesi](10-servisler/mtrader-trade-ui/backend-sozlesmesi.md#42-feed-tablosu) |
+| K-172 | bug? | Eski GUI OrderForm güncelle/sil `custom_data` önekini emrin değil formun seçili saatinden alıyor | [eski-gui](10-servisler/mtrader-trade-ui/eski-gui.md#şüpheli) |
+| K-173 | doğrula | Yeni GUI pasif emirler paneli 3 denemeden sonra yeniden bağlanmayı bırakıyor (`AGENTS.md`'deki sınırsız iyileşme kuralıyla çelişiyor) | [backend-sozlesmesi](10-servisler/mtrader-trade-ui/backend-sozlesmesi.md#43-yeni-gui-socket-yönetimi) |
+| K-174 | bug? | Yeni GUI Sidebar düzen kaydı Varant, Varant Toplu ve Teorik tracker panellerini `setPanel` ile yazmıyor | [yeni-gui](10-servisler/mtrader-trade-ui/yeni-gui.md#şüpheli) |
+| K-175 | doğrula | Prod'da `/v1` ve `/ws` isteklerinin trade-data-app'e nasıl ulaştığı ve TLS'in nerede sonlandığı (GUI nginx'inde proxy yok, imaj env'siz derleniyor) | [backend-sozlesmesi](10-servisler/mtrader-trade-ui/backend-sozlesmesi.md#1-bağlantı-ayarları) |
+| K-176 | doğrula | `expected_price` ölçeği: `RequestStructs.ts` yorumu "TL × 1000", kod enstrüman bölenini kullanıyor; `subscribeToOrderbook` fiyatları float32 | [backend-sozlesmesi](10-servisler/mtrader-trade-ui/backend-sozlesmesi.md#7-json-lehçesi-ve-ölçek-tablosu) |
+| K-177 | eksik | Yeni GUI `socketStore.sendCommand` WS'ten `fields` gönderiyor ama sunucu okumuyor, çağıranı yok (ölü kod adayı); satır zemin renkleri ham Tailwind sınıfı (AGENTS.md renk token kuralı) | [yeni-gui](10-servisler/mtrader-trade-ui/yeni-gui.md#şüpheli) |
+| K-178 | iş | `algo_gui.yaml` hâlâ `npm install --legacy-peer-deps` ve yüzen `node-version: 22`; `.nvmrc` 22.23.1 | [yeni-gui](10-servisler/mtrader-trade-ui/yeni-gui.md#şüpheli) |
+
 ## Borsa kuralları
 
 | # | Tür | Konu | Ayrıntı |
