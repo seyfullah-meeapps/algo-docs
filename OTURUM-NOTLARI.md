@@ -13,7 +13,7 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 - Bütün dosyalar `taslak`; `bos` kalmadı. Kullanıcı gözden geçirmesi bekleniyor.
 - `main` push edildi; `dogrulama-2026-10-22` branch'i silindi. Önceki sohbetin transkripti silindi (içeriği bu dosyaya aktarıldı).
-- **Madde 1 (trade-data-app) ve madde 2 (HftSrvProd) bitti** (README indeks + alt dosyalar). **Sıradaki: madde 3 (order-service).** Kullanıcı 2026-10-22'de HftSrvProd push'undan sonra durdurdu.
+- **Madde 1 (trade-data-app) ve madde 2 (HftSrvProd) bitti** (README indeks + alt dosyalar). **Devam eden: madde 3 (order-service, `b86c0cf` değişmedi).** Alt dosyalar yazılıyor: `arayuzler.md`, `sdk-ve-oturumlar.md`, `toplu-emirler.md`, `risk.md`, `kalicilik-ve-config.md`; sonra README indeks.
 - Yöntem: konu başına paralel agent alt dosya yazar → çelişkileri koddan kontrol et → README'yi indekse çevir → ACIK-KONULAR'a tek satır ekle → CHANGELOG → push.
 - Remote: `seyfullah-meeapps/algo-docs` (kişisel hesap). Planlanan `MeeApps/algo-docs` (org) değil; bilinçli mi, sorulmadı.
 
@@ -59,5 +59,6 @@ Kullanıcıyla alınmış kararlar; aksi söylenmedikçe geçerli.
 En yeni en üstte; oturum başına birkaç satır.
 
 - **2026-10-22 (3. oturum):** Kullanıcının `dogrulama-2026-10-22` branch'i main'e alındı (borsa kuralları, sözlük, ❓ temizliği — bkz. CHANGELOG). `ACIK-KONULAR.md` ve bu dosya açıldı. Push kuralı kondu; transkript silindi. Öncelik: doküman tamamlama (boşluk analizi). trade-data-app ve HftSrvProd derinleştirildi; HftSrvProd sonrası kullanıcı isteğiyle duruldu.
+- **2026-10-22 (4. oturum):** Önceki transkriptten devam; order-service derinleştirme başladı.
 - **2026-10-22 (2. oturum, transkript dışı):** `dogrulama-2026-10-22` branch'inde ❓'ler koddan kapatıldı, `borsa-kurallari.md` ve `sozluk.md` yazıldı.
 - **2026-10-22 (1. oturum):** Yapı kuruldu; sistem haritası, 9 strateji, 13 servis, operasyon ve akışlar taslak yazıldı. Kullanım limitinde kesildi.
