@@ -38,7 +38,7 @@ Bu bilgi tabanı kodu esas alır. İş tanımıyla çelişki görürsen ikisini 
      - `development`: Piramit, A1, Alnus, Alnus Algo, Marbas, Global.
      - `main` (prod): yukarıdakiler + **Kanjo**. `Configs/Kanjo` yalnızca `main`'de var.
      - `preprod`: Piramit, A1, Alnus.
-   - `Configs/` klasörleri de branch'e göre farklıdır: `development`'ta `Seker`, `main`'de `Oyak` var; ikisi de hiçbir kurulum matrisinde yok. ❓ Bu iki kurulumun durumu doğrulanmadı.
+   - `Configs/` klasörleri de branch'e göre farklıdır: `development`'ta `Seker`, `main`'de `Oyak` var; ikisi de hiçbir kurulum matrisinde yok. İkisi de **eski müşteri** (kullanıcı beyanı, 2026-10-22); klasörler artık kalıntı.
    - Her müşteri için `setup_mode` ve ağ hızlandırma seçimi (`onload` / `mlx` / normal) ayrıca tanımlıdır.
 2. Müşteri sunucusunda kurulum: zip açılır, `install.sh` içinde `setup_mode` ayarlanır, `./install.sh` çalıştırılır. Script şunları yapar:
    - Docker ve docker-compose kurulumu

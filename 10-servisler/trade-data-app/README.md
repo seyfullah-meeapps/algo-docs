@@ -137,7 +137,7 @@ Bağlantılar koparsa yeniden bağlanır. `StrategyType` → uygulama eşlemesi:
   - **A1, Alnus-Algo:** VİOP 4.
   - **Alnus, Global, Marbas, Piramit, Seker:** VİOP hiç yok (yalnız Spot 4).
 
-  Aynı müşterilerin HFT config'leri VİOP'ta 6 partition dinliyor. A1 ve Alnus-Algo'da trade-data-app'in VİOP 5–6. partition'larındaki enstrümanları görmemesi muhtemel. ❓ Kasıtlı mı (o partition'larda işlem yapılmıyor olabilir) doğrulanmadı. |
+  Aynı müşterilerin HFT config'leri VİOP'ta 6 partition dinliyor. A1 ve Alnus-Algo'da trade-data-app'in VİOP 5–6. partition'larındaki enstrümanları görmemesi muhtemel. ❓ Kasıtlı olup olmadığı açık; ayrıntılı incelemesi ertelendi (kullanıcı kararı, 2026-10-22). |
 | `historyManagerEnabled`, `interestRate` | Geçmiş, volatilite |
 | `tradeVerifier`, `datastore`, `akd`, `byf` | Entegrasyonlar |
 | `extServices[]` | Dış uygulamalar (`application`, ip, port, kullanıcı, `applicationUser`) |

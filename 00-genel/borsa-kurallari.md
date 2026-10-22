@@ -98,7 +98,7 @@ Dış kaynaklı bilgiler BIST'in resmi sayfasından doğrudan okunamadı (ağ er
 - **Kural:** Açığa satış, son gerçekleşen işlem fiyatının üzerinden yapılabilir. Son işlem bir öncekinin üzerinde gerçekleştiyse son fiyattan da yapılabilir.
 - **Ne zaman:** Kural sürekli değildir. Borsa İstanbul onu **belirli seanslar için** ilan eder (ör. 24 Şubat 2025; 11, 13 ve 17 Mart 2025).
 - **Kapsam:** Gün içinde sahip olunmadan yapılıp aynı gün kapatılan satış da açığa satıştır; emir açığa satış işaretiyle iletilmelidir. SPK'nın 5 Aralık 2024 kararıyla açığa satış BIST 50 paylarında yapılabilir.
-- **Sonuç:** HFT'de bu günlere özel bir mekanizma yok. `uptickRule` bütün müşteri config'lerinde `false`; açmak config değişikliği ve yeniden başlatma ister. Strateji bazında `Send_Sell_Orders_Instead_Of_Short` açığa satışı kapatır ([hft-classic](../20-stratejiler/hft-classic.md#bait--chase-uptick)). ❓ İlan günlerinde operasyonda ne yapıldığı ve kuralın 2026'daki güncel uygulaması doğrulanmadı.
+- **Sonuç:** HFT'de bu günlere özel bir mekanizma yok. `uptickRule` bütün müşteri config'lerinde `false`; açmak config değişikliği ve yeniden başlatma ister. Strateji bazında `Send_Sell_Orders_Instead_Of_Short` açığa satışı kapatır ([hft-classic](../20-stratejiler/hft-classic.md#bait--chase-uptick)). **Operasyon pratiği:** İlan günlerinde genelde strateji çalıştırılmıyor; sistem bu kurala henüz uygun değil, geliştirme planlanıyor (kullanıcı beyanı, 2026-10-22). ❓ Kuralın 2026'daki güncel uygulaması doğrulanmadı.
 
 ## Ön-işlem risk (PTRM) ve diğer ret kodları
 
