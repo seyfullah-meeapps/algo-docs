@@ -13,7 +13,7 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 - Bütün dosyalar `taslak`; `bos` kalmadı. Kullanıcı gözden geçirmesi bekleniyor.
 - `main` push edildi; `dogrulama-2026-10-22` branch'i silindi. Önceki sohbetin transkripti silindi (içeriği bu dosyaya aktarıldı).
-- **Madde 1–5 bitti** (trade-data-app, HftSrvProd, order-service, MAOrderSDK, itch-sdk; README indeks + alt dosyalar). **Sıradaki: madde 6 (ouch-sdk / network-sdk).**
+- **Madde 1–5 bitti** (trade-data-app, HftSrvProd, order-service, MAOrderSDK, itch-sdk; README indeks + alt dosyalar). **Madde 6 (ouch-sdk / network-sdk) devam ediyor:** ouch-sdk tek README, network-sdk README indeks + `wire-protokolu.md` + `baglanti-ve-threadler.md`; K-07 eski notlar kontrol ediliyor.
 - Yöntem: konu başına paralel agent alt dosya yazar → çelişkileri koddan kontrol et → README'yi indekse çevir → ACIK-KONULAR'a tek satır ekle → CHANGELOG → push.
 - Remote: `seyfullah-meeapps/algo-docs` (kişisel hesap). Planlanan `MeeApps/algo-docs` (org) değil; bilinçli mi, sorulmadı.
 
