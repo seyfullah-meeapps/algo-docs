@@ -251,7 +251,7 @@ Kodda olan: yalnız `Configs/Seker/tunning/` (development; Şeker eski müşteri
 
 `setup_tunning.sh` `cd tunning/` yapar ve `01-cpu.sh`, `02-kernel.sh`, `03-nic.sh`, `04b-…`, `05-thp.sh`, `06-grub-extras.md`, `10-isolcpus-grub.sh` çalıştırır, sonra servisi `/etc/systemd/system/`'e kopyalayıp `enable` eder. Kök dizinde `tunning/` yok ve adlar Seker'dekilerle uyuşmuyor; script pakete de girmiyor. Pratikte tuning elle uygulanıyor. ❓ doğrulanmadı: diğer müşteri sunucularında uygulanmış tuning.
 
-Bilerek kapalı tutulan ayarlar (`mlockall`, main thread pinleme, `SCHED_FIFO`): [hftsrvprod/config.md](../10-servisler/hftsrvprod/config.md) ve [README](README.md#sunucu-ayarları-setup_tunningsh).
+Bilerek kapalı tutulan ayarlar (`mlockall`, main thread pinleme, `SCHED_FIFO`): [hftsrvprod/config.md](../10-servisler/hftsrvprod/config.md) (toml yorumları).
 
 ## Güncelleme / yeniden deploy
 
@@ -294,7 +294,7 @@ cat /proc/cmdline; cat /sys/devices/system/cpu/isolated   # isolcpus
 systemctl status hft-tuning.service
 ```
 
-Açılış log imzaları: [README](README.md#açılış-log-imzaları).
+Açılış log imzaları: [log-imzalari.md](log-imzalari.md).
 
 ## Şüpheli
 

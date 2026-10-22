@@ -92,4 +92,4 @@ Ayrıntı: [entegrasyonlar.md](entegrasyonlar.md).
 
 - Go modülü, cgo ile `libMAItchSDK` gerekir. `Dockerfile`, `docker-compose.yml`; `generate.sh` proto üretimi.
 - Proto kaynakları: `api/protobuf-spec/` (sunduğu servisler), `api/client-spec/` (istemcisi olduğu sözleşmeler).
-- CI `dbservice.yaml` → Algo-Setup (DatabaseService). Deploy: [`40-operasyon/`](../../40-operasyon/README.md).
+- CI `dbservice.yaml` → Algo-Setup (DatabaseService). Deploy: [kurulum-ve-dagitim](../../40-operasyon/kurulum-ve-dagitim.md).

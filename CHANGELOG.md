@@ -2,6 +2,49 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-22 — Operasyon derinleştirme (madde 8)
+
+Kaynak: Algo-Setup `development` `2a3c5d5` (`main` `2907757` ve `preprod` `346306a` farkları `git show` ile), algo-configs `master` `ab35dde` (`Sabah_Kontrolleri.docx` dahil); servis repoları manifest'teki commit'lerde.
+
+- `40-operasyon/` alt dosyalara bölündü:
+  - `kurulum-ve-dagitim.md`
+  - `config-referansi.md`: servisler arası indeks; anahtar açıklaması yok
+  - `log-imzalari.md`
+  - `sabah-kontrolleri.md`: docx güncel koda göre yeniden yazıldı
+  - README artık indeks.
+- **Yeni:** `10-servisler/algorithmic-trading/config.md` (AlgoProd config referansı). AlgoProd README'deki config tablosu kaldırıldı; tablo yanlıştı (`akd*` okunmuyor, `triggerWorkerCount` ve `volatilityFile` etkisiz).
+- **Eski README'de yanlış çıkanlar:**
+  - "Hepsi `network_mode: host`": MySQL ve MAAdminUI bridge ağında.
+  - S3'e log yalnız HFT'den gidiyor.
+  - Kökte `tunning/` yok.
+  - `setup_mode` listesi eksikti.
+  - Container adları branch'ten ve varyanttan da etkileniyor.
+- **Eski log imzalarında yanlış çıkanlar:**
+  - development'ta trade-data-app listener'ları bütün pazarların snapshot-end'inden sonra basılıyor (master'da değil).
+  - 1001 metni `enterOrder: unknown instrument (no limit entry)`; limit tablosu boşken üretilmiyor.
+  - `Client connected …` yalnız master'da.
+  - `Restarting with Onload` Onload'un yüklendiğini kanıtlamaz.
+  - `zero-handoff` her sabah normal.
+  - `N active OUCH user(s)` N=0 normal.
+- **Sabah kontrolleri docx'inde eskiyenler:**
+  - `Morning Order For Part1/2` satırı kodda yok; aranacak metin `will be fetched at`.
+  - Zaman damgası epoch **ns**.
+  - Aktif dosya `order_service.txt`.
+  - Container adları değişmiş.
+- **Kapanan konular:**
+  - K-05 ve K-175: admin domain → 6688 ve GUI `/v1`, `/ws` yönlendirmesini müşteri başına `nginx-proxy` yapıyor (Algo-Setup `Configs/<M>/nginx/`); TLS orada sonlanıyor.
+  - K-09: sabah kontrolleri aktarıldı.
+- **Diğer dosyalarda:**
+  - `sistem-haritasi`: algo-configs tanımı ve admin yönlendirmesi.
+  - `backend-sozlesmesi`: `/v1`, `/ws`, TLS; nginx-proxy HSTS ekliyor, GUI kararıyla çelişiyor.
+  - Linkler yeni dosyalara yönlendirildi.
+  - K-15'e Algo-Setup sırları eklendi.
+- **Yeni konular K-179 – K-191** (ACIK-KONULAR § Operasyon). Kodla doğrulananlar:
+  - K-179: gece güncellemesi bozuk, main de `_development` zip'ini çekiyor.
+  - K-180: trade-data-app login şifreyi log'a basıyor.
+  - K-181: HFT gRPC portu ↔ trade-data-app `extServices[hft]` uyuşmuyor.
+  - K-183: `kill -15 <isim>` SIGTERM göndermiyor.
+
 ## 2026-10-22 — mtrader-trade-ui derinleştirme
 
 Kaynak: mtrader-trade-ui `development` `b0474c3` (yeni GUI) ve `main` `6715182` (eski GUI; salt okunur export), trade-data-app `1cca9a8`.

@@ -81,20 +81,7 @@ HftSrvProd ile aynı sözleşmedir (`strategies.proto`); istemci trade-data-app'
 
 ## Config (`Configuration.ini`)
 
-Sözdizimi: `anahtar :değer`, bölümler `$Ad :On … &Ad`.
-
-| Anahtar | Anlam |
-|---------|-------|
-| `clientPort` | gRPC portu |
-| `ouchIp`, `ouchPort`, `ouchUsername`, `ouchPassword` | **order-service** MARpc bağlantısı |
-| `dbIp`, `dbPort`, `dbUsername`, `dbPassword` | **trade-data-app** gRPC (MySQL değil) |
-| `workerCount`, `triggerWorkerCount` | Worker havuzu |
-| `monitoringEnabled`, `monitoringPort` | PerfSDK |
-| `akdUrl`, `akdUserName`, … | Foreks AKD |
-| `TRY`, `USD`, `EUR` | Faiz oranları (vade hesabı) |
-| `holidaysBIST` | Tatil dosyası |
-| `logDirectory`, `logFile`, `logLevel`, `strategyLogPath`, `volatilityFile` | Log |
-| `$Equity` / `$Derivative` → `$Partition` → `$Glimpse` / `$Itch` | ITCH adresleri: Spot 4, VİOP 6 partition |
+Anahtar referansı, parser tuzakları ve müşteri farkları: [config.md](config.md).
 
 ## Build
 

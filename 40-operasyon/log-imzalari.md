@@ -34,7 +34,7 @@ durum: taslak
 
 # Log imzaları
 
-Satırlar koddaki format string'lerinden alındı. `{}` / `%v` / `N` değişken kısımdır. Grep'te sabit kısmı kullan. Başlatma sırası ve neden bu sırada başlatıldığı: [sistem haritası § Başlatma sırası](../00-genel/sistem-haritasi.md#başlatma-sırası). Crontab saatleri: [README § Günlük takvim](README.md#günlük-takvim-crontab-hafta-içi).
+Satırlar koddaki format string'lerinden alındı. `{}` / `%v` / `N` değişken kısımdır. Grep'te sabit kısmı kullan. Başlatma sırası ve neden bu sırada başlatıldığı: [sistem haritası § Başlatma sırası](../00-genel/sistem-haritasi.md#başlatma-sırası). Crontab saatleri: [kurulum-ve-dagitim § setup_mode → servisler ve crontab](kurulum-ve-dagitim.md#setup_mode--servisler-ve-crontab-development).
 
 **Kural:** Bir servisin "HAZIR" satırını görmeden sıradakini başlatma.
 
@@ -293,20 +293,7 @@ Crontab `docker stop` yapar. Docker PID 1'e (`run.sh`) SIGTERM gönderir. `run.s
 | HftSrvProd | `kill -15 HftSrvProd` (Şüpheli) → `hft*` ve `itchsdk*` taşınır, zip → `aws s3 cp … s3://meeapps-backup/${MODE}/${COMPANY_NAME}/HFT/logs/` | `The interrupt signal is (15).` (yalnız sinyal prosese ulaşırsa) | Yerel zip + S3 |
 | AlgoProd | `kill -15 AlgoProd` → strategyLog `WarrantTracker` ve `algo*`/`itchsdk*` → `tar.gz` (pigz) | SIGTERM handler kapalı (yorum satırı). Gün sonu ITCH `EndOfMessages` gelince kendisi kapanır: `Application::waitCloseSignalEitherFromUserOrSystem system will be closed!` → `stopOuchStreaming from Application.cpp` | `log-backups-<YYYY-MM-DD-HH-MM-SS>.tar.gz`, S3 yok (`copy_strategy_logs.sh` ayrı ve elle) |
 
-[README § Günlük takvim](README.md#günlük-takvim-crontab-hafta-içi)'deki "log dosyalarını zip'ler ve S3'e yükler" ifadesi yalnız HFT için doğrudur.
-
-## 6. README § Açılış log imzaları ile farklar (2026-10-22)
-
-| README iddiası | Koddaki durum |
-|----------------|---------------|
-| trade-data-app: listener satırları snapshot'tan önce basılabilir | development'ta hayır: listener'lar config'teki bütün pazarların snapshot-end'inden sonra gelir. master'da ilk biten pazardan sonra gelir; iddia master için geçerli (§ 1) |
-| `1001 unknown instrument (no limit entry)` | Gerçek metin `enterOrder: unknown instrument (no limit entry)` (kod 1001), order-service'te `MAOrderSDK LOCAL REJECT …` satırında. Limit tablosu tamamen boşken üretilmez |
-| order-service `Client connected …` = BIST oturumu | Yalnız master'da. development'ta `Login accepted for user <u>` ve yalnız dosyada |
-| `Restarting with Onload` = Onload'un gerçekten açıldığının kanıtı | Satır `exec`'ten önce basılır; yükleme başarısızsa da görünür (§ 3 notları) |
-| HFT sırası: Restarting → DB login → MAOrderSDK → banner | Glimpse (`Login accepted for part`) ve `ItchSdkClient started` arada. `MAOrderSDK: N …` satırı DB login'den önce gelebilir. order-service login (`[DEBUG] ouchSDK::login()`) banner'dan sonra gelebilir |
-| `MAOrderSDK: N active OUCH user(s) loaded …` | Müşteri config'lerinde N=0 normaldir |
-| zero-handoff CRIT: sabah handoff'u yoksa | Banner'dan ~20 s sonra her gün basılır (handoff 09:40'ta) |
-| `HFT took over OUCH user …` | Yalnız `hft.txt`'te (`docker logs`'ta yok) |
+S3'e log yükleyen yalnız HFT'dir; diğer servisler arşivi yerelde bırakır (K-185).
 
 ## Şüpheli
 

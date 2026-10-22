@@ -77,7 +77,7 @@ Notlar:
 - Ağ varyantına (`*_network`: `onload`/`mlx`/`regular`) göre Dockerfile, compose, `run*.sh` ve binary standart adlara taşınır.
 - `libMAItchSDK_*.so` ve `libMAOrderSDK_*.so` da varyanta göre `libMAItchSDK.so` / `libMAOrderSDK.so` olur.
 - `install.sh`'e `setup_mode`; `run.sh` ve `setup_copy_binary.sh`'e `COMPANY_NAME` / `MODE` satır olarak eklenir.
-- Ayrıntı: [40-operasyon README → Kurulum paketi](README.md#kurulum-paketi).
+- Ayrıntı: [kurulum-ve-dagitim § CI](kurulum-ve-dagitim.md#ci-githubworkflowsalgosetupyml).
 
 **Config ile ilgili tuzaklar:**
 - **`Alnus_Algo_Setup`**: `directory: "Alnus"`, yani Alnus-Algo değil Alnus dosyaları paketlenir. `setup_mode: "order_algo_db"`; bu değer `install.sh`'te yok. Hiçbir `setup_*.sh` çalışmaz, yalnız gece crontab'ı kurulur.
@@ -221,8 +221,6 @@ Müşteri durumu:
 - **Kanjo (main) port çakışma adayları:** nginx 81 ↔ MAAdminUI 81. order-service 8000/9035 varsayılan kalmış; aynı host'ta başka bir order-service varsa çakışır. ❓ doğrulanmadı: Kanjo'nun başka bir müşteriyle aynı host'ta olduğu (77xx TDA portları ve 81/445 nginx portları bunu düşündürüyor).
 - **MySQL** `3306:3306` ile bütün arayüzlere yayınlanıyor (`network_mode: host` değil). Veri için adlandırılmış volume yok, yalnız imajın anonim volume'u var. ❓ doğrulanmadı: container yeniden yaratılınca verinin korunması.
 - **Diğer dokümanlarla fark:**
-  - [README → Container'lar](README.md#containerlar) "Hepsi `network_mode: host`" diyor; MySQL (`ports`) ve MAAdminUI (`81:80`) host ağında değil.
-  - [sistem-haritasi](../00-genel/sistem-haritasi.md) bileşen tablosu algo-configs'i "Ortam/müşteri config dosyaları" diye tanımlıyor; [README](README.md#repolar) ve manifest'e göre müşteri config'leri Algo-Setup'tadır.
   - mtrader-trade-ui `AGENTS.md` "HSTS eklenmez" diyor; GUI'nin önündeki nginx-proxy 443'te HSTS ekliyor (§ 3.1).
 
 **Açık metin gizli bilgi** (değerler buraya alınmadı; ❓ rotasyon kararı kullanıcıya ait):

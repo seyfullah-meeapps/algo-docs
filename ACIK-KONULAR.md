@@ -19,8 +19,6 @@ Tür: **bug?** olası hata · **doğrula** kodla/borsayla teyit gerekli · **eks
 | K-02 | bug? | trade-data-app ITCH config'i `Part` 1–4'ü tanıyor, 5–6 Partition1'e düşüyor; 6 partition'lı VİOP'ta (Piramit_Algo) son iki partition gelmiyor, A1/Alnus-Algo zaten 4 tanımlı. ⏸ ertelendi | [config](10-servisler/trade-data-app/config.md) § `itchConfigurations[]` |
 | K-03 | bug? | Tavan: yeni stratejide DB'ye 600/1200 varsayılan saat yazılıyor, UI 36000–64800 bekliyor; yanlış değer UI'dan geri gidebilir | [tavan](20-stratejiler/tavan.md) § Wire alanları |
 | K-04 | doğrula | Teorik Fiyat `executeOrder` pozisyonu güncellemiyor (kod yorumda); kasıtlı mı? | [teorik-fiyat](20-stratejiler/teorik-fiyat.md) § Bilinen durumlar |
-| K-05 | doğrula | Admin paneli domain → :6688 yönlendirmesi (reverse proxy) | [sistem-haritasi](00-genel/sistem-haritasi.md) § Bağlantı tablosu |
-| K-09 | eksik | `Sabah_Kontrolleri.docx` bilgi tabanına aktarılmadı | [40-operasyon](40-operasyon/README.md) § Sabah kontrolleri |
 
 ## trade-data-app
 
@@ -221,10 +219,27 @@ Ayrıntılar alt dosyaların kendi "Şüpheli" bölümlerinde. Sistem genelindek
 | K-172 | bug? | Eski GUI OrderForm güncelle/sil `custom_data` önekini emrin değil formun seçili saatinden alıyor | [eski-gui](10-servisler/mtrader-trade-ui/eski-gui.md#şüpheli) |
 | K-173 | doğrula | Yeni GUI pasif emirler paneli 3 denemeden sonra yeniden bağlanmayı bırakıyor (`AGENTS.md`'deki sınırsız iyileşme kuralıyla çelişiyor) | [backend-sozlesmesi](10-servisler/mtrader-trade-ui/backend-sozlesmesi.md#43-yeni-gui-socket-yönetimi) |
 | K-174 | bug? | Yeni GUI Sidebar düzen kaydı Varant, Varant Toplu ve Teorik tracker panellerini `setPanel` ile yazmıyor | [yeni-gui](10-servisler/mtrader-trade-ui/yeni-gui.md#şüpheli) |
-| K-175 | doğrula | Prod'da `/v1` ve `/ws` isteklerinin trade-data-app'e nasıl ulaştığı ve TLS'in nerede sonlandığı (GUI nginx'inde proxy yok, imaj env'siz derleniyor) | [backend-sozlesmesi](10-servisler/mtrader-trade-ui/backend-sozlesmesi.md#1-bağlantı-ayarları) |
 | K-176 | doğrula | `expected_price` ölçeği: `RequestStructs.ts` yorumu "TL × 1000", kod enstrüman bölenini kullanıyor; `subscribeToOrderbook` fiyatları float32 | [backend-sozlesmesi](10-servisler/mtrader-trade-ui/backend-sozlesmesi.md#7-json-lehçesi-ve-ölçek-tablosu) |
 | K-177 | eksik | Yeni GUI `socketStore.sendCommand` WS'ten `fields` gönderiyor ama sunucu okumuyor, çağıranı yok (ölü kod adayı); satır zemin renkleri ham Tailwind sınıfı (AGENTS.md renk token kuralı) | [yeni-gui](10-servisler/mtrader-trade-ui/yeni-gui.md#şüpheli) |
 | K-178 | iş | `algo_gui.yaml` hâlâ `npm install --legacy-peer-deps` ve yüzen `node-version: 22`; `.nvmrc` 22.23.1 | [yeni-gui](10-servisler/mtrader-trade-ui/yeni-gui.md#şüpheli) |
+
+## Operasyon
+
+| # | Tür | Konu | Ayrıntı |
+|---|-----|------|---------|
+| K-179 | bug? | Gece `setup_copy_binary.sh` bozuk (shebang yok, `rm -rf $HOME/Setup`, zip adı boş); main'de de `_development` zip'ini çekiyor → düzelirse prod'a dev binary/config; container içi config elle değişiklikleri ezer; yanlış container adları | [kurulum-ve-dagitim](40-operasyon/kurulum-ve-dagitim.md#şüpheli) |
+| K-180 | bug? | Gizli bilgi log'a düşüyor: trade-data-app login şifreyi düz metin basıyor (`gui_api.go`, `ouch_api.go`), HFT açılışta `dbPassword`/`ouchPassword` dahil config'i döküyor, token'lar basılıyor | [log-imzalari](40-operasyon/log-imzalari.md#şüpheli) |
+| K-181 | bug? | HFT gRPC portu ↔ trade-data-app `extServices[hft].port` uyuşmuyor (dev: A1, Marbas, Alnus, Alnus-Algo, Global; main: Piramit) → TDA sessizce 2 sn'de bir dener; HFT ve AlgoProd aynı gRPC (9098) ve Rewinder (26001–26010) portlarında | [config-referansi](40-operasyon/config-referansi.md#31-port-matrisi) |
+| K-182 | doğrula | main/preprod HFT `run.sh` `Configuration.ini` veriyor, paket `.toml` içeriyor, HFT yalnız TOML okuyor; prod sunucuda elle düzeltilmiş mi | [config-referansi](40-operasyon/config-referansi.md#2-paketleme-ve-gece-güncellemesi) |
+| K-183 | bug? | HFT/AlgoProd `run.sh` `kill -15 <isim>` (bash isim kabul etmez) → SIGTERM gitmiyor, SIGKILL; AlgoProd SIGTERM handler'ı yorumda; order-service gRPC `Wait()` SIGTERM'de çıkmayabilir | [kurulum-ve-dagitim](40-operasyon/kurulum-ve-dagitim.md#şüpheli) |
+| K-184 | bug? | Cron prod container adlarını kullanıyor, dev (`*Test`) ve preprod (`*PreProd`) adları farklı → otomatik start/stop çalışmaz; `order_algo_db` `install.sh`'ta yok (Alnus Algo paketi servis kurmuyor); dev `algo_order` cron eklemiyor | [kurulum-ve-dagitim](40-operasyon/kurulum-ve-dagitim.md#şüpheli) |
+| K-185 | bug? | Log arşivi: S3'e yalnız HFT; `MODE`/`COMPANY_NAME` boş → S3 yolu bozuk; order-service glob'u aktif `order_service.txt`'yi kapsamıyor; trade-data-app log dosya adı bozuk, her açılışta sıfırlanıyor, volume yok | [log-imzalari](40-operasyon/log-imzalari.md#şüpheli) |
+| K-186 | bug? | Algo-Setup script hataları: dev `install.sh` MySQL `setup.sql`'i koymuyor (şema init edilmez); `install_data.sh` sözdizimi hatası; `backupAllDatabases.sh` yanlış dosya adı (gece yedeği alınmıyor olabilir); zip'e girmeyen dosyalar; mlx yolu kırık | [kurulum-ve-dagitim](40-operasyon/kurulum-ve-dagitim.md#şüpheli) |
+| K-187 | bug? | AlgoProd config parser'ı `:` içeren değerleri ve `secondaryRewinderIp` satırlarını sessizce atlıyor, `$`/`&` parse'ı bozuyor, hata `terminate`; DB login hatası çökertir, OUCH login hatası sessiz | [algorithmic-trading/config](10-servisler/algorithmic-trading/config.md#şüpheli) |
+| K-188 | doğrula | Müşteri config'lerinde kopyala-yapıştır izleri: AlgoProd Alnus/Marbas aynı uzak adres, Kanjo = Global (yanlış `dbPort`), main HFT `dbIp`'leri, dev HFT config'lerinde Piramit NIC'i ve Glimpse kullanıcısı | [config-referansi](40-operasyon/config-referansi.md#şüpheli) |
+| K-189 | doğrula | Onload sürümü: AlgoProd imajı 9.0.1.86, host ve diğer imajlar 9.2.0.43 (userspace ↔ sürücü eşleşmeli) | [config-referansi](40-operasyon/config-referansi.md#şüpheli) |
+| K-190 | bug? | MySQL `3306` bütün arayüzlere açık, adlandırılmış veri volume'u yok; Kanjo'da nginx 81 ↔ MAAdminUI 81 çakışma adayı | [config-referansi](40-operasyon/config-referansi.md#şüpheli) |
+| K-191 | doğrula | Sabah kontrolü: Piramit prod container adları (docx `*Prod`, Algo-Setup'ta yok); bant dışı fiyatlı seans öncesi test emrinin `-110023` alıp almadığı | [sabah-kontrolleri](40-operasyon/sabah-kontrolleri.md) |
 
 ## Borsa kuralları
 
@@ -240,4 +255,4 @@ Ayrıntılar alt dosyaların kendi "Şüpheli" bölümlerinde. Sistem genelindek
 |---|-----|------|---------|
 | K-13 | iş | AlgoProd MAOrderSDK + handoff `add-order-sdk` branch'inde; merge edilince dokümanlar güncellenecek | [sistem-haritasi](00-genel/sistem-haritasi.md) § Emir yolları |
 | K-14 | iş | Uptick geliştirmesi planlanıyor (şu an global bayrak, hep kapalı) | [borsa-kurallari](00-genel/borsa-kurallari.md) § Açığa satış ve uptick |
-| K-15 | iş | Kaynak repolarda açık metin şifreler (ClickHouse, lisans, VERDA, Datastore, AKD, Glimpse, DB, JWT `secretKey`, SSH) → Secrets'a taşınmalı. ⏸ sonra ele alınacak | — |
+| K-15 | iş | Kaynak repolarda açık metin şifreler (ClickHouse, lisans, VERDA, Datastore, AKD, Glimpse, DB, JWT `secretKey`, SSH; Algo-Setup: AWS anahtarları, Docker Hub, MySQL, Discord webhook, TLS özel anahtarları; AlgoProd Sentry DSN) → Secrets'a taşınmalı. ⏸ sonra ele alınacak | [config-referansi](40-operasyon/config-referansi.md#şüpheli) |

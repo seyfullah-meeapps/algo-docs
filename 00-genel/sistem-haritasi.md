@@ -37,7 +37,7 @@ durum: taslak
 | Warrant-Selector | `Warrant-Selector` | Python | Bağımsız araç: bir dayanağın varantlarını takas dağılımına göre tarar (Foreks/Fintables). Stack'e bağlı değil. |
 | Itch-Replayer | `Itch-Replayer` | C/C++ | Bağımsız araç: ITCH multicast/Glimpse kaydı ve tekrar oynatma. Stack'e bağlı değil. |
 | Algo-Setup | `Algo-Setup` | — | Derlenmiş binary'ler, servis dosyaları, scriptler. Branch = ortam. |
-| algo-configs | `algo-configs` | — | Ortam/müşteri config dosyaları. |
+| algo-configs | `algo-configs` | — | İsmine rağmen çalışma config'i değil: container imajları, lisans uygulaması, insan için dokümanlar. Müşteri config'leri Algo-Setup'ta ([config-referansi](../40-operasyon/config-referansi.md)). |
 
 **İsim karışıklıkları (sık sorulur):**
 - C++ servislerin config'indeki `db*` / `database` anahtarları **MySQL değildir**; trade-data-app'in gRPC portudur (6620). MySQL'e yalnızca trade-data-app bağlanır.
@@ -97,7 +97,7 @@ Portlar `development`'taki örnek config'lerden; ortamlara göre değişebilir (
 | trade-data-app → AlgoProd | gRPC :9098 `StrategyService` | Aynı sözleşme (AlgoProd kendi proto kopyasını kullanır) |
 | trade-data-app → order-service | gRPC :9035 `OrderService` | Toplu emir gönderme (`SendOrder`; trade-data-app'teki Go sarmalayıcısının adı `OrderService.SetOrders`), emir stream'i (`SubscribeToOrders`) |
 | mtrader-trade-ui → trade-data-app | REST :6621 (grpc-gateway) + WebSocket :6623 | Bkz. aşağıdaki WS feed listesi |
-| Admin paneli → trade-data-app | REST, `AdminService` grpc-gateway (:6688); müşteri başına `admin<musteri>.meeapps.com.tr` domain'i (`mtrader-frontend-apps/.github/workflows/adminui.yml`). ❓ doğrulanmadı: domain → :6688 yönlendirmesi reverse proxy'de. | Kullanıcı/hesap/OUCH kullanıcısı yönetimi |
+| Admin paneli → trade-data-app | REST, `AdminService` grpc-gateway (:6688); müşteri başına `admin<musteri>.meeapps.com.tr` domain'i (`mtrader-frontend-apps/.github/workflows/adminui.yml`). Domain → :6688 yönlendirmesini müşteri sunucusundaki `nginx-proxy` yapar (Algo-Setup `Configs/<M>/nginx/`; [config-referansi § 3.1](../40-operasyon/config-referansi.md#31-port-matrisi)). | Kullanıcı/hesap/OUCH kullanıcısı yönetimi |
 | HFT, order-service, AlgoProd → izleme | ClickHouse HTTP push (MAPerfSDK, ayrı thread) | Latency metrikleri |
 
 trade-data-app WebSocket feed'leri (`pkg/gui/connections/ws_listener.go`): `/ws/v1/itch/start` (emir defteri derinliği), `/ws/v1/orders/start` (emir olayları), `/ws/v1/strategy/start` (strateji komut/durum), `/ws/v1/best/start` (best bid/ask), `/ws/v1/equilibrium/start` (denge fiyatı), `/ws/v1/bounds/start` (tavan/taban lot), `/ws/v1/passive-orders/start` (pasif emirler).

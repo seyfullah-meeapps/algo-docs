@@ -302,7 +302,7 @@ Algo-Setup `OrderService/`:
   - **Mlx:** VMA kütüphaneleri imaja eklenir. Compose `/dev/infiniband/*` cihazlarını ve `LD_PRELOAD=libvma.so`, `VMA_SPEC=latency` gibi değişkenleri verir. `cpuset` yok.
 - CI matrisinde müşteri ve varyant: Piramit, A1, Alnus, Marbas, Global → `onload`. `Alnus_Algo_Setup` → `regular`, ama `directory: "Alnus"`, yani `Configs/Alnus-Algo` dosyası değil `Configs/Alnus` dosyası kullanılır. Piramit_Algo ve Seker matriste yok.
 
-Genel kurulum adımları: [40-operasyon](../../40-operasyon/README.md).
+Genel kurulum adımları: [kurulum-ve-dagitim](../../40-operasyon/kurulum-ve-dagitim.md).
 
 ## Şüpheli
 

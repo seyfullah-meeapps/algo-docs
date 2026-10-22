@@ -1,5 +1,5 @@
 ---
-kapsam: Kurulum, dağıtım, günlük çalışma takvimi, container'lar, açılış log imzaları, sunucu ayarları, Algo-Setup ve algo-configs repoları
+kapsam: Operasyon giriş noktası — kurulum/dağıtım, config, log imzaları ve sabah kontrolleri dosyalarının indeksi; Algo-Setup ve algo-configs repolarının rolü
 kaynak:
   - repo: Algo-Setup
     branch: development
@@ -13,117 +13,41 @@ durum: taslak
 
 # Operasyon
 
-Sunucu adresleri, kullanıcılar ve şifreler bu dokümanda **yer almaz**.
+Sunucu adresleri, kullanıcılar ve şifreler bu klasörde **yer almaz**.
+
+## Hangi soru, hangi dosya
+
+| Soru | Dosya |
+|------|-------|
+| Müşteri sunucusuna ne, nasıl kuruluyor? CI müşteri matrisi, `install.sh`, `setup_mode`, crontab saatleri, container adları, cpuset, volume'ler, `run.sh`, tuning, binary güncelleme | [kurulum-ve-dagitim.md](kurulum-ve-dagitim.md) |
+| Bir servisin config'i nerede (repo şablonu, Algo-Setup müşteri dosyası, container yolu)? Hangi port, host ya da kullanıcı servisler arasında **aynı olmalı**? nginx-proxy yönlendirmesi | [config-referansi.md](config-referansi.md). Anahtarların anlamı servis dokümanlarında; oradan linkli |
+| Servis ayağa kalktı mı? "HAZIR" satırı ne? Sabah toplu emir zamanlayıcı satırları, handoff, hata ve kapanış log'ları, log dosyalarının yeri | [log-imzalari.md](log-imzalari.md) |
+| Her sabah 08:30'a kadar ne kontrol edilir? Seans öncesi canlı emir testi, yeniden başlatma sırası | [sabah-kontrolleri.md](sabah-kontrolleri.md) |
+| Başlatma sırası ve servis bağımlılıkları | [sistem haritası § Başlatma sırası](../00-genel/sistem-haritasi.md#başlatma-sırası) |
+| Prod'da bilerek kapalı tutulan ayarlar (`mlockall`, main thread pinleme, `SCHED_FIFO`) | [hftsrvprod/config.md § Prod'da kapalı tutulanlar](../10-servisler/hftsrvprod/config.md#prodda-kapalı-tutulanlar-toml-yorumlarından) |
 
 ## Repolar
 
 | Repo | Ne içerir |
 |------|-----------|
-| **Algo-Setup** | Müşteri sunucusuna kurulan her şey: servis klasörleri (`HFT/`, `OrderService/`, `MADatabaseService/`, `MAAlgoProd/`, `MAAdminUI/`), her birinde Dockerfile, `docker-compose{,-onload,-mlx}.yml` ve `scripts/run*.sh`. Ayrıca derlenmiş binary'ler (CI commit'ler), `MAProdEnv/` (SDK `.so` ve header'ları, Onload ve Mellanox kütüphaneleri), müşteri bazlı `Configs/<Müşteri>/` (order-service config, MySQL compose, DB scriptleri, nginx, tuning), kurulum ve tuning scriptleri. **Branch = ortam.** |
-| **algo-configs** | İsmine rağmen çalışma config'i değildir. İçinde: container imajları (`container-images/`: `MAProdEnvironment` build imajı, `HftTest`, `OrderServiceTest`, `AlgoProdOnload`, dev ortamları), lisans uygulaması (`License-Setup/`), test senaryoları, web sitesi, **dokümanlar** (`doc/`). Canlı branch `master`. |
+| **Algo-Setup** | Müşteri sunucusuna kurulan her şey. Servis klasörleri (`HFT/`, `OrderService/`, `MADatabaseService/`, `MAAlgoProd/`, `MAAdminUI/`), her birinde Dockerfile, compose ve `scripts/run*.sh`. Derlenmiş binary'ler (CI commit'leri), `MAProdEnv/` (SDK `.so` dosyaları, Onload ve Mellanox kütüphaneleri), müşteri bazlı `Configs/<Müşteri>/` (servis config'leri, MySQL, nginx-proxy, DB scriptleri). **Branch = ortam:** `development`, `preprod`, `main` (prod). |
+| **algo-configs** | İsmine rağmen çalışma config'i **değildir**. Container imajları (`container-images/`: `MAProdEnvironment` build imajı, test imajları), lisans uygulaması (`License-Setup/`), test senaryoları, web sitesi ve insan için yazılmış dokümanlar (`doc/`). Canlı branch `master`. |
 
 ### algo-configs `doc/` (insan için yazılmış kaynaklar)
 
 - **`BIST-Dökümanlar/`**: BISTECH ITCH, Glimpse, MoldUDP64 ve SoupBinTCP protokol spesifikasyonları (PDF), bağlantı bilgisi, test ortamı.
 - **`Business/`**: HFT, Tavan, Warrant ve Arbitraj iş dokümanları; risk kontrol; mTrader admin; AKD.
-- **`Development/`**: onboarding, dev ortamı, config'ler, sabah kontrolleri (`Sabah_Kontrolleri.docx`), temel terimler, DataStore API, AKD, mTrader test rehberi. CI tarafından üretilen Doxygen dokümanları (ouch-sdk, HFT, AlgorithmicTrading).
+- **`Development/`**: onboarding, dev ortamı, config'ler, sabah kontrolleri (`Sabah_Kontrolleri.docx` → [sabah-kontrolleri.md](sabah-kontrolleri.md)), temel terimler, DataStore API, AKD, mTrader test rehberi. CI'ın ürettiği Doxygen dokümanları (ouch-sdk, HFT, AlgorithmicTrading).
 - **`Network/`**: ağ topolojisi. Hassas bilgi içerir.
 
 Bu bilgi tabanı kodu esas alır. İş tanımıyla çelişki görürsen ikisini de belirt.
 
-## Kurulum paketi
+## Bilinmesi gereken beş şey
 
-1. Algo-Setup CI (`algosetup.yml`) `main`, `development` ve `preprod` push'larında **müşteri başına kurulum zip'i** üretir ve S3'e yükler.
-   - Matris branch'e göre değişir (Algo-Setup'ta branch = ortam):
-     - `development`: Piramit, A1, Alnus, Alnus Algo, Marbas, Global.
-     - `main` (prod): yukarıdakiler + **Kanjo**. `Configs/Kanjo` yalnızca `main`'de var.
-     - `preprod`: Piramit, A1, Alnus.
-   - `Configs/` klasörleri de branch'e göre farklıdır: `development`'ta `Seker`, `main`'de `Oyak` var; ikisi de hiçbir kurulum matrisinde yok. İkisi de **eski müşteri** (kullanıcı beyanı, 2026-10-22); klasörler artık kalıntı.
-   - Her müşteri için `setup_mode` ve ağ hızlandırma seçimi (`onload` / `mlx` / normal) ayrıca tanımlıdır.
-2. Müşteri sunucusunda kurulum: zip açılır, `install.sh` içinde `setup_mode` ayarlanır, `./install.sh` çalıştırılır. Script şunları yapar:
-   - Docker ve docker-compose kurulumu
-   - Onload/Mellanox kurulumu (varsa)
-   - `setup_<servis>.sh` → `docker-compose up -d --build`
-   - crontab ayarı
-3. Doğrulama:
-   - `crontab -l`
-   - `sysctl -a | grep net.core` (kuyruk boyutları)
-   - `docker ps`
-   - `docker logs --tail 100 -f <container>`
-   - `chronyc tracking` (BIST zaman sunucusuna senkron)
+Ayrıntıları linkli dosyalardadır; burada yalnız uyarı olarak duruyor.
 
-`setup_mode` değerleri: `hft_order`, `hft_order_db`, `order_db`, `db`, `hft`, `order`, `algo_order`, `order_algo_db`.
-
-## Günlük takvim (crontab, hafta içi)
-
-`hft_order_db` örneği:
-
-| Saat | İş |
-|------|----|
-| 07:43 | `docker start MADatabaseService` |
-| 07:44 | `docker start MAOrderService` |
-| 07:45 | `docker start MAHft` |
-| 23:29–23:30 | HFT ve order-service durdurulur |
-| 23:45 | DB servisi durdurulur |
-
-Sıra [sistem haritası → başlatma sırası](../00-genel/sistem-haritasi.md#başlatma-sırası) ile aynıdır.
-
-Durdurma sırasında `run.sh` SIGTERM'i yakalar: servisi kapatır, log dosyalarını zip'ler ve S3'e yükler (`s3://…/<MODE>/<COMPANY_NAME>/<servis>/logs/`).
-
-## Container'lar
-
-- Hepsi `network_mode: host`.
-- HFT container'ı:
-  - `cpuset` ile izole çekirdeklere bağlıdır.
-  - `NET_ADMIN`, `IPC_LOCK`, `SYS_NICE` yetkileri vardır.
-  - `memlock` sınırsızdır, `rtprio` 99.
-  - Loglar `$HOME/workingDirectory/container-logs/<servis>/`'a bağlanır.
-- **Container adları branch'e göre değişir.** Örneğin development compose'larında `MAHftTest`, `MAOrderServiceTest`, `MADatabaseServiceTest`; prod'da `MAHft`, `MAOrderService`, `MADatabaseService`, `MAAlgoProd`.
-
-## Sunucu ayarları (`setup_tunning.sh`)
-
-`tunning/` scriptleri: CPU (güç profili), kernel/sysctl, NIC, IRQ taşıma, THP kapatma, GRUB `isolcpus`, kalıcı `hft-tuning.service`. Müşteriye özel ayarlar `Configs/<Müşteri>/tunning/`'dedir.
-
-Prod'da yaşanmış sorunlar nedeniyle bilerek kapalı tutulan ayarlar:
-- `mlockall` / `sdkLockMemory`: host kilitlenmesi.
-- Main thread pinleme: ping ve ssh ölüyordu, iLO reset gerekti.
-- `SCHED_FIFO` env kapısı: `stalld` yoksa kworker aç kalıyor.
-
-Ayrıntılar HftSrvProd `Configuration.toml` yorumlarında.
-
-## Açılış log imzaları
-
-Her adımda bir önceki servisin "hazır" imzasını gördükten sonra sıradakini başlat. Port numaraları ortama göre değişir.
-
-**1. trade-data-app** (`docker logs <db container>`):
-```
-[AdminAPI] listening on :<adminApiPort>
-[RestAPI] listening on <restPort>
-[SNAPSHOT] Market 1 snapshot end received with N total instruments
-```
-- Listener satırları instrument snapshot'ından **önce** basılabilir.
-- Bu aralıkta başlayan order-service ve HFT eksik enstrüman listesi çeker. MAOrderSDK limit tablosunda olmayan hisseler `1001 unknown instrument (no limit entry)` ile reddedilir.
-- Bu yüzden Pay için `Market 1` snapshot-end satırını bekle; VİOP kullanılıyorsa `Market 2`'yi de.
-
-**2. order-service:**
-```
-Instruments were fetched successfully. Count: N        ← trade-data-app bağlantısı tamam
-Client connected …                                      ← BIST oturumu
-[Server] Started Listening                              ← MARpc (HFT/AlgoProd buraya bağlanır)
-Grpc Server listening on 0.0.0.0:<grpcPort>             ← HAZIR
-```
-
-**3. HftSrvProd:**
-```
-Restarting with Onload                                  ← çalışma anında Onload'un gerçekten açıldığını gösterir
-DatabaseServiceClient::Connect - Login successful
-MAOrderSDK: N active OUCH user(s) loaded …
-HFT INITIALIZATION COMPLETE / Status: LIVE              ← nihai hazır sinyali
-```
-- Banner'daki `Network: Onload Enabled` derleme bayrağıdır, çalışma anı kanıtı değildir.
-- OUCH kullanıcıları handoff ile gelir. Sabah handoff'u yoksa replay gate 20 sn sonra kendiliğinden açılır (`zero-handoff` CRIT log'u).
-- Handoff sırasında: `orderUserDisconnected: handoff for OUCH user … i/N` ve `HFT took over OUCH user …`.
-
-## Sabah kontrolleri
-
-İnsan için hazırlanmış kontrol listesi: algo-configs `doc/Development/Sabah_Kontrolleri.docx`. ❓ Bu bilgi tabanına aktarılmadı.
+1. **Container adları branch'e göre değişir.** Cron her branch'te prod adlarını kullanır. Dev ve preprod'da günlük start/stop bu yüzden çalışmaz ([kurulum-ve-dagitim § Adlar](kurulum-ve-dagitim.md#adlar-compose-container_name), K-184).
+2. **Gece 22:00 güncellemesi** (`setup_copy_binary.sh`) bozuk. Düzeltilirse prod'a development binary'si ve config'i kopyalar. Container içinde elle yapılan config değişikliği bu güncellemede ezilir (K-179).
+3. **Ağ:** Servislerin çoğu `network_mode: host` ile çalışır. **İstisnalar** MySQL (`3306`) ve MAAdminUI (`81:80`); ikisi bridge ağında.
+4. **Log arşivi:** S3'e yalnız HFT yükler. Diğer servisler kapanışta arşivi yerelde bırakır. trade-data-app'in log volume'u yoktur (K-185).
+5. **HFT ve AlgoProd `docker stop`'ta temiz kapanmaz.** `run.sh`'taki `kill -15 <isim>` çalışmaz (K-183).
