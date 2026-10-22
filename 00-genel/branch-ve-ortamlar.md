@@ -97,6 +97,6 @@ Kaynak: kullanıcı beyanı, 2026-10-22 (repodan çıkarılamıyor). Değişirse
 | Kanjo | eski |
 | Global | eski |
 | Marbas | eski |
-| Piramit_Algo | ❓ belirtilmedi |
+| Piramit_Algo | eski. Çıkarım: son başarılı GUI deploy'u 2026-04-24'te `preprod`'dan yapıldı, yeni GUI'nin merge'ünden (2026-09-14) önce (`algo_gui.yaml` run geçmişi). |
 
 Bir GUI sorusu cevaplanırken **müşterinin hangi GUI'yi kullandığı** belirleyicidir. Eski ve yeni GUI'nin davranış farkları: `10-servisler/mtrader-trade-ui/`.

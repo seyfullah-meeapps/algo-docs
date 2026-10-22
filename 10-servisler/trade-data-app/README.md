@@ -132,7 +132,12 @@ Bağlantılar koparsa yeniden bağlanır. `StrategyType` → uygulama eşlemesi:
 | `server.port` / `restPort` / `adminApiPort` | gRPC / REST / Admin REST |
 | `gui.port`, `gui.hostname`, sertifika yolları | WS sunucusu |
 | `database.*` | MySQL |
-| `itchEnabled`, `itchWorkerCount`, `itchTriggerWorkerCount`, `onloadStackName`, `itchConfigurations[]` | ITCH. Repodaki örnek `config.json` Spot 4 + **VİOP 4** partition tanımlar; HFT ve AlgoProd örnekleri VİOP için 6 tanımlar. ❓ Prod'daki trade-data-app config'inin VİOP 5–6. partition'ları içerip içermediği doğrulanmadı (müşteri config'i: Algo-Setup `Configs/<Müşteri>/dbservice-config.json`). |
+| `itchEnabled`, `itchWorkerCount`, `itchTriggerWorkerCount`, `onloadStackName`, `itchConfigurations[]` | ITCH. Repodaki örnek `config.json` Spot 4 + **VİOP 4** partition tanımlar; HFT ve AlgoProd örnekleri VİOP için 6 tanımlar. Müşteri config'lerinde (Algo-Setup `development`, `Configs/<Müşteri>/dbservice-config.json`):
+  - **Piramit_Algo:** VİOP 6.
+  - **A1, Alnus-Algo:** VİOP 4.
+  - **Alnus, Global, Marbas, Piramit, Seker:** VİOP hiç yok (yalnız Spot 4).
+
+  Aynı müşterilerin HFT config'leri VİOP'ta 6 partition dinliyor. A1 ve Alnus-Algo'da trade-data-app'in VİOP 5–6. partition'larındaki enstrümanları görmemesi muhtemel. ❓ Kasıtlı mı (o partition'larda işlem yapılmıyor olabilir) doğrulanmadı. |
 | `historyManagerEnabled`, `interestRate` | Geçmiş, volatilite |
 | `tradeVerifier`, `datastore`, `akd`, `byf` | Entegrasyonlar |
 | `extServices[]` | Dış uygulamalar (`application`, ip, port, kullanıcı, `applicationUser`) |

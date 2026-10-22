@@ -13,8 +13,10 @@ Kaynak repoların HEAD'leri manifest'teki doğrulama commit'leriyle aynı (deği
 - **PTRM:** AlgoProd `-850064`'ü tanımıyor (VWAP, Arbitraj). Arbitraj'ın PTRM'de durması ve `-420131` eklendi.
 - **Uptick:** HFT'de enstrüman bazlı değil, global config bayrağı (`uptickRule`); `uptickEnabled` kullanılmıyor.
 - **Tavan:** `Profit_Percentage` kullanılmıyor.
-- **trade-data-app:** Örnek config VİOP'ta 4 partition tanımlıyor (HFT/AlgoProd 6). ❓ olarak işaretlendi.
-- **Algo-Setup:** Kurulum matrisinde Kanjo yok. ❓ olarak işaretlendi.
+- **trade-data-app VİOP partition'ları:** Müşteri config'lerinde sayılar farklı. Piramit_Algo 6, A1 ve Alnus-Algo 4, diğerlerinde VİOP yok; HFT config'leri hepsinde 6.
+- **Algo-Setup kurulum matrisi branch'e göre değişiyor:** Kanjo yalnızca `main`'de (prod). `Seker` (development) ve `Oyak` (main) config klasörleri hiçbir matriste yok (❓).
+- **Piramit_Algo eski GUI'de:** Son başarılı deploy 2026-04-24'te `preprod`'dan (GitHub Actions run geçmişinden çıkarım).
+- **Uptick'in çalışma anında açılma yolu yok:** Bütün müşteri config'lerinde `uptickRule = false`.
 - **Kullanıcı beyanları:** Sepet arbitraj henüz kullanılmıyor; Warrant-Selector Varant Toplu'ya yüklenen CSV'yi üretiyor; Global ve Marbas eski GUI'de.
 - `00-genel/borsa-kurallari.md` yazıldı (`bos` → `taslak`): fiyat adımı, limitler, seanslar, uptick, ret kodları. Her bölümde "kodda" ve "borsada (referans)" ayrımı var. Borsa sitesine bu ortamdan erişilemedi; dış bilgiler arama sonuçlarından derlendi, kesinleşmeyenler ❓.
 
