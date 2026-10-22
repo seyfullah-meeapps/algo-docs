@@ -63,7 +63,7 @@ Sonuç: MARpc ve gRPC portları OUCH/FIX login'leri ve toplu emir thread'leri ku
 - Her bağlantıya 2 thread (listener başına 10'luk `ThreadPool`):
   - `receiveMessage`: non-blocking `recv` döngüsü (busy-spin). Gönderim kuyruğundan **iterasyon başına bir** mesaj yollar.
   - `processCallback`: çerçeveyi ayrıştırır, `OrderServer::RequestReceived`'ı **senkron** çağırır (busy-spin `try_dequeue`).
-- Heartbeat: istemci (ouch-sdk `MATCPClient::sendHeartbeatMessage`) 3 sn'de bir `HeartbeatRequest` gönderir. Sunucu `CONNECTION_TIMEOUT_MS = 15000` ms geçince bağlantıyı düşürür (`checkHeartbeatMessages`, `yield` ile dönen ayrı thread). Heartbeat `RequestReceived`'a ulaşmaz.
+- Heartbeat: istemci (network-sdk `MATCPClient::sendHeartbeatMessage`, ouch-sdk üzerinden) 3 sn'de bir `HeartbeatRequest` gönderir. Sunucu `CONNECTION_TIMEOUT_MS = 15000` ms geçince bağlantıyı düşürür (`checkHeartbeatMessages`, `yield` ile dönen ayrı thread). Heartbeat `RequestReceived`'a ulaşmaz.
 - İstemci `"C"` gövdeli çerçeve gönderirse sunucu bağlantıyı kapatır (`CLOSE_MSG`).
 - Kapanışta `closeCallBack` → `OrderServer::ConnectionClosed` (§3.9).
 - `setPerformanceSDK` order-service'te çağrılmaz; MARpc metrikleri kapalıdır.
@@ -74,7 +74,7 @@ Sonuç: MARpc ve gRPC portları OUCH/FIX login'leri ve toplu emir thread'leri ku
 
 | Tip | Değer | İşlem | Yanıt |
 |-----|-------|-------|-------|
-| `LoginRequest` | 4 | `AuthenticationService::Login` → trade-data-app `DataService.Login`. `applicationType`: 1 HFT, 2 AlgoTrading, diğerleri `APP_UNKNOWN`. Bağlantı, kullanıcı adının bağlantı listesine eklenir (`user_connections`). | `LoginResponse{token}`; `statusCode` 200 / 401. `status` alanı set edilmez (false). |
+| `LoginRequest` | 4 | `AuthenticationService::Login` → trade-data-app `DataService.Login`. `applicationType`: 1 HFT, 2 AlgoTrading, diğerleri `APP_UNKNOWN`. ⚠ network-sdk decoder'ı 2 ile 3'ü yer değiştiriyor (`MAHelper::getApplicationResult`), bu yüzden AlgoProd'un login'i `APP_UNKNOWN` ile yapılıyor ([network-sdk/wire-protokolu § 4](../network-sdk/wire-protokolu.md#4-enumlar), K-149). Bağlantı, kullanıcı adının bağlantı listesine eklenir (`user_connections`). | `LoginResponse{token}`; `statusCode` 200 / 401. `status` alanı set edilmez (false). |
 | `EnterOrderRequest` | 1 | §3.3 | Doğrudan yanıt yok; olaylar §3.7 |
 | `CancelOrderRequest` | 3 | Token geçersizse `OrderRejected{401, "Unauthorized"}` döner. Geçerliyse `CancelOrder{orderToken, protocolType}` → `OrderDispatcher::SendOrder` | Olay |
 | `ReplaceOrderRequest` | 2 | Token geçersizse **sessizce düşer** (yalnız log). Geçerliyse `ReplaceOrder{orderToken, price, quantity, passThrough, protocolType}` → dispatcher | Olay |
@@ -135,7 +135,7 @@ Yönlendirme: `OrderServer::OnOrder*` → `auth_service->GetUserConnections(even
 |------------------------|--------------------|------------------------|
 | `OrderAccepted` (1) | `orderToken` (SDK token), `orderId` (BIST order id), `passThrough`, `orderBookId`, `quantity` (lot), `price` (raw int32), `account`, `strategy`, `strategyIdentifier`, `preTradeQuantity` (lot), `side` (1/2/3), `timestamp` | `timestamp` = MAOrderSDK `msg.timestamp` (❓ doğrulanmadı: birim) |
 | `OrderExecuted` (2) | `orderToken`, `orderBookId`, `timestamp`, `quantity` (**bu dolumun** lotu), `price` = `lastPrice` (işlem fiyatı, raw), `matchId` | Wire'da `side`, `account`, `passThrough` alanı yok. `previousPosition`/`dailyPosition`/`totalPosition` 0. İstemci token ile eşler. |
-| `OrderCanceled` (3) | `orderToken`, `orderId`, `orderBookId`, `timestamp`, `reasonCode`, `reason`, `quantity` (lot), `side` | `price` ve `matchId` gönderilmez (0) |
+| `OrderCanceled` (3) | `orderToken`, `orderId`, `orderBookId`, `timestamp`, `reasonCode`, `reason`, `quantity` (lot), `side` | `price` ve `matchId` gönderilmez (0). Sebep network-sdk'da: `MAHelper::getOrderFBObj` `price`'ı yazmıyor, `matchId`'ye 0 yazıyor; order-service doldursa da kaybolur ([network-sdk/wire-protokolu § 6.1](../network-sdk/wire-protokolu.md#61-encode-mahelpergetrequest-getresponse-getorderfbobj)) |
 | `OrderRejected` (4) | `orderToken`, `passThrough`, `orderBookId`, `account`, `strategy`, `strategyIdentifier`, `timestamp`, `rejectCode`, `rejectReason` | Risk reddinde (§6.2) `orderToken` **boş**, `rejectCode` model varsayılanı, `timestamp` ns (`system_clock`). İstemci `passThrough` ile eşlemelidir. |
 | `OrderReplaced` (5) | `previousOrderToken`, `replacementOrderToken`, `passThrough`, `orderId`, `orderBookId`, `quantity` (lot), `price` (raw), `account`, `strategy`, `strategyIdentifier`, `preTradeQuantity`, `side`, `timestamp` | — |
 | `UserDisconnected` (9) | §3.8 | — |

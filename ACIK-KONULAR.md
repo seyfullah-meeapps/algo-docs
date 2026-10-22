@@ -20,7 +20,6 @@ Tür: **bug?** olası hata · **doğrula** kodla/borsayla teyit gerekli · **eks
 | K-03 | bug? | Tavan: yeni stratejide DB'ye 600/1200 varsayılan saat yazılıyor, UI 36000–64800 bekliyor; yanlış değer UI'dan geri gidebilir | [tavan](20-stratejiler/tavan.md) § Wire alanları |
 | K-04 | doğrula | Teorik Fiyat `executeOrder` pozisyonu güncellemiyor (kod yorumda); kasıtlı mı? | [teorik-fiyat](20-stratejiler/teorik-fiyat.md) § Bilinen durumlar |
 | K-05 | doğrula | Admin paneli domain → :6688 yönlendirmesi (reverse proxy) | [sistem-haritasi](00-genel/sistem-haritasi.md) § Bağlantı tablosu |
-| K-07 | doğrula | network-sdk eski wire protokol / bağlantı notları tek tek kontrol edilmedi | [network-sdk](10-servisler/network-sdk/README.md) § Build |
 | K-09 | eksik | `Sabah_Kontrolleri.docx` bilgi tabanına aktarılmadı | [40-operasyon](40-operasyon/README.md) § Sabah kontrolleri |
 
 ## trade-data-app
@@ -186,6 +185,25 @@ Ayrıntılar alt dosyaların kendi "Şüpheli" bölümlerinde. Sistem genelindek
 | K-146 | bug | Çoğu abonelik türünde slot geri kazanılmıyor: orderbook başına ömür boyu 32 abonelik, sonrası callback'siz geçerli handle (aynı sembolde 33. strateji start'ı) | [abonelik-api](10-servisler/itch-sdk/abonelik-api.md#şüpheli) |
 | K-147 | doğrula | `findClientForOrderbook` static cache yarışı (combiner OUCH thread'inden subscribe ediyor), shutdown sonrası dangling pointer (eski #12) | [abonelik-api](10-servisler/itch-sdk/abonelik-api.md#şüpheli) |
 | K-148 | doğrula | trade-data-app `rewinderSourceIp`'yi set etmiyor; Rewinder yanıtları demux'ta tanınıyor mu | [abonelik-api](10-servisler/itch-sdk/abonelik-api.md#şüpheli) |
+
+## ouch-sdk / network-sdk
+
+| # | Tür | Konu | Ayrıntı |
+|---|-----|------|---------|
+| K-149 | bug? | network-sdk `getApplicationResult` AlgoTrading (2) ile OUCH'u (3) yer değiştiriyor; AlgoProd order-service'e `APP_UNKNOWN` ile login oluyor (etkisi doğrulanmadı) | [wire-protokolu](10-servisler/network-sdk/wire-protokolu.md#4-enumlar) |
+| K-150 | bug? | MARpc sunucu watchdog'u fd 0'da `heartbeatLock` altında sonsuz döngüye giriyor (`continue` iteratörü ilerletmiyor); sunucu donar | [baglanti](10-servisler/network-sdk/baglanti-ve-threadler.md#şüpheli) |
+| K-151 | bug? | Bloklayan ouch-sdk çağrılarında timeout yok; connect hatası sessiz, order-service'e ulaşılamazsa `login` sonsuza kadar bekler (HFT/AlgoProd açılışta asılı kalır) | [ouch-sdk](10-servisler/ouch-sdk/README.md#51-açılış) |
+| K-152 | bug? | MARpc istemcisi FIN'i fark etmiyor (`recv()==0` yok sayılıyor), host'a bildirim yok, yeniden bağlanma yok; istekler sessizce kaybolur | [baglanti](10-servisler/network-sdk/baglanti-ve-threadler.md#4-kopma-tespiti-ve-yeniden-bağlanma) |
+| K-153 | bug? | Pointer ömrü: login token'ı, `getStrategyInfo` string'leri ve yanıt struct'ları callback döndükten sonra serbest kalan FlatBuffers tamponundan okunuyor (use-after-free) | [wire-protokolu](10-servisler/network-sdk/wire-protokolu.md#6-c-struct--flatbuffers-dönüşümü-ve-pointer-ömrü) |
+| K-154 | bug? | Callback içinden bloklayan ouch-sdk çağrısı yapılırsa deadlock (tek callback thread'i) | [ouch-sdk](10-servisler/ouch-sdk/README.md#33-thread-safety) |
+| K-155 | bug? | `ReplaceOrder::protocol` wire'a gitmiyor, `CancelOrder`'da alan yok (hep `protocolType=0`); `StrategyInfo` `position`/`lastPrice` SET'te serileştirilmiyor | [ouch-sdk](10-servisler/ouch-sdk/README.md#62-replaceorder-cancelorder) |
+| K-156 | bug? | İstek ve olay başına bellek sızıntısı (HFT/AlgoProd olay nesnelerini silmiyor); her `AccountStrategyResponse` (~1.4 MB) okunmayan `networkMap` için kopyalanıyor | [ouch-sdk](10-servisler/ouch-sdk/README.md#şüpheli) |
+| K-157 | bug? | MARpc sunucu: Unix socket bind hatası TCP dinlemeyi de durduruyor; `SO_REUSEADDR` bind'dan sonra (etkisiz); reddedilen bağlantının fd'si sızıyor; `accept<0` döngüsü spin | [baglanti](10-servisler/network-sdk/baglanti-ve-threadler.md#2-sunucu-yaşam-döngüsü) |
+| K-158 | bug? | fd yeniden kullanım yarışı (`close` temizlikten önce) ve fd başına kuyrukların silinmemesi: bayat yanıt aynı fd'ye gelen yeni bağlantıya gidebilir | [baglanti](10-servisler/network-sdk/baglanti-ve-threadler.md#8-backpressure-ve-fd-yeniden-kullanımı) |
+| K-159 | bug? | Farklı thread'lerden gönderilen istek/olaylar arasında sıra garantisi yok (moodycamel yalnız üretici başına FIFO) | [baglanti](10-servisler/network-sdk/baglanti-ve-threadler.md#6-sıralama-garantisi) |
+| K-160 | bug? | `CLOSE_MSG` sabit offset'te kontrol ediliyor; bilinmeyen union tipi iki tarafı da düşürür; `[byte]` alanlarında sonlandırıcı yok (`authToken`, Replace `passThrough` çöp bayt alabilir) | [wire-protokolu](10-servisler/network-sdk/wire-protokolu.md#şüpheli) |
+| K-161 | doğrula | network-sdk/ouch-sdk thread'leri yield'siz busy-spin (CPU, Onload etkisi); iki tarafın tamponları dolunca send/recv kilitlenmesi | [baglanti](10-servisler/network-sdk/baglanti-ve-threadler.md#şüpheli) |
+| K-162 | eksik | `ouchSDKApp/main.cpp`'de sabit IP/kullanıcı/şifre düz metin; `Application::OUCH` (3) order-service'te `APP_UNKNOWN` | [ouch-sdk](10-servisler/ouch-sdk/README.md#93-ouchsdkapp) |
 
 ## Borsa kuralları
 

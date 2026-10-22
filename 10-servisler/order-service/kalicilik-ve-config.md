@@ -148,7 +148,7 @@ Sunucu tarafı: [trade-data-app/api.md §4](../trade-data-app/api.md) ve [sema.m
 | `appname` | string | zorunlu | Yalnız açılış logunda | `main` |
 | `mode` | string | zorunlu | `prod` → kProduction, `test` → kTest, **başka her değer kUnknown**. kUnknown'da hiçbir OUCH/FIX kullanıcısı yüklenmez. | `OrderManager::IsProductionEnvironment`/`IsTestEnvironment`, `UserService::GetUsers(…, mode)` |
 | `protocols` | string listesi | [] | `ouch` veya `fix` varsa MAOSdkManager kurulur (ikisi aynı manager). Liste boşsa manager kurulmaz. | `OrderDispatcher` yapıcısı |
-| `server.address` | string | zorunlu | MARpc ve gRPC bind adresi | `OrderServer` |
+| `server.address` | string | zorunlu | gRPC bind adresi. MARpc bu anahtarı kullanmaz, `getaddrinfo(nullptr, AI_PASSIVE)` ile bütün arayüzlere bind eder ([arayuzler § 1](arayuzler.md)) | `OrderServer` |
 | `server.port` | uint16 | zorunlu | MARpc (ouch-sdk istemcileri) | `OrderServer` |
 | `server.grpcPort` | uint16 | zorunlu | gRPC (`OrderServiceImpl`) | `OrderServer` |
 | `log.name` | string | zorunlu | **Okunur, kullanılmaz** | — |

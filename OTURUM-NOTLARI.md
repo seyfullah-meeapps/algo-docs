@@ -13,7 +13,7 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 - Bütün dosyalar `taslak`; `bos` kalmadı. Kullanıcı gözden geçirmesi bekleniyor.
 - `main` push edildi; `dogrulama-2026-10-22` branch'i silindi. Önceki sohbetin transkripti silindi (içeriği bu dosyaya aktarıldı).
-- **Madde 1–5 bitti** (trade-data-app, HftSrvProd, order-service, MAOrderSDK, itch-sdk; README indeks + alt dosyalar). **Madde 6 (ouch-sdk / network-sdk) devam ediyor:** ouch-sdk tek README, network-sdk README indeks + `wire-protokolu.md` + `baglanti-ve-threadler.md`; K-07 eski notlar kontrol ediliyor.
+- **Madde 1–6 bitti** (trade-data-app, HftSrvProd, order-service, MAOrderSDK, itch-sdk, ouch-sdk/network-sdk; README indeks + alt dosyalar). **Sıradaki: madde 7 (mtrader-trade-ui).**
 - Yöntem: konu başına paralel agent alt dosya yazar → çelişkileri koddan kontrol et → README'yi indekse çevir → ACIK-KONULAR'a tek satır ekle → CHANGELOG → push.
 - Remote: `seyfullah-meeapps/algo-docs` (kişisel hesap). Planlanan `MeeApps/algo-docs` (org) değil; bilinçli mi, sorulmadı.
 
@@ -28,7 +28,7 @@ Boşluk analizi (2026-10-22): yeni KB ~3.100 satır, eski `meeapps-ai` ~25.000 s
 3. ~~order-service~~ ✅ 2026-10-22
 4. ~~MAOrderSDK~~ ✅ 2026-10-22
 5. ~~itch-sdk~~ ✅ 2026-10-22
-6. **ouch-sdk / network-sdk:** public API, wire protokolü (K-07).
+6. ~~ouch-sdk / network-sdk~~ ✅ 2026-10-22
 7. **mtrader-trade-ui:** ekranlar, REST/WS kullanımı, auth — eski ve yeni GUI ayrı ayrı.
 8. **Operasyon:** config referansı, açılış log imzaları, sabah kontrolleri (K-09).
 9. **Doğrulamalar:** K-04, K-05, K-10–K-12.
@@ -59,7 +59,7 @@ Kullanıcıyla alınmış kararlar; aksi söylenmedikçe geçerli.
 En yeni en üstte; oturum başına birkaç satır.
 
 - **2026-10-22 (3. oturum):** Kullanıcının `dogrulama-2026-10-22` branch'i main'e alındı (borsa kuralları, sözlük, ❓ temizliği — bkz. CHANGELOG). `ACIK-KONULAR.md` ve bu dosya açıldı. Push kuralı kondu; transkript silindi. Öncelik: doküman tamamlama (boşluk analizi). trade-data-app ve HftSrvProd derinleştirildi; HftSrvProd sonrası kullanıcı isteğiyle duruldu.
-- **2026-10-22 (5. oturum, bulut):** Kaynak repolar salt okunur bağlandı. itch-sdk derinleştirildi (3 alt dosya, K-126–K-148); K-06 kapandı, K-01 teşhisi düzeltildi.
+- **2026-10-22 (5. oturum, bulut):** Kaynak repolar salt okunur bağlandı. itch-sdk derinleştirildi (3 alt dosya, K-126–K-148); K-06 kapandı, K-01 teşhisi düzeltildi. ouch-sdk/network-sdk derinleştirildi (K-149–K-162); K-07 kapandı.
 - **2026-10-22 (4. oturum):** Önceki transkriptten devam; order-service (5 alt dosya, K-69–K-99) ve MAOrderSDK (4 alt dosya, K-100–K-125) derinleştirildi.
 - **2026-10-22 (2. oturum, transkript dışı):** `dogrulama-2026-10-22` branch'inde ❓'ler koddan kapatıldı, `borsa-kurallari.md` ve `sozluk.md` yazıldı.
 - **2026-10-22 (1. oturum):** Yapı kuruldu; sistem haritası, 9 strateji, 13 servis, operasyon ve akışlar taslak yazıldı. Kullanım limitinde kesildi.

@@ -98,4 +98,4 @@ Sözdizimi: `anahtar :değer`, bölümler `$Ad :On … &Ad`.
 
 ## Build
 
-CMake, binary adı `AlgoProd`. Bağımlılıklar: `libouchSDK` (MARpc'yi içerir), `libMAItchSDK`, (opsiyonel) `libMAPerfSDK`, gRPC/protobuf, TBB, sentry. Onload/Mellanox bulunursa hızlandırma derlenir. CI `algo.yml` binary'yi Algo-Setup'a (AlgoProd) yazar.
+CMake, binary adı `AlgoProd`. Bağımlılıklar: `libouchSDK` (MARpc'yi içermez; `libMARpc.so`'ya dinamik bağlı, çalışma anında ayrıca gerekir), `libMAItchSDK`, (opsiyonel) `libMAPerfSDK`, gRPC/protobuf, TBB, sentry. Onload/Mellanox bulunursa hızlandırma derlenir. CI `algo.yml` binary'yi Algo-Setup'a (AlgoProd) yazar.

@@ -2,6 +2,34 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-22 — ouch-sdk / network-sdk derinleştirme
+
+Kaynak: ouch-sdk `0c3589e`, network-sdk `3c1b42f` (değişmedi). Host tarafı için HftSrvProd, AlgorithmicTrading ve order-service; eski notlar için `meeapps-ai` (salt okunur) okundu.
+
+- `10-servisler/ouch-sdk/README.md` tek dosya olarak yeniden yazıldı: public API, model alan tabloları, callback thread'i, bağlantı yaşam döngüsü, enum farkları, sabah emri API'leri.
+- `10-servisler/network-sdk/` alt dosyalara bölündü: `wire-protokolu.md` (çerçeve, FlatBuffers şemaları, enum'lar, pointer ömrü) ve `baglanti-ve-threadler.md` (istemci/sunucu yaşam döngüsü, heartbeat, kopma, thread modeli, kapanış). README artık giriş ve indeks.
+- **K-07 kapandı:** Eski `wire-protocol.md`, `connection-management.md`, `bugs-and-quirks.md` maddeleri tek tek kontrol edildi; tablo network-sdk README § Eski bilgi tabanı'nda. Eski bilgilerden yanlış çıkanlar:
+  - Decode derin kopya değil.
+  - `SO_REUSEADDR` bind'dan önce değil, sonra.
+  - Watchdog sorunu kötü bir sentinel değil, kilit altında sonsuz döngü.
+  - İstemci `recv()==0`'ı görmüyor.
+  - Alan adlarını değiştirmek wire'ı bozmaz.
+- **Diğer dosyalarda düzeltilenler:**
+  - `hftsrvprod/emir-yasam-dongusu`:
+    - Callback thread'i recv değil, ayrı `processCallback` thread'i.
+    - Reconnect yok.
+    - order-service'e ulaşılamazsa HFT exception atmıyor, login'de asılı kalıyor.
+  - `order-service/arayuzler`:
+    - `MATCPClient` network-sdk'da.
+    - `applicationType` takası.
+    - `OrderCanceled` `price`/`matchId` kaybının nedeni.
+  - `order-service/kalicilik-ve-config`: `server.address` MARpc'de kullanılmıyor.
+  - `algorithmic-trading`: `libouchSDK` MARpc'yi içermiyor.
+- **Yeni konular K-149 – K-162** (ACIK-KONULAR § ouch-sdk / network-sdk). Kodla doğrulanan üç tanesi:
+  - K-149: AlgoProd login'i `APP_UNKNOWN`.
+  - K-150: watchdog sonsuz döngüsü.
+  - K-152: kopma tespiti ve yeniden bağlanma yok.
+
 ## 2026-10-22 — itch-sdk derinleştirme
 
 Kaynak: itch-sdk `35a3b5c` (değişmedi). Tüketici tarafı için HftSrvProd, AlgorithmicTrading ve trade-data-app; eski bug listesi için `meeapps-ai` (salt okunur) okundu.
