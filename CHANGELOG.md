@@ -2,6 +2,27 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-22 — order-service derinleştirme
+
+Kaynak: order-service `b86c0cf` (değişmedi). Karşı taraf için MAOrderSDK, ouch-sdk, network-sdk, trade-data-app ve Algo-Setup müşteri config'leri de okundu.
+
+- `10-servisler/order-service/` alt dosyalara bölündü: `arayuzler.md`, `sdk-ve-oturumlar.md`, `toplu-emirler.md`, `risk.md`, `kalicilik-ve-config.md`. README artık giriş ve indeks.
+- **README düzeltmeleri:**
+  - `-110023` yeniden gönderimi yalnız son atışta, `repeatLastShot: true` iken, en çok 900 ms. Fazla kopya iptali thread'ler bittikten 2 sn sonra.
+  - `OffHours` bayrağı yalnız `SendOrderAsync` yolunda; toplu/açılış gönderimleri normal seans bayrağıyla gidiyor.
+  - Handoff her OUCH `repeatableOrders` satırının ve FIX akışının sonunda tetikleniyor, pazar filtresi yok; +30 sn zamanlayıcısı yalnız `type: morning` için.
+  - Kullanıcı partition'ı DB'den gelmiyor, hep 1.
+  - Risk: yalnız gün içi limitler stream; satış bakiye kontrolü yalnız kısıtlı hissede; replay fill koruması yalnız FIX.
+  - Kalıcılık: olaylar DB'ye yazılmıyor (yalnız enter/replace `STRATEGY` satırı ve toplu akışlar); `RetrieveSentOrders` tarihsiz yüklüyor.
+  - FIX replay: müşteri config'lerinin hepsinde `resetOnLogon: true`, replay yok.
+- **Diğer dosyalarda düzeltmeler (kodla doğrulandı):**
+  - `sistem-haritasi.md`: handoff'ta logout gönderilmiyor, yalnız soket kapanıyor; tetik koşulları.
+  - `hftsrvprod/emir-yasam-dongusu.md`: OS yolunda HFT token'ı wire'a çıkmıyor; iki ❓ cevaplandı (cancel → `onSdkError(10)`, bağlantısız hesap → `onSdkError(1)`, sessiz kayıp).
+  - `sozluk.md` "Son atış" anlamı ters yazılmıştı; `borsa-kurallari.md` açığa satış kısıtı kısmen uygulanıyor; `30-akislar/README.md` sabah akışı adımları.
+  - `network-sdk/README.md`: sabah/açılış isteği yok. `ouch-sdk/README.md`: `addMorningOrder` vb. kodda yok.
+  - trade-data-app: `veri-akisi.md` side biçimi ve health servisi ❓'leri cevaplandı; `entegrasyonlar.md` `LimitControlService` order-service tarafından çağrılmıyor, RPC adı `LimitLogin`; `api.md` iki RPC kullanılmıyor; `sema.md` `Orders.type` enum'u.
+- **Yeni açık konular:** K-69–K-99; K-43 güncellendi.
+
 ## 2026-10-22 — HftSrvProd derinleştirme
 
 Kaynak: HftSrvProd `4275ccc` (değişmedi). Karşı taraf için MAOrderSDK, ouch-sdk ve order-service de okundu.

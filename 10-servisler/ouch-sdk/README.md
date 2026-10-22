@@ -24,7 +24,7 @@ durum: taslak
 | `login(user, password, Application)` | `Application`: `APP_HFT`, `AlgoTrading`, `OUCH` |
 | `insertStrategyInfo(StrategyInfo)` / `getStrategyInfo()` | Emir göndermeden önce (orderbook, hesap, strateji identifier, tip) kaydı. order-service bunu trade-data-app'e yazar. |
 | `enterOrder`, `cancelOrder`, `replaceOrder` | Gün içi emirler (OUCH veya FIX, `Protocol` alanıyla) |
-| `addMorningOrder` / `getMorningOrders` / `clearMorningOrders`, `addOpeningOrder` / … | Sabah ve açılış emirleri (README'deki eski API; GUI yolu trade-data-app üzerindendir) |
+| ~~`addMorningOrder` / `getMorningOrders` / `clearMorningOrders`, `addOpeningOrder`~~ | Repo README'sinde geçer, kodda (`include/OrderStreamClient.h`) **yoktur**. Toplu emirler GUI → trade-data-app → order-service gRPC yolundan gelir. |
 | `getAllOrders()` | Günün emirleri (replay) |
 
 ## Callback'ler (uygulama implemente eder)

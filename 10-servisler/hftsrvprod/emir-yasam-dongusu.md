@@ -73,7 +73,7 @@ Genel desen ve handoff özeti başka dosyalarda; burada tekrar edilmez:
 - **SDK yolu:** `toSdkMsg` `client_order_id`'yi **bilerek boş** bırakır. SDK 14 baytlık OUCH token'ı üretir ve bütün callback'lerde onu `client_order_id` olarak döner ("SDK-owned token" modeli; bkz. [maordersdk § Callback'ler](../maordersdk/README.md#callbackler)).
   - Strateji token'ı gönderim anında öğrenmez, `onAccepted` ile öğrenir.
   - Replace'te yeni id'yi HFT kendisi üretir: `UtilityClass::generateToken()`, 14 karakter `[0-9a-zA-Z]`.
-- **OS yolu:** `OuchManager::enterOrder` havuzdan bir token atar (`tokens[token_index++]`). order-service bu id'yi temizleyip kendi MAOrderSDK token'ını kullanır (order-service `MAOSdkManager.cpp`, `msg.client_order_id.clear()`).
+- **OS yolu:** `OuchManager::enterOrder` havuzdan bir token atar (`tokens[token_index++]`), ama bu token yalnız `hftEnterOrder` sarmalayıcısında kalır; MARpc `EnterOrder` (network-sdk `sdk/Models/orders.fbs`) ve ouch-sdk `EnterOrder`'da token alanı yoktur. order-service emri kendi MAOrderSDK'sıyla, SDK'nın ürettiği token'la gönderir (`MAOSdkManager.cpp`, `msg.client_order_id.clear()`; bkz. [order-service/arayuzler](../order-service/arayuzler.md)).
   - Dolayısıyla HFT'ye dönen accept token'ı her iki yolda da **BIST wire token'ıdır**. Çift kayıt koruması bu eşitliğe dayanır (§4).
 - **Stratejiye eşleme anahtarı:** `OuchManager::findStrategy` anahtarı `"<orderbookId>_<account>_<strategyIdentifier>_<strategyType>"` olarak kurar.
   - Bu, `StrategyManager` kayıt defterinin `unique_key`'idir (`Strategy::getStrategyKey` aynı formatı üretir).
@@ -286,7 +286,7 @@ Aynı accept iki kez gelebilir:
 ### Handoff öncesi açılmış emirlerin sahipliği
 
 - **Replay'den önce:** Emir yalnız OS yolunda bilinir; `ownsOrder` false döner.
-  - Bu aralıkta stratejinin cancel'ı OS yoluna gider. Ancak order-service o OUCH kullanıcısından logout olmuştur. ❓ doğrulanmadı: order-service'in bu cancel'ı nasıl işlediği.
+  - Bu aralıkta stratejinin cancel'ı OS yoluna gider. Ancak order-service o OUCH kullanıcısından logout olmuştur. order-service'in SDK'sı emrin kapalı connection'ını görür → `onSdkError(10)`; order-service yalnız log basar, HFT'ye cevap gitmez ([order-service/sdk-ve-oturumlar](../order-service/sdk-ve-oturumlar.md)).
 - **Replay'den sonra:** Emir SDK'da adopt edilmiştir (`ownsOrder` true). Cancel ve replace SDK yolundan gider; dönüş olayları `OrderRegistry`'deki replay kopyasıyla çözülür ve aynı stratejiye eşlenir.
 - **Combiner:** Adopt edilen emirler combiner'a girmez.
 
@@ -332,7 +332,7 @@ Strateji özelindeki ayrıntı: [taban](../../20-stratejiler/taban.md#tolerans-v
 
 | Senaryo | Ne olur (koddan) |
 |---------|------------------|
-| **OUCH koptu** (handoff sonrası) | `is_connected` false olur, combiner `poison_all` yapar. HFT `onUserDisconnected`/`onHeartbeatTimeout` callback'lerini **set etmez**. SDK kendiliğinden yeniden bağlanmaz (heartbeat thread yalnızca bağlı olanlara heartbeat yollar). Hesabın başka canlı connection'ı varsa round-robin onu kullanır. Yoksa `ownsAccount` false olur ve **yeni emirler OS yoluna düşer**. Açık emirlerin cancel/replace'i `ownsOrder` true olduğu için OS'ye gitmez; `onSdkError(10)` ile düşer. ❓ doğrulanmadı: order-service'in logout ettiği kullanıcı için emri kabul edip etmediği. Kullanıcıyı geri almanın tek yolu yeni bir `orderUserDisconnected`'dır. `replaysRegistered` statik olduğu için ikinci tur gate'i yeniden kurmaz. |
+| **OUCH koptu** (handoff sonrası) | `is_connected` false olur, combiner `poison_all` yapar. HFT `onUserDisconnected`/`onHeartbeatTimeout` callback'lerini **set etmez**. SDK kendiliğinden yeniden bağlanmaz (heartbeat thread yalnızca bağlı olanlara heartbeat yollar). Hesabın başka canlı connection'ı varsa round-robin onu kullanır. Yoksa `ownsAccount` false olur ve **yeni emirler OS yoluna düşer**. Açık emirlerin cancel/replace'i `ownsOrder` true olduğu için OS'ye gitmez; `onSdkError(10)` ile düşer. order-service'te hesabın bağlı başka OUCH kullanıcısı yoksa SDK `onSdkError(1)` + `false` döner; ret gitmez, emir sessizce kaybolur ([order-service/sdk-ve-oturumlar](../order-service/sdk-ve-oturumlar.md)). Kullanıcıyı geri almanın tek yolu yeni bir `orderUserDisconnected`'dır. `replaysRegistered` statik olduğu için ikinci tur gate'i yeniden kurmaz. |
 | **order-service koptu** | Handoff sonrası SDK yolu etkilenmez. OS yolu (handoff öncesi emirler, FIX kanallı GUI emirleri, OUCH kopmuş hesaplar) çalışmaz. ❓ doğrulanmadı: ouch-sdk/MARpc'nin yeniden bağlanma ve login davranışı. `OuchManager` constructor'ı login başarısızsa exception atar; açılışta order-service yoksa HFT kalkmaz. Handoff hiç gelmezse 20 s watchdog gate'i açar ve stratejiler OS yoluna emir dener. |
 | **Replay sırasında** | Gate kapalıdır; stratejiler ITCH işlemez, emir göndermez. GUI manuel emirleri **geçer**. Replay'deki accept'ler §4 tablosuna göre ayıklanır; execute'lar ayıklanmaz. 60 s içinde bütün kullanıcılar `onReplayCompleted` vermezse gate zorla açılır. Login'i başarısız olan bir kullanıcı replay vermediği için gate 60 s'yi bekler. |
 | **connectUser hepsi başarısız** | O kullanıcının hesapları OS yolunda kalır (`ownsAccount` false). order-service ise kullanıcıdan logout olmuştur (2026-08-03 olayında gün boyu OUCH yoktu; retry o olaydan sonra eklendi). |

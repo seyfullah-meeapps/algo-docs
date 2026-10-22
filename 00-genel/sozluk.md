@@ -54,8 +54,8 @@ Bu dosya yeni bilgi içermez. Tanımlar bu repodaki diğer dokümanlardan derlen
 | **Replay gate** | Handoff sonrası OUCH replay bitene kadar HFT stratejilerinin kapalı tutulması. | [sistem haritası](sistem-haritasi.md#ouch-handoff-sabah-devri) |
 | **Hot / cold (tiering)** | Fiyat eşiğine göre stratejinin ITCH callback'lerini açıp kapatması. | [tavan](../20-stratejiler/tavan.md#hotcold-tiering-performans) |
 | **Hot path** | ITCH alımı → strateji kararı → OUCH gönderimi (HFT, handoff sonrası). | [sistem haritası](sistem-haritasi.md#performans-prensipleri-tüm-c-kodu-için) |
-| **Toplu emirler** | Sabah / açılış / akşam / YİP emirleri (`OrderType`); order-service gönderir. | [order-service](../10-servisler/order-service/README.md#toplu-emir-akışları) |
-| **Son atış** | Seans açılmadan sabah emrini `-110023` reddi alınana kadar tekrar gönderme; amaç kuyruk önceliği. | [order-service](../10-servisler/order-service/README.md#toplu-emir-akışları) |
+| **Toplu emirler** | Sabah / açılış / akşam / YİP emirleri (`OrderType`); order-service gönderir. | [order-service](../10-servisler/order-service/toplu-emirler.md) |
+| **Son atış** | Seans açılmadan giden sabah emri `-110023` ile reddedildikçe, kabul alınana kadar (en çok 900 ms) yeniden gönderme; yalnız `repeatLastShot: true` iken. Amaç kuyruk önceliği. | [order-service](../10-servisler/order-service/toplu-emirler.md) |
 | **Paket** | Arbitraj / Fon Takibi'nde açılan bir pozisyon kaydı (DB'de). | [arbitraj](../20-stratejiler/arbitraj.md) |
 
 ## Uygulama adları (eş anlamlılar)

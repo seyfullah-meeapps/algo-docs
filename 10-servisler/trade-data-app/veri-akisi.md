@@ -146,7 +146,7 @@ Subscribe (3) / unsubscribe (10): `{"AccountName": [string], "Types": [StrategyT
   - `Type 7` `MyOrderReject`: + `Reason`, `ReasonCode`.
   - `Type 10/11/0` `MyOrderCommon` (order-service'in toplu emir `Common` olayı; ACCEPTED → 10, CANCELED → 11).
   - Alt tipteki `Price`/`Quantity` gölgelediği için JSON'da tek `Price`/`Quantity` görünür. Fiyat raw integer.
-  - `Side`: HFT stratejilerinden gelen emirlerde proto enum (1/2/3) olarak gelebilir; `OrderService.normalizeSide` iki biçimi de kabul ediyor. ❓ doğrulanmadı: order-service'in hangi biçimi yolladığı.
+  - `Side`: HFT stratejilerinden gelen emirlerde proto enum (1/2/3) olarak gelebilir; `OrderService.normalizeSide` iki biçimi de kabul ediyor. order-service iki biçim yollar: strateji olaylarında iç enum doğrudan (66/83/84 = 'B'/'S'/'T'), toplu emir `OrdersCommon` mesajlarında 1/2/3 (`OrderServiceImpl::getOrderResponseItem`; [order-service/arayuzler](../order-service/arayuzler.md)).
 
 ### 4.4 `/ws/v1/strategy/start` — strateji komut/durum
 
@@ -200,7 +200,7 @@ Subscribe (8) / unsubscribe (15): `{"AccountName": [string], "Types": [StrategyT
 - `GuiExtServ.Connect`: `extServices[]` her eleman için goroutine. `application` değeri `hft`, `algotrading`, `orderserv` dışında ise `NewExternalService` `nil` döner; goroutine'deki `srv.Connect()` nil interface üzerinde çağrıldığından panic verir ve process çöker (koddan çıkarım).
 - `Connect()` (üç servis için aynı kalıp): `token=""` → `grpc.Dial(WithBlock, insecure, maxint mesaj boyu)` başarılı olana kadar 2 sn arayla **sonsuz** dener → login (`StrategyLogin` / order-service `Login`, `Application_OUCH`) → `token` set → `monitorConnection` + stream goroutine'leri.
 - Login hatası → `Connect` hata döner → ilk bağlantıda goroutine biter; yeniden bağlanmada "Quit trying to reconnect" ile **kalıcı olarak vazgeçilir**. Process yeniden başlatılana kadar o servis bağlantısız kalır.
-- Kopma tespiti: `monitorConnection` gRPC Health `Watch` stream'i; `Recv` hatası → `isDisconnectedChan <- true` → yeniden `Connect`. `Watch` çağrısı hata dönerse yalnızca log basılır ve o bağlantı için izleme yapılmaz. ❓ doğrulanmadı: HFT/AlgoProd/order-service'in gRPC health servisini sunduğu; sunmuyorsa ilk `Recv` hatası kopma sayılır ve sürekli yeniden bağlanma döngüsü beklenir.
+- Kopma tespiti: `monitorConnection` gRPC Health `Watch` stream'i; `Recv` hatası → `isDisconnectedChan <- true` → yeniden `Connect`. `Watch` çağrısı hata dönerse yalnızca log basılır ve o bağlantı için izleme yapılmaz. order-service health servisini sunar (`""` SERVING, `OrderServer::StartServiceWithGRPC`). ❓ doğrulanmadı: HFT/AlgoProd'un sunduğu; sunmuyorsa ilk `Recv` hatası kopma sayılır ve sürekli yeniden bağlanma döngüsü beklenir.
 - `IsConnected()` = `len(token) > 0`. Token yalnızca yeniden `Connect` başlarken silinir; kopma ile health tespiti arasındaki sürede `true` kalır.
 - **Bağlantı yokken komutlar:** kuyruk yok (`commandsQueue` alanı tanımlı, kullanılmıyor). REST `SetStrategyCommands` `IsConnected` false ise `"HFT service is not connected"` hatasıyla döner; true ama bağlantı ölü ise gRPC hatası döner. Komut kaybolur, yeniden denenmez. WS strategy subscribe'ı aynı şekilde hata mesajı döner; yeniden bağlantıda abonelikler motora **otomatik yenilenmez** — istemci yeniden subscribe etmelidir. ❓ doğrulanmadı: motorların abonelik durumunu kopma sonrası koruyup korumadığı.
 

@@ -120,7 +120,7 @@ Tipler Go tarafındaki karşılıklarıdır (struct alanı veya Scan hedefi). DB
 
 ### Emir ve pozisyon
 
-**`Orders`**: order-service'in kalıcı emirleri. `scripts/sql/orders_isyip.sql` yorumuna göre bunlar açılış (sabah) emirleridir: order-service işaretli satırları belirli seans saatinde gönderir. ❓ doğrulanmadı: başka `type` değerlerinin de burada tutulup tutulmadığı; `GetOrders` `type` ile filtreleyebiliyor.
+**`Orders`**: order-service'in kalıcı emirleri. `scripts/sql/orders_isyip.sql` yorumuna göre bunlar açılış (sabah) emirleridir: order-service işaretli satırları belirli seans saatinde gönderir. Tip enum'u `MORNING=1, OPENING=2, STRATEGY=3, EVENING=4`. order-service gönderdiği bütün emirleri (HFT/AlgoProd dahil) `STRATEGY` olarak yazar; olaylar yazılmaz ([order-service/kalicilik-ve-config § A2](../order-service/kalicilik-ve-config.md#a2-emir-kalıcılığı)).
 - Kolonlar: `id`, `quantity` (uint64, lot), `price` (uint32; ❓ raw tamsayı fiyat olması bekleniyor, ölçeği order-service tarafında doğrulanmalı), `side`, `strategy` (→ `Accounts_Strategies.id`), `type` (OrderType), `applicationUser` (→ `Application_Users.id`; insert'te username'den çözülür), `orderToken`, `customData`, `customDataSize`, `timestamp` (insert anı, unix **ms**), `protocol`, `timeInForce`, `regularOrderType`, `isActive`, `isMainOrder`, `levelCount`, `isYip` (TINYINT(1) NOT NULL DEFAULT 0; Yakın İzleme Pazarı bayrağı), `mainOrderId` (nullable → `Orders.id`; alt emirlerin ana emri).
 - `models.Order`'daki `ApplicationType`, `LatencyWritingNs`, `LatencyNetworkNs`, `LatencyBistNs`, `InternalOuch` alanları DB'ye **yazılmıyor**. `GetOrders` `ApplicationType`'ı doldurmadığı için bu alan hep 0 döner.
 - Yazan: DataService `SetOrders` (`OrdersDB.SetOrders`):

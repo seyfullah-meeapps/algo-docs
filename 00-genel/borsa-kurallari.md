@@ -68,7 +68,7 @@ Dış kaynaklı bilgiler BIST'in resmi sayfasından doğrudan okunamadı (ağ er
 | Kural | Nerede |
 |-------|--------|
 | Strateji emirleri yalnız sürekli işlemde gider (`continuousSession()`). Seans durumu ITCH orderbook state'inden gelir. | [hft-classic](../20-stratejiler/hft-classic.md#tetik-erime) |
-| Sabah emirleri seans açılmadan gönderilir, `-110023` ("Illegal transaction at this time") reddi alındıkça tekrar gönderilir. | [order-service](../10-servisler/order-service/README.md#toplu-emir-akışları) |
+| Sabah emirleri seans açılmadan gönderilir, `-110023` ("Illegal transaction at this time") reddi alındıkça, kabul alınana kadar (en çok 900 ms, yalnız `repeatLastShot: true` iken) son atış yeniden gönderilir. | [order-service](../10-servisler/order-service/toplu-emirler.md) |
 | Sabah emri saati config'tedir (örnek 09:40:00.144). Açılış emirleri payda 10:00, varant/sertifikada 10:02. | aynı yer |
 | Müzayedede denge fiyatı yayınlanır; Eşleştirme durumunda Teorik Fiyat stratejisi değerlendirme yapar. UTC 12:00 öncesi "sabah", sonrası "akşam" sayılır. | [teorik-fiyat](../20-stratejiler/teorik-fiyat.md) |
 | Strateji saat alanları İstanbul saatiyle günün saniyesidir (36000 = 10:00). | strateji dosyaları |
@@ -92,7 +92,7 @@ Dış kaynaklı bilgiler BIST'in resmi sayfasından doğrudan okunamadı (ağ er
 
 **Kodda:**
 - Satış emri `SELL` veya `SHORT_SELL` gider. HFT'de uptick kararı **global bir config bayrağıdır** (`uptickRule`); enstrümana veya güne göre değişmez ([hftsrvprod config](../10-servisler/hftsrvprod/README.md#config-configurationtoml), [hft-classic](../20-stratejiler/hft-classic.md#bait--chase-uptick)).
-- order-service `RiskManager` açığa satış yasaklarını hisse kısıtı olarak uygular ([order-service](../10-servisler/order-service/README.md#risk-riskmanager)).
+- order-service `RiskManager` açığa satış yasaklarını hisse kısıtı olarak uygular. Kısmen: pazar geneli `ACIGA_SATIS` listede adı geçmeyen hisseye uygulanmaz; `DEPO`/`BRUT_TAKAS` kısıtlı hissede açığa satış reddedilmez; açığa satışta bakiye kontrolü yoktur ([order-service/risk](../10-servisler/order-service/risk.md)).
 
 **Borsada (referans):**
 - **Kural:** Açığa satış, son gerçekleşen işlem fiyatının üzerinden yapılabilir. Son işlem bir öncekinin üzerinde gerçekleştiyse son fiyattan da yapılabilir.

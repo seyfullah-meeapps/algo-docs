@@ -38,7 +38,7 @@ Müşteri kurulumlarında DB ayarlarını arayüzden yönetmek için kullanılan
 | Production Ortamı | order-service `mode` filtresi bu alana bakar |
 | Aktif | |
 | Dedicated Bağlantı | |
-| **Yalnızca Sabah Emri** (`only_morning_order_user`) | Bu kullanıcı sabah emirlerinden sonra **HFT'ye devredilir** (OUCH handoff). Bkz. [order-service](../order-service/README.md#ouch-handoff-hftye-devir). |
+| **Yalnızca Sabah Emri** (`only_morning_order_user`) | Bu kullanıcı sabah emirlerinden sonra **HFT'ye devredilir** (OUCH handoff). Bkz. [order-service](../order-service/sdk-ve-oturumlar.md#7-ouch-handoff--order-service-tarafı). |
 
 ## Backend
 

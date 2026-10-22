@@ -288,7 +288,7 @@ Endeks skoru `Scores`'a iki kez yazılır: endeksin kendi id'si ve en yakın vad
 - `RiskManagerService`:
   - `GetCustomerLimits`, `GetStockLimits`.
   - `GetIntraDayCustomerLimits`: stream; gün içi işlemleri tamponsuz `ClientSrvChan` kanalından iletir.
-- ❓ doğrulanmadı: `LimitControlService`'i besleyen istemci hangisi? README order-service diyor.
+- ❓ doğrulanmadı: `LimitControlService`'i besleyen istemci hangisi? order-service değil: yalnız `RiskManagerService` istemcisi var, `limit_control.proto`'yu yalnız `StockLimitType` enum'u için derliyor ([order-service/risk](../order-service/risk.md)). (K-43)
 - Tamponsuz kanal yüzünden okuyucu (`GetIntraDayCustomerLimits` aboneliği) yoksa `SetIntraDayCustomerLimits` ilk mesajda bloklanır.
 
 ## AWS (`pkg/util/aws_client.go`)
@@ -380,4 +380,4 @@ Hepsi aday; kullanıcı onayı yok. "Bug" etiketi kodun açık niyetiyle çeliş
 - **Açılış iptalleri exit 0:** BYF, VERDA ve `isBrutTakas` hataları `main`'den `return` ile çıkar, yani exit code 0. ❓ doğrulanmadı: restart politikası `on-failure` ise servis yeniden başlamaz.
 - **BYF indirmesi panic:** Ağ hatasında `panic`. Non-200 yanıtta hata sayfası ayrıştırılıyor.
 - **Dış HTTP istemcilerinde timeout yok:** VERDA, AKD ve BYF (Datastore'da 60 sn var).
-- **`LimitControlService.Login` şifreyi düz metin logluyor.**
+- **`LimitControlService.LimitLogin` şifreyi düz metin logluyor.**

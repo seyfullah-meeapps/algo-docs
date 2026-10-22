@@ -60,8 +60,8 @@ Her akış ilgili ayrıntı dokümanına link verir; burada yalnızca sıra ve s
 
 1. Operatör gün içinde (sabah saatinden önce) Toplu Emirler ekranından `OrderType = MORNING` emir girer → `POST /v1/sendOrders` → trade-data-app → order-service gRPC `SendOrder` → DB (`DataService.SetOrders`).
    - Kademeli emirler `LevelCount` ile açılır.
-2. order-service sabah thread'i config'teki saatte (ör. 09:40:00.144) emirleri DB'den çeker ve OUCH kullanıcılarına dağıtır. Her kullanıcı ayrı FIFO thread'de aynı anda göndermeye başlar.
-3. Seans açılmadan giden emirler `-110023` ile reddedilir; kabul edilene kadar tekrar gönderilir. Kabul edilen ilk emir kuyruk önceliğini alır, fazlalar iptal edilir ([order-service](../10-servisler/order-service/README.md#toplu-emir-akışları)).
+2. order-service sabah thread'i config'teki saatten (ör. 09:40:00.144) 60 sn önce emirleri DB'den çeker, OUCH kullanıcılarına dağıtır ve saati bekler. Her kullanıcı ayrı FIFO thread'de aynı anda göndermeye başlar.
+3. Seans açılmadan giden emirler `-110023` ile reddedilir; `repeatLastShot: true` ise son atış kabul alınana kadar (en çok 900 ms) yeniden gönderilir. Bütün thread'ler bittikten 2 sn sonra, hesapta iptal izni (`IsCancelAllowed`) varsa hesap başına en erken `OrderRepeatRemainingCount` kopya tutulur, kalanı iptal edilir ([order-service/toplu-emirler](../10-servisler/order-service/toplu-emirler.md)).
 4. Sabah emirleri bitince order-service `onlyMorningOrderUser` kullanıcılarından logout olur ve MARpc ile HFT'ye `UserDisconnected` gönderir.
 5. HFT `connectUser(OuchUser)` ile login olur ve BIST günün emirlerini replay eder. Replay bitince (`onReplayCompleted`) HFT stratejileri emir göndermeye başlar ([sistem haritası](../00-genel/sistem-haritasi.md#ouch-handoff-sabah-devri)).
 6. Açılış (10:00), varant açılışı (10:02) ve YİP seansları kendi saatlerinde aynı yoldan gider.

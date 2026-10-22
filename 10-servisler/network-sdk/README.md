@@ -25,7 +25,7 @@ FlatBuffers tabanlı, düşük gecikmeli TCP RPC kütüphanesi (C++). Tek görev
 
 ## Mesajlar
 
-- **İstek:** login, strateji kaydı, enter/cancel/replace, sabah/açılış emri işlemleri, emir listesi.
+- **İstek** (`RequestTypes`, `sdk/Public/MAOrderEnums.h`): Enter, Replace, Cancel, Login, AllOrders, AccountStrategy, Heartbeat. Sabah/açılış emri isteği yoktur.
 - **Yanıt:** order accepted/rejected/executed/canceled/replaced ve `UserDisconnected` (handoff bildirimi).
 
 `StrategyType` gibi enum'lar burada da tanımlıdır. Son commit'te `HFT_WARRANT_ADVANCED (15)` eklendi. Yeni strateji tipinde bu enum da güncellenir.

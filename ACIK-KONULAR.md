@@ -57,7 +57,7 @@ Ayrıntılar alt dosyaların kendi "şüpheli davranışlar" bölümlerinde.
 | K-40 | bug? | `StrategyAttributes` tip kontrolü strateji tipine göre filtrelemiyor; bilinmeyen TypeUrl sessizce düşüyor | [sema](10-servisler/trade-data-app/sema.md) § Ayar saklama modeli |
 | K-41 | bug? | Config'de etkisiz anahtarlar: `logLevel` üst seviyede (kod `server.logLevel` okur), `maxVolumePath`, `gui.ip`, sertifika yolları, `interestRate` | [config](10-servisler/trade-data-app/config.md) § Bilinen uyumsuzluklar |
 | K-42 | bug? | `cors` anahtarı yoksa boş regex her origin'i kabul ediyor | [config](10-servisler/trade-data-app/config.md) § `server` |
-| K-43 | doğrula | LimitControlService'in workspace'te istemcisi yok; harici sağlayıcı kim? | [api](10-servisler/trade-data-app/api.md) § 6 |
+| K-43 | doğrula | LimitControlService'in workspace'te istemcisi yok (order-service de çağırmıyor); harici sağlayıcı kim? | [api](10-servisler/trade-data-app/api.md) § 6 |
 
 ## HftSrvProd
 
@@ -90,6 +90,42 @@ Ayrıntılar alt dosyaların kendi "şüpheli davranışlar" bölümlerinde.
 | K-66 | bug? | Etkisiz config anahtarları (`coreAffinity`, `internalOuch*`, `ouchWorkerCount`, `minHotDwellUpdates`, `[[viop_ouch_users]]`, `license*`); `loadConfiguration` şifreleri stdout'a basıyor | [config](10-servisler/hftsrvprod/config.md) § Lisans ve okunup kullanılmayanlar |
 | K-67 | doğrula | HFT `grpcPort` ile trade-data-app `extServices` hft portu A1, Alnus, Alnus-Algo, Global, Marbas'ta uyuşmuyor | [config](10-servisler/hftsrvprod/config.md) § Müşteri config'leri |
 | K-68 | doğrula | 7 müşteride `logLevel=debug` (ITCH SDK da debug'a geçiyor); strateji kuyruğu düşürme sayacı loglanmıyor | [config](10-servisler/hftsrvprod/config.md) § Müşteri config'leri |
+
+## order-service
+
+| # | Tür | Konu | Ayrıntı |
+|---|-----|------|---------|
+| K-69 | bug? | Gün içi limit stream'i koptuktan sonra yeniden açılmıyor; delta'lar kayboluyor | [risk](10-servisler/order-service/risk.md#13-şüpheli) |
+| K-70 | bug? | Rezervasyon hesabı hatalı: replace sonrası 0'a düşüyor, kısmi fill sonrası iptal fazla düşüyor, alış limit fiyatla ayrılıp fill fiyatıyla bırakılıyor | [risk](10-servisler/order-service/risk.md#13-şüpheli) |
+| K-71 | bug? | Hisse yeterlilik kontrolünde uint64 çıkarma sarıyor; rezervasyon bakiyeyi aşınca satış geçiyor | [risk](10-servisler/order-service/risk.md#13-şüpheli) |
+| K-72 | doğrula | Satış bakiye kontrolü yalnız kısıtlı hissede; açığa satışta bakiye kontrolü yok; pazar geneli `ACIGA_SATIS` listede olmayan hisseye uygulanmıyor | [risk](10-servisler/order-service/risk.md#13-şüpheli) |
+| K-73 | doğrula | Replay fill'i bakiyeye yazılmaması yalnız FIX'te; OUCH replay fill'leri risk bakiyesine yeniden uygulanıyor, pozisyonu yalnız 10 sn pencere koruyor | [risk](10-servisler/order-service/risk.md#13-şüpheli) |
+| K-74 | doğrula | Risk fail-open: hesap/limit yoksa, stream kopuksa emir geçiyor; hesap limitleri bir kez çekiliyor, gün içi güncelleme görülmüyor | [risk](10-servisler/order-service/risk.md#13-şüpheli) |
+| K-75 | bug? | `RiskManager`/`RiskInfo` kilitsiz; risk reddi `OrderRejected`'ta token boş, `RejectCode` 0 | [risk](10-servisler/order-service/risk.md#13-şüpheli) |
+| K-76 | bug? | Başarısız MARpc login'i `""` token'ını kullanıcıya eşliyor; boş token'lı istekler yetkili sayılıyor | [arayuzler](10-servisler/order-service/arayuzler.md#8-şüpheli) |
+| K-77 | bug? | Enter/Replace/Cancel hatalarının çoğu istemciye yanıtsız düşüyor; bağlı OUCH connection yoksa da sessiz kayıp (`onSdkError` 1/9/10) | [arayuzler](10-servisler/order-service/arayuzler.md#8-şüpheli) |
+| K-78 | bug? | MARpc'de GTC/AT_CROSSING TIF'i sessizce DAY'e çevriliyor | [arayuzler](10-servisler/order-service/arayuzler.md#8-şüpheli) |
+| K-79 | bug? | Her `SubscribeToOrders` callback'leri yeniden bağlıyor (olaylar çoğalıyor); tek paylaşılan `order_queue` kopmuş stream'lerde olay yutuyor | [arayuzler](10-servisler/order-service/arayuzler.md#8-şüpheli) |
+| K-80 | bug? | Bellek/ömür: MARpc istek/yanıt nesneleri serbest bırakılmıyor; AccountStrategy GET thread'i dangling referans; `OrderReplaced` token sonlandırıcısı yanlış | [arayuzler](10-servisler/order-service/arayuzler.md#8-şüpheli) |
+| K-81 | bug? | Kilitsiz paylaşılan durum: `token_username`, `account_strategies`, `SendOrder` üye vektörleri | [arayuzler](10-servisler/order-service/arayuzler.md#8-şüpheli) |
+| K-82 | bug? | Gizli bilgi loglanıyor: MARpc şifresi, DataService ve istemci JWT'leri; `UserDisconnected` açık OUCH şifresini gRPC kuyruğuna da koyuyor | [kalicilik-ve-config](10-servisler/order-service/kalicilik-ve-config.md#şüpheli) |
+| K-83 | bug? | SIGTERM'de process gRPC `Wait`'te kalıyor; handler async-signal-safe değil | [arayuzler](10-servisler/order-service/arayuzler.md#8-şüpheli) |
+| K-84 | bug? | `morning_viop` akışı sonunda pay piyasası dahil bütün morning-only kullanıcılar devrediliyor (pazar filtresi yok) | [sdk-ve-oturumlar](10-servisler/order-service/sdk-ve-oturumlar.md#şüpheli) |
+| K-85 | doğrula | `morning` + 30 sn zamanlayıcısı süren sabah akışının kullanıcısını devredebilir; `TryDisconnectUser` kilit tutarken süresiz bekliyor | [sdk-ve-oturumlar](10-servisler/order-service/sdk-ve-oturumlar.md#şüpheli) |
+| K-86 | doğrula | Handoff'ta SoupBinTCP LogoutRequest gönderilmiyor (`OuchConnection::logout` ölü kod) | [sdk-ve-oturumlar](10-servisler/order-service/sdk-ve-oturumlar.md#şüpheli) |
+| K-87 | bug? | OUCH heartbeat timeout'u yalnız log basıyor; yarı açık TCP'de reconnect yok | [sdk-ve-oturumlar](10-servisler/order-service/sdk-ve-oturumlar.md#şüpheli) |
+| K-88 | doğrula | Kullanıcı partition'ı DB'den gelmiyor, hep 1; partition 2 enstrümanda FIX routing çalışmaz | [sdk-ve-oturumlar](10-servisler/order-service/sdk-ve-oturumlar.md#şüpheli) |
+| K-89 | bug? | Handoff tetiği `type == "morning"` küçük harf arıyor, akışlar büyük harfe çeviriyor; `MORNING` yazılırsa zamanlayıcı kurulmaz | [kalicilik-ve-config](10-servisler/order-service/kalicilik-ve-config.md#şüpheli) |
+| K-90 | bug? | Son atış: pointer anahtarlı timeout haritaları `erase` sonrası kayıyor; FIFO 99 thread'inde uykusuz dönüyor | [toplu-emirler](10-servisler/order-service/toplu-emirler.md#10-şüpheli) |
+| K-91 | bug? | Son atış kopyaları DB'ye iki kez yazılıyor (`insert_to_db` + `BulkInsertStrategyOrder`) | [toplu-emirler](10-servisler/order-service/toplu-emirler.md#10-şüpheli) |
+| K-92 | doğrula | `CancelRepeatedOrders`: kilitsiz okuma, ayraçsız grup anahtarı; `IsCancelAllowed=false` hesapta N kopya iptalsiz kalıyor | [toplu-emirler](10-servisler/order-service/toplu-emirler.md#10-şüpheli) |
+| K-93 | doğrula | Gönderilmemiş/reddedilmiş toplu satırlar da pasife alınıyor; kapasite yetmezse alışlar hiç gitmiyor; `SHORT` satırlar seçilmiyor | [toplu-emirler](10-servisler/order-service/toplu-emirler.md#10-şüpheli) |
+| K-94 | doğrula | Geç başlatmada (sabah/teorik T−5 sn, açılış/YİP T−30 sn) akış sessizce atlanıyor | [toplu-emirler](10-servisler/order-service/toplu-emirler.md#10-şüpheli) |
+| K-95 | doğrula | Müşteri config'lerinde `resetOnLogon: true`, `replayFromSeq` yok; master şemasında yazılmışlar (development'ta varant/YİP açılışı gönderilmez) | [kalicilik-ve-config](10-servisler/order-service/kalicilik-ve-config.md#şüpheli) |
+| K-96 | bug? | Config okuma tek `try` içinde; eksik anahtar sonraki blokları sessizce varsayılanda bırakıyor (ör. `protocols` boş → emir gitmez) | [kalicilik-ve-config](10-servisler/order-service/kalicilik-ve-config.md#şüpheli) |
+| K-97 | doğrula | DataService: `Connect()` sonucu kontrol edilmiyor, yeniden login yok (JWT 48 sa), deadline yok, yazma kuyruğu sınırsız; alım limiti 4 MB kalıyor | [kalicilik-ve-config](10-servisler/order-service/kalicilik-ve-config.md#şüpheli) |
+| K-98 | doğrula | `STRATEGY` satırları tarihsiz yükleniyor; Alnus ve Alnus-Algo'da gece temizleme (`dbNightEvent.sh`) yok | [kalicilik-ve-config](10-servisler/order-service/kalicilik-ve-config.md#şüpheli) |
+| K-99 | doğrula | CI'da Alnus_Algo `Configs/Alnus`'u kullanıyor; Piramit_Algo matriste yok; Onload derlemesinde `use_onload=false` | [kalicilik-ve-config](10-servisler/order-service/kalicilik-ve-config.md#şüpheli) |
 
 ## Borsa kuralları
 

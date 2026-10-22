@@ -108,7 +108,7 @@ Kod yerleri: proto'lar `api/protobuf-spec/` (sunucu) ve `api/client-spec/` (iste
 
 ## 4. DataService (`ouch-data.proto`, `ouch_api.go`) — yalnız gRPC
 
-Çağıran: order-service (`Data/DatabaseClient`, `Service/Network/*`). Aşağıdaki 15 RPC'nin hepsi order-service'te kullanılıyor.
+Çağıran: order-service (`Data/DatabaseClient`, `Service/Network/*`). Aşağıdaki 15 RPC'nin order-service'te sarmalayıcısı var; `GetAllIndices` ve `GetIndiceInstruments`'i çağıran yok ([order-service/kalicilik-ve-config § A1](../order-service/kalicilik-ve-config.md#a1-dataservice-istemcisi-datadatabaseclient)).
 
 | RPC | Ne yapar / önemli davranış |
 |-----|----------------------------|
