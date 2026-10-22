@@ -13,7 +13,7 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 - Bütün dosyalar `taslak`; `bos` kalmadı. Kullanıcı gözden geçirmesi bekleniyor.
 - `main` push edildi; `dogrulama-2026-10-22` branch'i silindi. Önceki sohbetin transkripti silindi (içeriği bu dosyaya aktarıldı).
-- **Madde 1–4 bitti** (trade-data-app, HftSrvProd, order-service, MAOrderSDK; README indeks + alt dosyalar). **Sıradaki: madde 5 (itch-sdk).**
+- **Madde 1–4 bitti** (trade-data-app, HftSrvProd, order-service, MAOrderSDK; README indeks + alt dosyalar). **Madde 5 (itch-sdk) devam ediyor:** `alim-yolu.md`, `mesajlar-ve-emir-defteri.md`, `abonelik-api.md` paralel yazılıyor; K-06 eski bug listesi `meeapps-ai/algo/context/context-itch-sdk/bugs-quirks.md`'den (salt okunur) kontrol ediliyor.
 - Yöntem: konu başına paralel agent alt dosya yazar → çelişkileri koddan kontrol et → README'yi indekse çevir → ACIK-KONULAR'a tek satır ekle → CHANGELOG → push.
 - Remote: `seyfullah-meeapps/algo-docs` (kişisel hesap). Planlanan `MeeApps/algo-docs` (org) değil; bilinçli mi, sorulmadı.
 
@@ -59,6 +59,7 @@ Kullanıcıyla alınmış kararlar; aksi söylenmedikçe geçerli.
 En yeni en üstte; oturum başına birkaç satır.
 
 - **2026-10-22 (3. oturum):** Kullanıcının `dogrulama-2026-10-22` branch'i main'e alındı (borsa kuralları, sözlük, ❓ temizliği — bkz. CHANGELOG). `ACIK-KONULAR.md` ve bu dosya açıldı. Push kuralı kondu; transkript silindi. Öncelik: doküman tamamlama (boşluk analizi). trade-data-app ve HftSrvProd derinleştirildi; HftSrvProd sonrası kullanıcı isteğiyle duruldu.
+- **2026-10-22 (5. oturum, bulut):** Kaynak repolar salt okunur bağlandı; itch-sdk derinleştirme başladı.
 - **2026-10-22 (4. oturum):** Önceki transkriptten devam; order-service (5 alt dosya, K-69–K-99) ve MAOrderSDK (4 alt dosya, K-100–K-125) derinleştirildi.
 - **2026-10-22 (2. oturum, transkript dışı):** `dogrulama-2026-10-22` branch'inde ❓'ler koddan kapatıldı, `borsa-kurallari.md` ve `sozluk.md` yazıldı.
 - **2026-10-22 (1. oturum):** Yapı kuruldu; sistem haritası, 9 strateji, 13 servis, operasyon ve akışlar taslak yazıldı. Kullanım limitinde kesildi.
