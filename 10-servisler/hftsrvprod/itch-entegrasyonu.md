@@ -42,7 +42,7 @@ Adımlar:
    - Onload derlemesinde HFT `main()` zaten `LD_PRELOAD` ile kendini yeniden başlatmıştır, bu yüzden SDK'nın kendi re-exec'i devreye girmez.
 5. `HftMain` → `initializeGlobalOrderBookStates()`: SDK'nın bildiği **her** orderbook için durum aboneliği açılır (bkz. §6).
 
-`requestStrategyLoadAsync` / `loadStrategiesFromDb`: Spot snapshot-end callback'i SDK alım thread'inde çalışır. Önce varant tiplerini cache'ler (§8), `glimpseEndProcessed=true` yapar, sonra DB yüklemesini `strat-loader` thread'ine devreder.
+`requestStrategyLoadAsync` / `loadStrategiesFromDb`: Spot snapshot-end callback'i, o pazarın son biten partition'ının `ItchClient` decode thread'inde (`glimpseMutex` altında) çalışır; RX thread'i değil ([itch-sdk/alim-yolu § 6.2](../itch-sdk/alim-yolu.md#62-partition-tamamlanması--snapshot-end)). HftSrvProd'daki kod yorumu "receiver thread" der, yanlış. Önce varant tiplerini cache'ler (§8), `glimpseEndProcessed=true` yapar, sonra DB yüklemesini `strat-loader` thread'ine devreder.
 - Gerekçe kod yorumundadır: 2026-08-03'te bu iş callback içinde yapıldı, DB fetch'i ve `createStrategy` döngüsü bir partition'ı dakikalarca durdurdu.
 - Yükleyici trade-data-app'ten `getStrategySettings` çeker. Her ayar için `CommandFactory::createStrategyCommand` + `StrategyManager::createStrategy(cmd, true)` çağrılır.
 - Pas bitince `strategiesLoadedFromDb=true` olur.
@@ -134,8 +134,8 @@ AlgoWorker busy-loop ─► strategy->processSingleEvent()  (bkz. strateji-cekir
 - `timestamp` varsayılan olarak olayın kurulduğu andaki `system_clock` (ns epoch) değeridir.
 - `LEVEL_CHANGED` ve `HEADER_CHANGED`: SDK'nın verdiği ITCH zaman damgası 2020-01-01'den (1577836800e9 ns) büyükse o kullanılır, değilse sistem saati kalır.
 - `HEADER_SNAPSHOT`: SDK damgası koşulsuz kullanılır.
-- `ORDER_ADDED/EXECUTED/DELETED`: `timestamp` sistem saatidir. ITCH damgası ayrı `ts` (uint32, ITCH mesaj damgası) ve `packetTs` (uint64) alanlarında taşınır. ❓ doğrulanmadı: `ts` ve `packetTs`'nin birimi (ns kısmı / paket alım ns) SDK'da teyit edilmeli.
-- `LEVEL_CHANGED` ek alanları: `changedLevelIndex`, `changedPrice` (raw), `oldQuantity`/`newQuantity` (lot), `isMaxSizeExecution` (momentum yükselen kenar), `couldSweep` (taraf toplamı eşiğin altında), `sideTotalQuantity` (lot). Anlamları: [itch-sdk → Abonelik API'si](../itch-sdk/README.md).
+- `ORDER_ADDED/EXECUTED/DELETED`: `timestamp` sistem saatidir. ITCH damgası ayrı `ts` (uint32, ITCH mesaj damgası) ve `packetTs` (uint64) alanlarında taşınır. `ts` = son ITCH `T` saniyesi içindeki ns (uint32, her saniye sıfırlanır); `packetTs` = kernel SW RX zamanı, `CLOCK_REALTIME` epoch ns, Glimpse ve XLIO'da 0 ([itch-sdk/mesajlar § 3](../itch-sdk/mesajlar-ve-emir-defteri.md#3-timestamp-modeli)).
+- `LEVEL_CHANGED` ek alanları: `changedLevelIndex`, `changedPrice` (raw), `oldQuantity`/`newQuantity` (lot), `isMaxSizeExecution` (momentum; seviye bazlı, eşik geçilince gruptaki her fill'de 1 — [itch-sdk/abonelik-api § 5](../itch-sdk/abonelik-api.md#5-momentum--max-size-ismaxsizeexecution)), `couldSweep` (taraf toplamı eşiğin altında), `sideTotalQuantity` (lot). Anlamları: [itch-sdk → Abonelik API'si](../itch-sdk/README.md).
 - Stratejiler dwell/cooldown hesabında ITCH damgasını değil `hft::perf::nowNs()` (steady clock) kullanır, çünkü epoch'lar farklıdır (Tavan kod yorumu).
 
 ## 6. Orderbook durumu ve seans
@@ -193,7 +193,7 @@ AlgoWorker busy-loop ─► strategy->processSingleEvent()  (bkz. strateji-cekir
 
 ## 10. Kopma, gap, hat değişimi (HFT'nin gördüğü kadarıyla)
 
-- HFT'ye **gap, Rewinder kurtarma, Glimpse tekrarı veya hat değişimi bildiren bir callback yoktur**. Sequence takibi, Rewinder ve birincil/ikincil hat seçimi tamamen SDK içindedir ([itch-sdk → Glimpse ve Rewinder](../itch-sdk/README.md#glimpse-ve-rewinder)). Hat seçimi yalnız açılışta yapılır.
+- HFT'ye **gap, Rewinder kurtarma, Glimpse tekrarı veya hat değişimi bildiren bir callback yoktur**. Sequence takibi, Rewinder ve birincil/ikincil hat seçimi tamamen SDK içindedir ([itch-sdk → Glimpse ve Rewinder](../itch-sdk/alim-yolu.md#5-gap-ve-rewinder)). Hat seçimi yalnız açılışta yapılır.
 - Kurtarma sırasında olaylar gecikir, stratejinin `localOrderbook`'u eski kalır. HFT tarafında bayatlık (staleness) kontrolü yoktur. ❓ doğrulanmadı: SDK Rewinder sırasında callback'leri tutuyor mu yoksa kurtarılan mesajları sırayla mı akıtıyor.
 - Açılışta Glimpse 30 s içinde bitmezse ITCH başlatma başarısız olur ve process `exit(1)` ile çıkar. Gün içinde yeniden bağlanma HFT'nin kontrolünde değildir.
 - SDK ring taşması (`packetsDroppedFull`) HFT'ye yansımaz; yalnız PerfSDK metriklerinde görünür ([performance-sdk](../performance-sdk/README.md)).

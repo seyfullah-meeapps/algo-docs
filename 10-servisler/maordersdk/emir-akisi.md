@@ -307,7 +307,7 @@ Replay ile adopt edilen emirler izlenmez.
 - Kayıt tam fill veya cancel'a kadar kalır.
 
 **ITCH kaynaklı fill'in alanları:**
-- `timestamp` = ITCH `packetTs` (❓ doğrulanmadı: birim/epoch domeni OUCH timestamp'iyle aynı mı)
+- `timestamp` = ITCH `packetTs`: kernel SW RX zamanı, `CLOCK_REALTIME` epoch ns; 0 olabilir ([itch-sdk/mesajlar § 3](../itch-sdk/mesajlar-ve-emir-defteri.md#3-timestamp-modeli)). ❓ OUCH timestamp'iyle aynı domende karşılaştırılıp karşılaştırılmadığı doğrulanmadı.
 - `price` = ITCH'teki dinlenen emir fiyatı (raw `int32`)
 - `match_id` = 0, `ouch_username` boş
 

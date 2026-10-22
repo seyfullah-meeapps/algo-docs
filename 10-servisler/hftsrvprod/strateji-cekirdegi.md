@@ -134,7 +134,7 @@ Singleton (`StrategyManager::instance()`).
 
 ### DB'den yükleme ve `restorePositionState`
 
-- Tetik: ITCH Spot snapshot-end callback'i (`ItchSdkClient::onSnapshotEndCallback`). Callback önce varant tiplerini cache'ler, sonra `requestStrategyLoadAsync()` ile **`strat-loader`** thread'ini uyandırır. Yükleme SDK receiver thread'inde yapılmaz: 2026-08-03'te bu thread'de yapılan yükleme bir partition'ı dakikalarca durdurdu.
+- Tetik: ITCH Spot snapshot-end callback'i (`ItchSdkClient::onSnapshotEndCallback`). Callback önce varant tiplerini cache'ler, sonra `requestStrategyLoadAsync()` ile **`strat-loader`** thread'ini uyandırır. Yükleme SDK decode (ItchClient) thread'inde yapılmaz: 2026-08-03'te bu thread'de yapılan yükleme bir partition'ı dakikalarca durdurdu.
 - `loadStrategiesFromDb`: `DatabaseServiceClient::getStrategySettings()` → her satır için `convertAlgoSettings` → `CommandFactory::createStrategyCommand` → `createStrategy(cmd, true)`. Bitince `strategiesLoadedFromDb = true`. Snapshot-end birden fazla gelirse yükleme tekrarlanır. Var olan anahtarlar atlandığı için tekrar zararsızdır.
 - `Strategy_Started` DB'ye **yazılmaz**: `saveStrategySettings` bu alanı filtreler. Yüklenen stratejiler bu yüzden **durmuş** halde gelir (kasıtlı). Kullanıcı GUI'den yeniden başlatmalıdır.
 - **Pozisyon DB'den yüklenmez.** `balance`/`profit` 0 ile başlar. Yeniden kurulmalarının iki yolu var: OUCH replay'inin getirdiği accept/execute olayları (`addOrder`/`executeOrder` → `updatePosition`) veya GUI'den SetBalance. ❓ doğrulanmadı: gün içi restart'ta order-service'in handoff + replay'i yeniden yapıp yapmadığı ([emir-yasam-dongusu.md](emir-yasam-dongusu.md)).
@@ -215,7 +215,7 @@ Dirty işareti yalnız özet **üyeliğini** günceller. Üyelikteki stratejiler
 | Kod | Thread |
 |-----|--------|
 | `processSingleEvent`, `processReadyEvent`, `processItchEvent*` (strateji kararları) | AlgoWorker |
-| `enqueueItchEvent` / `enqueueHotReady`, `onPriceThresholdCrossing` | ITCH SDK receiver thread'leri |
+| `enqueueItchEvent` / `enqueueHotReady`, `onPriceThresholdCrossing` | ITCH SDK decode (`ItchClient`) thread'leri — callback'ler RX thread'inde değil ([itch-sdk/alim-yolu § 1](../itch-sdk/alim-yolu.md#1-bileşenler-threadler-başlatma-sırası)) |
 | `loadStrategiesFromDb` → `createStrategy` | `strat-loader` |
 | `setCommand`, `createStrategy` (GUI), `cancelAllOrders`, `closeThePositionForSingleStock`, `setBalance` | gRPC (`GUIManager` / `StrategyServiceImpl`) |
 | `addOrder` + `addSecondRuleOrder`, `rejectOrder`, `updateOrder`, `deleteOrder`, `onCancelResponse` | MAOrderSDK OUCH recv thread'i (handoff öncesi: ouch-sdk istemci thread'i, `OuchManager.cpp`) |

@@ -15,12 +15,11 @@ Tür: **bug?** olası hata · **doğrula** kodla/borsayla teyit gerekli · **eks
 
 | # | Tür | Konu | Ayrıntı |
 |---|-----|------|---------|
-| K-01 | bug? | itch-sdk `partId` VİOP'ta 4 partition varsayıyor, HFT 6 dinliyor; 5–6. partition'da çakışma olabilir. ⏸ ertelendi | [itch-sdk](10-servisler/itch-sdk/README.md) § Glimpse ve Rewinder |
+| K-01 | bug? | itch-sdk snapshot-end pazar başına sabit Partition 1–4 bekliyor (`isMarketGlimpseComplete`); 6 partition'lı VİOP'ta P5–P6 tamamlanmaya dahil değil, 4'ten azında pazar hiç canlıya geçmez. `partId` yalnız log etiketi. ⏸ ertelendi | [alim-yolu](10-servisler/itch-sdk/alim-yolu.md#8-partition-varsayımları-ve-partid-k-01--ertelendi) |
 | K-02 | bug? | trade-data-app ITCH config'i `Part` 1–4'ü tanıyor, 5–6 Partition1'e düşüyor; 6 partition'lı VİOP'ta (Piramit_Algo) son iki partition gelmiyor, A1/Alnus-Algo zaten 4 tanımlı. ⏸ ertelendi | [config](10-servisler/trade-data-app/config.md) § `itchConfigurations[]` |
 | K-03 | bug? | Tavan: yeni stratejide DB'ye 600/1200 varsayılan saat yazılıyor, UI 36000–64800 bekliyor; yanlış değer UI'dan geri gidebilir | [tavan](20-stratejiler/tavan.md) § Wire alanları |
 | K-04 | doğrula | Teorik Fiyat `executeOrder` pozisyonu güncellemiyor (kod yorumda); kasıtlı mı? | [teorik-fiyat](20-stratejiler/teorik-fiyat.md) § Bilinen durumlar |
 | K-05 | doğrula | Admin paneli domain → :6688 yönlendirmesi (reverse proxy) | [sistem-haritasi](00-genel/sistem-haritasi.md) § Bağlantı tablosu |
-| K-06 | doğrula | itch-sdk eski "bilinen buglar" listesinin hangileri düzeltildi | [itch-sdk](10-servisler/itch-sdk/README.md) § Bilinen notlar |
 | K-07 | doğrula | network-sdk eski wire protokol / bağlantı notları tek tek kontrol edilmedi | [network-sdk](10-servisler/network-sdk/README.md) § Build |
 | K-09 | eksik | `Sabah_Kontrolleri.docx` bilgi tabanına aktarılmadı | [40-operasyon](40-operasyon/README.md) § Sabah kontrolleri |
 
@@ -157,6 +156,36 @@ Ayrıntılar alt dosyaların kendi "şüpheli davranışlar" bölümlerinde.
 | K-123 | doğrula | `armFixPasswordChange` sonrası herhangi bir Logout şifre değişimi başarısız sayılıp oturum devre dışı kalıyor | [fix](10-servisler/maordersdk/fix.md#10-şüpheli) |
 | K-124 | doğrula | FIX: ExecType `H`/`G` (trade cancel/correct) sessizce düşüyor; ClOrdID uzunluk kontrolü yok; yabancı ClOrdID'ler sahipleniliyor | [fix](10-servisler/maordersdk/fix.md#10-şüpheli) |
 | K-125 | doğrula | QuickFIX oturum penceresi sabit kodlu 05:00–03:00 UTC (06:00–08:00 TR oturum dışı) | [fix](10-servisler/maordersdk/fix.md#10-şüpheli) |
+
+## itch-sdk
+
+Ayrıntılar alt dosyaların kendi "Şüpheli" bölümlerinde. Sistem genelindeki K-01 (partition varsayımı) yukarıda.
+
+| # | Tür | Konu | Ayrıntı |
+|---|-----|------|---------|
+| K-126 | bug | snapshot-end aboneliği `market`'i saklamıyor; her pazarın snapshot'ı bütün abonelere gidiyor (AlgoProd çift teslim, trade-data-app çift replay) | [abonelik-api](10-servisler/itch-sdk/abonelik-api.md#şüpheli) (1) |
+| K-127 | bug? | Kurtarılamayan gap partition'ı kalıcı donduruyor; deneme sınırı, Glimpse'e dönüş, host bildirimi yok | [alim-yolu](10-servisler/itch-sdk/alim-yolu.md#şüpheli) |
+| K-128 | bug? | Glimpse login hatasından sonra retry'lar boşa gidiyor (`connected` true kalıyor, soket sızıyor); `Connect` ikincilde hata verse de `true` dönüyor | [alim-yolu](10-servisler/itch-sdk/alim-yolu.md#şüpheli) |
+| K-129 | bug? | Birincil/ikincil bayrağı atomic değil; Rewinder adresi client init sırasına göre seçiliyor; ikincil multicast'e join ve A/B arbitraj yok | [alim-yolu](10-servisler/itch-sdk/alim-yolu.md#4-birincilikincil-seçimi) |
+| K-130 | bug? | Ortak `glimpseMutex`: Spot snapshot callback'leri sürerken VİOP partition'ı ring'ini boşaltamıyor | [alim-yolu](10-servisler/itch-sdk/alim-yolu.md#şüpheli) |
+| K-131 | doğrula | Kesik paket / Rewinder yanıtında `expected` önceden ilerliyor (sessiz mesaj kaybı); MoldUDP64 session okunmuyor, sequence 1'e dönerse akış yok sayılır | [alim-yolu](10-servisler/itch-sdk/alim-yolu.md#şüpheli) |
+| K-132 | doğrula | Ring boyutu 2'nin kuvveti mi kontrol edilmiyor; `receiverCpuCores[4]` 5.+ receiver'a çekirdek vermiyor; ZC/XLIO yolunda 2048 bayt üstü paket taşması | [alim-yolu](10-servisler/itch-sdk/alim-yolu.md#şüpheli) |
+| K-133 | doğrula | Canlı tamponun serbest bırakılması HFT'nin sonradan (async) kurduğu abonelikleri kapsamıyor | [alim-yolu](10-servisler/itch-sdk/alim-yolu.md#şüpheli) |
+| K-134 | doğrula | Glimpse `recv`'i `close()` ile açılmayabilir, `cleanup()` `join`'de takılabilir; Onload preload kontrolü yalnız "boş mu" | [alim-yolu](10-servisler/itch-sdk/alim-yolu.md#şüpheli) |
+| K-135 | doğrula | Rewinder sayaçlarında çift sayım (eski #3); `setArguments` HFT'de çağrılmıyor, Onload/XLIO yeniden başlatma (eski #4) | [alim-yolu](10-servisler/itch-sdk/alim-yolu.md#şüpheli) |
+| K-136 | bug? | `header_changed` yalnız fiyat değişince tetikleniyor, miktar değişimini kaçırıyor (eski #1) | [mesajlar](10-servisler/itch-sdk/mesajlar-ve-emir-defteri.md#7-header-ve-kademe-hesabı) |
+| K-137 | bug? | `F` (AddOrderWithMPID) `len<45` şartıyla sessizce düşebilir; `C`'de fiyat hâlâ kitap fiyatı | [mesajlar](10-servisler/itch-sdk/mesajlar-ve-emir-defteri.md#25-f-addorderwithmpid) |
+| K-138 | bug? | Header/level/threshold callback `timestamp`'i kaynağa göre ITCH saniye içi ns / `packetTs` / 0; equilibrium'daki `packetTs` aslında ITCH ns; ts her saniye sarıyor, ts ile gruplama farklı saniyeleri birleştirebilir | [mesajlar](10-servisler/itch-sdk/mesajlar-ve-emir-defteri.md#3-timestamp-modeli) |
+| K-139 | bug? | seed/reseed/`update_level_subscription` host thread'inden kitabı kilitsiz okuyor/yazıyor (vektör `resize` yarışı) | [mesajlar](10-servisler/itch-sdk/mesajlar-ve-emir-defteri.md#11-thread-ve-kilit-modeli) |
+| K-140 | bug? | Canlıda tekrar gelen `R` (OrderBookDirectory) kitabı ve callback'lerini siliyor; dışarıdaki pointer'lar sallanıyor | [mesajlar](10-servisler/itch-sdk/mesajlar-ve-emir-defteri.md#şüpheli) |
+| K-141 | bug? | Flush sonrası atomik header aynası bayat kalıyor | [mesajlar](10-servisler/itch-sdk/mesajlar-ve-emir-defteri.md#şüpheli) |
+| K-142 | doğrula | Tick tablosunda `prxTo=0` = sonsuz kuralı kodda yok; satır bulunamazsa 1 dönüyor | [mesajlar](10-servisler/itch-sdk/mesajlar-ve-emir-defteri.md#4-fiyat-ve-miktar-ölçeği) |
+| K-143 | eksik | Orderbook state eşlemesi eksik (`P_SALTKOTASYON`, `P_SUREKLI_ISLEM_HFL` → `Other`); `V`/`S`/`M` mesajları parse edilmiyor | [mesajlar](10-servisler/itch-sdk/mesajlar-ve-emir-defteri.md#8-orderbook-state) |
+| K-144 | bug? | `OrderExecutedWithPrice` DTO'su `comboGroupId`'yi 8 bayt okuyor; `operator<<(Side)` bool basıyor | [mesajlar](10-servisler/itch-sdk/mesajlar-ve-emir-defteri.md#şüpheli) |
+| K-145 | bug? | `headerSnapshotCallbacks` dizisi ilklendirilmiyor (C++17, heap'te belirsiz değer) | [abonelik-api](10-servisler/itch-sdk/abonelik-api.md#şüpheli) |
+| K-146 | bug | Çoğu abonelik türünde slot geri kazanılmıyor: orderbook başına ömür boyu 32 abonelik, sonrası callback'siz geçerli handle (aynı sembolde 33. strateji start'ı) | [abonelik-api](10-servisler/itch-sdk/abonelik-api.md#şüpheli) |
+| K-147 | doğrula | `findClientForOrderbook` static cache yarışı (combiner OUCH thread'inden subscribe ediyor), shutdown sonrası dangling pointer (eski #12) | [abonelik-api](10-servisler/itch-sdk/abonelik-api.md#şüpheli) |
+| K-148 | doğrula | trade-data-app `rewinderSourceIp`'yi set etmiyor; Rewinder yanıtları demux'ta tanınıyor mu | [abonelik-api](10-servisler/itch-sdk/abonelik-api.md#şüpheli) |
 
 ## Borsa kuralları
 

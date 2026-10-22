@@ -1,5 +1,5 @@
 ---
-kapsam: itch-sdk (libMAItchSDK, v3) — ITCH piyasa verisi SDK'sı; sınıflar, thread modeli, alım yolu, Glimpse/Rewinder, abonelik API'si, momentum/tiering yetenekleri, kullanıcılar
+kapsam: itch-sdk (libMAItchSDK, v3) — giriş ve indeks; görev, kullananlar, sınıflar, alt dosyalar, kısa özetler, eski bug listesinin durumu, build
 kaynak:
   - repo: itch-sdk
     branch: development
@@ -10,87 +10,79 @@ durum: taslak
 
 # itch-sdk (`libMAItchSDK`)
 
-BIST ITCH piyasa verisi SDK'sı (C++, namespace `itch`, tek paylaşımlı kütüphane). Development'taki kod, eski bilgi tabanında "v3 rewrite" diye anlatılan sürümdür.
+BIST ITCH piyasa verisi SDK'sı (C++, namespace `itch`, tek paylaşımlı kütüphane, `extern "C"` API). Development'taki kod, eski bilgi tabanında "v3 rewrite" diye anlatılan sürümdür.
 
 **Kullananlar:**
-- HftSrvProd (`ItchSdkClient`)
+- HftSrvProd (`ItchSdkClient`) → [hftsrvprod/itch-entegrasyonu](../hftsrvprod/itch-entegrasyonu.md)
 - AlgorithmicTrading (`ItchSdkManager`)
 - trade-data-app (cgo, `pkg/itch`)
-- MAOrderSDK combiner (`itch::getItchSdk()`)
+- MAOrderSDK combiner (`itch::getItchSdk()`) → [maordersdk/emir-akisi § 9](../maordersdk/emir-akisi.md#9-combiner-srccombiner)
+
+Tüketici bazında hangi fonksiyonların kullanıldığı: [abonelik-api § 9](abonelik-api.md#9-tüketiciler).
+
+## Alt dosyalar
+
+| Dosya | Soru |
+|-------|------|
+| [`alim-yolu.md`](alim-yolu.md) | Thread'ler ve başlatma sırası, recv modları (POSIX/Onload ZC/XLIO), demux ve MoldUDP64, birincil/ikincil hat, gap ve Rewinder, Glimpse ve canlı tampon, kuyruk dolması, partition varsayımları, PerfSDK metrikleri, kopma senaryoları |
+| [`mesajlar-ve-emir-defteri.md`](mesajlar-ve-emir-defteri.md) | ITCH mesaj kataloğu ve byte düzenleri, **timestamp modeli**, fiyat/miktar ölçeği ve tick tablosu, `OrderbookInfo`/`OrderDepth`, emir olaylarının kitaba etkisi, header hesabı, orderbook state, snapshot emir sırası, kilitler |
+| [`abonelik-api.md`](abonelik-api.md) | Yaşam döngüsü, `ItchSdkConfigurations` alanları, C API ve callback argümanları, handle modeli, level eşik semantiği, momentum/max-size, tiering, C++ arayüzü, referans veri fonksiyonları, tüketiciler |
 
 ## Sınıflar
 
 | Sınıf | Dosya | Rol |
 |-------|-------|-----|
-| `SDKItchManager` | `Clients/SDKItchManager.*` | Singleton. Yaşam döngüsü, abonelik kayıt defteri, snapshot oluşturma. Alttaki `extern "C"` C API'si de burada. |
-| `ItchReceiver` | `Clients/ItchReceiver.*` | UDP RX thread'i: recv (POSIX `recvmmsg` / Onload ZC / XLIO), demux, SPSC kuyruğa koyma, PerfSDK metrikleri |
-| `ItchClient` | `Clients/ItchClient.*` | (port, pazar) başına decoder thread'i: mesaj parse, Rewinder durum makinesi |
-| `GlimpseClient` | `Clients/GlimpseClient.*` | TCP snapshot (login → sıralı veri → EndOfGlimpse) |
-| `OrderbookInfo` | `OrderBook/OrderbookInfo.*` | Orderbook başına durum ve callback yönetimi (header, level, execute, eşik, momentum) |
+| `SDKItchManager` | `Clients/SDKItchManager.*` | Singleton. Yaşam döngüsü, abonelik kayıt defteri, snapshot oluşturma, `extern "C"` gövdeleri |
+| `ItchReceiver` | `Clients/ItchReceiver.*` | UDP RX thread'i: recv, demux, SPSC kuyruğa koyma, metrikler |
+| `ItchClient` | `Clients/ItchClient.*` | Partition başına decoder thread'i: MoldUDP64, mesaj parse, Rewinder durum makinesi |
+| `GlimpseClient` | `Clients/GlimpseClient.*` | TCP snapshot (SoupBinTCP login → veri → EndOfSnapshot) |
+| `OrderbookInfo` | `OrderBook/OrderbookInfo.*` | Orderbook başına durum ve callback dizileri (header, level, execute, eşik, momentum) |
 | `OrderDepth` | `OrderBook/OrderDepth.*` | Taraf başına fiyat→miktar ve orderId→emir haritası |
-| `SPSCRingBuffer` | `Public/spsc_ring_buffer.h` | Cache-line hizalı, 2'nin kuvveti boyutlu ring |
-| `TscClock` | `Globals/TscClock.h` | `rdtsc` ile ns zaman damgası (hot path'te `clock_gettime` yok) |
+| `SPSCRingBuffer` | `Public/spsc_ring_buffer.h` | Cache-line hizalı ring |
+| `TscClock` | `Globals/TscClock.h` | `rdtsc` tabanlı ns; yalnız RX metriklerinde |
 
-## Thread modeli ve alım yolu
+## Kısa özetler
 
-```
-NIC ─► ItchReceiver (RX thread, pinli, SCHED_FIFO) ─► SPSC ring (port×pazar) ─► ItchClient (decode thread) ─► OrderbookInfo ─► abone callback'i
-```
+Ayrıntı ve kod referansları alt dosyalarda; burada yalnız yön bulmak için.
 
-- RX thread yalnızca recv + memcpy + kuyruğa koyma yapar. Decode yavaşlarsa paket düşer (`packetsDroppedFull`), RX etkilenmez.
-- Callback'ler **ItchClient thread'inde** çalışır. Tüketici (HFT `ItchSdkClient`) olayı kendi strateji kuyruğuna koyar; ağır iş callback içinde yapılmaz.
-- Onload derlemesinde `LD_PRELOAD` yoksa `start()` kendini `execvp` ile yeniden başlatır.
+- **Thread modeli:** `NIC → ItchReceiver (RX) → SPSC ring → ItchClient (decode) → OrderbookInfo → callback`. Callback'ler **decode thread'inde** çalışır. Pinleme yalnız core > 0 verilirse, SCHED_FIFO yalnız `ITCH_RT_FIFO` env'i varsa ([alim-yolu § 1](alim-yolu.md#1-bileşenler-threadler-başlatma-sırası)).
+- **Birincil/ikincil hat:** Seçim açılışta ve process genelinde yapılır; çalışma sırasında failover yok. Glimpse TCP bağlantısı birincilde başarısız olursa global bayrak ikincile döner (geri dönmez). Multicast her zaman birincil hattan alınır; ikincil gruba join yok, A/B arbitraj yok ([alim-yolu § 3–4](alim-yolu.md#4-birincilikincil-seçimi)).
+- **Glimpse ve canlı tampon:** Canlı paketler Glimpse snapshot'ı bitene kadar tamponlanır (2026-10). Snapshot-end, pazar başına **sabit Partition 1–4** tamamlanınca tetiklenir; partition sayısı config'ten okunmaz ([alim-yolu § 6, § 8](alim-yolu.md#6-glimpse-ve-canlıya-geçiş)).
+- **Gap:** Rewinder ile kurtarılır. Kurtarılamazsa partition kalıcı donabilir ([alim-yolu § 5](alim-yolu.md#5-gap-ve-rewinder)).
+- **Timestamp:** ITCH `timestamp` / callback `ts` = son `T` (saniye) mesajının içindeki **ns** (uint32, her saniye sıfırlanır). `packetTs` = kernel SW RX zamanı, `CLOCK_REALTIME` epoch ns; Glimpse ve XLIO'da 0. Header/level callback'lerinde alanın domeni olay kaynağına göre değişir ([mesajlar § 3](mesajlar-ve-emir-defteri.md#3-timestamp-modeli)).
+- **`header_changed`:** Yalnız best bid/ask **fiyatı** değişince tetiklenir; miktar değişimi level aboneliğinden izlenir ([mesajlar § 7](mesajlar-ve-emir-defteri.md#7-header-ve-kademe-hesabı)).
+- **`header_snapshot`:** Abone olunduğu andaki header, kitaptaki bir sonraki add/execute/delete'te teslim edilir; hareketsiz kitapta hiç gelmez ([abonelik-api § 3.3](abonelik-api.md#33-abonelik-fonksiyonları-ve-callback-argümanları)).
+- **Momentum (max-size):** Aggressor fill'leri aynı borsa damgasıyla veya `exec_window` (ns) içinde toplanır. `isMaxSizeExecution` **seviye bazlıdır**: toplam eşiği geçince aynı gruptaki her sonraki fill'de 1 gelir, yalnız bir kez değil. `exec_arm_price` mutlak fiyat kapısıdır ([abonelik-api § 5](abonelik-api.md#5-momentum--max-size-ismaxsizeexecution)). Tüketiciler: HFT Classic follow-max, Tavan max-size, Taban momentum girişi.
+- **Tiering:** `price_threshold_crossing` + `seed_price_threshold`; callback `false` dönerse geçiş reddedilir ([abonelik-api § 6](abonelik-api.md#6-tiering--fiyat-eşiği-geçişi-orderbookinfoevaluatepricethresholdcallbacks)).
+- **Fiyat:** Raw, enstrümanın `DecimalCount`'u ile. Tick tablosu ITCH referans verisinden gelir; `itchsdk_get_tick_size` satır bulamazsa 1, orderbook bilinmiyorsa 0 döner ([mesajlar § 4](mesajlar-ve-emir-defteri.md#4-fiyat-ve-miktar-ölçeği)).
+- **Config:** Değerler tüketici servisin config'inden gelir (HFT `[[markets]]`, AlgoProd `$Equity`/`$Derivative`, trade-data-app `itchConfigurations`). Alan tablosu: [abonelik-api § 2](abonelik-api.md#2-itchsdkconfigurations-publicconfigh).
 
-## Glimpse ve Rewinder
+Açık sorunlar: [`ACIK-KONULAR.md`](../../ACIK-KONULAR.md) § itch-sdk.
 
-- **Glimpse** (TCP): gün içinde açılışta partition başına snapshot alır, baseline sequence'i belirler. `itchsdk_is_glimpse_finished(market, partition)`.
-  - ⚠ Yeni davranış (2026-10): Canlı ITCH paketleri Glimpse snapshot'ı bitene kadar **tamponlanır**, bitince sırayla işlenir. Snapshot emirleri sıralanır, flush'ta emir başına delete üretilir.
-- **Rewinder** (UDP): sequence boşluğu görülünce eksik paketler istenir. Kurtarma bitince normal akışa dönülür.
-- **Birincil/ikincil hat** (`ip`/`secondaryIp`) config'tedir. Seçim **açılışta ve process genelinde** yapılır, çalışma sırasında failover yoktur (`ItchClient.cpp` yorumu: "start-time only").
-  - Varsayılan birincildir. Glimpse TCP bağlantısı birincilde başarısız olursa ya da zaman aşımına uğrarsa global seçim ikincile döner (`ITCHTCPConnection::Connect`). Bu Rewinder dahil sonraki bütün bağlantıları etkiler ve geri dönmez.
-  - Multicast alımında demux iki hattın kaynak IP'lerini de tanır (`setMarketSourceIps`).
-- **Partition kimliği:** `partId` Spot 1–4, VİOP 5–8 (`partition + 4`). Bu kural VİOP'ta 4'ten fazla partition'ı öngörmüyor, oysa HFT config'leri 6 tanımlıyor. ❓ 5–6. VİOP partition'larında `partId` çakışması olup olmadığı incelenmedi; [trade-data-app](../trade-data-app/README.md) partition farkıyla birlikte ertelenen konu.
+## Eski bilinen buglar (K-06, kapandı)
 
-## Abonelik API'si (`Public/itch_sdk.h`, C)
+Eski `meeapps-ai` `context-itch-sdk/bugs-quirks.md` listesi 2026-10-22'de güncel koda karşı kontrol edildi. Ayrıntılar alt dosyaların `Şüpheli` bölümlerinde.
 
-| Fonksiyon | Olay |
-|-----------|------|
-| `itchsdk_subscribe_header_changed` | Best bid/ask fiyat veya miktar değişti |
-| `itchsdk_subscribe_header_snapshot` | İlk header durumu |
-| `itchsdk_subscribe_order_level_changed` | Bir taraftaki kademe değişimi, **eşikli**: miktar eşiğin altında/üstünde, kaç kademe. Olayda `sideTotalQuantity`, `couldSweep`, `isMaxSizeExecution` alanları da gelir. |
-| `itchsdk_update_level_subscription` | Eşik veya kademe güncelle |
-| `itchsdk_update_level_max_order_qty` | Momentum: azami emir lot eşiği (0 = kapalı) |
-| `itchsdk_update_level_exec_window` | Momentum: bu kadar ns içindeki fill'ler tek emir sayılır (0 = yalnız aynı borsa damgası) |
-| `itchsdk_update_level_exec_arm_price` | Momentum: mutlak fiyat kapısı (ask bu fiyatın altındayken bayrak kalkmaz) |
-| `itchsdk_subscribe_order_executed` / `add_order` / `order_delete` | Emir olayları (`ORDER_EXECUTED`'da kitaptaki emrin tarafı ve `prevHeaderQty`) |
-| `itchsdk_subscribe_specific_order_executed` / `specific_order_events` | Belirli bir orderId (combiner) |
-| `itchsdk_subscribe_equilibrium_price_update` | Denge fiyatı (müzayede) |
-| `itchsdk_subscribe_orderbook_state_changed` | Seans durumu |
-| `itchsdk_subscribe_snapshot_end` | Glimpse bitti |
-| `itchsdk_subscribe_price_threshold_crossing` + `itchsdk_seed_price_threshold` | **Tiering**: promote/demote fiyat geçişi. Callback `false` dönerse geçiş reddedilir ve sonraki güncellemede yeniden tetiklenir. |
-| `itchsdk_set_callback_enabled` | Aboneliği geçici aç/kapa (cold strateji maliyetsiz kalır) |
-| `itchsdk_unsubscribe` | |
-| `itchsdk_get_tick_size(obId, price)`, `itchsdk_get_orderbook_symbol`, `itchsdk_get_all_orderbook_ids` | Referans veri (fiyat adımı tablosu ITCH'ten gelir) |
-
-C++ arayüzü (`Public/ItchSdk.h`, `itch::getItchSdk()`) yalnızca belirli emir olayları için dar bir yüzeydir; combiner bunu kullanır.
-
-**Momentum (max-size) mantığı:**
-- Bir saldırganın (aggressor) fill'leri, aynı borsa zaman damgasıyla veya pencere içinde toplanır.
-- Toplam `maxOrderQty`'ye ulaştığı anda `isMaxSizeExecution` **yükselen kenarda** bir kez kalkar. Saniye sınırını geçen boşluklar da doğru hesaplanır.
-- Tüketiciler: HFT Classic follow-max, Tavan max-size giriş/çıkış, Taban momentum girişi.
-
-## Config (`ItchSdkConfigurations`, `Public/config.h`)
-
-- Pazar: Spot / Derivative.
-- Partition başına: ITCH multicast IP/port (birincil/ikincil), Glimpse IP/port ve kullanıcı, Rewinder IP/port ve yerel port, `localInterface`, kaynak IP.
-- Worker ve trigger worker sayıları, CPU core ataması, Onload stack adı.
-
-Değerler tüketici servisin config'inden gelir (HFT `[[markets]]`, AlgoProd `$Equity`/`$Derivative`, trade-data-app `itchConfigurations`).
+| Eski # | Konu | Durum |
+|--------|------|-------|
+| 1 | HeaderChanged yalnız fiyata bakıyor | Hâlâ var |
+| 2 | p99 ingest tail | ❓ ölçüm gerekir |
+| 3 | Rewinder sayaçlarında çift sayım | Hâlâ var |
+| 4 | `setArguments` zorunlu (Onload/XLIO yeniden başlatma) | Hâlâ var; HFT çağırmıyor |
+| 5 | Çalışma anında `EF_*`/`XLIO_*` `setenv` | Kısmen: `execvp` yolunda etkili, preload'la başlatılmış süreçte değil |
+| 6 | Kaynak IP / iface uyuşmazlığı sessiz | Kısmen: boş iface/port artık `start` hatası; kaynak IP uyuşmazlığı hâlâ yalnız sayaç |
+| 7 | `F` (AddOrderWithMPID) ve `C` (OrderExecutedWithPrice) aynı handler | Kısmen: `C` için specific-order olayında `priceReliable=0` (fiyat hâlâ kitap fiyatı, `order_executed`'da bayrak yok); `F` `len<45` şartıyla tamamen düşebilir ([mesajlar § 2.5](mesajlar-ve-emir-defteri.md#25-f-addorderwithmpid)) |
+| 8 | `T`/`P`/`S` düşüyor | `T` düzeltildi; `P`, `S` hâlâ düşüyor (kasıtlı) |
+| 9 | Birincil/ikincil yalnız açılışta | Hâlâ var; ek olarak ikincil multicast'e join yok |
+| 10 | Snapshot'ta seviye emirleri boş | Düzeltildi (PR #152, sıralı); heap alloc yükü duruyor |
+| 11 | `getMarketForPartition`/`getPortForPartition` | Hâlâ var, ölü kod |
+| 12 | `findClientForOrderbook` static cache yarışı | Hâlâ var; `cleanup`'ta temizlenmiyor |
+| 13 | 2048 bayt üstü paket taşması | POSIX güvenli; ZC ve XLIO yollarında hâlâ var |
+| 14 | Client spin döngüsü, pin yok | Spin var; pin artık var (`clientCpuCore`) |
+| 15 | `Error` log seviyesi `Warning` oluyor | Hâlâ var |
+| 16 | ITCH ts "gün başından ns" | Eski bilgi yanlıştı: saniye içi ns |
+| 17 | Bazı parçalar root namespace'te | Hâlâ var: `Globals/UtilityClass.h`, `Globals/Parser.h`, `Public/enums.h`, `Public/config.h`, `Public/spsc_ring_buffer.h` (`Public/itch_sdk.h` C API olduğu için kasıtlı) |
 
 ## Build
 
-CMake. Varyantlar: normal, **Onload** (`libMAItchSDK_Onload.so`), Mellanox. CI `itchsdk.yml` kütüphaneleri Algo-Setup `MAProdEnv/lib`'e yazar. Kütüphane, sürüm bilgisini (`MAItchSDK_BuildInfo`) gömülü taşır.
-
-## Bilinen notlar
-
-Eski bilgi tabanındaki ayrıntılı notlar (performans, pcap gözlemleri, mesaj kataloğu) büyük ölçüde geçerli. Bu doküman yalnızca güncel yapıyı ve API'yi özetler. ❓ Eski "bilinen buglar" listesinin hangilerinin düzeltildiği tek tek doğrulanmadı.
+CMake. Varyantlar: normal, **Onload** (`libMAItchSDK_Onload.so`), Mellanox/XLIO ([alim-yolu § 2](alim-yolu.md#2-recv-modları-ve-derleme-varyantı)). CI `itchsdk.yml` kütüphaneleri Algo-Setup `MAProdEnv/lib`'e yazar. Kütüphane, sürüm bilgisini (`MAItchSDK_BuildInfo`) gömülü taşır. Örnek: `demoApp/smoke_main.cpp`.

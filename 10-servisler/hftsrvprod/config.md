@@ -173,7 +173,7 @@ Notlar:
 - Portlar ve IP'ler string tutulur (struct'lar `std::string`). TOML int verilirse de string'e çevrilir.
 - SDK, receiver'ları (iface, port) çiftine göre gruplar. Aynı port numarasını kullanan Spot ve VİOP partition'ları tek RX thread'ini paylaşır ve `receiverCpuCores` bu receiver sırasına göre dağıtılır.
 - Bağlantı adı bütün Spot partition'larında aynıdır: `"spot"`.
-- VİOP için 6 partition tanımlı ama SDK'nın partition kimlik kuralı 4'ten fazlasını öngörmüyor: [itch-sdk → Partition kimliği](../itch-sdk/README.md#glimpse-ve-rewinder).
+- VİOP için 6 partition tanımlı, ama SDK snapshot-end için pazar başına sabit Partition 1–4 bekliyor; 5–6. partition'lar snapshot tamamlanmasına dahil değil. `partId` yalnız log etiketi, çakışma üretmez ([itch-sdk/alim-yolu § 8](../itch-sdk/alim-yolu.md#8-partition-varsayımları-ve-partid-k-01--ertelendi), K-01).
 
 ## Config'te olmayan, sabit kodlu ITCH SDK ayarları
 

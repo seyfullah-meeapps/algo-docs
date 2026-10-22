@@ -31,7 +31,7 @@ Dış kaynaklı bilgiler BIST'in resmi sayfasından doğrudan okunamadı (ağ er
 ## Fiyat adımı (tick)
 
 **Kodda:**
-- Tablo kodda sabit değildir, ITCH'ten gelir: `itchsdk_get_tick_size(obId, price)` ([itch-sdk](../10-servisler/itch-sdk/README.md#abonelik-apisi-publicitch_sdkh-c)).
+- Tablo kodda sabit değildir, ITCH'ten gelir: `itchsdk_get_tick_size(obId, price)` ([itch-sdk](../10-servisler/itch-sdk/mesajlar-ve-emir-defteri.md#4-fiyat-ve-miktar-ölçeği)).
 - Adım fiyat bandına göre değiştiği için "N kademe aşağı/yukarı" hesapları bantları tek tek yürür (ör. [tavan](../20-stratejiler/tavan.md) max-size arm price).
 - Tick bulunamazsa bazı stratejiler 1 kullanır ([varant-toplu](../20-stratejiler/varant-toplu.md#fiyat-ve-birimler)).
 

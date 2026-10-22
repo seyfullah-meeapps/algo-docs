@@ -13,8 +13,8 @@ Bu dosya yeni bilgi içermez. Tanımlar bu repodaki diğer dokümanlardan derlen
 | Terim | Anlam | Ayrıntı |
 |-------|-------|---------|
 | **ITCH** | BIST piyasa verisi protokolü (UDP multicast, MoldUDP64). Spot 4, VİOP 6 partition; birincil + ikincil hat. | [itch-sdk](../10-servisler/itch-sdk/README.md) |
-| **Glimpse** | ITCH'in TCP snapshot servisi. Açılışta partition başına emir defterinin o anki halini verir. | [itch-sdk](../10-servisler/itch-sdk/README.md#glimpse-ve-rewinder) |
-| **Rewinder** | ITCH'in UDP gap-recovery servisi. Sequence boşluğunda eksik paketler buradan istenir. | [itch-sdk](../10-servisler/itch-sdk/README.md#glimpse-ve-rewinder) |
+| **Glimpse** | ITCH'in TCP snapshot servisi. Açılışta partition başına emir defterinin o anki halini verir. | [itch-sdk](../10-servisler/itch-sdk/alim-yolu.md#6-glimpse-ve-canlıya-geçiş) |
+| **Rewinder** | ITCH'in UDP gap-recovery servisi. Sequence boşluğunda eksik paketler buradan istenir. | [itch-sdk](../10-servisler/itch-sdk/alim-yolu.md#5-gap-ve-rewinder) |
 | **OUCH** | BIST emir protokolü (SoupBinTCP üzerinde). Piyasa emri yoktur; limit emirle taklit edilir. | [MAOrderSDK](../10-servisler/maordersdk/README.md) |
 | **FIX** | FIX 5.0SP2 emir kanalı (QuickFIX, MAOrderSDK'ya statik gömülü). AlgoProd'da strateji başına `Channel_Enum` ile seçilir. | [MAOrderSDK](../10-servisler/maordersdk/README.md) |
 | **MARpc** | network-sdk'nın TCP RPC'si; ouch-sdk ↔ order-service (:8000). BIST ile ilgisi yok. | [network-sdk](../10-servisler/network-sdk/README.md) |

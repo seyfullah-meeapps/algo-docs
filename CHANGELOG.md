@@ -2,6 +2,28 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-22 — itch-sdk derinleştirme
+
+Kaynak: itch-sdk `35a3b5c` (değişmedi). Tüketici tarafı için HftSrvProd, AlgorithmicTrading ve trade-data-app; eski bug listesi için `meeapps-ai` (salt okunur) okundu.
+
+- `10-servisler/itch-sdk/` alt dosyalara bölündü: `alim-yolu.md`, `mesajlar-ve-emir-defteri.md`, `abonelik-api.md`. README artık giriş ve indeks.
+- **README düzeltmeleri:**
+  - `header_changed` yalnız fiyat değişiminde tetikleniyor (miktar değil).
+  - `isMaxSizeExecution` seviye bazlı: eşik geçilince gruptaki her fill'de 1, yalnız yükselen kenarda bir kez değil.
+  - SCHED_FIFO yalnız `ITCH_RT_FIFO` env'iyle, pinleme yalnız core > 0 ile.
+  - Birincil/ikincil: `Connect()`'te zaman aşımı yok, multicast hep birincil, ikincil gruba join yok.
+  - "Flush'ta emir başına delete" Glimpse'e değil ITCH `FlushOrder` (`Y`) mesajına ait.
+  - Config'te worker sayısı alanı yok.
+  - `header_snapshot` hareketsiz kitapta hiç gelmiyor.
+- **Timestamp modeli netleşti:** ITCH `ts` son `T` saniyesi içindeki ns. Eski bilgi tabanının "gün başından ns" iddiası yanlıştı. `packetTs` kernel SW RX zamanı, `CLOCK_REALTIME` epoch ns; Glimpse ve XLIO'da 0. hftsrvprod/itch-entegrasyonu ve maordersdk/emir-akisi'deki ❓'ler buna göre kapatıldı.
+- **K-01 teşhisi düzeltildi:** `partId` yalnız log etiketi, çakışma üretmiyor. Asıl sorun snapshot-end'in pazar başına sabit Partition 1–4 beklemesi (`isMarketGlimpseComplete`). hftsrvprod/config da buna göre güncellendi.
+- **Thread adlandırması:** Snapshot-end ve ITCH callback'leri `ItchClient` decode thread'inde çalışıyor, RX thread'inde değil. hftsrvprod/itch-entegrasyonu ve strateji-cekirdegi'nde "receiver thread" ifadeleri düzeltildi.
+- **K-06 kapandı:** Eski `bugs-quirks.md`'deki 17 maddenin durumu README § Eski bilinen buglar'da. Düzeltilen: #8 (`T`), #10, #16 (eski bilgi yanlıştı). Kısmen düzelen: #5, #6, #7, #13, #14. Geri kalanı hâlâ var.
+- **Yeni konular K-126 – K-148** (ACIK-KONULAR § itch-sdk). Öne çıkanlar:
+  - K-126: snapshot-end `market`'i yok sayıyor.
+  - K-127: kurtarılamayan gap partition'ı donduruyor.
+  - K-146: orderbook başına ömür boyu 32 abonelik sınırı.
+
 ## 2026-10-22 — MAOrderSDK derinleştirme
 
 Kaynak: MAOrderSDK `a788782` (değişmedi). Host tarafı için HftSrvProd ve order-service, FIX config'leri için Algo-Setup/algo-configs de okundu.
