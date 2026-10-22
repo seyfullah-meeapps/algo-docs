@@ -12,16 +12,14 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 ## Şu an (2026-10-22)
 
 - Bütün dosyalar `taslak`; `bos` kalmadı. Kullanıcı gözden geçirmesi bekleniyor.
-- `dogrulama-2026-10-22` branch'i yerel `main`'e fast-forward edildi (`424d0c0`). **Push edilmedi**, kullanıcı onayı bekleniyor.
+- `main` push edildi; `dogrulama-2026-10-22` branch'i silindi. Önceki sohbetin transkripti silindi (içeriği bu dosyaya aktarıldı).
 - Remote: `seyfullah-meeapps/algo-docs` (kişisel hesap). Planlanan `MeeApps/algo-docs` (org) değil; bilinçli mi, sorulmadı.
-- Repo kökünde önceki sohbetin transkripti (`2026-10-22-135950-meeapps-ai-algo-revize.txt`) untracked duruyor; commit'lenmemeli.
 
 ## Sıradaki
 
-1. `main`'i push et (onay sonrası); `dogrulama-2026-10-22` branch'ini silmeyi sor.
-2. `ACIK-KONULAR.md`'deki konuları kapat — kullanıcı hangisinden başlanacağını seçecek (K-01/K-02 ertelendi).
-3. Kullanıcı taslakları gözden geçirdikçe `durum: dogrulandi`.
-4. Periyodik güncelleme: kullanıcı istediğinde `_surec/guncelleme.md`.
+1. `ACIK-KONULAR.md`'deki konuları kapat — kullanıcı hangisinden başlanacağını seçecek (K-01/K-02 ertelendi).
+2. Kullanıcı taslakları gözden geçirdikçe `durum: dogrulandi`.
+3. Periyodik güncelleme: kullanıcı istediğinde `_surec/guncelleme.md`.
 
 ## Kararlar
 
@@ -38,12 +36,13 @@ Kullanıcıyla alınmış kararlar; aksi söylenmedikçe geçerli.
 - **İnternet:** Genel tarama yok; yalnızca belirli şüpheli/tarihe bağlı borsa iddiaları tek tek kontrol edilir.
 - **Güncelleme akışı:** Kullanıcı "güncelleyelim" der → agent commit'leri inceleyip özet çıkarır → kullanıcı onaylar → yazılır. İlk sürüm main'e, sonrakiler branch + PR.
 - **VİOP partition konusu** (K-01, K-02): incelemesi ertelendi.
+- **Push:** Her adımdan sonra `main` commit'lenip push edilir (onay beklenmez). İşi biten branch'ler silinebilir.
 - **Not tutma:** Açık sorunlar `ACIK-KONULAR.md`'de tek satır + link; oturum devamlılığı bu dosyada.
 
 ## Geçmiş
 
 En yeni en üstte; oturum başına birkaç satır.
 
-- **2026-10-22 (3. oturum):** Kullanıcının `dogrulama-2026-10-22` branch'i main'e alındı (borsa kuralları, sözlük, ❓ temizliği — bkz. CHANGELOG). `ACIK-KONULAR.md` ve bu dosya açıldı.
+- **2026-10-22 (3. oturum):** Kullanıcının `dogrulama-2026-10-22` branch'i main'e alındı (borsa kuralları, sözlük, ❓ temizliği — bkz. CHANGELOG). `ACIK-KONULAR.md` ve bu dosya açıldı. Push kuralı kondu; transkript silindi.
 - **2026-10-22 (2. oturum, transkript dışı):** `dogrulama-2026-10-22` branch'inde ❓'ler koddan kapatıldı, `borsa-kurallari.md` ve `sozluk.md` yazıldı.
 - **2026-10-22 (1. oturum):** Yapı kuruldu; sistem haritası, 9 strateji, 13 servis, operasyon ve akışlar taslak yazıldı. Kullanım limitinde kesildi.
