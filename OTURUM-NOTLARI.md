@@ -13,7 +13,7 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 - Bütün dosyalar `taslak`; `bos` kalmadı. Kullanıcı gözden geçirmesi bekleniyor.
 - `main` push edildi; `dogrulama-2026-10-22` branch'i silindi. Önceki sohbetin transkripti silindi (içeriği bu dosyaya aktarıldı).
-- Madde 1–7: trade-data-app, HftSrvProd, order-service, MAOrderSDK, itch-sdk, ouch-sdk/network-sdk, mtrader-trade-ui. **Madde 1–9 bitti** (madde 9: K-10–K-12 resmi Pay Piyasası Prosedürü'nden kapandı; K-04 netleşti, kasıt sorusu kullanıcıda/ekipte). **Sıradaki: madde 10 (kullanıcı taslakları gözden geçirdikçe `durum: dogrulandi`)**; sonra ACIK-KONULAR bug?/iş.
+- Madde 1–7: trade-data-app, HftSrvProd, order-service, MAOrderSDK, itch-sdk, ouch-sdk/network-sdk, mtrader-trade-ui. **Madde 1–9 bitti.** Kullanıcıyla eklenen yeni maddeler 11–13. **Şu an madde 11 (AlgoProd) sürüyor:** `10-servisler/algorithmic-trading/` alt dosyalara bölünüyor — `uygulama-ve-threadler.md`, `emir-yolu.md`, `grpc-ve-veri.md` + `20-stratejiler/{arbitraj,vwap,fon-takibi}.md` yeniden doğrulama (4 agent). Prod = master `aa150ee` (dev'in 31 gerisi, 12 master-only commit).
 - Yöntem: konu başına paralel agent alt dosya yazar → çelişkileri koddan kontrol et → README'yi indekse çevir → ACIK-KONULAR'a tek satır ekle → CHANGELOG → push.
 - Remote: `seyfullah-meeapps/algo-docs` (kişisel hesap). Planlanan `MeeApps/algo-docs` (org) değil; bilinçli mi, sorulmadı.
 
@@ -33,6 +33,9 @@ Boşluk analizi (2026-10-22): yeni KB ~3.100 satır, eski `meeapps-ai` ~25.000 s
 8. ~~Operasyon~~ ✅ 2026-10-22
 9. ~~Doğrulamalar~~ ✅ 2026-10-22 (K-04 kasıt sorusu açık)
 10. Kullanıcı taslakları gözden geçirdikçe `durum: dogrulandi`.
+11. **AlgoProd derinleştirme** (en büyük boşluk; eski KB'de de yoktu).
+12. **`30-akislar/`** güncel servis dokümanlarına göre yeniden doğrulama/genişletme.
+13. **Admin paneli** (`mtrader-frontend-apps`) derinleştirme.
 
 ## Kararlar
 
