@@ -17,9 +17,20 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Sıradaki
 
-1. `ACIK-KONULAR.md`'deki konuları kapat — kullanıcı hangisinden başlanacağını seçecek (K-01/K-02 ertelendi).
-2. Kullanıcı taslakları gözden geçirdikçe `durum: dogrulandi`.
-3. Periyodik güncelleme: kullanıcı istediğinde `_surec/guncelleme.md`.
+**Öncelik: dokümanı tamamlamak.** `ACIK-KONULAR.md`'deki bug?/iş konularına doküman bitince bakılacak.
+
+Boşluk analizi (2026-10-22): yeni KB ~3.100 satır, eski `meeapps-ai` ~25.000 satır; yeni dosyalar özet seviyesinde. Eski içerik kopyalanmaz, güncel koda karşı yeniden yazılır. Eksik derinlik:
+
+1. **trade-data-app:** REST/gRPC API yüzeyi, DB şeması (K-08), veri akışı, dış entegrasyonlar (VERDA/Datastore/AKD/BYF), config referansı.
+2. **HftSrvProd:** command pattern + GUI gRPC sözleşmesi, strateji base class, emir yaşam döngüsü, config/açılış.
+3. **order-service:** risk kontrolleri, kalıcılık, emir yönlendirme, config referansı.
+4. **MAOrderSDK:** bağlantı yaşam döngüsü, emir akışı, OUCH mesajları.
+5. **itch-sdk:** mesaj kataloğu, alım yolu, Glimpse/Rewinder ayrıntısı, bilinen buglar (K-06).
+6. **ouch-sdk / network-sdk:** public API, wire protokolü (K-07).
+7. **mtrader-trade-ui:** ekranlar, REST/WS kullanımı, auth — eski ve yeni GUI ayrı ayrı.
+8. **Operasyon:** config referansı, açılış log imzaları, sabah kontrolleri (K-09).
+9. **Doğrulamalar:** K-04, K-05, K-10–K-12.
+10. Kullanıcı taslakları gözden geçirdikçe `durum: dogrulandi`.
 
 ## Kararlar
 
@@ -37,6 +48,7 @@ Kullanıcıyla alınmış kararlar; aksi söylenmedikçe geçerli.
 - **Güncelleme akışı:** Kullanıcı "güncelleyelim" der → agent commit'leri inceleyip özet çıkarır → kullanıcı onaylar → yazılır → `main`'e push.
 - **VİOP partition konusu** (K-01, K-02): incelemesi ertelendi.
 - **Push:** Her adımdan sonra `main` commit'lenip push edilir (onay beklenmez). İşi biten branch'ler silinebilir.
+- **Öncelik:** Önce doküman tamamlanır; sorun düzeltme/inceleme (ACIK-KONULAR bug?/iş) sonra.
 - **Not tutma:** Açık sorunlar `ACIK-KONULAR.md`'de tek satır + link; oturum devamlılığı bu dosyada.
 
 ## Geçmiş
