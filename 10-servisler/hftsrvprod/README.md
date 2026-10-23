@@ -86,7 +86,7 @@ if (!maosdk || !maosdk->enterOrder(HftConvert::toSdkMsg(order, account, fatherRe
 - SDK hesabın sahibiyse (handoff sonrası, bağlantı canlı) emir doğrudan BIST'e gider; değilse order-service'e.
 - `ownsAccount` canlı bağlantı ister: OUCH koparsa emirler order-service'e düşer. SDK sahipken `false` dönerse emir **gönderilmez**.
 - **Father order ref:** parçalanan emirlerin accept'leri toplanır (Tavan/Taban `orderCompletelyAccepted`).
-- **Replay gate:** handoff sonrası replay bitene kadar stratejiler emir göndermez (20 sn watchdog, 60 sn zorunlu açılma).
+- **Replay gate:** strateji ITCH/gönderim girişlerini sınırlar; GUI manuel emir, cancel-all ve close-position yolları gate'i atlayabilir. 20 sn watchdog henüz handoff yokken, 60 sn timeout ilk handoff kaydından sonra geçerlidir ([gate ve istisnalar](emir-yasam-dongusu.md#replay-gate-strategymanager)).
 - **Çift accept koruması:** `OrderRegistry` + `OuchManager::claimGlobalAcceptedToken`.
 
 Ayrıntı ve istisnalar: [emir-yasam-dongusu](emir-yasam-dongusu.md).

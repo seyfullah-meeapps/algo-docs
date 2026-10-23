@@ -1,6 +1,6 @@
 ---
 kapsam: Çalışma oturumlarının devamlılığı — alınan kararlar, mevcut durum, sıradaki işler
-dogrulama: 2026-10-22
+dogrulama: 2026-10-23
 durum: taslak
 ---
 
@@ -14,12 +14,13 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 - Bütün dosyalar `taslak`; kullanıcı gözden geçirmesi bekleniyor. **Planlanan derinleştirme maddeleri 1–9 ve 11–13 tamamlandı.**
 - Madde 12: yedi akış + README indeks, K-208–K-220; `1c5a5d9` main'e push edildi.
 - Madde 13: admin README indeks + üç alt dosya, K-221–K-228; kaynak kod ve development/master sözleşme farkları kontrol edildi.
+- Madde 10 teknik hazırlığı: tüm repo yapısal taraması ve özet çelişkilerinin temizliği tamamlandı. `_surec/kontrol.py` bağlantı/frontmatter/manifest/kaynak-ref kontrolü yapar; içerik onayı vermez. İnceleme sırası `_surec/inceleme-durumu.md` içinde.
 - Kaynak kontrolü `C:\Users\Seyf\algo-workspace` snapshot'larında yapıldı. Fetch, browser/build/deploy veya canlı kurtarma denemesi yapılmadı; uygulama kaynakları değişmedi.
 - Ekli konuşma doküman commit'lerine dahil edilmedi. Remote mevcut `seyfullah-meeapps/algo-docs`. **Admin belgeleri yerel main üzerinde commit'lendi; push otomatik onay incelemesince hedef sahipliği/gönderim yetkisi yeterince doğrulanmadığı için reddedildi. Tekrar gönderim için kullanıcıdan bu hedefe açık onay bekleniyor.** Madde 12 daha önce push edilmişti.
 
 ## Sıradaki
 
-**Sıradaki: kullanıcı taslak incelemesi (madde 10).** İncelenen belgeler onaylandıkça `durum: dogrulandi` yapılır. Planlanan derinleştirme bitti; `ACIK-KONULAR.md` bug?/iş konuları ayrı sonraki çalışma olarak ele alınır, bu oturumda kod düzeltmesi yapılmadı.
+**Sıradaki: kullanıcı içerik incelemesi (madde 10); teknik hazırlık tamamlandı.** İncelenen belgeler onaylandıkça `durum: dogrulandi` yapılır. Planlanan derinleştirme bitti; `ACIK-KONULAR.md` bug?/iş konuları ayrı sonraki çalışma olarak ele alınır, bu oturumda kod düzeltmesi yapılmadı.
 
 Boşluk analizi (2026-10-22): yeni KB ~3.100 satır, eski `meeapps-ai` ~25.000 satır; yeni dosyalar özet seviyesinde. Eski içerik kopyalanmaz, güncel koda karşı yeniden yazılır. Eksik derinlik:
 
@@ -60,6 +61,9 @@ Kullanıcıyla alınmış kararlar; aksi söylenmedikçe geçerli.
 ## Geçmiş
 
 En yeni en üstte; oturum başına birkaç satır.
+
+- **2026-10-23 (Codex genel kontrol):** 84 Markdown belgesi ve yerel bağlantılar tarandı; manifest/frontmatter kaynakları 15 klonda 23 farklı commit nesnesine çözüldü. Gate/watchdog, handoff saati ve thread güvenliği özetleri düzeltildi; kontrol aracı ve inceleme sırası eklendi. Durum etiketleri taslak kaldı. Önceki push engeli nedeniyle remote'a tekrar gönderim denenmedi.
+
 
 - **2026-10-23 (Codex admin):** Madde 13 tamamlandı; üç alt belge ve README indeks, K-221–K-228. Panel main ↔ backend development/master alan farkları belgelendi. Sıradaki kullanıcı taslak incelemesi ve ayrı kod sorunu çalışması.
 

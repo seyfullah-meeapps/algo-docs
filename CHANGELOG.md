@@ -2,6 +2,15 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-23 — Genel tutarlılık ve taslak incelemesine hazırlık
+
+- Tüm bilgi tabanı için `_surec/kontrol.py` eklendi: yerel inline bağlantılar/başlıklar, frontmatter alanları, 400 satır sınırı, K numarası tekilliği, manifest belge yolları; isteğe bağlı salt okunur Git commit ve yerel origin branch kontrolleri. Tam YAML parser'ı veya içerik doğrulaması değildir.
+- `_surec/kontrol.md` kullanım/sınırları ve `_surec/inceleme-durumu.md` öncelikli kullanıcı incelemesi sırasını içerir. Ana README'ye frontmatter ve bağlantılar eklendi.
+- HftSrvProd `4275ccc` StrategyManager/OuchManager ve callback/kilit noktaları kontrol edildi: 20 s zero-handoff watchdog, ilk handoff sonrası 60 s timeout ve gate'i atlayan yollar özetlerde ayrıldı. HFT restart'ı için eski belirsizlik K-215 senaryosuna bağlandı.
+- Sistem haritasındaki bütün state'in korunmuş olduğu iddiası kaldırıldı; handoff login sayısı ilk + dört tekrar olarak netleştirildi. Sabah/log özetlerindeki sabit 09:40 ve her açılışta watchdog log'u varsayımları düzeltildi.
+- Kontrol aracı gerçek repo üzerinde ve geçici örneklerle sınandı: kod içindeki sahte bağlantılar, Türkçe/tekrarlı başlıklar, eksik dosya/başlık. Kaynak nesneleri mevcut; remote fetch, canlı/build testi ve uygulama kodu değişikliği yok.
+- `durum: dogrulandi` etiketi verilmedi. Önceki otomatik onay reddi nedeniyle push yeniden denenmedi; değişiklikler yerel commit'te tutulur.
+
 ## 2026-10-23 — Admin paneli derinleştirme (madde 13)
 
 Kaynak: mtrader-frontend-apps main `db10c12`, trade-data-app development `1cca9a8` / master `4a43e19`, order-service development `b86c0cf`. Yerel snapshot'lar kontrol edildi; fetch, browser testi, build veya canlı deploy yapılmadı.

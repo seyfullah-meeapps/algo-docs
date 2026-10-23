@@ -94,7 +94,7 @@ grep -a "Login accepted for user" order_service.txt
 - `DatabaseServiceClient::Connect - Connection result: SUCCESS` → DB servisinden token alındı.
 - Banner'da `HFT INITIALIZATION COMPLETE` / `Status: LIVE`.
 - `[DEBUG] ouchSDK::login() returned: true` → order-service'e bağlandı. Bu satır banner'dan sonra gelebilir. `called` satırı var ama `returned` yoksa order-service'e ulaşılamıyor demektir; bekleme zaman aşımsızdır ([log-imzalari § 3 Hata imzaları](log-imzalari.md#hata-imzaları-2)).
-- `MAOrderSDK: 0 active OUCH user(s)`, `OUCH Users: 0 connected` ve `hft.txt`'teki `zero-handoff` satırı sabah **normaldir**. OUCH kullanıcıları 09:40'taki handoff'la gelir.
+- `MAOrderSDK: 0 active OUCH user(s)`, `OUCH Users: 0 connected` ve `hft.txt`'teki `zero-handoff` satırı sabah **normaldir**. OUCH kullanıcıları gerçek config ve tetiklere bağlı handoff'la gelir; 09:40 sabit sınır değildir (VİOP tetiği daha erken olabilir, [zaman çizelgesi](../30-akislar/sabah-emri-ve-handoff.md#özet-zaman-çizelgesi)).
 - Onload kullanan müşterilerde: `Restarting with Onload` var **ve** `ld.so … cannot be preloaded` hatası yok.
 
 ### 6. Canlı emir testi (seans öncesi ret)

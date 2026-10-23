@@ -124,7 +124,7 @@ Sabah emirleri (09:40 civarı, config'e bağlı) order-service'ten gönderilir. 
 
 1. HFT açılırken MAOrderSDK'yı başlatır ama **hiçbir OUCH kullanıcısına login olmaz**. O kullanıcılar order-service'tedir; ikinci bir login BIST tarafından reddedilir.
 2. order-service sabah emirlerini gönderir. Her OUCH `repeatableOrders` satırının (`morning_viop` dahil) ve FIX akışının sonunda, ya da `type: morning` satırının saati + 30 sn geçince ([ayrıntı](../10-servisler/order-service/sdk-ve-oturumlar.md)) `MAOSdkManager::DisconnectMorningOrderUsers` çalışır. Uygulama kullanıcısının (HFT) order-service'e bağlı olmasını bekler, OUCH bağlantısını kapatır (`disconnectUser` yalnız soketi kapatır; SoupBinTCP LogoutRequest gönderilmez) ve `UserDisconnected` mesajını (kullanıcı adı, şifre, IP, port, izinli hesaplar, `callbackNumber/total`) MARpc ile HFT'ye yollar.
-3. HFT `ouchSDK::orderUserDisconnected` callback'inde bu bilgilerle `maosdk->connectUser` çağırır. BIST eski oturumu henüz bırakmamış olabileceğinden 4 kez artan beklemeyle tekrar dener (2026-08-03 olayı).
+3. HFT `ouchSDK::orderUserDisconnected` callback'inde bu bilgilerle `maosdk->connectUser` çağırır. BIST eski oturumu henüz bırakmamış olabileceğinden ilk denemeden sonra 4 kez daha artan beklemeyle tekrar dener (2026-08-03 olayı).
 4. Login sonrası MAOrderSDK günün emirlerini **replay** eder. HFT'nin *replay gate*'i tüm devredilen kullanıcıların replay'i bitene kadar stratejileri ITCH'e kapalı tutar.
    - 20 sn içinde hiç handoff gelmezse gate yine de açılır (zero-handoff watchdog, `StrategyManager.cpp`).
 5. Bu noktadan sonra o hesapların emirleri doğrudan MAOrderSDK'dan gider.
@@ -148,5 +148,5 @@ Açılış log imzaları ve sorun giderme: `40-operasyon/`.
 
 - **Hot path** = ITCH alımı → strateji kararı → OUCH gönderimi (HFT içinde, handoff sonrası). Bu yolda allocation, kopya, kilit, sistem çağrısı istenmez.
 - **order-service hot path'te değildir** (HFT için handoff sonrası); AlgoProd için ise emir yolunun parçasıdır.
-- **Thread safety:** Callback'ler farklı thread'lerden gelir (OUCH recv thread, ITCH client thread, gRPC thread). Paylaşılan her state mutex/atomic ile korunur. Combiner açıkken `onExecuted` ITCH thread'inden de gelebilir (`HftMain.cpp` yorumları).
+- **Thread safety:** Callback'ler farklı thread'lerden gelir (OUCH recv thread, ITCH client thread, gRPC thread). Paylaşılan state senkronizasyon gerektirir; kodda kilitsiz haritalar ve veri yarışı adayları da vardır ([HFT şüpheli davranışlar](../10-servisler/hftsrvprod/emir-yasam-dongusu.md#şüpheli-davranışlar-koddan)). Bu ifade bütün state'in korunmuş olduğu garantisi değildir. Combiner açıkken `onExecuted` ITCH thread'inden de gelebilir (`HftMain.cpp` yorumları).
 - CPU pinning, Onload ve `mlockall` config ile açılıp kapanır. Prod'da yaşanmış host kilitlenmeleri nedeniyle bazıları bilerek kapalıdır (`Configuration.toml` yorumları).
