@@ -11,6 +11,8 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Şu an (2026-10-23)
 
+- Varant (13)/Teorik Fiyat statik ikinci turu tamamlandı; HFT yeniden fetch/pull sonrası uçlar aynı. K-241 senkron ret/recursive olmayan mutex, K-242 tek satış token'ı/parçalı fill sınırı eklendi. Teorik ilk eşleşme feature bfe65e2 incelendi, referans davranışına geçirilmedi; K-04 devam ediyor.
+
 - Süpürme UI/wire alt turu tamamlandı: HFT ve GUI fetch/pull sonrası referans uçlar aynı. Tavan `Should_Sweep` nihai payload'da pozitif Melt_Lot ile kapılanır; motor aynı kısıtı uygulamaz. Varant Toplu `Sweep_Left_Ask` ayrı GUI feature dalındadır; development motor desteği yok (K-240), eşleşen HFT feature doğrulanmadı.
 
 - Varant Toplu development callback/trigger/reprice alt turu tamamlandı; HFT fetch/pull sonrası referans uç değişmedi, master'da sınıf yok. Her alış fill'ine koşulsuz satış ve her yarışta açığa düşmeme ifadeleri daraltıldı. K-239 boş-kuyruk next-check gecikme adayı kaydedildi. Yeni origin `theo-cancel-on-first-eslestirme` ref'i görüldü; içeriği henüz incelenmedi.
@@ -36,7 +38,7 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Sıradaki
 
-**Sıradaki: Varant (13), Teorik Fiyat ve AlgoProd stratejilerinin ikinci kod turu.** Tavan Süpürme UI/wire ve Varant Toplu sweep feature ayrımı kaydedildi; diğer GUI yollarının tümü yeniden incelenmedi. Classic/Tavan/Taban ve FIX statik alt turları kaydedildi; entegrasyon/gerçek exchange, thread yarışları ve prod doğrulaması yapılmadı. Bütün bilgi tabanının ikinci doğrulaması henüz tamamlanmadı.
+**Sıradaki: AlgoProd stratejilerinin ikinci kod turu — Arbitraj, Fon Takibi, VWAP.** Varant (13)/Teorik ve HFT strateji alt turları kaydedildi; GUI yollarının tümü yeniden incelenmedi. Entegrasyon/gerçek exchange, thread yarışları ve prod doğrulaması yapılmadı. Bütün bilgi tabanının ikinci doğrulaması henüz tamamlanmadı.
 
 Kullanıcı içerik onayı geldikçe durum etiketi kapsamına göre güncellenir; genel devam talimatıyla topluca dogrulandi yapılmaz. Uygulama bug düzeltmesi/deploy bu doküman incelemesinin dışında kaldı.
 

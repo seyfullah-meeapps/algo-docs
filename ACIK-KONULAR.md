@@ -318,6 +318,9 @@ Koddan çıkarılan sonuçlar canlıda gözlemle doğrulanmış sayılmaz; ayrı
 
 | K-240 | doğrula | GUI sweep-left-ask feature'ı Sweep_Left_Ask ve yeni maliyet kapanışı anlatıyor; HFT development bu sözleşmeyi taşımıyor, eşleşen motor dalı teyit edilmeli | [Varant Toplu feature](20-stratejiler/varant-toplu.md#ikinci-tur--sweep_left_ask-feature-sınırı) |
 
+| K-241 | bug? | Varant (13) emir gönderimi derivativeMutex tutarken senkron SDK ret callback'i aynı recursive olmayan mutex'i yeniden istiyor | [Varant](20-stratejiler/varant.md#ikinci-kod-turu--ret-ve-parçalı-satış-sınırları) |
+| K-242 | doğrula | Varant (13) parçalı buy fill'lerinde ayrı satışlar üretirken yalnız tek sellOrderToken tutuyor; hedef replace toplu kalan miktarla yalnız o token'a gidiyor | [Varant](20-stratejiler/varant.md#ikinci-kod-turu--ret-ve-parçalı-satış-sınırları) |
+
 ## Yolda / takip
 
 | # | Tür | Konu | Ayrıntı |

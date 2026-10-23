@@ -172,6 +172,10 @@ HFT fetch/pull sonrası development/master uçları değişmedi; Varant Toplu ma
 
 HFT ve GUI yeniden fetch/development pull, uçlar aynı. [Tavan Should_Sweep](../20-stratejiler/tavan.md#ikinci-tur--süpürme-uiwire-sözleşmesi) GUI form/toplu/nihai payload ile motor parser/trigger karşılaştırıldı; UI lot şartı motor garantisi sayılmadı. [Varant Sweep_Left_Ask](../20-stratejiler/varant-toplu.md#ikinci-tur--sweep_left_ask-feature-sınırı) ayrı feat/sweep-left-ask d2c35c7 sözleşmesidir; K-240 development motor eşleşmesi açık. Feature motor yorumları referans davranışına geçirilmedi. Browser/build/canlı test yok.
 
+### Strateji ikinci turu — Varant (13) ve Teorik Fiyat
+
+HFT yeniden fetch/pull sonrası uçlar aynı. [Varant ret/parçalı satış](../20-stratejiler/varant.md#ikinci-kod-turu--ret-ve-parçalı-satış-sınırları) K-241/K-242'yi kaydeder; tolerans/replace özeti daraltıldı. [Teorik ilk eşleşme feature](../20-stratejiler/teorik-fiyat.md#ikinci-kod-turu--branch-ve-ilk-eşleşme) bfe65e2 development üzerine ayrı dal olarak incelendi. K-04 çözülmüş sayılmadı; feature BIST sırası yorumu protokol/canlı kanıt sayılmadı. Canlı/build testi yok; sıradaki AlgoProd stratejileri.
+
 ## 6. Son iki haftada aktif, referansa merge edilmemiş branch'ler
 
 2026-10-09 ve sonrası commit tarihine göre tarandı. Branch'in adı niyet hakkında ipucu verir; bütün içeriğinin doğru/çalışır olduğu veya prod'a çıkacağı anlamına gelmez.

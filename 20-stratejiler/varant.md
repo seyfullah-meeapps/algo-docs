@@ -4,6 +4,9 @@ kaynak:
   - repo: HftSrvProd
     branch: development
     commit: 4275ccc
+  - repo: HftSrvProd
+    branch: master
+    commit: 052dd96
 dogrulama: 2026-10-22
 durum: taslak
 ---
@@ -33,7 +36,7 @@ Kod: `src/Strategy/HftWarrant.{h,cpp}`, `src/Commands/HftWarrantCommand.{h,cpp}`
 ## Tolerans
 
 `Tolerance_Count` = izin verilen **alış fill'i** sayısı.
-- Sayaç her alış fill'inde artar (`currentTradeCount`). Sınır dolunca kriter kontrolü kapanır ve strateji durur.
+- Sayaç her alış fill'inde artar (`currentTradeCount`). Sınır dolunca `strategyStopped=true`, `criteriaCheckActive=false`, durum `Idle` olur; bu yol `stop()` ile bütün emirleri iptal etmez. Kriter takibi/hedefe replace yolu da kapanır.
 - ⚠ Tolerans 0 iken hiç işlem yapılmaz, çünkü `currentTradeCount < toleranceCount` şartı sağlanmaz. Varant Toplu'da 0 sınırsız demektir; burada değil.
 
 ## Fiyat ölçekleri (kritik)
@@ -61,7 +64,17 @@ Karıştırmak emri 10× veya 1000× yanlış fiyata gönderir. UI tarafı `WARR
 | `Hft_Type` | Long | `HftType::Warrant` (4) |
 | `Derivative_Orders` | String (JSON) | `[{instrumentId, symbol, userPrice, userQuantity, isActive}]` |
 
-## Pozisyon ve GUI
+## İkinci kod turu — ret ve parçalı satış sınırları
+
+2026-10-23 HFT fetch/pull sonrası development `4275ccc` ve master `052dd96` değişmedi. `HftWarrant.{h,cpp}` ve incelenen command cpp'si iki uçta aynı; SDK/callback altyapısı ve prod binary'nin eşitliği buradan çıkmaz. Trigger, alış/satış, fill/ret, replace ve tolerans yolları okundu; canlı test yok.
+
+**K-241 — senkron ret kendi mutex'ini yeniden istiyor:** `processItchEventTimed` `derivativeMutex` (`std::mutex`) tutarken `executeBuyOrders` SDK'ya girer. `executeOrder` da aynı kilit altında `placeSellOrder` çağırır. SDK yerel validasyon/gönderim reddini senkron `onRejected` ile iletirse HFT `rejectOrder` aynı mutex'i almaya çalışır. Aynı thread recursive olmayan mutex'te kalabilir. Bu statik çağrı zinciridir; bütün emirlerin kilitlendiği veya canlıda yaşandığı iddia edilmez. SDK'nın senkron ret ürettiği yol koşuldur.
+
+**K-242 — birden çok satış için tek token:** Her buy fill'i ayrı satış gönderebilir; `addOrder` her satış accept'inde tek `sellOrderToken` alanını üzerine yazar. `replaceToTarget` yalnız bu token'a, bütün türev için `buyFilledQuantity-sellFilledQuantity` miktarıyla replace dener. Önceki satışlar böylece aynı hedef yönetiminde ayrı ayrı temsil edilmez. İki parçalı buy fill/iki satış ACK senaryosu koddan görülebilir; exchange miktar semantiği ve canlı sonuç test edilmedi. Varant Toplu'nun satış listesi modeliyle karıştırma.
+
+`replaceToTarget` gönderim sonucu başarısız olsa da `isReplacedToTarget=true` yazar; bu alan ACK teyidi değildir ve otomatik tekrar garantisi vermez. Tolerans sınırı yalnız trade fill sayacında değil, tamamlanan tur `cycleCount` kontrollerinde de kullanılır. Ayar 0 komutta geçersiz sayılır; “0 sınırsız” değildir.
+
+### Arayüz ve bakiye
 
 - Elle girilen (`UserOrder`) emirler strateji mantığına girmez; yalnızca varant veya dayanak bakiyesini günceller.
 - Varant bakiyeleri `HftWarrantBalanceCommand` ile GUI'ye gider.

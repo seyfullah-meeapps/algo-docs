@@ -4,6 +4,12 @@ kaynak:
   - repo: HftSrvProd
     branch: development
     commit: 4275ccc
+  - repo: HftSrvProd
+    branch: master
+    commit: 052dd96
+  - repo: HftSrvProd
+    branch: theo-cancel-on-first-eslestirme
+    commit: bfe65e2
 dogrulama: 2026-10-22
 durum: taslak
 ---
@@ -40,7 +46,15 @@ Kod: `src/Strategy/HftTheoreticalPrice.{h,cpp}`, `src/Commands/TheoreticalPriceC
 - `updateOrder` replace sonrası `orderMap`'i güncellemiyor; yalnızca log basıyor.
 - Ayar alanı yok: `TheoreticalPriceCommand` yalnızca ortak alanları taşır.
 
-## UI
+## İkinci kod turu — branch ve ilk eşleşme
+
+2026-10-23 fetch/pull sonrası development `4275ccc` ve master `052dd96` aynı kaldı. İncelenen `HftTheoreticalPrice.cpp` iki uçta aynı; `executeOrder` ve replace log-only sınırları sürüyor, K-04 kapanmadı. `evaluateTheoreticalOrders(true)` parametresi eylemi zorla akşam yapmaz: iptal/ters emir kararı hâlâ `nightEmirToplama` ile verilir. “night ... set to TRUE” log'u da o noktada bir atama değildir.
+
+Feature `theo-cancel-on-first-eslestirme` `bfe65e2`, development `4275ccc` üzerine ayrı değişikliktir. `ItchSdkClient` ilk `KapanisEmirToplama → Eslestirme` geçişini diğer çalışan Teorik stratejilere sentetik state olayıyla yayar; kendi orderbook'u ilk eşleşen strateji bu yayından hariçtir. `closingEvaluated` daha sonra kendi state olayında bir tekrar değerlendirmesini atlar. Başlat/durdur listener kaydı ekler/çıkarır.
+
+Bu “bütün emirler ilk dolumdan önce iptal edilir” garantisi değildir: olay alma, AlgoWorker kuyruğu, cancel gönderimi ve exchange işlemesi arada kalır. Feature K-04'ün log-only fill kaydını veya kalan miktar güncellemesini değiştirmez. Feature yorumundaki BIST fill/state sırası bu turda protokol veya canlı kayıtla teyit edilmedi. Referans doküman davranışı bu dala geçirilmedi; build/canlı test yok.
+
+### Arayüz
 
 - Yeni GUI route `theoretical-price`. Ayar modalı yok.
 - Tracker denge fiyatını trade-data-app `/ws/v1/equilibrium/start` feed'inden gösterir. Bu feed subscribe olunca snapshot göndermez; satır borsa denge güncellemesi yayınlayana kadar (yalnızca müzayedelerde) boş kalır.
