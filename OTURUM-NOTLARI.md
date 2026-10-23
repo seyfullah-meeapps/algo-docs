@@ -11,15 +11,15 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Şu an (2026-10-23)
 
-- Bütün dosyalar `taslak`; kullanıcı gözden geçirmesi bekleniyor.
-- **Madde 1–9, 11 ve 12 tamamlandı.** `30-akislar/` yedi dosya + README indeks; önceki oturumdan kalan beş taslak kontrol edildi, eksik emir dönüşü ve AlgoProd akışı yazıldı. K-208–K-220 kaydedildi.
-- **Sıradaki madde 13:** `mtrader-frontend-apps` admin panelini derinleştirme. Madde 10 kullanıcı incelemesine bağlı.
-- Kaynak kontrolü `C:\Users\Seyf\algo-workspace` yerel snapshot'larında yapıldı; fetch veya canlı sunucu incelemesi yapılmadı. Kaynak repolar değişmedi.
-- Akışlar ve çapraz düzeltmeler için commit/push sonucu oturum sonunda güncellenecek. Kullanıcının eklediği transkript korunur, doküman commit'ine dahil edilmez.
+- Bütün dosyalar `taslak`; kullanıcı gözden geçirmesi bekleniyor. **Planlanan derinleştirme maddeleri 1–9 ve 11–13 tamamlandı.**
+- Madde 12: yedi akış + README indeks, K-208–K-220; `1c5a5d9` main'e push edildi.
+- Madde 13: admin README indeks + üç alt dosya, K-221–K-228; kaynak kod ve development/master sözleşme farkları kontrol edildi.
+- Kaynak kontrolü `C:\Users\Seyf\algo-workspace` snapshot'larında yapıldı. Fetch, browser/build/deploy veya canlı kurtarma denemesi yapılmadı; uygulama kaynakları değişmedi.
+- Ekli konuşma doküman commit'lerine dahil edilmedi. Remote mevcut `seyfullah-meeapps/algo-docs`. **Admin belgeleri yerel main üzerinde commit'lendi; push otomatik onay incelemesince hedef sahipliği/gönderim yetkisi yeterince doğrulanmadığı için reddedildi. Tekrar gönderim için kullanıcıdan bu hedefe açık onay bekleniyor.** Madde 12 daha önce push edilmişti.
 
 ## Sıradaki
 
-**Öncelik: dokümanı tamamlamak.** `ACIK-KONULAR.md`'deki bug?/iş konularına doküman bitince bakılacak.
+**Sıradaki: kullanıcı taslak incelemesi (madde 10).** İncelenen belgeler onaylandıkça `durum: dogrulandi` yapılır. Planlanan derinleştirme bitti; `ACIK-KONULAR.md` bug?/iş konuları ayrı sonraki çalışma olarak ele alınır, bu oturumda kod düzeltmesi yapılmadı.
 
 Boşluk analizi (2026-10-22): yeni KB ~3.100 satır, eski `meeapps-ai` ~25.000 satır; yeni dosyalar özet seviyesinde. Eski içerik kopyalanmaz, güncel koda karşı yeniden yazılır. Eksik derinlik:
 
@@ -35,7 +35,7 @@ Boşluk analizi (2026-10-22): yeni KB ~3.100 satır, eski `meeapps-ai` ~25.000 s
 10. Kullanıcı taslakları gözden geçirdikçe `durum: dogrulandi`.
 11. ~~AlgoProd derinleştirme~~ ✅ 2026-10-23
 12. ~~`30-akislar/` yeniden doğrulama/genişletme~~ ✅ 2026-10-23
-13. **Admin paneli** (`mtrader-frontend-apps`) derinleştirme.
+13. ~~Admin paneli (`mtrader-frontend-apps`) derinleştirme~~ ✅ 2026-10-23
 
 ## Kararlar
 
@@ -60,6 +60,9 @@ Kullanıcıyla alınmış kararlar; aksi söylenmedikçe geçerli.
 ## Geçmiş
 
 En yeni en üstte; oturum başına birkaç satır.
+
+- **2026-10-23 (Codex admin):** Madde 13 tamamlandı; üç alt belge ve README indeks, K-221–K-228. Panel main ↔ backend development/master alan farkları belgelendi. Sıradaki kullanıcı taslak incelemesi ve ayrı kod sorunu çalışması.
+
 
 - **2026-10-23 (Codex devam):** Transkript ve çalışma ağacı karşılaştırıldı. Madde 12 tamamlandı; yedi akış, README indeks ve çapraz düzeltmeler, K-208–K-220. Kritik yollar kaynak kodla kontrol edildi; canlı kurtarma denenmedi. Sıradaki madde 13.
 

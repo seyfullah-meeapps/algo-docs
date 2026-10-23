@@ -238,7 +238,7 @@ Dış servis gerektiren uçlar ilk `DataService.Login` gelmeden önce "Gui exter
 | `AllowStrategyForAccount` / `DenyStrategyFromAccount` | `POST` / `PUT /v1/users/accounts/strategies` | `Account_Allowed_Strategies` |
 | `GetStrategies` | `GET /v1/strategies` | `Strategies` |
 
-Hangi RPC'nin hangi tabloya yazdığının kesin listesi `pkg/db/mysql/admin_db.go` içindedir; tablo adları [`sema.md`](sema.md) ile karşılaştırılmalıdır. ❓ doğrulanmadı: yukarıdaki tablo eşlemesi her RPC için tek tek kontrol edilmedi.
+CRUD tablo/ilişkileri `pkg/db/mysql/admin_db.go` ile karşılaştırıldı (2026-10-23). Form alanları, ilişki update sınırları ve canlı servis etkisi [admin alan belgesinde](../mtrader-frontend-apps/alanlar-ve-servislere-etkisi.md); frontend/backend branch farkları [sürüm belgesinde](../mtrader-frontend-apps/dagitim-ve-surum-farklari.md).
 
 ## 9. trade-data-app'in istemci olduğu sözleşmeler (`api/client-spec/`, `pkg/gui/connections/`)
 

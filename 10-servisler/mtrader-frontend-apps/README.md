@@ -1,49 +1,37 @@
 ---
-kapsam: mtrader-frontend-apps — Admin paneli; ekranlar, backend, OUCH/FIX kullanıcı alanları, deploy
+kapsam: Admin paneli giriş noktası — rolü, kaynak sürümler, alt belge indeksi ve trade-data-app sınırı
 kaynak:
   - repo: mtrader-frontend-apps
     branch: main
     commit: db10c12
-dogrulama: 2026-10-22
+  - repo: trade-data-app
+    branch: development
+    commit: 1cca9a8
+  - repo: trade-data-app
+    branch: master
+    commit: 4a43e19
+dogrulama: 2026-10-23
 durum: taslak
 ---
 
-# mtrader-frontend-apps (Admin paneli)
+# mtrader-frontend-apps — Admin paneli
 
-Müşteri kurulumlarında DB ayarlarını arayüzden yönetmek için kullanılan web paneli: kullanıcılar, hesaplar, OUCH/FIX kullanıcıları ve aralarındaki izinler.
+GUI operatörlerini, hesapları, OUCH/FIX kullanıcılarını ve ilişkilerini yönetir. Emir göndermez, strateji çalıştırmaz, servis restart etmez. MySQL'e doğrudan bağlanmaz; trade-data-app AdminService REST gateway'ini kullanır.
 
-- Canlı branch **`main`**; `development` 2026-03'ten beri güncel değil.
-- Teknoloji: React Router (framework mode), Vite, TypeScript, Tailwind.
-
-## Ekranlar (`app/routes/`)
-
-| Route | Ne |
-|-------|----|
-| `login` | Admin girişi (`AdminService.Login`) |
-| `users` (list / new / edit) | Uygulama kullanıcıları (GUI operatörleri) |
-| `accounts` (list / new / edit) | Hesaplar; kullanıcı, OUCH kullanıcısı ve strateji izinleri |
-| `order-users` (list / new / edit) | **OUCH/FIX kullanıcıları** (DB `Ouchs`) |
-
-**OUCH/FIX kullanıcı formu alanları:**
-
-| Alan | Anlam |
+| Soru | Belge |
 |------|-------|
-| Kullanıcı adı, Parola | |
-| Piyasa | Equity / Derivative |
-| Kapasite | Sabah emri tekrar hesabında kullanılır |
-| Kanal | OUCH / FIX |
-| İzinli hesaplar | |
-| FIX alanları | Sender Sub ID, Sender Comp ID, Target Comp ID |
-| Ana / ikincil IP ve port | |
-| Production Ortamı | order-service `mode` filtresi bu alana bakar |
-| Aktif | |
-| Dedicated Bağlantı | |
-| **Yalnızca Sabah Emri** (`only_morning_order_user`) | Bu kullanıcı sabah emirlerinden sonra **HFT'ye devredilir** (OUCH handoff). Bkz. [order-service](../order-service/sdk-ve-oturumlar.md#7-ouch-handoff--order-service-tarafı). |
+| Route, liste/CSV, form, auth, HTTP istemcisi ve cache nerede? | [Arayüz ve oturum](arayuz-ve-oturum.md) |
+| Alan hangi DB kaydını etkiler; kaydetmek canlı servise ne zaman yansır? | [Alanlar ve servislere etkisi](alanlar-ve-servislere-etkisi.md) |
+| Branch, frontend/backend farkları, build/deploy nasıl? | [Dağıtım ve sürüm farkları](dagitim-ve-surum-farklari.md) |
+| REST/RPC uç listesi ve gateway gövde biçimi | [trade-data-app API § 8](../trade-data-app/api.md#8-adminservice-admin_uiproto--admin_uiyaml-admin_apigo--rest-adminapiport) |
+| DB ilişkileri | [trade-data-app şema](../trade-data-app/sema.md) |
+| Sabah/handoff ve restart | [Sabah emri](../../30-akislar/sabah-emri-ve-handoff.md), [kopma/kurtarma](../../30-akislar/kopma-ve-kurtarma.md) |
 
-## Backend
+## Önce bil
 
-trade-data-app `AdminService` (`api/protobuf-spec/admin_ui.proto`), grpc-gateway REST üzerinden (`server.adminApiPort`, örnek 6688). İstemci tabanı `VITE_API_URL`; müşteri başına `https://admin<musteri>.meeapps.com.tr/v1`.
-
-## Deploy
-
-`.github/workflows/adminui.yml`, müşteri matrisi: Piramit, Alnus, Alnus Algo, A1, Marbas, Global, Kanjo. Docker imajı, VPN üzerinden kurulur.
+- Referans **main db10c12**; development güncel referans değildir. Repo genel branch kuralının istisnasıdır.
+- React 19, React Router 7 framework mode, Vite, TypeScript, Tailwind 4; SPA (ssr:false). React Query veri/cache; React Hook Form + Zod formlar. Tam sürümler package.json/lock dosyasındadır.
+- Paneldeki alan ile backend desteği aynı şey değildir: Dedicated/hesap tekrar alanları eski sözleşmeye aittir; development backend farklıdır.
+- DB kaydı başarılı olması canlı OUCH oturumunun güncellendiğini kanıtlamaz; otomatik reload varsayılmaz.
+- Admin girişleri Admins, panelin yönettiği GUI kullanıcıları Users tablosundadır. Admin hesapları için CRUD ekranı yoktur.
+- Kaynak branch'ler incelendi; canlı sunucunun bundle/binary sürümü doğrulanmadı. Dosyalar kullanıcı incelemesini bekleyen taslaktır.

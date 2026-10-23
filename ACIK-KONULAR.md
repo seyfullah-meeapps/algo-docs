@@ -287,6 +287,19 @@ Koddan çıkarılan sonuçlar canlıda gözlemle doğrulanmış sayılmaz; ayrı
 | K-219 | doğrula | HFT SDK ve toplu emir yolları off_hours set etmiyor; borsa gereksinimi teyit edilmedi | [sabah-emri-ve-handoff](30-akislar/sabah-emri-ve-handoff.md#9-gün-içi-ve-akşam) |
 | K-220 | bug? | AlgoProd'a bağlı morning-only OUCH kullanıcısı devredilirse referans sürüm devralmıyor; başka canlı kullanıcı yoksa hesap OUCH'suz | [sabah-emri-ve-handoff](30-akislar/sabah-emri-ve-handoff.md#13-algoprodun-yeri) |
 
+## Admin paneli (2026-10-23)
+
+| # | Tür | Konu | Ayrıntı |
+|---|-----|------|---------|
+| K-221 | bug? | Panel hesap repeat_count/Dedicated alanlarını koruyor; development backend bunları kaldırmış, OUCH repeat_count/core_to_pin alanlarını panel sunmuyor | [sürüm farkları](10-servisler/mtrader-frontend-apps/dagitim-ve-surum-farklari.md#1-frontend--backend-sözleşme-farkı) |
+| K-222 | doğrula | İzinli strateji UI listesi 0–12 ile sabit; 13/14/15 yok, DB Strategies ucu kullanılmıyor | [alanlar](10-servisler/mtrader-frontend-apps/alanlar-ve-servislere-etkisi.md#şüpheli) |
+| K-223 | doğrula | Admin yeni OUCH/FIX kaydında applicationUser=4 sabit; hedef uygulama panelden seçilemiyor | [alanlar](10-servisler/mtrader-frontend-apps/alanlar-ve-servislere-etkisi.md#şüpheli) |
+| K-224 | bug? | Order-user formunda boşaltılıp payload'dan çıkarılan parola backend update SQL'inde boş yazılabilir | [alanlar](10-servisler/mtrader-frontend-apps/alanlar-ve-servislere-etkisi.md#şüpheli) |
+| K-225 | bug? | Order-user mutation'ları dropdown cache'ini invalid etmiyor; logout QueryClient cache'ini temizlemiyor | [arayüz](10-servisler/mtrader-frontend-apps/arayuz-ve-oturum.md#şüpheli) |
+| K-226 | doğrula | Tüm export 10 000, bazı ilişki seçimleri 1000 kayıtla sınırlı | [arayüz](10-servisler/mtrader-frontend-apps/arayuz-ve-oturum.md#4-liste-toplu-silme-ve-csv) |
+| K-227 | bug? | Admin ilişki insert/update hatalarının bazıları rollback yerine devam ediyor; eksik ilişkilerle başarı dönebilir | [alanlar](10-servisler/mtrader-frontend-apps/alanlar-ve-servislere-etkisi.md#şüpheli) |
+| K-228 | doğrula | npm start server build'i bekliyor; build script'i server dizinini siliyor (production nginx yolu ayrı) | [dağıtım](10-servisler/mtrader-frontend-apps/dagitim-ve-surum-farklari.md#şüpheli) |
+
 ## Yolda / takip
 
 | # | Tür | Konu | Ayrıntı |

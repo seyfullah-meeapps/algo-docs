@@ -2,6 +2,16 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-23 — Admin paneli derinleştirme (madde 13)
+
+Kaynak: mtrader-frontend-apps main `db10c12`, trade-data-app development `1cca9a8` / master `4a43e19`, order-service development `b86c0cf`. Yerel snapshot'lar kontrol edildi; fetch, browser testi, build veya canlı deploy yapılmadı.
+
+- Admin README indekse çevrildi; arayüz/oturum, alanlar/servis etkisi, dağıtım/sürüm farkları üç alt dosyada belgelendi.
+- Route, auth/API/cache, liste/CSV, hesap/kullanıcı/order-user formları; CRUD DB ilişkileri, kayıt atomikliği ve canlı bağlantıya yansıma sınırları kaynak koddan incelendi.
+- Development backend'deki hesap repeat_count/Dedicated kaldırılması ve OUCH repeat_count/core_to_pin eklenmesi master proto ile karşılaştırıldı; prod'a doğrudan genellenmedi.
+- Yeni konular K-221–K-228; önceki K-16/K-17/K-19/K-220 ile ilişkiler linklendi. Belirsiz gateway JSON alan davranışı ve canlı sonuçlar kesinleştirilmedi.
+- Planlanan derinleştirme maddeleri 1–9 ve 11–13 tamamlandı. Madde 10 kullanıcı taslak incelemesine bağlı; kod sorunları sonraki çalışma konusu.
+
 ## 2026-10-23 — Uçtan uca akışlar (madde 12)
 
 Kaynak: mevcut yerel klonlar; HftSrvProd `4275ccc` / master `052dd96`, AlgorithmicTrading `0dc32a7` / master `aa150ee`, order-service `b86c0cf` / master `298403b`, trade-data-app `1cca9a8` / master `4a43e19`; diğer kaynaklar akışların frontmatter'ında. Remote fetch ve canlı sunucu incelemesi yapılmadı.
