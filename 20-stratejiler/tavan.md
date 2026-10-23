@@ -182,7 +182,15 @@ UI (yeni GUI, route `max-price`): canlı durum `maxPriceStateStore`'da tutulur, 
 
 Development cold'a geçerken escape örnekleme zincirini de sıfırlar; master'da bu ek sıfırlama yoktur. Kaynak: `HftMaxPrice.cpp` ve `MaxPriceCommand.cpp` iki uç farkı. Tetik/çıkış anlatımı development referansıdır; bütün queue/timer yarışları ve prod binary bu statik alt turla doğrulanmadı.
 
-### Çalışma thread'leri
+### İkinci tur — restore ve timer sırası
+
+Kısmi çıkış restore'unda cancel ve hedefe eksik alış aynı turda denenebilir; alış cancel ACK'ini beklemez. `restorePending` sonrasında execute/cancel/reject callback'lerinden `topUpToTargetIfShort` çağrılır: strateji çalışıyor/açık olmalı, aile yerleşmeli ve satış depth'i boş olmalıdır. Hedef hesabı `TLSize*1000/tavanPrice − (balance + restingBuy)`; bekleyen alış miktarı da taahhüt sayılır. Eksik yoksa ek alış yok; stop restore niyetini temizler. Bunlar gönderim sonrası gerçek fill garantisi değildir.
+
+`tryConsumePendingOpenAfterClose` 2 ms TTL'yi yalnız callback'te çağrıldığında kontrol eder; kendiliğinden tekrar gönderen timer değildir. Aile ve depth'ler yerleşmeli, tavan hâlâ kilitli olmalı; KIE çıkıştan pozitif bakiye kalmışsa restore için özel izin vardır. Bu yol Taban'ın sıfır balance şartıyla aynı değildir.
+
+İkinci kural job'ı periodik thread'den emir göndermez; sentetik olayla cached defter üzerinde yalnız cancel kararı yeniden çalışır. Snapshot dışındaki çalışma saati filtresi timer için de geçerlidir ([K-238](taban.md#ikinci-tur--timer-ve-callback-sırası)). Tavan timer/restore kaynak blokları master `052dd96` ile karşılaştırıldı; bu alt turda bu mekanizmaların master'da olmadığı sonucu çıkmadı. Gerçek thread/ACK zamanlaması test edilmedi.
+
+### Thread özeti
 
 - ITCH olayları AlgoWorker'da işlenir. OUCH callback'leri recv thread'inden gelir. Second rule timer'ı periodic jobs thread'indedir; karar vermez, sadece olay kuyruğa atar.
 - Kilit: `buySellInfoMutex` (`setCommand` 500 ms dener). Emir gönderilmeden önce kilit bırakılır.

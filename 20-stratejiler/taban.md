@@ -27,7 +27,7 @@ Tavan ile **aynı sözleşmeyi paylaşmaz**. Ortak alanlar yalnızca genel yaşa
 
 - `Taban` (kilitli): satış header'ı taban fiyatında **ve** alış tarafı boş (`buyLevel == 0`).
 - `NotTaban → Taban` geçişinde `tabanSecuredTimestamp` damgalanır; giriş cooldown'u buradan sayılır.
-- Bütün zamanlama ITCH saatine göredir (duvar saati değil).
+- Gerçek defter olayları ITCH damgasını kullanır; sentetik timer olayı `system_clock` epoch ns ile kurulur. Timer planlama `steady_clock` kullanır; bütün zamanlamayı yalnız ITCH saati sayma (ikinci tur ayrıntısı aşağıda).
 
 ## Giriş (`shouldEnterPosition`)
 
@@ -123,11 +123,23 @@ Tavan'ın tersine çalışır: satış fiyatı yukarıdan tabana yaklaşınca ho
 
 ### İkinci kod turu — branch sınırı
 
-2026-10-23 fetch/pull sonrası uçlar aynı. Development'ın `Secondary_Enter_Lot`, `Consider_All_Buy_Levels` ve `Min_Max_Size_Buy_Enter` alanları/giriş yolu master `052dd96` command/strateji koduna genellenmez. Master ayrı `Re_Close_Lot`/`Re_Close_Percentage` okurken development reClose eşiğini giriş kriterine bağlar. Development reClose timer'ı da ekler; master sessiz defterde aynı yeniden değerlendirme yolunu taşımaz. Üstteki anlatım development içindir.
+2026-10-23 fetch/pull sonrası uçlar aynı. Development'ın `Secondary_Enter_Lot`, `Consider_All_Buy_Levels` ve `Min_Max_Size_Buy_Enter` alanları/giriş yolu master `052dd96` command/strateji koduna genellenmez. Master ayrı `Re_Close_Lot`/`Re_Close_Percentage` okurken development reClose eşiğini giriş kriterine bağlar. ReClose timer'ı **iki branch'te de vardır**; önceki alt turdaki master'da olmadığı ifadesi düzeltildi. Üstteki tetik anlatımı development içindir.
 
 **K-235:** Master `rejectOrder` father-ref çözme, çıkış durumunu serbest bırakma ve `recheckEscape` yolunu sürdürür; PTRM kodunda `stopOnPtrmReject` çağrısı yoktur. Development PTRM muhasebesini yaptıktan sonra kilidi bırakıp durdurur; açık pozisyonu otomatik kapatma garantisi vermez. Kaynak: `HftMinPrice.cpp`, `MinPriceCommand.cpp` master/development farkı. Statik inceleme; prod binary ve gerçek ret senaryosu denenmedi.
 
-Bu alt tur giriş/ret/durma ve branch farklarını kapsar; bütün top-up/reClose eşzamanlı sıraları yeniden doğrulanmış değildir.
+### İkinci tur — timer ve callback sırası
+
+`scheduleReCloseCheck` açılış/otomatik lift/manuel re-break sırasında kurulur. `openPositionTimestamp` ile system clock arasındaki geçen süre çıkarılır; kalan bekleme +1 ms steady-clock job yapılır. Job tek sefer tüketilir. `sendSecondRuleOrder` yalnız çalışan/açık pozisyonda `TIMER_TRIGGER_CHECK` ekler; karar AlgoWorker'dadır. Timer cached defterle **yalnız escape** kontrolünü çalıştırır, top-up/giriş çalıştırmaz; yeni bir piyasa snapshot'ı istemez.
+
+Normal level olayı sırası giriş → top-up → escape'tir. Auto top-up yeni alış yapmaz, tabandaki satışları yukarı replace eder; manual top-up bunları iptal etmeyi dener. Her ikisi `isExiting/topUpArmed` durumunu ve hold başlangıcını yeniler. Gönderim denemesi ACK garantisi değildir. Manuel cancel ACK'i geldiğinde long pozisyon sürüyorsa ve tabanda satış kalmamışken `isExiting` açıksa, `deleteOrder` bu mandalı çözer; ardından escape kontrolü kuyruğa alınabilir.
+
+Buy fill/cancel callback'leri aile yerleşip buy depth boşalınca tek aggregate kâr satışı kontrolünü yapar. Sell fill balance'ı sıfırlayınca tur kapanır. Callback sonlarında `tryConsumePendingOpenAfterClose` ve `recheckEscape` değerlendirilir. Bekleyen giriş 2 ms TTL'yi çağrıldığında kontrol eder; ayrı bir 2 ms otomatik gönderim timer'ı yoktur. Sıfır balance, boş iki depth, yerleşmiş aile ve hâlâ tabanda satış duvarı şartlarıyla yeniden dener.
+
+`Consider_All_Buy_Levels` yolunda eşik sınırı header yolundan farklıdır: SDK thin sinyali toplam **<** eşik iken header karşılaştırması **≤** eşiği kabul eder. Üstteki ortak eşik anlatımını bütün seviyelerde eşitlik için kullanma.
+
+**K-238 — çalışma saati filtresi koruyucu timer'ı da eler:** `processItchEventTimed` snapshot hariç bütün olayları `Start_Time < currentSec < End_Time` filtresinden geçirir. Dolayısıyla bitiş sınırında/sonrasında gelen reClose timer'ı ve yeni defter olayı escape kararına ulaşmaz; timer'ın varlığı pencere dışında otomatik satış garantisi değildir. Açık emir callback'leri ayrı yoldan işlenebilir; olay filtresi cancel veya pozisyon kapatma komutu değildir. Tavan'ın ikinci kural timer'ı da aynı filtreye tabidir. Kaynak: iki stratejinin event handler'ı, `EventDriven/ItchEvents.h`, `StrategyManager::periodicJobsWorker`. İki HFT branch'inde koddan görüldü; istenen ürün politikası ve canlı etkisi doğrulanmadı.
+
+İkinci alt tur statik callback/timer yollarını tamamlar; eşzamanlı thread sıraları, saat kayması ve gerçek ACK/fill yarışları entegrasyon testinde denenmedi.
 
 ### Durum alanları
 

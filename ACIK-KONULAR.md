@@ -312,6 +312,8 @@ Koddan çıkarılan sonuçlar canlıda gözlemle doğrulanmış sayılmaz; ayrı
 | K-236 | bug? | HFT Classic `Is_Stop_Loss_Enabled` strateji alanına alınır ama karar yolunda okunmaz; false tek başına stop'u kapatmaz | [Classic](20-stratejiler/hft-classic.md#ikinci-kod-turu--classic-kontrol-sınırları) |
 | K-237 | bug? | HFT Classic tek işlem accept kontrolü satış dalında da Start_With_Buy kullanıyor; satış başlangıcında mandal kurulmayabilir | [Classic](20-stratejiler/hft-classic.md#ikinci-kod-turu--classic-kontrol-sınırları) |
 
+| K-238 | doğrula | Tavan/Taban çalışma saati filtresi koruyucu timer/defter olaylarını da eler; bitiş sonrasında otomatik çıkış garantisi yok | [Taban timer sırası](20-stratejiler/taban.md#ikinci-tur--timer-ve-callback-sırası) |
+
 ## Yolda / takip
 
 | # | Tür | Konu | Ayrıntı |

@@ -160,6 +160,10 @@ order-service/SDK yeniden fetch/development pull sonrası aynı uçlarda. Legacy
 
 HFT yeniden fetch/development pull sonrası aynı uçlarda. Classic çekirdek/command dört dosyasının iki uçta aynı olduğu görüldü; accept/fill/reject, stop ve tek işlem mandalı okundu. [Classic](../20-stratejiler/hft-classic.md#ikinci-kod-turu--classic-kontrol-sınırları) K-236/K-237'yi içerir. [Taban](../20-stratejiler/taban.md#ikinci-kod-turu--branch-sınırı) K-235 PTRM stop master farkını; [Tavan](../20-stratejiler/tavan.md#ikinci-kod-turu--branch-sınırı) momentum gate/window ve cold escape farklarını kaydeder. Üstteki development anlatımları master'a genellenmedi. Tavan/Taban top-up/reClose callback/timer ayrıntıları sırada; canlı test yok.
 
+### Strateji ikinci turu — Tavan/Taban callback ve timer
+
+HFT yeniden fetch/pull sonrası uçlar aynı. [Taban timer/callback](../20-stratejiler/taban.md#ikinci-tur--timer-ve-callback-sırası) ve [Tavan restore](../20-stratejiler/tavan.md#ikinci-tur--restore-ve-timer-sırası) kaynakları okundu. Önceki “Taban timer master'da yok” ifadesi düzeltildi; iki branch'te de var. TTL callback'te kontrol edilir, timer doğrudan emir vermez. K-238 çalışma saati filtresinin koruyucu olayı da elemesini kaydeder. Planlanan bu statik alt tur tamamlandı; thread/exchange testi yok. Sıradaki Varant Toplu/Süpürme ve AlgoProd stratejileri.
+
 ## 6. Son iki haftada aktif, referansa merge edilmemiş branch'ler
 
 2026-10-09 ve sonrası commit tarihine göre tarandı. Branch'in adı niyet hakkında ipucu verir; bütün içeriğinin doğru/çalışır olduğu veya prod'a çıkacağı anlamına gelmez.

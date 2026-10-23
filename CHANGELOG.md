@@ -2,6 +2,13 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-23 — Tavan/Taban callback ve timer sıraları
+
+- HFT yeniden fetch/development pull: uçlar aynı. Pending-open TTL, restore top-up, Taban auto lift/manual cancel, reClose timer ve callback sonu kontrolleri okundu; master timer/restore varlığı kontrol edildi.
+- Önceki turda yazılan “Taban reClose timer master'da yok” ifadesi düzeltildi: iki branch'te de var. Taban zamanlamasının yalnız ITCH saati olduğu ifadesi düzeltildi; sentetik olay system_clock, job steady_clock kullanır.
+- K-238 çalışma saati filtresinin koruyucu timer/defter olaylarını da elemesi adayını kaydeder. Taban tüm seviye eşik sınırının strict < olduğu, TTL'nin otomatik gönderim timer'ı olmadığı açıklandı.
+- Statik inceleme; build/canlı/zamanlamalı test ve kaynak uygulama değişikliği yok. Sıradaki diğer stratejiler.
+
 ## 2026-10-23 — HFT Classic ve Tavan/Taban branch farkları
 
 - HFT yeniden fetch/development pull: uçlar aynı. Classic çekirdek/command dört dosyası development/master aynı; accept/fill/reject, stop ve tek işlem mandalı okundu.
