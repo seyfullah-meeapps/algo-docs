@@ -164,6 +164,10 @@ HFT yeniden fetch/development pull sonrası aynı uçlarda. Classic çekirdek/co
 
 HFT yeniden fetch/pull sonrası uçlar aynı. [Taban timer/callback](../20-stratejiler/taban.md#ikinci-tur--timer-ve-callback-sırası) ve [Tavan restore](../20-stratejiler/tavan.md#ikinci-tur--restore-ve-timer-sırası) kaynakları okundu. Önceki “Taban timer master'da yok” ifadesi düzeltildi; iki branch'te de var. TTL callback'te kontrol edilir, timer doğrudan emir vermez. K-238 çalışma saati filtresinin koruyucu olayı da elemesini kaydeder. Planlanan bu statik alt tur tamamlandı; thread/exchange testi yok. Sıradaki Varant Toplu/Süpürme ve AlgoProd stratejileri.
 
+### Strateji ikinci turu — Varant Toplu
+
+HFT fetch/pull sonrası development/master uçları değişmedi; Varant Toplu master'da yok. [Motor ikinci turu](../20-stratejiler/varant-toplu.md#ikinci-kod-turu--callback-ve-zamanlama-sınırları) fill başına satış koşulları, ret sonrası açık pozisyon ve next-check sınırını netleştirir (K-239). UI/wire feature farkları henüz bu alt turla doğrulanmadı. Fetch yeni `origin/theo-cancel-on-first-eslestirme` ref'ini getirdi: `bfe65e2`, 2026-10-23; içeriği ve merge durumu incelenmedi, referans davranışı sayılmadı. Canlı test yok.
+
 ## 6. Son iki haftada aktif, referansa merge edilmemiş branch'ler
 
 2026-10-09 ve sonrası commit tarihine göre tarandı. Branch'in adı niyet hakkında ipucu verir; bütün içeriğinin doğru/çalışır olduğu veya prod'a çıkacağı anlamına gelmez.

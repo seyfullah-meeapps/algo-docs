@@ -7,13 +7,13 @@ kaynak:
   - repo: mtrader-trade-ui
     branch: development
     commit: b0474c3
-dogrulama: 2026-10-22
+dogrulama: 2026-10-23
 durum: taslak
 ---
 
 # Varant Toplu (`HFT_WarrantAdvanced`, 15)
 
-⚠ master'da yok (2026-10-22). 2026-10-19'da development'a merge edildi (HftSrvProd PR #615, order-service #423, network-sdk #84, ouch-sdk #62).
+⚠ HFT master `052dd96`'da yok (2026-10-23 fetch sonrası). Referans development `4275ccc`. 2026-10-19'da development'a merge edildi (HftSrvProd PR #615, order-service #423, network-sdk #84, ouch-sdk #62).
 
 Bir dayanak (ör. BIST30 hissesi) için **birden çok varantı** aynı anda izler. Bir varantta piyasa yapıcının (kotasyoncu) satış kademesi agresif alışla yenince o varantı KIE ile alır, ardından 1 tick yukarıya satış yazar. Satış fiyatı dayanağın hareketine göre maliyet ile maliyet + 1 tick arasında gidip gelir.
 
@@ -34,7 +34,7 @@ Varant (13) ile **hiçbir sözleşmeyi paylaşmaz**. Payload, fiyat ölçekleri 
 3. **Alış.** Tetik fiyatından (`execAccumFirstPrx`) `Warrant_Lot_Quantity` lot **KIE (IOC) limit alış** gönderilir. Durum gönderimden önce `BuyPending` olur, böylece ack gelene kadar ikinci tetik ikinci alış göndermez.
    - O anki dayanak kitabı (bid/ask/lot) *referans* olarak saklanır.
    - OUCH replay bitmemişse tetik atlanır (`ouchReplayComplete`).
-4. **Satış.** Her alış fill'inde, o fill miktarı kadar **DAY limit satış** yazılır. Kısmi alışlar birden fazla satış emri doğurabilir, her biri ayrı izlenir.
+4. **Satış.** Çalışan, durdurulmamış, replay'i tamamlanmış ve `SellRejected` olmayan turda alış fill'i için **DAY limit satış** denenir. Miktar fill lotundan başlar; eldeki pozisyon eksi tahtadaki/yoldaki satış toplamıyla sınırlanır. Kısmi alışlar birden fazla satış emri doğurabilir, her biri ayrı izlenir.
    - Alış fiyatı = kısmi fill'lerin **en yükseği** (`buyPrice = max`). Böylece başabaş çıkış en kötü alışın altına inmez.
 5. **Satış hedefi** (`sellTarget`). İzlenen taraf: **Call (`C`) varantta dayanak ask, Put (`P`) varantta dayanak bid**. Referans, alış **gönderildiği** andaki fiyattır.
    - Aleyhte hareket (Call'da ask düştü / Put'ta bid çıktı) → **maliyet** (`Adverse`).
@@ -43,7 +43,7 @@ Varant (13) ile **hiçbir sözleşmeyi paylaşmaz**. Payload, fiyat ölçekleri 
    - Dayanak bu turda referanstan **bir kez ayrılıp geri döndüyse** süre beklenmeden maliyet (`leftReference`).
    - Varant tipi bilinmiyorsa (`getWarrantType` = 0) yalnızca süre kuralı uygulanır.
 6. **Replace.** Hedef değişince satış emirleri replace edilir. Kurallar:
-   - Replace miktarı **her zaman emrin ilk toplamıdır** (`SellOrder.total`, OUCH: gerçekleşen + açık). Açık miktarı borsa kendisi hesaplar, böylece satış hiçbir yolda büyümez (açığa düşmeme).
+   - Replace miktarı `SellOrder.total` (accept'teki miktar) olarak gönderilir; açık miktardan yeniden hesaplanmaz. Kodun amacı miktarı büyütmemektir. Bunun bütün yarışlarda açığa düşmeyi önlediği veya wire miktar semantiğinin canlıda teyit edildiği varsayılmaz.
    - Yukarı çekme son replace'ten sonra **200 ms** bekler (`kRaiseCooldown`), titreyen dayanakta emir yağmasın diye. Maliyete çekme beklemez.
    - Replace reddinden sonra o emir **1 sn** tekrar denenmez (`kReplaceRejectBackoff`).
    - Süre kuralı ITCH olayı beklemez: AlgoWorker kuyruğu boşken `nextCheckNs` gelmişse yeniden değerlendirilir.
@@ -130,6 +130,16 @@ Varant (13) ile **hiçbir sözleşmeyi paylaşmaz**. Payload, fiyat ölçekleri 
 - DB attribute satırları: trade-data-app `scripts/sql/hft_warrant_advanced.sql`.
 - **Eski GUI'de Varant Toplu yok.** `main`'de ve eski GUI tabanlı `varant-toplu` branch'inde (`main` ile aynı commit) yalnızca Varant (13) ekranı var. Strateji yalnızca yeni GUI'yi kullanan kurulumlarda kullanılabilir ([branch-ve-ortamlar](../00-genel/branch-ve-ortamlar.md#eski-gui--yeni-gui-parçalı-geçiş)).
 
-## Gölge kriter (log only)
+## İkinci kod turu — callback ve zamanlama sınırları
+
+2026-10-23 HFT fetch/development pull: uç değişmedi. `HftWarrantAdvanced` trigger, send/replace, accept/fill/reject, close/release ve next-check yolları okundu; master karşılığı yok. UI sözleşmesi bu alt turda yeniden incelenmedi. Build/canlı emir veya zamanlamalı test yapılmadı.
+
+- Bir satış reddi `SellRejected` durumuna geçirir ve pending satış kaydını çıkarır; otomatik yeniden yeni satış göndermez. Tahtada kalan satışlar reprice edilir. Bu durumdayken aynı alışın sonraki fill'leri pozisyona eklenir ama `placeSellOrder` çağrılmaz; açık kalan miktar için operatör yolu gerekir. Mevcut manuel satış izni ayrıca strateji satışının tahtada kalıp kalmadığına bakar.
+- Replace token'ı ACK'e kadar beklenir. Ret token'ı bekleyen replace veya canlı satış token'ıyla eşleşirse yeni giriş reddi gibi ele alınmaz; mevcut satış korunur, 1 s retry planlanır. Emri kapanmış geç replace retleri `staleReplaceTokens` ile ayıklanır.
+- ACK sonrası `updateOrder` yeni token/price/açık miktarı yazar ve hedefi yeniden değerlendirir. `Frozen/Raised` olayları hedef kararını anlatır; borsanın replace'i kabul ettiği teyidi değildir.
+
+**K-239 — next-check yoğun kuyrukta gecikebilir:** `processSingleEvent` olay bulursa handler'ı çalıştırıp hemen döner; `nextCheckNs` yalnız kuyruk boşken kontrol edilir. Örneğin sadece varant execution olayları sürekli kuyrukta birikir, yeni dayanak header'ı/OUCH callback'i de repricing tetiklemezse cost timeout geçmiş olsa bile planlı reprice bekler. Bu bir gerçek zaman deadline garantisi değildir. Koddan koşullu gecikme adayı; kalıcı starvation veya canlı zarar ölçülmedi. Kaynak: `processSingleEvent`, `scheduleNextCheck`, `repriceAll`.
+
+### Gölge log
 
 `sendBuyOrder` her alışta `[WA_SHADOW]` log'u basar: dayanakta lehte taraftaki lot payı ≤ %5 mi? Girişi **engellemez**. Olası bir filtre için veri toplamaya yarar.

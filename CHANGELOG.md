@@ -2,6 +2,13 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-23 — Varant Toplu motor ikinci turu
+
+- HFT fetch/development pull sonrası referans uç değişmedi; master'da Varant Toplu sınıfı yok. Yeni theo-cancel-on-first-eslestirme remote ref'i görüldü, içeriği bu turda incelenmedi.
+- Tetik, emir/replace, accept/fill/reject, close/release ve next-check yolları okundu. Satışın her fill'de koşulsuz yazıldığı ve her yarışta açığa düşmemenin garanti olduğu ifadeleri daraltıldı.
+- SellRejected sonrası sonraki alış fill'lerinde otomatik satış olmadığının ve Frozen/Raised hedeflerinin ACK olmadığının altı çizildi. K-239 yoğun kuyrukta planlı repricing gecikmesi adayı kaydedildi.
+- Build/canlı/zamanlamalı test ve uygulama değişikliği yok; UI ikinci turu henüz yapılmadı.
+
 ## 2026-10-23 — Tavan/Taban callback ve timer sıraları
 
 - HFT yeniden fetch/development pull: uçlar aynı. Pending-open TTL, restore top-up, Taban auto lift/manual cancel, reClose timer ve callback sonu kontrolleri okundu; master timer/restore varlığı kontrol edildi.

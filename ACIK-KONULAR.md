@@ -314,6 +314,8 @@ Koddan çıkarılan sonuçlar canlıda gözlemle doğrulanmış sayılmaz; ayrı
 
 | K-238 | doğrula | Tavan/Taban çalışma saati filtresi koruyucu timer/defter olaylarını da eler; bitiş sonrasında otomatik çıkış garantisi yok | [Taban timer sırası](20-stratejiler/taban.md#ikinci-tur--timer-ve-callback-sırası) |
 
+| K-239 | doğrula | Varant Toplu nextCheckNs yalnız kuyruk boşken kontrol edilir; sürekli olay yükünde cost timeout repricing gecikebilir | [Varant Toplu](20-stratejiler/varant-toplu.md#ikinci-kod-turu--callback-ve-zamanlama-sınırları) |
+
 ## Yolda / takip
 
 | # | Tür | Konu | Ayrıntı |
