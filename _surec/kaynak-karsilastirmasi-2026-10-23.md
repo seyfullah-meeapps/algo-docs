@@ -168,6 +168,10 @@ HFT yeniden fetch/pull sonrası uçlar aynı. [Taban timer/callback](../20-strat
 
 HFT fetch/pull sonrası development/master uçları değişmedi; Varant Toplu master'da yok. [Motor ikinci turu](../20-stratejiler/varant-toplu.md#ikinci-kod-turu--callback-ve-zamanlama-sınırları) fill başına satış koşulları, ret sonrası açık pozisyon ve next-check sınırını netleştirir (K-239). UI/wire feature farkları henüz bu alt turla doğrulanmadı. Fetch yeni `origin/theo-cancel-on-first-eslestirme` ref'ini getirdi: `bfe65e2`, 2026-10-23; içeriği ve merge durumu incelenmedi, referans davranışı sayılmadı. Canlı test yok.
 
+### Strateji ikinci turu — Süpürme UI/wire
+
+HFT ve GUI yeniden fetch/development pull, uçlar aynı. [Tavan Should_Sweep](../20-stratejiler/tavan.md#ikinci-tur--süpürme-uiwire-sözleşmesi) GUI form/toplu/nihai payload ile motor parser/trigger karşılaştırıldı; UI lot şartı motor garantisi sayılmadı. [Varant Sweep_Left_Ask](../20-stratejiler/varant-toplu.md#ikinci-tur--sweep_left_ask-feature-sınırı) ayrı feat/sweep-left-ask d2c35c7 sözleşmesidir; K-240 development motor eşleşmesi açık. Feature motor yorumları referans davranışına geçirilmedi. Browser/build/canlı test yok.
+
 ## 6. Son iki haftada aktif, referansa merge edilmemiş branch'ler
 
 2026-10-09 ve sonrası commit tarihine göre tarandı. Branch'in adı niyet hakkında ipucu verir; bütün içeriğinin doğru/çalışır olduğu veya prod'a çıkacağı anlamına gelmez.

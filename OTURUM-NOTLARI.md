@@ -11,6 +11,8 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Şu an (2026-10-23)
 
+- Süpürme UI/wire alt turu tamamlandı: HFT ve GUI fetch/pull sonrası referans uçlar aynı. Tavan `Should_Sweep` nihai payload'da pozitif Melt_Lot ile kapılanır; motor aynı kısıtı uygulamaz. Varant Toplu `Sweep_Left_Ask` ayrı GUI feature dalındadır; development motor desteği yok (K-240), eşleşen HFT feature doğrulanmadı.
+
 - Varant Toplu development callback/trigger/reprice alt turu tamamlandı; HFT fetch/pull sonrası referans uç değişmedi, master'da sınıf yok. Her alış fill'ine koşulsuz satış ve her yarışta açığa düşmeme ifadeleri daraltıldı. K-239 boş-kuyruk next-check gecikme adayı kaydedildi. Yeni origin `theo-cancel-on-first-eslestirme` ref'i görüldü; içeriği henüz incelenmedi.
 
 - Tavan/Taban top-up, reClose ve callback/timer statik alt turu tamamlandı. HFT yeniden fetch/pull sonrası aynı uçlarda. Önceki “Taban timer master'da yok” ifadesi yanlıştı; timer iki branch'te de mevcut, düzeltildi. K-238 çalışma saati filtresinin koruyucu olaylara da uygulanmasını kaydeder. TTL'nin callback'te kontrol edildiği ve Tavan restore / Taban lift farkı açıklandı.
@@ -34,7 +36,7 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Sıradaki
 
-**Sıradaki: Süpürme'nin UI/wire ve merge edilmemiş feature farkları; sonra Varant (13), Teorik Fiyat ve AlgoProd stratejileri.** Varant Toplu motor alt turu tamamlandı; UI yeniden incelenmedi. Classic/Tavan/Taban ve FIX planlanan statik alt turları kaydedildi; entegrasyon/gerçek exchange, thread yarışları ve prod doğrulaması yapılmadı. Bütün bilgi tabanının ikinci doğrulaması henüz tamamlanmadı.
+**Sıradaki: Varant (13), Teorik Fiyat ve AlgoProd stratejilerinin ikinci kod turu.** Tavan Süpürme UI/wire ve Varant Toplu sweep feature ayrımı kaydedildi; diğer GUI yollarının tümü yeniden incelenmedi. Classic/Tavan/Taban ve FIX statik alt turları kaydedildi; entegrasyon/gerçek exchange, thread yarışları ve prod doğrulaması yapılmadı. Bütün bilgi tabanının ikinci doğrulaması henüz tamamlanmadı.
 
 Kullanıcı içerik onayı geldikçe durum etiketi kapsamına göre güncellenir; genel devam talimatıyla topluca dogrulandi yapılmaz. Uygulama bug düzeltmesi/deploy bu doküman incelemesinin dışında kaldı.
 

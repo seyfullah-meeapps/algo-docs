@@ -7,6 +7,9 @@ kaynak:
   - repo: mtrader-trade-ui
     branch: development
     commit: b0474c3
+  - repo: mtrader-trade-ui
+    branch: feat/sweep-left-ask
+    commit: d2c35c7
 dogrulama: 2026-10-23
 durum: taslak
 ---
@@ -140,6 +143,16 @@ Varant (13) ile **hiçbir sözleşmeyi paylaşmaz**. Payload, fiyat ölçekleri 
 
 **K-239 — next-check yoğun kuyrukta gecikebilir:** `processSingleEvent` olay bulursa handler'ı çalıştırıp hemen döner; `nextCheckNs` yalnız kuyruk boşken kontrol edilir. Örneğin sadece varant execution olayları sürekli kuyrukta birikir, yeni dayanak header'ı/OUCH callback'i de repricing tetiklemezse cost timeout geçmiş olsa bile planlı reprice bekler. Bu bir gerçek zaman deadline garantisi değildir. Koddan koşullu gecikme adayı; kalıcı starvation veya canlı zarar ölçülmedi. Kaynak: `processSingleEvent`, `scheduleNextCheck`, `repriceAll`.
 
-### Gölge log
+## İkinci tur — Sweep_Left_Ask feature sınırı
+
+2026-10-23 fetch/pull sonrası GUI development `b0474c3` ve main `6715182` değişmedi. `feat/sweep-left-ask` ucu `d2c35c7`; development'tan ayrı bir daldır. Bu bölüm feature kanıtını kaydeder, yukarıdaki referans motor davranışını değiştirmez.
+
+Feature `warrantBulkPayload.ts` ayarlarına `sweepLeftAsk` (varsayılan false), snapshot okumasına `Sweep_Left_Ask` ve payload'a Bool wrapper ekler; tekil/toplu modal ve liste düzenlemelerinde de değişiklikler vardır. Kod yorumu, açıkken tetik kademesinde kalan lotun `Warrant_Lot_Quantity` ile sınırlandığını ve maliyetten kapanan turun artık pasife alınmadığını söylüyor.
+
+**K-240 — feature GUI/motor eşleşmesi doğrulanmalı:** HFT development `4275ccc` içinde `Sweep_Left_Ask` parse/uygulama yolu yok; `sendBuyOrder` lotQuantity kullanır. `closeCycle` maliyetten fill olmuş turu hâlâ `ClosedAtCost` yapıp `deactivate` eder. Bu yüzden GUI feature yorumları güncel development motor desteğinin kanıtı değildir. Eşleşen bir HFT feature ucu bu alt turda doğrulanmadı; feature'ın hiçbir motor dalında çalışmadığı veya prod'da kullanıldığı iddia edilmez.
+
+Tavan'ın mevcut `Should_Sweep` alanıyla karıştırma ([Tavan UI/wire](tavan.md#ikinci-tur--süpürme-uiwire-sözleşmesi)). Bu branch yalnız adı nedeniyle Tavan sweep değişikliği sayılmadı; development'a göre incelenen farklar Varant Toplu sözleşmesi ve başka UI değişikliklerini de içeriyor. Feature'ın tamamı için build/browser testi yapılmadı.
+
+## Gölge kriter (log only)
 
 `sendBuyOrder` her alışta `[WA_SHADOW]` log'u basar: dayanakta lehte taraftaki lot payı ≤ %5 mi? Girişi **engellemez**. Olası bir filtre için veri toplamaya yarar.

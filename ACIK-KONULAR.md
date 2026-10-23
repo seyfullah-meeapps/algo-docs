@@ -316,6 +316,8 @@ Koddan çıkarılan sonuçlar canlıda gözlemle doğrulanmış sayılmaz; ayrı
 
 | K-239 | doğrula | Varant Toplu nextCheckNs yalnız kuyruk boşken kontrol edilir; sürekli olay yükünde cost timeout repricing gecikebilir | [Varant Toplu](20-stratejiler/varant-toplu.md#ikinci-kod-turu--callback-ve-zamanlama-sınırları) |
 
+| K-240 | doğrula | GUI sweep-left-ask feature'ı Sweep_Left_Ask ve yeni maliyet kapanışı anlatıyor; HFT development bu sözleşmeyi taşımıyor, eşleşen motor dalı teyit edilmeli | [Varant Toplu feature](20-stratejiler/varant-toplu.md#ikinci-tur--sweep_left_ask-feature-sınırı) |
+
 ## Yolda / takip
 
 | # | Tür | Konu | Ayrıntı |

@@ -2,6 +2,13 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-23 — Süpürme UI/wire ve feature ayrımı
+
+- HFT ve GUI fetch/development pull sonrası referans uçlar değişmedi. Tavan form/toplu/nihai payload Should_Sweep kuralı ve motor parser/trigger karşılaştırıldı.
+- Pozitif Melt_Lot şartının yeni GUI'de olduğu, motor garantisi olmadığı; eşik ile TLSize emir büyüklüğünün ayrı olduğu açıklandı. Bütün kademelerin mutlaka tek emirle alınacağı ifadesi daraltıldı.
+- feat/sweep-left-ask d2c35c7 Varant Toplu alanı/yorumları referans motorla karşılaştırıldı. K-240 development motor eşleşmesi adayı; feature yorumları canlı destek sayılmadı. Tavan Should_Sweep ile Varant Sweep_Left_Ask ayrı belgelendi.
+- Build/browser/canlı test yok; uygulama kodu değişmedi. Sıradaki Varant (13), Teorik Fiyat ve AlgoProd.
+
 ## 2026-10-23 — Varant Toplu motor ikinci turu
 
 - HFT fetch/development pull sonrası referans uç değişmedi; master'da Varant Toplu sınıfı yok. Yeni theo-cancel-on-first-eslestirme remote ref'i görüldü, içeriği bu turda incelenmedi.

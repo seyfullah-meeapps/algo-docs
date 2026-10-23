@@ -7,6 +7,9 @@ kaynak:
   - repo: HftSrvProd
     branch: master
     commit: 052dd96
+  - repo: mtrader-trade-ui
+    branch: development
+    commit: b0474c3
 dogrulama: 2026-10-22
 durum: taslak
 ---
@@ -47,7 +50,7 @@ Tetikler, sırayla:
 3. **Recover:** Alış header'ı tavanda, durum `Tavan`, `Should_Recover` açık ve alış kuyruğu `Cancel_Lot_Number`'a eşit veya üstünde → tekrar gir (`cameFromRecover = true`).
    - Yani pozisyon iptal eşiğiyle kapatılmış ama tavan bozulmamışsa yeniden kuyruğa girer.
    - `Cancel_Lot_Number = 0` iken recover çalışmaz.
-4. **Sweep** (`Should_Sweep`): ITCH SDK satış tarafının **tamamını** `Melt_Lot`'un altında bildirirse (`couldSweep`) ve satış header'ı tavanın altındaysa, tavana kadar olan kademeler tek emirle alınır.
+4. **Sweep** (`Should_Sweep`): ITCH SDK satış tarafının **tamamını** eşik altında bildirirse (`couldSweep`), toplam pozitifse ve satış header'ı tavanın altındaysa alış tetiklenir. Emir miktarı hedef `Tl_Size` ile hesaplanır; bütün kademelerin mutlaka alınacağı veya SDK'nın emri bölmeyeceği garanti değildir.
 5. **Max-size alış** (`Max_Size_Buy_Enter`): Satış kuyruğunu azami emir büyüklüğünde agresif bir alıcı yiyorsa, eşik beklenmeden girilir.
    - Aktivasyon mesafesi `Max_Size_Buy_Enter_Levels` (tavanın kaç kademe altından itibaren) SDK'ya mutlak "arm price" olarak itilir. SDK bu fiyatın altında sinyal üretmez.
    - Kademe sayımı tick bantları gözetilerek tek tek yürünür. Çözülemezse tavana sabitlenir (fail-closed).
@@ -189,6 +192,14 @@ Kısmi çıkış restore'unda cancel ve hedefe eksik alış aynı turda denenebi
 `tryConsumePendingOpenAfterClose` 2 ms TTL'yi yalnız callback'te çağrıldığında kontrol eder; kendiliğinden tekrar gönderen timer değildir. Aile ve depth'ler yerleşmeli, tavan hâlâ kilitli olmalı; KIE çıkıştan pozitif bakiye kalmışsa restore için özel izin vardır. Bu yol Taban'ın sıfır balance şartıyla aynı değildir.
 
 İkinci kural job'ı periodik thread'den emir göndermez; sentetik olayla cached defter üzerinde yalnız cancel kararı yeniden çalışır. Snapshot dışındaki çalışma saati filtresi timer için de geçerlidir ([K-238](taban.md#ikinci-tur--timer-ve-callback-sırası)). Tavan timer/restore kaynak blokları master `052dd96` ile karşılaştırıldı; bu alt turda bu mekanizmaların master'da olmadığı sonucu çıkmadı. Gerçek thread/ACK zamanlaması test edilmedi.
+
+## İkinci tur — Süpürme UI/wire sözleşmesi
+
+Yeni GUI development `b0474c3`: `maxPriceSettings` form encode/decode'u Süpür'ü pozitif `Melt_Lot` moduyla sınırlar. `maxPricePayload.ts` ayrıca nihai payload'da `Should_Sweep = Melt_Lot > 0 && alan` kuralını Bool wrapper ile uygular; böylece formdan geçmeyen toplu/bayat kayıt da normalize edilir. Toplu ayarda pozitif lotu olmayan satırlar için kullanıcıya hata gösterilir. Kaynaklar: `MaxPriceSettingsSections.tsx`, `maxPriceSettings.ts`, `maxPricePayload.ts`, `MaxPriceTrackerForm.tsx`.
+
+Motor `MaxPriceCommand` alanı Bool olarak parse eder; `HftMaxPrice::shouldEnterPosition` ise `Melt_Lot > 0` koşulunu tekrar koymaz. Yüzde aboneliği de `couldSweep` sinyali üretebildiği için doğrudan/başka istemciden `Should_Sweep=true` gönderilirse yeni GUI'nin kısıtı motor garantisi sayılmaz. Eşik `Melt_Lot`, alış büyüklüğü `Tl_Size` ayrı ayarlardır.
+
+Bu Tavan (9) özelliğidir. GUI `feat/sweep-left-ask` branch'indeki Varant Toplu (15) `Sweep_Left_Ask` farklı sözleşmedir; [feature ayrımı](varant-toplu.md#ikinci-tur--sweep_left_ask-feature-sınırı). GUI main `6715182` eski `src/` uygulamasıdır; yeni `app/.../maxPricePayload.ts` yolu main'de yoktur. Bu alt tur eski GUI'nin tüm sweep payload yollarını yeniden doğrulamaz. Statik kaynak kontrolü; browser/backend uçtan uca testi yok.
 
 ### Thread özeti
 
