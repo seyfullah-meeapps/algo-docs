@@ -2,6 +2,17 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-23 — Uçtan uca akışlar (madde 12)
+
+Kaynak: mevcut yerel klonlar; HftSrvProd `4275ccc` / master `052dd96`, AlgorithmicTrading `0dc32a7` / master `aa150ee`, order-service `b86c0cf` / master `298403b`, trade-data-app `1cca9a8` / master `4a43e19`; diğer kaynaklar akışların frontmatter'ında. Remote fetch ve canlı sunucu incelemesi yapılmadı.
+
+- Önceki oturumdan kalan beş commit edilmemiş taslak incelendi; `emir-donusu.md` ve `algoprod-emri.md` yazıldı. `30-akislar/README.md` yedi akışın indeksine çevrildi.
+- Kritik kod yolları kontrol edildi: HFT callback/registry/FetchOrders, GUI emir ve komut yönlendirmesi, AlgoProd userbook/kanal/timeout, handoff ve gün içi restart bağımlılıkları.
+- Eski README'nin HFT OUCH otomatik reconnect iddiası kaldırıldı. Uygulama iptali ile BIST cancel-on-disconnect belirsizliği ayrıldı; SetBalance'ın bağlantı kurtarmadığı belirtildi.
+- Çapraz düzeltmeler: `duration` ms; HFT health servisi mevcut; motor gRPC hata kodları her zaman HTTP 500 değil; HFT handoff master'da da var; AlgoProd referans sürüm handoff callback'i boş. Sabah kontrolü restart bölümü bağımlı servis akışına bağlandı.
+- Yeni konular K-208–K-220. Mevcut K-16/K-24/K-57/K-151/K-152 ile ilişkiler akışlarda belirtildi; canlı gözlem gerektiren sonuçlar kesinleştirilmedi.
+- Taslakların kullanıcı incelemesi bekleniyor; kaynak uygulamalarda veya canlı sistemde değişiklik yapılmadı.
+
 ## 2026-10-23 — AlgoProd derinleştirme (madde 11)
 
 Kaynak: AlgorithmicTrading `development` `0dc32a7`, `master` `aa150ee` (prod; 31 commit geride, 12 master-only commit), `add-order-sdk` `7d7f705`. Karşılaştırma için HftSrvProd `4275ccc`, order-service `b86c0cf`, trade-data-app `1cca9a8`, ouch-sdk `0c3589e`, mtrader-trade-ui `b0474c3` / `main` `6715182`.

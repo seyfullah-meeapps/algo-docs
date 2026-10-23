@@ -186,7 +186,7 @@ Akışların davranışı: [toplu-emirler.md](toplu-emirler.md). Burada yalnız 
 | `…[].part` | uint16 | 1 | Partition filtresi: yalnız bu partition'daki enstrümanlar ve kullanıcılar |
 | `…[].mode` | string | — | **Okunmuyor** (struct'ta alan var, parse yok) |
 | `…[].hour/minute/second/millisecond` | uint16 | zorunlu | Gönderim anı. Emirler bundan 1 dk önce DB'den çekilir. |
-| `…[].duration` | uint16 (sn) | zorunlu | Tekrar turlarının yayıldığı süre |
+| `…[].duration` | uint16 (ms) | zorunlu | Tekrar turlarının yayıldığı süre |
 | `…[].repeatSellOrders` | bool | zorunlu | Satış emirleri de tekrarlansın mı |
 | `…[].repeatLastShot` | bool | zorunlu | Son atış stratejisi: true → `RepeatedLastShot`, false → `SingleLastShot` |
 | `…[].timeoutOrderCount` | uint16 | 2 | Son atışta yanıt gelmeyen alış emri için en fazla kaç timeout kopyası (2 ms sonra) gönderileceği. 0 = hiç. |

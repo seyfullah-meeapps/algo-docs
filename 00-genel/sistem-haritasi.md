@@ -118,7 +118,7 @@ Hangi `StrategyType`'ın hangi motora gittiği: trade-data-app `getApplicationFr
 
 ## OUCH handoff (sabah devri)
 
-Görece yeni bir geliştirme; şu an yalnızca HFT için development'ta. AlgoProd (arbitraj) için aynı mekanizma `add-order-sdk` branch'inde geliştiriliyor.
+HFT için hem `development 4275ccc` hem `master 052dd96`'da mevcut (2026-10-23 kod kontrolü). order-service master uygulaması eski OUCH manager'ını kullanır; [akıştaki prod farkları](../30-akislar/sabah-emri-ve-handoff.md#12--masterda-farklı-order-service-298403b). AlgoProd (arbitraj) için aynı mekanizma `add-order-sdk` branch'inde geliştiriliyor.
 
 Sabah emirleri (09:40 civarı, config'e bağlı) order-service'ten gönderilir. HFT'nin kullandığı OUCH kullanıcıları DB'de "only morning order user" olarak işaretlidir ve bir *application user*'a (ör. `hftUser`) bağlıdır. Devir sırası:
 

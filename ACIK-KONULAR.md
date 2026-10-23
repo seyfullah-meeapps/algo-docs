@@ -267,6 +267,26 @@ Ayrıntılar alt dosyaların kendi "Şüpheli" bölümlerinde. Sistem genelindek
 |---|-----|------|---------|
 | K-193 | doğrula | VİOP seans saatleri (09:20/09:30–18:15, akşam 19:00–23:00) yalnız ikincil kaynaktan; resmi VİOP prosedürüyle teyit | [borsa-kurallari](00-genel/borsa-kurallari.md#seanslar) |
 
+## Uçtan uca akışlarda yeni bulgular (2026-10-23)
+
+Koddan çıkarılan sonuçlar canlıda gözlemle doğrulanmış sayılmaz; ayrıntı ve koşullar linklenen akıştadır.
+
+| # | Tür | Konu | Ayrıntı |
+|---|-----|------|---------|
+| K-208 | bug? | HftClassic her işlenen ITCH olayında koşulsuz WARN log'u üretiyor (development ve master) | [hot-path](30-akislar/hot-path.md#şüpheli) |
+| K-209 | bug? | Combiner fill callback'i ITCH decode thread'inde strateji kilidinde bloklanabilir | [hot-path](30-akislar/hot-path.md#şüpheli) |
+| K-210 | doğrula | HFT ITCH callback'lerinde olay başına heap allocation var; gecikme etkisi ölçülmedi | [hot-path](30-akislar/hot-path.md#şüpheli) |
+| K-211 | bug? | HFT Serbest (tip 12) için strateji yaratma dalı yok; manuel emir yolu Strategy creation failed dönebilir | [manuel-emir](30-akislar/manuel-emir.md#şüpheli) |
+| K-212 | doğrula | Tavan/Taban/Teorik/Varant workspace'lerinde Serbest emir tip 1 ile AlgoProd'a yönleniyor | [manuel-emir](30-akislar/manuel-emir.md#şüpheli) |
+| K-213 | doğrula | İptal/replace hedef motoru emir sahibinden değil panelin strategy_type alanından seçiliyor | [manuel-emir](30-akislar/manuel-emir.md#şüpheli) |
+| K-214 | bug? | AlgoProd restart'ında anahtar bildirim kuyrukları kayboluyor; gateway abonelikleri otomatik yenilemiyor | [strateji-baslatma](30-akislar/strateji-baslatma.md#şüpheli) |
+| K-215 | bug? | Handoff sonrası yalnız HFT restart'ı OUCH kullanıcılarını geri getirmiyor; eski tek-servis restart prosedürü yetersiz | [kopma-ve-kurtarma](30-akislar/kopma-ve-kurtarma.md#hft-gün-içi-restart--strateji-ve-pozisyon) |
+| K-216 | bug? | trade-data-app tek başına restart sonrası yeni DataService.Login gelmezse WS ve motor bağlantıları açılmıyor | [kopma-ve-kurtarma](30-akislar/kopma-ve-kurtarma.md#trade-data-app-restart) |
+| K-217 | doğrula | Pay açılışında hesabın bütün OUCH kullanıcıları devredilmişse order-service satırı gönderemeyebilir | [sabah-emri-ve-handoff](30-akislar/sabah-emri-ve-handoff.md#8-açılış-gönderimleri-vadeli-pay-varant-yip) |
+| K-218 | doğrula | T−60 s çekiminden sonra girilen aktif pay MORNING/OPENING satırı sonraki güne kalabilir | [sabah-emri-ve-handoff](30-akislar/sabah-emri-ve-handoff.md#1-toplu-emir-girişi-önceki-gün-veya-gün-içi) |
+| K-219 | doğrula | HFT SDK ve toplu emir yolları off_hours set etmiyor; borsa gereksinimi teyit edilmedi | [sabah-emri-ve-handoff](30-akislar/sabah-emri-ve-handoff.md#9-gün-içi-ve-akşam) |
+| K-220 | bug? | AlgoProd'a bağlı morning-only OUCH kullanıcısı devredilirse referans sürüm devralmıyor; başka canlı kullanıcı yoksa hesap OUCH'suz | [sabah-emri-ve-handoff](30-akislar/sabah-emri-ve-handoff.md#13-algoprodun-yeri) |
+
 ## Yolda / takip
 
 | # | Tür | Konu | Ayrıntı |

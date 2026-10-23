@@ -124,11 +124,11 @@ Kontrol listesine göre:
 
 ## Yeniden başlatma
 
-Bağımlılık sırası: DB servisi → order-service → HFT/AlgoProd ([sistem haritası § Başlatma sırası](../00-genel/sistem-haritasi.md#başlatma-sırası)). Arızalı servis yeniden başlatılmadan önce, bağlı olduğu servis kontrol edilir:
+Bağımlılık sırası: DB servisi → order-service → HFT/AlgoProd ([sistem haritası](../00-genel/sistem-haritasi.md#başlatma-sırası)). **Gün içi restart yalnız arızalı servise göre seçilmez:** MARpc otomatik yeniden bağlanmaz; HFT handoff kullanıcısı aynı order-service process'inden tekrar devredilmez.
 
-1. order-service'te hata varsa önce DB servisi kontrol edilir (2. adım). Gerekirse DB servisi yeniden başlatılır.
-2. `docker stop <order-service>` → `docker start <order-service>` yapılır, ardından 3. adımdan itibaren yeniden kontrol edilir.
-3. HFT'de hata varsa önce order-service kontrol edilir. Sonra `docker stop <hft>` → `docker start <hft>` yapılır ve 5. adımdan itibaren yeniden kontrol edilir.
+Servis başına sonuçlar ve koddan çıkarılan yeniden başlatma sırası [kopma-ve-kurtarma § Servis restart'ları](../30-akislar/kopma-ve-kurtarma.md#servis-restartları)'ndadır. Canlıda denenmiş bir kurtarma prosedürü değildir. Restart öncesi gerçek handoff durumu, açık emirler ve pozisyon kontrol edilir; SetBalance OUCH bağlantısını geri getirmez.
+
+Yeniden başlatma sonrasında bu belgedeki ilgili servis kontrolleri, OUCH bağlantısı/replay ve pozisyon kontrolü tekrarlanır; stratejiler otomatik başlamaz. Sabah toplu gönderim penceresinin kaçırılması restart ile telafi edilmez.
 
 Dikkat edilecekler:
 - order-service sabah saatinden (09:40) **sonra** başlatılırsa OUCH kullanıcılarını hemen HFT'ye devreder. `Late startup detected` satırı basılır ([log-imzalari § Sabah işleri, Handoff](log-imzalari.md#sabah-işleri)). Gönderim anı (T) geçmiş ya da T'ye 5 sn'den az kalmış tekrarlı akış log basmadan atlanır; açılış akışında sınır 30 sn'dir (`It is too late…`). Yani geç yeniden başlatma o günün geçmiş akışlarını **göndermez**.
