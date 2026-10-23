@@ -300,8 +300,8 @@ Koddan çıkarılan sonuçlar canlıda gözlemle doğrulanmış sayılmaz; ayrı
 | K-226 | doğrula | Tüm export 10 000, bazı ilişki seçimleri 1000 kayıtla sınırlı | [arayüz](10-servisler/mtrader-frontend-apps/arayuz-ve-oturum.md#4-liste-toplu-silme-ve-csv) |
 | K-227 | bug? | Admin ilişki insert/update hatalarının bazıları rollback yerine devam ediyor; eksik ilişkilerle başarı dönebilir | [alanlar](10-servisler/mtrader-frontend-apps/alanlar-ve-servislere-etkisi.md#şüpheli) |
 | K-228 | doğrula | npm start server build'i bekliyor; build script'i server dizinini siliyor (production nginx yolu ayrı) | [dağıtım](10-servisler/mtrader-frontend-apps/dagitim-ve-surum-farklari.md#şüpheli) |
-
 | K-230 | bug? | Replace rekey'i kuyruktaki eski token'lı execute olayının GUI'de varsayılan proto'ya dönüşmesine yol açabilir | [emir yaşam döngüsü](10-servisler/hftsrvprod/emir-yasam-dongusu.md#ikinci-tur-gui-token-eşlemesi) |
+| K-231 | bug? | SDK main hard cap yalnız enstrüman limitini aşan emirlerde çalışıyor; development'ta koşul ve çarpım taşması koruması farklı | [branch kontrolü](10-servisler/maordersdk/branch-ve-replay-kontrolu.md#şüpheli) |
 
 ## Yolda / takip
 

@@ -148,6 +148,8 @@ K-56 hard-cap aşımı ifadesi daraltıldı. Yeni [K-230 ayrıntısı](../10-ser
 
 ## 6. Son iki haftada aktif, referansa merge edilmemiş branch'ler
 
+İzleyen replay/combiner alt turu: SDK yeniden fetch/pull edildi, uçlar değişmedi. `Combiner.cpp`, `OuchConnection.cpp` development/main farkları ve `MAOrderSDK.cpp` ilgili callback/routing/limit blokları incelendi. Sonuçlar [SDK branch ve replay kontrolünde](../10-servisler/maordersdk/branch-ve-replay-kontrolu.md). K-106 süreç içi reconnect ile yeni süreç adopt ayrımı netleştirildi; K-231 main hard-cap koşulu kaydedildi. FIX engine/codec tam iç incelemesi ve host legacy FIX yolu henüz tamamlanmadı; build/canlı test yapılmadı.
+
 2026-10-09 ve sonrası commit tarihine göre tarandı. Branch'in adı niyet hakkında ipucu verir; bütün içeriğinin doğru/çalışır olduğu veya prod'a çıkacağı anlamına gelmez.
 
 | Repo | Branch | Uç | Commit tarihi |

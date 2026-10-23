@@ -2,6 +2,13 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-23 — SDK replay/combiner ve main farkları
+
+- SDK yeniden fetch/pull edildi, uçlar değişmedi. Combiner ve OUCH connection development/main farkları, SDK callback/routing/limit blokları karşılaştırıldı; yeni branch/replay belgesi ve README indeksi eklendi.
+- K-106 açıklamasında aynı süreçte eligible token kaydı ile yeni süreç adopt'u ayrıldı. Poison mevcut OUCH sayaçlarını sıfırlamaz; replay dedup sayılmadı.
+- K-231 main hard cap'in yalnız enstrüman limiti aşımında koşması ve kontrolsüz notional çarpımı kaynak branch bulgusu olarak kaydedildi; prod binary/config iddiası yapılmadı. Risk belgesine çapraz bağlantı eklendi.
+- Soket gönderim kilidi, reconnect temizliği, atomik trampoline ve token/split değişiklikleri branch tablosunda. Build/canlı test yok; sıradaki legacy FIX/master ve development SDK FIX karşılaştırması.
+
 ## 2026-10-23 — HFT/SDK callback ve token alt turu
 
 - Altı ilgili kaynak repoda yeniden fetch ve development pull yapıldı; uçlar değişmedi. HFT master/development registry ve callback farkları kontrol edildi.

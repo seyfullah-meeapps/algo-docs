@@ -380,7 +380,7 @@ Kapsanmayanlar: gerçek itch-sdk, eşzamanlı thread'ler, yeniden bağlanma repl
 9. **doğrula: `poison_all` bütün kullanıcıları etkiliyor.** Tek bir OUCH bağlantısı kopunca combiner diğer canlı bağlantıların emirlerini de zehirler; o emirler gün sonuna kadar yalnız OUCH'tan dolar (`install_callbacks` → `set_on_disconnected`). Kasıtlı mı, bilinmiyor.
 10. **doğrula: Yeniden bağlanma replay'i ve combiner.**
     - Aynı süreçte login sequence 1'den replay ederse, izlenen emrin OUCH execute'ları `on_executed_adjust`'a tekrar girer. `cum_ouch_rest`/`remaining_total` taşar → poison; lotlar host'a ikinci kez verilir.
-    - Bitmiş (silinmiş) emrin replay accept'i izlemeyi baştan kurar ve kitapta olmayan `order_id`'ye abone olur.
+    - Aynı süreçte bitmiş emrin combiner kaydı silinse de SDK token kaydı eligible kalır; replay accept'i izlemeyi yeniden kurabilir. Yeni süreçte bilinmeyen token adopt'u eligible değildir; izleme kurmaz. [İkinci tur ayrımı](branch-ve-replay-kontrolu.md#replay-ve-combiner-sınırı).
     - Combiner'sız durumda da replay fill'leri tekrarlanır ([hftsrvprod Şüpheli #2](../hftsrvprod/emir-yasam-dongusu.md#şüpheli-davranışlar-koddan)).
 11. **doğrula: Replace'te ITCH `order_id` değişmezse.** `on_replaced` sayaçları sıfırlar; stale guard yalnız `orderId` farkına dayanır. BIST replace'te ITCH order id'yi korursa, OUCH'tan geride kalan eski epoch ITCH fill'i yeni epoch'ta sayılıp ikinci kez verilebilir. itch-sdk yorumu ("DELETED = cancel or replace") yeni id'yi ima eder; test (`test_replace_flow`) yalnız farklı id'yi kapsar.
 12. **doğrula: Wire reject'in token'ı.** Cancel/replace reddinde BIST'in hangi token'ı döndüğü bilinmiyor. Eski token dönerse `on_wire_rejected` canlı emrin id'siyle `onRejected` üretir; host emri reddedilmiş sanabilir.

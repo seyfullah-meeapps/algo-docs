@@ -30,6 +30,7 @@ ouch-sdk ve network-sdk'ya dokunmaz. Uygulamalar arası (strateji ↔ order-serv
 | [`emir-akisi.md`](emir-akisi.md) | `enterOrder`/`cancelOrder`/`replaceOrder` iç yolu, iç tablolar, token ve kimlik modelleri, **yerel retlerin tam tablosu**, BIST ret kodları özeti, bölme matematiği, hard cap ve `InstrumentLimit`, olay → callback eşlemesi, combiner, ölçek özeti |
 | [`ouch-protokolu.md`](ouch-protokolu.md) | SoupBinTCP katmanı, bağlanma ve failover, login (sequence 1), recv thread'i ve heartbeat, replay ve `onReplayCompleted`, End of Session, OUCH mesajlarının byte düzenleri, kopma senaryoları |
 | [`fix.md`](fix.md) | QuickFIX gömme, SessionSettings (sabit ve config'ten gelenler), oturum yaşam döngüsü, PossDup ve `is_replay`, encode/decode tag tabloları, **şifre yaşam döngüsü ve 1409 kodları** |
+| [`branch-ve-replay-kontrolu.md`](branch-ve-replay-kontrolu.md) | İkinci kod turu: development/main farkları, süreç içi reconnect ile yeni süreç adopt ayrımı, main hard-cap koşulu |
 
 ## Dosya yapısı
 
