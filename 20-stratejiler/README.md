@@ -44,7 +44,7 @@ AlgoProd stratejileri iç `Commands` enum'u ile oluşturulur (`algoSrc/Globals/E
 |---|----------|-----------|-----------------------------|----------|----------------|-------|
 | 6 | `Arbitrage` | Arbitraj (spot–vadeli) | `Arbitrage/ArbitrageTracker` | `ArbitrageTracker` `'3'` | `arbitrage` | [arbitraj.md](arbitraj.md) |
 | 6 | `Arbitrage` | Sepet Arbitraj (endeks vadeli) — **henüz kullanılmıyor** | `BasketArbitrage/BasketArbitrageTracker` | `BasketArbitrageTracker` `'E'` | — | [arbitraj.md](arbitraj.md) |
-| 7 | `VWAP` | VWAP | `TradeByVolume/TradeByVolume`, `TradeByVolumeOverall` | `TradeByVolume` `'6'`, `TradeByVolumeOverall` `'V'` | `vwap` | [vwap.md](vwap.md) |
+| 7 | `VWAP` | VWAP | `TradeByVolume/TradeByVolume` (`TradeByVolumeOverall` kodda var ama işlevsiz, [vwap § Overall](vwap.md#overall-tradebyvolumeoverall)) | `TradeByVolume` `'6'`, `TradeByVolumeOverall` `'V'` | `vwap` | [vwap.md](vwap.md) |
 | 10 | `FundTracker` | Fon Takibi (BYF) | `FundTracker/FundTracker` | `FundTracker` `'d'` | `fund-tracker` | [fon-takibi.md](fon-takibi.md) |
 Sepet arbitraj wire'da da `Arbitrage` (6) olarak gider: `BasketArbitrageTracker` taban sınıfa `MyOrderType::ArbitrageTracker` verir, `convertMyOrderStrategy` bunu `ARBITRAGE`'a çevirir. İç komut (`'E'`) farklıdır.
 

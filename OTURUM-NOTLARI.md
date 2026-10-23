@@ -13,7 +13,7 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 - Bütün dosyalar `taslak`; `bos` kalmadı. Kullanıcı gözden geçirmesi bekleniyor.
 - `main` push edildi; `dogrulama-2026-10-22` branch'i silindi. Önceki sohbetin transkripti silindi (içeriği bu dosyaya aktarıldı).
-- Madde 1–7: trade-data-app, HftSrvProd, order-service, MAOrderSDK, itch-sdk, ouch-sdk/network-sdk, mtrader-trade-ui. **Madde 1–9 bitti.** Kullanıcıyla eklenen yeni maddeler 11–13. **Şu an madde 11 (AlgoProd) sürüyor:** `10-servisler/algorithmic-trading/` alt dosyalara bölünüyor — `uygulama-ve-threadler.md`, `emir-yolu.md`, `grpc-ve-veri.md` + `20-stratejiler/{arbitraj,vwap,fon-takibi}.md` yeniden doğrulama (4 agent). Prod = master `aa150ee` (dev'in 31 gerisi, 12 master-only commit).
+- Madde 1–7: trade-data-app, HftSrvProd, order-service, MAOrderSDK, itch-sdk, ouch-sdk/network-sdk, mtrader-trade-ui. **Madde 1–9 ve 11 bitti** (11: AlgoProd 3 alt dosya + README indeks, AlgoProd stratejileri yeniden doğrulandı; K-194–K-207, ikisi prod'u etkiliyor). **Sıradaki: madde 12 (`30-akislar/`), sonra 13 (admin paneli).** Madde 10 kullanıcı incelemesine bağlı.
 - Yöntem: konu başına paralel agent alt dosya yazar → çelişkileri koddan kontrol et → README'yi indekse çevir → ACIK-KONULAR'a tek satır ekle → CHANGELOG → push.
 - Remote: `seyfullah-meeapps/algo-docs` (kişisel hesap). Planlanan `MeeApps/algo-docs` (org) değil; bilinçli mi, sorulmadı.
 
@@ -33,7 +33,7 @@ Boşluk analizi (2026-10-22): yeni KB ~3.100 satır, eski `meeapps-ai` ~25.000 s
 8. ~~Operasyon~~ ✅ 2026-10-22
 9. ~~Doğrulamalar~~ ✅ 2026-10-22 (K-04 kasıt sorusu açık)
 10. Kullanıcı taslakları gözden geçirdikçe `durum: dogrulandi`.
-11. **AlgoProd derinleştirme** (en büyük boşluk; eski KB'de de yoktu).
+11. ~~AlgoProd derinleştirme~~ ✅ 2026-10-23
 12. **`30-akislar/`** güncel servis dokümanlarına göre yeniden doğrulama/genişletme.
 13. **Admin paneli** (`mtrader-frontend-apps`) derinleştirme.
 
@@ -61,6 +61,7 @@ Kullanıcıyla alınmış kararlar; aksi söylenmedikçe geçerli.
 
 En yeni en üstte; oturum başına birkaç satır.
 
+- **2026-10-23 (6. oturum, devam):** Kullanım limitinden sonra devam. AlgoProd (madde 11) derinleştirildi; K-194–K-207. master'da olmayan iki strateji düzeltmesi (K-194, K-195) prod'u etkiliyor.
 - **2026-10-22 (3. oturum):** Kullanıcının `dogrulama-2026-10-22` branch'i main'e alındı (borsa kuralları, sözlük, ❓ temizliği — bkz. CHANGELOG). `ACIK-KONULAR.md` ve bu dosya açıldı. Push kuralı kondu; transkript silindi. Öncelik: doküman tamamlama (boşluk analizi). trade-data-app ve HftSrvProd derinleştirildi; HftSrvProd sonrası kullanıcı isteğiyle duruldu.
 - **2026-10-22 (5. oturum, bulut):** Kaynak repolar salt okunur bağlandı. itch-sdk derinleştirildi (3 alt dosya, K-126–K-148); K-06 kapandı, K-01 teşhisi düzeltildi. ouch-sdk/network-sdk derinleştirildi (K-149–K-162); K-07 kapandı. mtrader-trade-ui derinleştirildi (K-163–K-178).
 - **2026-10-22 (6. oturum):** Doğrulamalar (madde 9): borsa kuralları resmi prosedürden, K-10–K-12 kapandı, K-04 netleşti (K-192, K-193).

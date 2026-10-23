@@ -224,6 +224,25 @@ Ayrıntılar alt dosyaların kendi "Şüpheli" bölümlerinde. Sistem genelindek
 | K-177 | eksik | Yeni GUI `socketStore.sendCommand` WS'ten `fields` gönderiyor ama sunucu okumuyor, çağıranı yok (ölü kod adayı); satır zemin renkleri ham Tailwind sınıfı (AGENTS.md renk token kuralı) | [yeni-gui](10-servisler/mtrader-trade-ui/yeni-gui.md#şüpheli) |
 | K-178 | iş | `algo_gui.yaml` hâlâ `npm install --legacy-peer-deps` ve yüzen `node-version: 22`; `.nvmrc` 22.23.1 | [yeni-gui](10-servisler/mtrader-trade-ui/yeni-gui.md#şüpheli) |
 
+## AlgorithmicTrading (AlgoProd)
+
+| # | Tür | Konu | Ayrıntı |
+|---|-----|------|---------|
+| K-194 | bug | **Prod:** Fon Takibi lot düzeltmesi (`41adb60`, 2025-08) master'da yok; L=1 ile ilk dolumdan sonra kotasyon biter, sepet hedge'i hiç gönderilmez, fon pozisyonu hedge'siz kalır | [fon-takibi](20-stratejiler/fon-takibi.md#şüpheli) |
+| K-195 | bug | **Prod:** Arbitraj teorik fiyatta faiz `/100` düzeltmesi (`c811418`) master'da yok; `diffTick`, açma koşulu ve `Theo_Price` etkileniyor | [arbitraj](20-stratejiler/arbitraj.md#şüpheli) |
+| K-196 | bug? | `Channel_Enum` yoksa kanal 0 gider, order-service emri yanıtsız düşürür (ret yok, takip kaydı kalır) | [emir-yolu](10-servisler/algorithmic-trading/emir-yolu.md#şüpheli) |
+| K-197 | bug? | order-service risk reddi `rejectCode=0` gelir: Arbitraj durur, VWAP durmaz/yeniden dener; PTRM kontrolleri yakalamaz | [emir-yolu](10-servisler/algorithmic-trading/emir-yolu.md#şüpheli) |
+| K-198 | bug? | Userbook yoksa `getOrderbook` callback thread'inde istisna → `std::terminate`; OUCH login 401'de olaylar sessizce atılır, emirler gider | [emir-yolu](10-servisler/algorithmic-trading/emir-yolu.md#şüpheli) |
+| K-199 | doğrula | Arbitraj VİOP fiyatı sabit ×100/÷10; `decimalCount ≠ 2` kontratta 10× sapma (K-122/K-163 ailesi); GUI serbest emir fiyatı aynen geçer | [emir-yolu](10-servisler/algorithmic-trading/emir-yolu.md#şüpheli) |
+| K-200 | bug? | Gün sonu `EndOfMessages` kapanışı ölü kod (olay yayınlanmıyor); SIGTERM handler yorumda → hep SIGKILL | [uygulama-ve-threadler](10-servisler/algorithmic-trading/uygulama-ve-threadler.md#şüpheli) |
+| K-201 | bug? | K-126 nedeniyle `orderbookInitialized` VİOP gelmeden çalışabilir (dayanak/vade/endeks ilişkileri eksik); snapshot ile ilk canlı olay arasında sıra yok | [uygulama-ve-threadler](10-servisler/algorithmic-trading/uygulama-ve-threadler.md#şüpheli) |
+| K-202 | bug? | Kilitsiz paylaşılan yapılar (Marketbook, `strategyMap`, `accountbooks`); gRPC restore'dan önce açılıyor; `Manager::stop` detach → aynı strateji iki thread'de koşabilir; strateji thread'i istisnayla ölünce `running` true kalır | [uygulama-ve-threadler](10-servisler/algorithmic-trading/uygulama-ve-threadler.md#şüpheli) |
+| K-203 | bug? | `StrategyFactory` istisnası yutuluyor: GUI `OK` görür, ayar DB'ye yazılır, strateji yok; `readAlgoSettings` anahtarı bayt kırparak çıkarıyor | [grpc-ve-veri](10-servisler/algorithmic-trading/grpc-ve-veri.md#şüpheli) |
+| K-204 | bug? | `SubscribeToOrderbook` `return`'süz (tanımsız davranış); `FetchCommands` iptali kontrol etmiyor (zombi stream, K-25 ile ilişkili); `GUIManager::workAsyncron` ve AKD stream meşgul döngü | [grpc-ve-veri](10-servisler/algorithmic-trading/grpc-ve-veri.md#şüpheli) |
+| K-205 | bug? | Arbitraj: yeni GUI "Automatic" (`O`) yönü motorda tanınmıyor, Above gibi işleniyor; `Passive_Barrier` okunmuyor; dayanak retleri dinlenmiyor, stop'ta dayanak emirleri iptal edilmiyor; `checkPassiveUndOrders` `end()` okuyor | [arbitraj](20-stratejiler/arbitraj.md#şüpheli) |
+| K-206 | bug? | VWAP: AKD aboneliği `&& false` ile kapalı ve `brokerMap` boş → AKD açılırsa hiç emir gitmez; vadelide fiyat limiti 0'a iniyor; Overall işlevsiz; stop'taki son emir 100 ms'de iptal | [vwap](20-stratejiler/vwap.md#şüpheli) |
+| K-207 | bug? | Fon Takibi: eşlenemeyen PCF sembolünde `stop()` yapıcıda etkisiz, eksik sepetle başlar; reddedilen sepet emri paketi tamamlanmış sayar | [fon-takibi](20-stratejiler/fon-takibi.md#şüpheli) |
+
 ## Operasyon
 
 | # | Tür | Konu | Ayrıntı |

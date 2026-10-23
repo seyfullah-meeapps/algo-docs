@@ -125,14 +125,14 @@ Kim hangisini kullanır (koddan):
 
 ### 4.2 Kanal seçimi (`Channel_Enum`)
 
-- `ArbitrageTrackerCommand` ve `TradeByVolumeCommand` `Channel_Enum`'u (`ARB_CHANNEL_ENUM`, IntValue) `ouchSDK::enums::Protocol`'e cast eder: 1 OUCH, 2 FIX. Alan **yoksa `PROTOCOL_UNKOWN` (0)** olur. 0 wire'a gider ve order-service emri "Unknown protocol type" log'uyla **yanıtsız düşürür** ([arayuzler § 6.2](../order-service/arayuzler.md#62-enter-girişten-bista)). AlgoProd bunu kontrol etmez (Şüpheli).
+- `ArbitrageTrackerCommand` ve `TradeByVolumeCommand` `Channel_Enum`'u (`ARB_CHANNEL_ENUM`, IntValue) `ouchSDK::enums::Protocol`'e cast eder: 1 OUCH, 2 FIX. Alan **yoksa `PROTOCOL_UNKOWN` (0)** olur. 0 wire'a gider ve order-service emri "Unknown protocol type" log'uyla **yanıtsız düşürür** ([arayuzler § 6.2](../order-service/arayuzler.md#62-enter-girişten-biste)). AlgoProd bunu kontrol etmez (Şüpheli).
 - Kanal yalnız enter'da anlamlıdır. Cancel/replace'te order-service protokolü token'dan bulur ([arayuzler § 6.3](../order-service/arayuzler.md#63-cancel--replace)).
 - FIX ve OUCH order-service'te aynı `MAOSdkManager`'a gider; fark kullanıcı seçimindedir ([arayuzler § 6.1](../order-service/arayuzler.md#61-manager-seçimi)).
 
 ### 4.3 Bölme (`levelCount > 1`) — pratikte ölü
 
 - `EnterOrder::levelCount` üyesi 1 ile başlar ve hiçbir yerde set edilmez. `sendOrder`'ın bölme dalı ve `OrderUtility::generateOrders` / `addNewOrderToListOrders` (maks emir değerine göre bölme, VİOP'ta 100, payda 1000 sabit bölen) development'ta çalışmaz.
-- Asıl bölme order-service'te MAOrderSDK'dadır. ARBITRAGE/VWAP/FUND_TRACKER için `no_split` set edilir ([arayuzler § 6.2](../order-service/arayuzler.md#62-enter-girişten-bista)).
+- Asıl bölme order-service'te MAOrderSDK'dadır. ARBITRAGE/VWAP/FUND_TRACKER için `no_split` set edilir ([arayuzler § 6.2](../order-service/arayuzler.md#62-enter-girişten-biste)).
 - GUI'nin kademe emri (`Order_Lvl_Count`) ayrı ve çalışan bir yoldur (§8).
 
 ### 4.4 Timeout (10 sn) ve sonrası

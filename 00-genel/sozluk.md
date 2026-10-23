@@ -23,7 +23,7 @@ Bu dosya yeni bilgi içermez. Tanımlar bu repodaki diğer dokümanlardan derlen
 | **VERDA** | Borsa İstanbul günlük dosyaları: tavan/taban, maks emir değeri, brüt takas. trade-data-app TradeVerifier okur. | [trade-data-app](../10-servisler/trade-data-app/README.md#entegrasyonlar) |
 | **AKD** | Aracı kurum dağılımı (Foreks). VWAP filtresinde kullanılır. | [vwap](../20-stratejiler/vwap.md#akd-aracı-kurum-dağılımı-filtresi) |
 | **BYF / PCF** | Borsa yatırım fonu / fonun sepet dosyası. Fon Takibi kullanır. | [fon-takibi](../20-stratejiler/fon-takibi.md) |
-| **PTRM** | Borsanın ön-işlem risk kontrolü. `-8500xx` ret kodlarıyla döner; Taban ve VWAP ilk redde durur. | [taban](../20-stratejiler/taban.md#tolerans-ve-durma) |
+| **PTRM** | Borsanın ön-işlem risk kontrolü. `-8500xx` ret kodlarıyla döner; Taban ilk PTRM reddinde durur; VWAP yalnız belirli PTRM kodlarında durur ([vwap § PTRM](../20-stratejiler/vwap.md#ptrm)). | [taban](../20-stratejiler/taban.md#tolerans-ve-durma) |
 
 ## Emir defteri ve emir
 

@@ -67,7 +67,7 @@ Değerler maskelidir. Gerçek değerler Algo-Setup `Configs/<Müşteri>/Algo-Con
 | `dbIp`, `dbPort` | string | "" | **trade-data-app gRPC** (`AlgoService`), MySQL değil. Kanal insecure, mesaj boyu sınırsız (-1). | `DatabaseServiceClient::Connect` |
 | `dbUsername`, `dbPassword` | string | "" | `AlgoLogin(application=AlgoTrading)`. Boş token dönerse yapıcı `"Failed to Connect Database Service!"` fırlatır. İlk çağrı `startApplication` içinde `try` dışındaki `SettingsManager::loadAllSettingsFiles`'tan gelir, yani process çöker. `dbUsername` ayrıca strateji ayarlarının **`application_user` anahtarıdır** (`setStrategySettings`, `DatabaseServiceClient.cpp`). | `DatabaseServiceClient`, `BaseStrategyCommand` |
 | `holidaysBIST` | string (dosya yolu, cwd'ye göre) | "" | BIST tatil günleri; ilk satır virgüllü tarih listesi. Dosya yoksa yalnız "File is empty" basılır ve vade hesabı tatilsiz yapılır. CI `MAProdEnv/scripts/holidays.csv` dosyasını binary'nin yanına koyar. | `TimeUtility.h` |
-| `workerCount` | int | **zorunlu** | `AlgoWorkerManager` thread sayısı (Arbitraj worker havuzu, [README](README.md#strateji-çalıştırma-modeli)). | `AlgoWorkerManager` |
+| `workerCount` | int | **zorunlu** | `AlgoWorkerManager` thread sayısı (Arbitraj worker havuzu, [uygulama-ve-threadler § 4.2](uygulama-ve-threadler.md#42-worker-havuzu-workersalgoworkercpp---masterda-yok)). | `AlgoWorkerManager` |
 | `triggerWorkerCount` | int | — | Okunur; getter'ı çağıran yok. **Etkisiz.** | — |
 | `TRY`, `USD`, `EUR` | double (oran; 0.14 = %14) | — | Varant teorik fiyatının faizi, para birimine göre. Tek kullanıcı `WarrantTracker` (kullanılmayan strateji, [katalog](../../20-stratejiler/README.md#kullanılmayan-kod)). Pratikte **etkisiz**. Eksik para birimi `std::stod` istisnası verir. ❓ doğrulanmadı: oranın yıllık olduğu. | `WarrantEuropeanFormula.cpp` |
 | `akdUrl`, `akdUserName`, `akdPassword`, `akdLogFile` | string | — | **Okunmuyor.** AlgoProd AKD'yi trade-data-app'ten (`FetchAkd`) alır. | — |
@@ -128,7 +128,7 @@ Kurallar:
 | Çalışma kökü | cwd'nin üst dizini | `ConfigurationManager::loadConfigurations` |
 | order-service'e bağlanmadan önce bekleme | 3000 ms | `OuchManager::start` |
 | Emir defteri hazır bekleme | 600 sn | `Application::runTests` |
-| Strateji emir gönderim zaman aşımı | 10 sn (VWAP) | [README → Emir yolu](README.md#emir-yolu) |
+| Replace/Cancel yanıt bekleme (`send`) | 10 sn; yeni emirde bekleme yok | [emir-yolu § 4.4](emir-yolu.md#44-timeout-10-sn-ve-sonrası) |
 | PerfSDK | app adı `algo_prod`, aralık 0–2000 µs, ClickHouse exporter yok | `Application::runTests` |
 | gRPC sunucusu | `0.0.0.0`, insecure, health service | `GUIManager::startGrpcServer` |
 | DataService kanalı | insecure, gönderim/alım sınırı yok, deadline yok | `DatabaseServiceClient::Connect` |

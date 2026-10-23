@@ -35,49 +35,24 @@ Stratejiler: [arbitraj.md](../../20-stratejiler/arbitraj.md), [vwap.md](../../20
 | `holidays.csv` | BIST tatil günleri (vadeye kalan süre hesabı) |
 | `*.proto` | HftSrvProd ile aynı servis sözleşmeleri, AlgoProd'un kendi kopyası |
 
-## Açılış sırası (`Application::runTests`)
+## Alt dosyalar
 
-Kodda üretim yolu `runTests()` adını taşıyor.
+| Soru | Dosya |
+|------|-------|
+| Açılış/kapanış sırası, sinyaller, manager'lar, thread ve worker modeli, kuyruklar ve sıra garantisi, kilitler, `StrategyManager` (restore, yaşam döngüsü), ITCH köprüsü, kendi emir defteri modeli, enstrüman hiyerarşisi, logger | [uygulama-ve-threadler.md](uygulama-ve-threadler.md) |
+| Emir order-service'e nasıl gider (ouch-sdk/MARpc), kimlikler (token, passthrough), kanal seçimi, olayların stratejiye dönüşü, userbook'lar, pozisyon, fiyat ölçeği, ret ve PTRM, manuel emir, kopma, 🚧 `add-order-sdk` | [emir-yolu.md](emir-yolu.md) |
+| gRPC `StrategyService` uçları ve HFT'den farkları, `SetCommandRequest` dispatch, wire alan biçimi, GUI'ye dönen akış, proto farkları, trade-data-app çağrıları ve kalıcılık | [grpc-ve-veri.md](grpc-ve-veri.md) |
+| Config anahtarları | [config.md](config.md) |
+| Log satırları | [40-operasyon/log-imzalari § 4](../../40-operasyon/log-imzalari.md#4-algoprod-algorithmictrading) |
 
-1. PerfSDK (`monitoringEnabled`)
-2. Logger
-3. `OrderbookManager.start()`
-4. `ItchSdkManager.startItchSdkManager()`: Spot + VİOP ITCH (Glimpse snapshot, multicast, Rewinder). Emir defteri hazır olana kadar en fazla 600 sn beklenir; dolarsa uygulama exception ile başlamaz.
-5. `OuchManager.start()`: order-service'e MARpc ile bağlan (`ouchIp:ouchPort`, kullanıcı `algoUser`).
-6. `GUIManager.start()`: gRPC sunucusu (`clientPort`, örnek 9098).
-7. `AlgoWorkerManager.start()`
-8. `StrategyManager.start()`: DB'deki strateji ayarlarını okur (`readAlgoSettings`) ve stratejileri yeniden oluşturur.
+## Önce bil
 
-ITCH `EndOfMessages` (gün sonu) gelince veya sinyal gelince kapanır.
-
-## Strateji çalıştırma modeli
-
-İki model vardır:
-
-| Model | Kim | Nasıl |
-|-------|-----|-------|
-| **Kendi thread'i** | VWAP, Fon Takibi, diğerleri | `BaseStrategy::workAsyncron`: `while(isRunning()) doPeriodicChecks();`. Strateji kendi `sleep`'ini yapar (VWAP ~100 ms, Fon ~5 ms). |
-| **Worker havuzu** (`runsOnWorkerPool() == true`) | Arbitraj | `AlgoWorkerManager`'a atanır. `doPeriodicChecks()` **bloklamamalıdır**; bekleme `sleep` yerine `retryAfterNs_` ile yapılır. |
-
-Piyasa ve emir olayları stratejiye `Subscriber`/`Notifier` kuyrukları ile gelir (`moodycamel::ConcurrentQueue`, TBB kuyrukları). Strateji bunları her döngüde `tryPop` ile boşaltır.
-
-## Emir yolu
-
-- **Bütün emirler** `OuchManager::send` → ouch-sdk → MARpc → **order-service** → BIST.
-- Protokol strateji başına seçilir: `Channel_Enum` OUCH veya FIX.
-- Gönderim 10 sn içinde dönmezse strateji durur (VWAP `sendTransaction`).
-- 🚧 `add-order-sdk` branch'i (12 commit, son 2026-10-15) MAOrderSDK'yı ve OUCH handoff'u getiriyor: `MAOrderSdkManager`, `MAOrderSdkRouter`, `OrderEventDispatcher`, replay beklemesi. Henüz development'ta değil. Daha eski `feature/maorder-sdk-integration` (2026-05) da merge edilmemiş.
-
-## gRPC (`StrategyService`, :9098)
-
-HftSrvProd ile aynı sözleşmedir (`strategies.proto`); istemci trade-data-app'tir. Ek olarak AlgoProd'a özgü uçlar vardır:
-- Vadeli abonelikleri: `SubscribeToFuture(s)`, `SubscribeToAllFutures`
-- Paket işlemleri
-- Strateji aktiviteleri: `ArbitrageStrategyActivity`, `ArbitragePackageActivity`, `FundTracker*Activity`, özetler
-
-## trade-data-app'e (`AlgoService`, :6620) yaptığı çağrılar
-
-`AlgoLogin`, `GetUserAccounts`, `GetAllInstruments`, `GetFictiveInstrumentSettings` / `GetFictiveItemSettings` (endeks tanımları), `Get/SetArbitrageData`, `UpdateArbitragePackage`, `DeleteArbitragePackage`, `Get/SetFundData`, `GetByfSettings`, `Get/SetStrategySettings`, `FetchAkd` (stream), `SubscribeBrokarageResults`, `GetTimeBasedData`, `FetchHistoricalData`.
+- **Prod `master`'dır ve development'tan belirgin geridir** (aa150ee, 2026-09-01; development 0dc32a7 31 commit önde, master'da 12 ayrı commit). master'da worker havuzu yok (Arbitraj kendi thread'inde), ITCH SDK v2 API'si kullanılıyor, `StrategyStartException` yok. Prod'u etkileyen strateji farkları (Fon Takibi lot düzeltmesi, Arbitraj faiz `/100`) strateji dosyalarında `⚠ master'da yok` ile işaretli.
+- **Açılış:** Sentry → config → `SettingsManager` (DB'den enstrüman ve fiktif ayarlar) → PerfSDK → Logger → OrderbookManager → ITCH (Glimpse'i `itchsdk_start` bloklar; ardından snapshot-end için en çok 600 s) → OuchManager (3 s sabit bekleme; login hatasında açılış sürer) → gRPC → worker havuzu → `StrategyManager` restore. gRPC restore'dan önce açılır ([§ 1](uygulama-ve-threadler.md#1-açılış-sırası)).
+- **Kapanış:** Yalnız SIGINT/SIGHUP/SIGUSR1/SIGUSR2 düzenli kapatır. SIGTERM handler'ı yorumda; gün sonu `EndOfMessages` kapanışı **ölü kod** (olayı yayınlayan yok). `docker stop` → SIGKILL ([§ 2](uygulama-ve-threadler.md#2-kapanış-sinyal-gün-sonu-hata)).
+- **Bütün emirler order-service üzerinden** gider (ouch-sdk → MARpc). Yeni emirde bekleme/timeout **yoktur**; 10 sn timeout yalnız `send(Replace/Cancel)` yolundadır ve GUI/VWAP iptalleri bu yolu kullanmaz ([emir-yolu § 4](emir-yolu.md#4-gönderim-ouchmanagerh)).
+- **Kanal:** `Channel_Enum` yalnız Arbitraj ve VWAP'ta okunur; boşsa kanal 0 gider ve order-service emri **yanıtsız düşürür** ([emir-yolu § 4.2](emir-yolu.md#42-kanal-seçimi-channel_enum)). Fon Takibi sabit OUCH.
+- **gRPC sözleşmesi HFT ile aynı `.proto`, davranışı farklı:** komut sınıfı `Command_Type` (char) ile seçilir; bazı uçlar boş/işlevsiz ([grpc-ve-veri § 2](grpc-ve-veri.md#2-rpcler)).
 
 ## Config (`Configuration.ini`)
 

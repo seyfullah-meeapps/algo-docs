@@ -34,7 +34,7 @@ Kod: `include/OrderStreamClient.h` (public API), `OrderStreamClient.cpp` (tek tr
 | Kullanan | Kod | Ne için |
 |----------|-----|---------|
 | HftSrvProd | `src/Clients/OuchManager.*` | Handoff öncesi yedek emir yolu ("OS yolu"), strateji kaydı (`insertStrategy`), restart sonrası `getAllOrders`, handoff bildirimi (`orderUserDisconnected`). Ayrıntı: [hftsrvprod/emir-yasam-dongusu.md](../hftsrvprod/emir-yasam-dongusu.md#os-yolu-eşdeğerleri-ouchmanagercpp-ouchsdkorder-serbest-fonksiyonları), [§ 4 Handoff](../hftsrvprod/emir-yasam-dongusu.md#4-handoff--hft-tarafı). |
-| AlgorithmicTrading (AlgoProd) | `algoSrc/Managers/OuchManager.*` | **Bütün emirler**, strateji kaydı/okuma, açılışta `getAllOrders`. `orderUserDisconnected` boş (yalnız `cout`). Ayrıntı: [algorithmic-trading/README.md § Emir yolu](../algorithmic-trading/README.md#emir-yolu). |
+| AlgorithmicTrading (AlgoProd) | `algoSrc/Managers/OuchManager.*` | **Bütün emirler**, strateji kaydı/okuma, açılışta `getAllOrders`. `orderUserDisconnected` boş (yalnız `cout`). Ayrıntı: [algorithmic-trading/emir-yolu.md](../algorithmic-trading/emir-yolu.md). |
 
 Ek kullanım: HftSrvProd `ouchSDK::models::Order*` sınıflarını **MAOrderSDK yolunda da** iç olay tipi olarak kullanır (`src/Messages/OngoingMessages/Transaction/MsgConvert.*`, `HftConvert::fromSdk` → `shared_ptr<ouchSDK::models::OrderAccepted>` vb.). Model sınıflarındaki bir değişiklik HFT'nin iki yolunu da etkiler.
 

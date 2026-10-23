@@ -224,7 +224,7 @@ Endeks skoru `Scores`'a iki kez yazılır: endeksin kendi id'si ve en yakın vad
 
 **Tüketiciler:**
 - `AlgoService.GetInstrumentScores` → AlgoProd `TradeByBSRatio` (strateji tipi 3, "AKD") ve `WarrantUnderlyingTracker`.
-- `FetchAkd` (stream, ham dağılım) ve `SubscribeBrokarageResults` (kurum kriteri) → AlgoProd VWAP AKD filtresi ([vwap.md](../../20-stratejiler/vwap.md#akd-aracı-kurum-dağılımı-filtresi)).
+- `SubscribeBrokarageResults` (kurum kriteri) → AlgoProd VWAP AKD filtresi ([vwap.md](../../20-stratejiler/vwap.md#akd-aracı-kurum-dağılımı-filtresi); filtre pratikte kapalı). `FetchAkd`'yi yalnız kullanılmayan TradeByBSRatio çağırır ([grpc-ve-veri § 7.2](../algorithmic-trading/grpc-ve-veri.md#72-çağrılar)).
 
 ### Kurum kriteri (`brokarage_instrument.go` `checkCriterias`)
 
