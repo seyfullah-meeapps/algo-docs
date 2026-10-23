@@ -4,6 +4,9 @@ kaynak:
   - repo: HftSrvProd
     branch: development
     commit: 4275ccc
+  - repo: HftSrvProd
+    branch: master
+    commit: 052dd96
 dogrulama: 2026-10-22
 durum: taslak
 ---
@@ -84,6 +87,7 @@ Koşullar:
 - **Tolerans:** Her tam kapanan tur `toleranceCounter`'ı artırır. `Tolerance` dolunca strateji durur; `-1` = sınırsız.
 - **`Finish_With_Sell`:** Tolerans dolunca durma durumunu işaretler. ⚠ UI bu alanı **göndermez** (ürün kararı 2026-09-25). Motor eksik alanı false sayar. Simetri için eklemeyin (mtrader-trade-ui `AGENTS.md`).
 - **PTRM reddi → anında dur** (`stopOnPtrmReject`): Ret kodu borsa ön-işlem risk koduysa strateji ilk redde durur. Kodlar: `-850002` user blocked, `-850004` pretrade breach, `-850044` margin breach, `-850064` margin user blocked (`GlobalConstants.h` `isPtrmRejectCode`).
+  - **⚠ master'da yok:** `052dd96` legacy `rejectOrder` bu sınıflandırmayı/durdurmayı yapmaz; development `4275ccc` davranışıdır (K-235).
   - Açık pozisyon **bırakılır**, manuel müdahale gerekir.
   - GUI satırı bu duruşu ayrı renkte gösterir (`Stopped_By_Ptrm`).
 
@@ -116,6 +120,16 @@ Tavan'ın tersine çalışır: satış fiyatı yukarıdan tabana yaklaşınca ho
 | `Start_Time` / `End_Time` | Long | Günün saniyesi, İstanbul (varsayılan 36000 / 64800) |
 
 ## GUI'ye giden durum
+
+### İkinci kod turu — branch sınırı
+
+2026-10-23 fetch/pull sonrası uçlar aynı. Development'ın `Secondary_Enter_Lot`, `Consider_All_Buy_Levels` ve `Min_Max_Size_Buy_Enter` alanları/giriş yolu master `052dd96` command/strateji koduna genellenmez. Master ayrı `Re_Close_Lot`/`Re_Close_Percentage` okurken development reClose eşiğini giriş kriterine bağlar. Development reClose timer'ı da ekler; master sessiz defterde aynı yeniden değerlendirme yolunu taşımaz. Üstteki anlatım development içindir.
+
+**K-235:** Master `rejectOrder` father-ref çözme, çıkış durumunu serbest bırakma ve `recheckEscape` yolunu sürdürür; PTRM kodunda `stopOnPtrmReject` çağrısı yoktur. Development PTRM muhasebesini yaptıktan sonra kilidi bırakıp durdurur; açık pozisyonu otomatik kapatma garantisi vermez. Kaynak: `HftMinPrice.cpp`, `MinPriceCommand.cpp` master/development farkı. Statik inceleme; prod binary ve gerçek ret senaryosu denenmedi.
+
+Bu alt tur giriş/ret/durma ve branch farklarını kapsar; bütün top-up/reClose eşzamanlı sıraları yeniden doğrulanmış değildir.
+
+### Durum alanları
 
 `MinPriceStateCommand` (`Command_Type_MaxPriceStateResponse` zarfıyla, Tavan ile aynı store). Alanlar: `Taban_State`, `Has_Passive_Buy_Order`, `Has_Passive_Sell_Order_At_Taban`, `Stopped_By_Ptrm`, tolerans sayacı, çalışma durumu.
 

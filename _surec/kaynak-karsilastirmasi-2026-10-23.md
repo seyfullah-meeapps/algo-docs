@@ -156,6 +156,10 @@ order-service/SDK yeniden fetch/development pull sonrası aynı uçlarda. Legacy
 
 İzleyen replay/combiner alt turu: SDK yeniden fetch/pull edildi, uçlar değişmedi. `Combiner.cpp`, `OuchConnection.cpp` development/main farkları ve `MAOrderSDK.cpp` ilgili callback/routing/limit blokları incelendi. Sonuçlar [SDK branch ve replay kontrolünde](../10-servisler/maordersdk/branch-ve-replay-kontrolu.md). K-106 süreç içi reconnect ile yeni süreç adopt ayrımı netleştirildi; K-231 main hard-cap koşulu kaydedildi. FIX engine/codec tam iç incelemesi ve host legacy FIX yolu henüz tamamlanmadı; build/canlı test yapılmadı.
 
+### Strateji ikinci turu — ilk alt tur
+
+HFT yeniden fetch/development pull sonrası aynı uçlarda. Classic çekirdek/command dört dosyasının iki uçta aynı olduğu görüldü; accept/fill/reject, stop ve tek işlem mandalı okundu. [Classic](../20-stratejiler/hft-classic.md#ikinci-kod-turu--classic-kontrol-sınırları) K-236/K-237'yi içerir. [Taban](../20-stratejiler/taban.md#ikinci-kod-turu--branch-sınırı) K-235 PTRM stop master farkını; [Tavan](../20-stratejiler/tavan.md#ikinci-kod-turu--branch-sınırı) momentum gate/window ve cold escape farklarını kaydeder. Üstteki development anlatımları master'a genellenmedi. Tavan/Taban top-up/reClose callback/timer ayrıntıları sırada; canlı test yok.
+
 ## 6. Son iki haftada aktif, referansa merge edilmemiş branch'ler
 
 2026-10-09 ve sonrası commit tarihine göre tarandı. Branch'in adı niyet hakkında ipucu verir; bütün içeriğinin doğru/çalışır olduğu veya prod'a çıkacağı anlamına gelmez.

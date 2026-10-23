@@ -11,6 +11,8 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Şu an (2026-10-23)
 
+- Strateji ikinci turu başladı: HFT yeniden fetch/development pull sonrası aynı uçlarda. Classic çekirdek/command dosyaları master ile aynı; K-236 stop enable alanı ve K-237 tek işlem yön kontrolü kaydedildi. Tavan/Taban branch farkları işaretlendi; K-235 Taban PTRM stop master'da yok. Bu alt tur bütün Tavan/Taban callback/timer sıralarını tamamlamaz.
+
 - FIX şifre/config/ret alt turu tamamlandı; order-service ve SDK yeniden fetch/pull sonrası aynı uçlarda. K-233 (1409'suz Logon SDK/host ayrımı), K-234 (manuel adayda DB yazma hatasına rağmen arm) kaydedildi; crash-safe garanti ifadesi daraltıldı. K-120 ortak ret sınırı açık. Statik inceleme, şifre değişimi/canlı test yok.
 
 - Legacy FIX fill/replay ve replace alt turu tamamlandı. order-service/SDK yeniden fetch/pull sonrası aynı uçlarda. K-121'in master'da da olduğu teyit edildi; K-232 legacy geçmiş fill'in yeniden pozisyon kuyruğuna girmesi adayı kaydedildi. Ayrıntı `10-servisler/order-service/fix-branch-karsilastirmasi.md`. Kaynak branch bulguları; prod sonucu/canlı test yok.
@@ -28,7 +30,7 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Sıradaki
 
-**Sıradaki: stratejilerin güncel development ve master kodlarıyla ikinci turu.** Önce HFT Classic/Tavan/Taban emir-dolum ve durma kuralları, sonra diğer stratejiler; ardından GUI/admin/operasyon sırası izlenecek. FIX için planlanan statik karşılaştırma tamamlandı; entegrasyon/gerçek exchange ve prod doğrulaması yapılmadı. Bütün bilgi tabanının ikinci doğrulaması henüz tamamlanmadı.
+**Sıradaki: Tavan/Taban top-up, reClose ve callback/timer sıralarının kalan ayrıntıları.** Classic accept/fill/reject, stop ve tek işlem alt turu ile üç stratejinin branch farkları kaydedildi. Ardından diğer stratejiler, GUI/admin/operasyon izlenecek. FIX statik karşılaştırması tamamlandı; entegrasyon/gerçek exchange ve prod doğrulaması yapılmadı. Bütün bilgi tabanının ikinci doğrulaması henüz tamamlanmadı.
 
 Kullanıcı içerik onayı geldikçe durum etiketi kapsamına göre güncellenir; genel devam talimatıyla topluca dogrulandi yapılmaz. Uygulama bug düzeltmesi/deploy bu doküman incelemesinin dışında kaldı.
 

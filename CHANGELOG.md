@@ -2,6 +2,13 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-23 — HFT Classic ve Tavan/Taban branch farkları
+
+- HFT yeniden fetch/development pull: uçlar aynı. Classic çekirdek/command dört dosyası development/master aynı; accept/fill/reject, stop ve tek işlem mandalı okundu.
+- K-236 kullanılmayan stop enable bayrağı, K-237 satış dalında alış başlangıç bayrağı kontrolü kaydedildi. Tek işlem “stop” özeti mandal davranışına düzeltildi.
+- Tavan momentum gate/window ve escape örneklemesi, Taban yeni alan/reClose timer/PTRM stop farkları belgelendi. K-235 PTRM duruşunun master'da olmadığı kaydedildi; üç stratejiye master kaynak metadata'sı eklendi.
+- Statik alt tur; build/canlı emir testi ve uygulama değişikliği yok. Tavan/Taban top-up/reClose callback sıralarının tamamı henüz yeniden incelenmedi.
+
 ## 2026-10-23 — FIX şifre/config ve ret yolları
 
 - order-service ve SDK yeniden fetch/development pull: uçlar aynı. Legacy master ile SDK/host oturum ayarları, sequence başlangıcı, 35=3/35=j ve cancel-reject yolları karşılaştırıldı; FIX branch belgesi genişletildi.

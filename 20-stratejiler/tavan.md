@@ -4,6 +4,9 @@ kaynak:
   - repo: HftSrvProd
     branch: development
     commit: 4275ccc
+  - repo: HftSrvProd
+    branch: master
+    commit: 052dd96
 dogrulama: 2026-10-22
 durum: taslak
 ---
@@ -172,6 +175,14 @@ Hisseyi hızla tavana koşturup oradan satan manipülatörlere karşı koruma.
 UI (yeni GUI, route `max-price`): canlı durum `maxPriceStateStore`'da tutulur, "Tavan Lot" kolonu bounds feed'inden gelir. Taban ile farkları: mtrader-trade-ui `AGENTS.md` → "MAX_PRICE and MIN_PRICE".
 
 ## Thread ve kilit
+
+### İkinci kod turu — branch sınırı
+
+2026-10-23 fetch/pull sonrası development `4275ccc`, master `052dd96`. Yukarıdaki momentum window/arm-price ayarları master'a aynen genellenmez: development `syncMomentumParams` ile window → arm price → threshold sırasını kurar, giriş gate güncellemesi başarısızsa maxOrderQty'yi 0 tutmayı dener. Master bu fonksiyonu ve `Max_Size_*_Delta`/`Max_Size_Buy_Enter_Levels` command eklerini taşımaz. Development yüzde >100 için ölçekli threshold kullanırken master bu aralıkta tam cap kullanır.
+
+Development cold'a geçerken escape örnekleme zincirini de sıfırlar; master'da bu ek sıfırlama yoktur. Kaynak: `HftMaxPrice.cpp` ve `MaxPriceCommand.cpp` iki uç farkı. Tetik/çıkış anlatımı development referansıdır; bütün queue/timer yarışları ve prod binary bu statik alt turla doğrulanmadı.
+
+### Çalışma thread'leri
 
 - ITCH olayları AlgoWorker'da işlenir. OUCH callback'leri recv thread'inden gelir. Second rule timer'ı periodic jobs thread'indedir; karar vermez, sadece olay kuyruğa atar.
 - Kilit: `buySellInfoMutex` (`setCommand` 500 ms dener). Emir gönderilmeden önce kilit bırakılır.

@@ -4,6 +4,9 @@ kaynak:
   - repo: HftSrvProd
     branch: development
     commit: 4275ccc
+  - repo: HftSrvProd
+    branch: master
+    commit: 052dd96
 dogrulama: 2026-10-22
 durum: taslak
 ---
@@ -52,7 +55,7 @@ alış = (satış header'ındaki bizim satışlarımız) − balance − (header
 
 Sıfır pozisyonla başlar ve `No_Position_Lot` kadar lotla kademeler arasında döner.
 - `Start_With_Buy` → önce alır, `Start_With_Sell` → önce satar.
-- `Perform_Single_Operation` → tek işlem yapıp durur.
+- `Perform_Single_Operation` → kabul sonrası yeni girişleri mandalla engellemeyi amaçlar; `stop()` çağrısı değildir. Satış başlangıç kontrolünde asimetri var (K-237, aşağıda).
 - Fiyat limitleri yalnız bu modda uygulanır:
   - `Buy_Upper_Limit_Price`: satış header'ı bu fiyatın üstündeyse alış yapılmaz.
   - `Sell_Below_Limit_Price`: alış header'ı bu fiyatın altındaysa satış yapılmaz.
@@ -108,6 +111,7 @@ Tahmin yanlış çıkarsa (kademe kırılmazsa) pozisyondan çıkış mekanizmas
 - **TP gönderimi:** Giriş emri giriş fiyatından **tamamen** dolunca `sendPassiveSellInfoOrder` pasif satışı yazar. Miktar `min(No_Position_Lot, balance − satış header'ındaki bizim satışlar)`.
 - **Stop:** `checkStopLoss` alış header'ı `stopLossPrice`'a veya altına inince ve alış header miktarı eşiğin altındayken pasif TP emrini alış header'ına (veya `stopLossPrice`'a) replace eder. TP emri yoksa balance kadar yeni stop emri yazar.
 - **Kapatma:** `Hft_Stop_Loss_Level = -1` stop loss'u kapatır.
+  - `Is_Stop_Loss_Enabled` command'dan strateji alanına alınır, fakat karar yolunda okunmaz; bu bayrağı false yapmak tek başına stop'u kapatmaz (K-236).
   - ⚠ UI "kapalı" için 0 gönderiyor; bu bilinen ve çözülmemiş bir uyumsuzluk (mtrader-trade-ui `AGENTS.md`).
 - **Kullanılmayan alan:** `Take_Profit_Level` command'da okunmuyor (satır yorum dışı).
 
@@ -196,6 +200,15 @@ Kaynak: `src/Globals/GuiConstants.h`, `HftClassicCommand.cpp`.
 
 Tüm fiyatlar **raw** (enstrümanın `decimalCount` ölçeğinde).
 
-## UI
+## İkinci kod turu — Classic kontrol sınırları
+
+2026-10-23: HFT fetch/pull sonrası development `4275ccc`, master `052dd96`. `HftClassic.{h,cpp}` ve `HftClassicCommand.{h,cpp}` iki uçta aynı; bu, callback altyapısının ve linklenmiş SDK'nın da aynı olduğu anlamına gelmez. Accept/fill/reject, `sent`, TP/stop ve tek işlem mandalı kaynakları okundu; canlı test yok. Belgeler taslak.
+
+- **K-236:** `stopLossEnabled` yalnız `setCommand` içinde atanır. `checkStopLoss` ve header karşılığı bu alanı kullanmaz; seviye −1, fiyat, hazır TP ve defter koşulları belirleyicidir. UI bayrağıyla motoru kapattığını varsayma.
+- **K-237:** `isSameSideSingleOperation` BUY ve diğer taraf için aynı `isSingleOperation() && isNoPositionBuyMode()` ifadesini döndürür. `Start_With_Sell=true`, `Start_With_Buy=false` halinde accept `singleOperationAccepted` mandalını kurmaz; `sent` çözülünce tek işlem engeli kalıcı olmayabilir. Alış başlangıcında ise taraf ayrımı korunmaz. İki branch'te aynı statik bulgu; gerçek emirle denenmedi.
+
+`executeOrder` fill miktarıyla pozisyonu günceller, tam dolumda TP hazırlığını değerlendirip emri yerel haritadan çıkarır; `rejectOrder` uygun retlerde gönderim mandalını çözer. Bu mekanizmalar replay match-id dedup sağlamaz; sınır [emir yaşam döngüsünde](../10-servisler/hftsrvprod/emir-yasam-dongusu.md#şüpheli-davranışlar-koddan).
+
+### Arayüz
 
 Yeni GUI route `hft`. Inline ayar hücreleri, pozisyonlu/pozisyonsuz alan normalizasyonu ve stop loss uyumsuzluğu: mtrader-trade-ui `AGENTS.md`.
