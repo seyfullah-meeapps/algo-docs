@@ -2,6 +2,12 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-23 — HFT/SDK callback ve token alt turu
+
+- Altı ilgili kaynak repoda yeniden fetch ve development pull yapıldı; uçlar değişmedi. HFT master/development registry ve callback farkları kontrol edildi.
+- K-56 uçtan uca hard-cap aşımı iddiası daraltıldı; fallback denemesi ve ikinci yolun kendi kontrolleri ayrıldı. Replace sıfır alanlarının BIST semantiği teyit edilmiş sayılmadı.
+- K-230 eski token'lı GUI olayının replace rekey'i sonrasında varsayılan proto'ya dönüşebilmesi statik kod senaryosuyla kaydedildi; gRPC özeti düzeltildi. Canlı test ve uygulama kodu değişikliği yok; belgeler taslak. Replay/combiner ve SDK main ayrıntılı turu sırada.
+
 ## 2026-10-23 — Remote tazeliği ve ikinci kod incelemesi: risk
 
 - Kullanıcının development ve master/main'in güncel halleriyle kıyaslama isteği üzerine 15 kaynak klonda temizlik kontrolü, origin fetch ve referans branch pull --ff-only yapıldı. Hepsi zaten güncel; manifest doğrulama SHA'ları değiştirilmedi. Master/main ve test ortamı ref'leri de okundu; sonuçlar `_surec/kaynak-karsilastirmasi-2026-10-23.md` içinde.

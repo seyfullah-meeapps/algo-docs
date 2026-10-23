@@ -140,6 +140,12 @@ Bunlar fetch sonrasında hesaplandı; önceki doküman baseline'ından sonra yen
 
 Bu tur bütün bilgi tabanının yeniden kodla doğrulanması değildir. Sonraki tur HFT/SDK emir yaşam döngüsü ve callback kimlik/sıra eşlemesi, ardından strateji kurallarıdır. Kullanıcı onayı ve canlı test olmadığı için belgeler taslak kalır.
 
+### Devam: HFT/SDK callback-token alt turu
+
+HftSrvProd, MAOrderSDK, ouch-sdk, network-sdk, order-service ve itch-sdk yeniden fetch edildi; development pull --ff-only başarılı, uçlar aynı. HFT master/development registry/callback farkları ile SDK accept/reject/execute/cancel/replace token eşlemesi incelendi. Bütün SDK main çekirdeğinin eşdeğerliği iddia edilmez.
+
+K-56 hard-cap aşımı ifadesi daraltıldı. Yeni [K-230 ayrıntısı](../10-servisler/hftsrvprod/emir-yasam-dongusu.md#ikinci-tur-gui-token-eşlemesi) eski token'lı GUI olayının rekey sonrasında çözülememesini kaydeder; iki HFT branch'inde statik kod senaryosudur. Build/canlı/zamanlamalı test yapılmadı. Replay/combiner zamanlaması, SDK main ayrıntılı farkları ve legacy FIX ikinci turu henüz tamamlanmadı.
+
 ## 6. Son iki haftada aktif, referansa merge edilmemiş branch'ler
 
 2026-10-09 ve sonrası commit tarihine göre tarandı. Branch'in adı niyet hakkında ipucu verir; bütün içeriğinin doğru/çalışır olduğu veya prod'a çıkacağı anlamına gelmez.

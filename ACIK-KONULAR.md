@@ -73,7 +73,7 @@ Ayrıntılar alt dosyaların kendi "şüpheli davranışlar" bölümlerinde.
 | K-53 | bug? | Tavan/Taban kendi `isRunning`'iyle taban sınıfınkini gölgeliyor; `strategyType` iki sınıfta tanımlı | [strateji-cekirdegi](10-servisler/hftsrvprod/strateji-cekirdegi.md) § Şüpheli |
 | K-54 | bug? | Durdurmada `unregisterStrategyForHandle` çağrılmıyor (HFT Classic, Varant, Teorik); Teorik her başlatmada yeni abonelik açıyor; handle'lar 65536'da sessizce düşüyor | [itch-entegrasyonu](10-servisler/hftsrvprod/itch-entegrasyonu.md) § Şüpheli |
 | K-55 | bug? | Gün içi handoff gate'i tekrar kapatınca kuyruk birikiyor, açılınca bayat olaylar işleniyor | [strateji-cekirdegi](10-servisler/hftsrvprod/strateji-cekirdegi.md) § Replay gate |
-| K-56 | bug? | Handoff öncesi yerel ret (1001–1006) hem stratejiye ret olarak dönüyor hem order-service'e gidiyor; hard cap (1003) fiilen aşılıyor | [emir-yasam-dongusu](10-servisler/hftsrvprod/emir-yasam-dongusu.md) § Şüpheli |
+| K-56 | bug? | Handoff öncesi yerel ret (1001–1006) sonrası fallback deneniyor; ikinci yol kendi limitlerini ayrıca kontrol ediyor | [emir-yasam-dongusu](10-servisler/hftsrvprod/emir-yasam-dongusu.md) § Şüpheli |
 | K-57 | doğrula | Replay, order-service yolunda işlenmiş fill'leri yeniden getiriyor; strateji `match_id` kontrolü yok | [emir-yasam-dongusu](10-servisler/hftsrvprod/emir-yasam-dongusu.md) § Çift kayıt koruması |
 | K-58 | bug? | OUCH kopunca reconnect callback'i yok; tek kurtarma yeni handoff, gate yeniden kurulmuyor (`replaysRegistered` static) | [emir-yasam-dongusu](10-servisler/hftsrvprod/emir-yasam-dongusu.md) § Kopma senaryoları |
 | K-59 | bug? | `tokens`/`refs` havuzları (100 000) wrap etmiyor; Tavan her girişte `refs` harcıyor | [emir-yasam-dongusu](10-servisler/hftsrvprod/emir-yasam-dongusu.md) § Şüpheli |
@@ -300,6 +300,8 @@ Koddan çıkarılan sonuçlar canlıda gözlemle doğrulanmış sayılmaz; ayrı
 | K-226 | doğrula | Tüm export 10 000, bazı ilişki seçimleri 1000 kayıtla sınırlı | [arayüz](10-servisler/mtrader-frontend-apps/arayuz-ve-oturum.md#4-liste-toplu-silme-ve-csv) |
 | K-227 | bug? | Admin ilişki insert/update hatalarının bazıları rollback yerine devam ediyor; eksik ilişkilerle başarı dönebilir | [alanlar](10-servisler/mtrader-frontend-apps/alanlar-ve-servislere-etkisi.md#şüpheli) |
 | K-228 | doğrula | npm start server build'i bekliyor; build script'i server dizinini siliyor (production nginx yolu ayrı) | [dağıtım](10-servisler/mtrader-frontend-apps/dagitim-ve-surum-farklari.md#şüpheli) |
+
+| K-230 | bug? | Replace rekey'i kuyruktaki eski token'lı execute olayının GUI'de varsayılan proto'ya dönüşmesine yol açabilir | [emir yaşam döngüsü](10-servisler/hftsrvprod/emir-yasam-dongusu.md#ikinci-tur-gui-token-eşlemesi) |
 
 ## Yolda / takip
 

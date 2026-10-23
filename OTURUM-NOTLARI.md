@@ -11,6 +11,8 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Şu an (2026-10-23)
 
+- HFT/SDK callback-token alt turu tamamlandı; altı ilgili repoda yeniden fetch/development pull yapıldı, uçlar aynı. K-56 daraltıldı; iki HFT branch'inde GUI kuyruğu/rekey sorunu adayı K-230 kaydedildi. Statik inceleme; canlı/zamanlamalı test yok.
+
 - Planlanan derinleştirme maddeleri 1–9 ve 11–13 tamamlandı; belgeler kullanıcı incelemesini bekleyen taslak.
 - **Yeni aşama: güncel development + master/main ile ikinci kod incelemesi.** Kullanıcı özellikle pull ile tazelik istedi. 15 kaynak klon temizdi; hepsinde origin fetch ve referans branch'te pull --ff-only başarılı. Referans uçları manifest baseline'larıyla aynı; kaynak uygulama dosyalarında değişiklik yok.
 - Güncel uçlar, preprod/preproduction farkları ve aktif merge edilmemiş işler `_surec/kaynak-karsilastirmasi-2026-10-23.md` içinde. Yeni fetch/pull sonucu, önceki salt yerel yapısal taramadan ayrıdır.
@@ -20,7 +22,7 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Sıradaki
 
-**Sıradaki: HFT/MAOrderSDK emir yaşam döngüsünün ayrıntılı ikinci kod turu.** Kimlik/token, accept/execute sırası, cancel/replace, handoff/replay ve iki branch farkları kontrol edilecek. Ardından stratejiler, GUI/admin/operasyon sırası izlenecek. Güncel risk turu bütün bilgi tabanının yeniden doğrulanması değildir.
+**Sıradaki: HFT/SDK replay ve combiner zamanlaması, SDK main ayrıntılı farkları.** Callback/token alt turu tamamlandı; ardından legacy FIX, stratejiler, GUI/admin/operasyon sırası izlenecek. Bütün bilgi tabanının ikinci doğrulaması henüz tamamlanmadı.
 
 Kullanıcı içerik onayı geldikçe durum etiketi kapsamına göre güncellenir; genel devam talimatıyla topluca dogrulandi yapılmaz. Uygulama bug düzeltmesi/deploy bu doküman incelemesinin dışında kaldı.
 

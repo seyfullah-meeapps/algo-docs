@@ -145,7 +145,7 @@ Bütün strateji gönderim noktaları aynı kalıbı kullanır:
 - **Strateji kalıbı:** `if (!maosdk->replaceOrder/cancelOrder(...)) { if (!maosdk->ownsOrder(token)) OuchManager::...; }`
 - **GUI kalıbı** (`handleCancelOrder` / `handleReplaceOrder`): Önce `ownsOrder` sorulur, sahipse SDK, değilse OS yolu. Sebep: FIX emirleri SDK'da bilinmez.
 - **Replace semantiği:**
-  - Fiyat 0 = fiyat korunur, miktar 0 = miktar korunur. GUI ikisinin birden pozitif olmasını reddeder.
+  - HFT çağrı niyeti sıfır fiyat/miktarla ilgili alanı korumaktır; SDK codec sıfırları wire'a aynen yazar. BIST sıfır alan semantiği bu turda teyit edilmedi; [SDK emir akışı](../maordersdk/emir-akisi.md) §7 sınırı geçerlidir. GUI ikisinin birden pozitif olmasını reddeder.
   - `OuchManager::replaceOrder` (OS yolu) no-op replace'i (aynı miktar veya aynı fiyat) göndermez ve passthrough boşsa `"10"` yazar. SDK yolunda bu no-op filtresi yoktur.
 - **SDK yerel hataları** (`onSdkError`, **ret callback'i yok**):
   - 9: bilinmeyen token
@@ -343,7 +343,7 @@ Strateji özelindeki ayrıntı: [taban](../../20-stratejiler/taban.md#tolerans-v
 
 1. **Handoff öncesi yerel ret + yedek yol.** Yerel validasyon (1001–1006) ve "split ama route yok" (kod 1) bağlantı kontrolünden önce koşar, `onRejected` üretir ve `false` döner. Çağıran taraf `ownsAccount` false gördüğü için aynı emri OS yoluna da gönderir. Sonuç:
    - Strateji ret alır (HftClassic `sent=false` yapar, Tavan/Taban father-ref miktarını serbest bırakır), emir ise order-service'ten gider.
-   - Hard-cap (1003) handoff öncesi fiilen bypass edilir.
+   - HFT hard-cap reddi fallback denemesini durdurmaz; uçtan uca limit aşımı kanıtlanmış değildir. order-service kendi SDK limit kontrolünü ayrıca uygular (limit tablosu ve price koşullarıyla).
    - Split-route retinde token boş string'dir.
 2. **Replay execute'ları dedup edilmiyor.** Handoff öncesi OS yolunda stratejiye işlenmiş fill'ler, replay'de SDK `onExecuted` ile tekrar `executeOrder`'a gelebilir. Stratejilerde match_id kontrolü yoktur (grep). `globalExecutedMatches` yazılır ama okunmaz. SDK her login'de sequence 1 ister (`OuchCodec::encode_login`), yani günün bütün mesajları baştan gelir ([maordersdk/ouch-protokolu](../maordersdk/ouch-protokolu.md)). ❓ doğrulanmadı: tekrarın fiilen oluşup oluşmadığı.
 3. **OS yolu ret miktarı 0.** `ouchSDK::orderRejected` `OrderRejected::quantity`'yi set etmez; Tavan/Taban father-ref'ten 0 lot serbest bırakır.
@@ -357,3 +357,9 @@ Strateji özelindeki ayrıntı: [taban](../../20-stratejiler/taban.md#tolerans-v
 11. **`client_cat` varsayılanı.** Alan-alan `EnterOrder` ctor'unun `client_cat` varsayılanı 1'dir (House). `DE` hesaplar için 0'a çeviren yalnızca mesaj-parse ctor'u. ❓ doğrulanmadı: Strateji emirlerinde `DE` hesabın House olarak gidip gitmediği.
 12. **CancelAll(obid=0) bütün hesapları durduruyor.** `stopAllStrategies` hesap filtresi uygulamaz.
 13. **Pozisyon kapatmada bekleme listesi siliniyor.** `closeThePositionForSingleStock` iki tarafta `cancelAllOrders(..., true)` çağırır. İkinci çağrı birincinin `pendingCancelTokens`'ını temizler.
+
+## İkinci tur: GUI token eşlemesi
+
+**K-230:** `onWireExecuted(old)` registry kaydını kontrol edip GUI kuyruğuna olay ekledikten sonra `onReplaced(old,new)` eski registry anahtarını kaldırabilir. `FetchOrders` daha sonra EXECUTED olayını çevirirken eski token ile accept bulamaz; builder erken döner, çağıran yine varsayılan `StrategyOrder` ekler. Enqueue kontrolü bu aralığı korumaz. Strateji callback'i ayrı yoldur; bu bulgu stratejinin fill almadığını göstermez.
+
+2026-10-23 statik kontrolü: development `4275ccc` ve master `052dd96` aynı eski anahtar kaldırma ve başarısız builder sonrasında proto ekleme davranışını taşır. Kaynaklar: `src/Main/HftMain.cpp`, `src/Clients/OrderRegistry.h`, `src/Strategy/Service/StrategyServiceImpl.cpp`. Canlıda/zamanlamalı testte yeniden üretilmedi. Development insert sahipliği ve rekey çakışma koruması master'dan ileridedir; bu kuyruk sorununu çözmez.
