@@ -11,16 +11,18 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Şu an (2026-10-23)
 
-- Bütün dosyalar `taslak`; kullanıcı gözden geçirmesi bekleniyor. **Planlanan derinleştirme maddeleri 1–9 ve 11–13 tamamlandı.**
-- Madde 12: yedi akış + README indeks, K-208–K-220; `1c5a5d9` main'e push edildi.
-- Madde 13: admin README indeks + üç alt dosya, K-221–K-228; kaynak kod ve development/master sözleşme farkları kontrol edildi.
-- Madde 10 teknik hazırlığı: tüm repo yapısal taraması ve özet çelişkilerinin temizliği tamamlandı. `_surec/kontrol.py` bağlantı/frontmatter/manifest/kaynak-ref kontrolü yapar; içerik onayı vermez. İnceleme sırası `_surec/inceleme-durumu.md` içinde.
-- Kaynak kontrolü `C:\Users\Seyf\algo-workspace` snapshot'larında yapıldı. Fetch, browser/build/deploy veya canlı kurtarma denemesi yapılmadı; uygulama kaynakları değişmedi.
-- Ekli konuşma doküman commit'lerine dahil edilmedi. Remote mevcut `seyfullah-meeapps/algo-docs`. **Admin belgeleri yerel main üzerinde commit'lendi; push otomatik onay incelemesince hedef sahipliği/gönderim yetkisi yeterince doğrulanmadığı için reddedildi. Tekrar gönderim için kullanıcıdan bu hedefe açık onay bekleniyor.** Madde 12 daha önce push edilmişti.
+- Planlanan derinleştirme maddeleri 1–9 ve 11–13 tamamlandı; belgeler kullanıcı incelemesini bekleyen taslak.
+- **Yeni aşama: güncel development + master/main ile ikinci kod incelemesi.** Kullanıcı özellikle pull ile tazelik istedi. 15 kaynak klon temizdi; hepsinde origin fetch ve referans branch'te pull --ff-only başarılı. Referans uçları manifest baseline'larıyla aynı; kaynak uygulama dosyalarında değişiklik yok.
+- Güncel uçlar, preprod/preproduction farkları ve aktif merge edilmemiş işler `_surec/kaynak-karsilastirmasi-2026-10-23.md` içinde. Yeni fetch/pull sonucu, önceki salt yerel yapısal taramadan ayrıdır.
+- **İlk içerik turu:** order-service risk çekirdeği, SDK callback/limit noktaları ve HFT/AlgoProd risk ret eşlemesi kontrol edildi. Risk belgesindeki koşulsuz geçiş/koruma ifadeleri düzeltildi; K-74 netleştirildi, K-229 eklendi. Legacy FIX akışının tamamı henüz yeniden incelenmedi.
+- Admin repeat_count/core_to_pin geliştirmesi ayrı feature branch'te, main'e merge edilmemiş; K-221 açık kaldı.
+- Önceki yerel commit'ler `00a6c99` (admin) ve `3c86c9b` (genel kontrol) henüz push edilmedi. Mevcut remote `seyfullah-meeapps/algo-docs`; önceki otomatik onay reddi nedeniyle bu oturumda push denenmedi.
 
 ## Sıradaki
 
-**Sıradaki: kullanıcı içerik incelemesi (madde 10); teknik hazırlık tamamlandı.** İncelenen belgeler onaylandıkça `durum: dogrulandi` yapılır. Planlanan derinleştirme bitti; `ACIK-KONULAR.md` bug?/iş konuları ayrı sonraki çalışma olarak ele alınır, bu oturumda kod düzeltmesi yapılmadı.
+**Sıradaki: HFT/MAOrderSDK emir yaşam döngüsünün ayrıntılı ikinci kod turu.** Kimlik/token, accept/execute sırası, cancel/replace, handoff/replay ve iki branch farkları kontrol edilecek. Ardından stratejiler, GUI/admin/operasyon sırası izlenecek. Güncel risk turu bütün bilgi tabanının yeniden doğrulanması değildir.
+
+Kullanıcı içerik onayı geldikçe durum etiketi kapsamına göre güncellenir; genel devam talimatıyla topluca dogrulandi yapılmaz. Uygulama bug düzeltmesi/deploy bu doküman incelemesinin dışında kaldı.
 
 Boşluk analizi (2026-10-22): yeni KB ~3.100 satır, eski `meeapps-ai` ~25.000 satır; yeni dosyalar özet seviyesinde. Eski içerik kopyalanmaz, güncel koda karşı yeniden yazılır. Eksik derinlik:
 
@@ -48,6 +50,7 @@ Kullanıcıyla alınmış kararlar; aksi söylenmedikçe geçerli.
 - **Kapsam dışı:** kişisel dersler, mate, Backoffice, Kripdome/DTA, Algo-GUI (en eski arayüz), `mtrader-new` (yeni GUI'nin kişisel öncül reposu, artık `mtrader-trade-ui` development'ta).
 - **Eski ve yeni GUI:** İkisi de prod'da (parçalı geçiş); ikisi de belgelenir. Müşteri ↔ GUI tablosu `00-genel/branch-ve-ortamlar.md`'de.
 - **Kullanılmayan stratejiler** (OrderChase, Warrant Tracker, AKD, MovingAverage): tek satırla "kullanılmıyor", ayrıntı yazılmaz.
+- **Tazelik (2026-10-23 kullanıcı isteği):** İkinci inceleme development ile birlikte master/main güncel origin uçlarına karşı yapılır. Başlangıçta fetch, temiz referans çalışma branch'inde pull --ff-only; yerel değişiklikler ezilmez. Manifest istisnaları korunur.
 - **Klonlar:** Okuma `C:\Users\Seyf\algo-workspace`'teki taze klonlardan; masaüstündeki klonlara dokunulmaz.
 - **Gizli bilgi:** Placeholder ile maskelenir. Kaynak repolardaki açık şifreler sonra ele alınacak (K-15).
 - **İnternet:** Genel tarama yok; yalnızca belirli şüpheli/tarihe bağlı borsa iddiaları tek tek kontrol edilir.
@@ -61,6 +64,9 @@ Kullanıcıyla alınmış kararlar; aksi söylenmedikçe geçerli.
 ## Geçmiş
 
 En yeni en üstte; oturum başına birkaç satır.
+
+- **2026-10-23 (güncel kaynak/risk):** 15 repoda fetch + referans pull yapıldı; baseline'lar aynı. Development/master/main ve preprod ref'leri kıyaslandı. Risk belgesi ilk içerik turu, K-74 düzeltmesi, K-229; admin feature ayrı kaydedildi. Sıradaki HFT/SDK emir yaşam döngüsü. Push engeli nedeniyle değişiklikler yerel tutuldu.
+
 
 - **2026-10-23 (Codex genel kontrol):** 84 Markdown belgesi ve yerel bağlantılar tarandı; manifest/frontmatter kaynakları 15 klonda 23 farklı commit nesnesine çözüldü. Gate/watchdog, handoff saati ve thread güvenliği özetleri düzeltildi; kontrol aracı ve inceleme sırası eklendi. Durum etiketleri taslak kaldı. Önceki push engeli nedeniyle remote'a tekrar gönderim denenmedi.
 

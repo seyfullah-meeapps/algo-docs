@@ -7,7 +7,19 @@ kaynak:
   - repo: trade-data-app
     branch: development
     commit: 1cca9a8
-dogrulama: 2026-10-22
+  - repo: order-service
+    branch: master
+    commit: 298403b
+  - repo: MAOrderSDK
+    branch: development
+    commit: a788782
+  - repo: HftSrvProd
+    branch: development
+    commit: 4275ccc
+  - repo: AlgorithmicTrading
+    branch: development
+    commit: 0dc32a7
+dogrulama: 2026-10-23
 durum: taslak
 ---
 
@@ -27,7 +39,7 @@ Kod: `Managers/RiskManager.*`, `Data/Models/RiskInfo.*`, protolar `Service/limit
 | Giriş | Yol | Risk kontrolü |
 |-------|-----|---------------|
 | MARpc `EnterOrderRequest` (ouch-sdk istemcileri: HFT OS yolu, AlgoProd) | `OrderServer` → `OrderDispatcher::SendOrder(EnterOrder)` | **Evet**, `checkEnterOrder` |
-| gRPC `SendOrder`, `order_type = STRATEGY`, `ORDER_EVENT_ENTER` | `OrderServiceImpl::InsertRegularOrder` → `OrderDispatcher::SendOrder(EnterOrder)` | **Evet**. ❓ doğrulanmadı: trade-data-app `GuiSendOrders` STRATEGY emirlerini motorlara gönderiyor, order-service'e değil ([api § 7](../trade-data-app/api.md#7-guiservice-gui-dataproto-gui_apigo--rest-restport)); bu dalı çağıran bir istemci bulunamadı. |
+| gRPC `SendOrder`, `order_type = STRATEGY`, `ORDER_EVENT_ENTER` | `OrderServiceImpl::InsertRegularOrder` → `OrderDispatcher::SendOrder(EnterOrder)` | **Evet**, bu RPC dalı kullanılırsa. Güncel trade-data-app `GuiSendOrders` STRATEGY emirlerini motorlara gönderir; bu REST akışı order-service STRATEGY gRPC dalını çağırmaz ([manuel emir](../../30-akislar/manuel-emir.md#1-hedef-tablosu-koddan-gui_apigo-guisendorders)). Diğer olası dış istemciler doğrulanmadı. |
 | MARpc `ReplaceOrderRequest` | `OrderDispatcher::SendOrder(ReplaceOrder)` → `MAOSdkManager::SendOrderAsync(ReplaceOrder)` | **Evet**, fark emri üzerinden (§ 6) |
 | MARpc `CancelOrderRequest` | `OrderDispatcher::SendOrder(CancelOrder)` | Hayır |
 | gRPC `SendOrder` MORNING / OPENING / EVENING (GUI toplu emirleri) | DB'ye yazılır, sonra toplu akışlar `MAOSdkManager::SubmitEnterOrder` ile doğrudan gönderir | **Hayır**. Toplu emirler `checkEnterOrder`'a hiç uğramaz. |
@@ -35,7 +47,7 @@ Kod: `Managers/RiskManager.*`, `Data/Models/RiskInfo.*`, protolar `Service/limit
 
 - Kontrol protokolden bağımsızdır; `kFix` emirleri de aynı `checkEnterOrder`'dan geçer.
 - Riskten geçmeyen emirlerin olayları (accept/execute/cancel/replace) yine de rezervasyonları günceller. Bunun şartı, emrin host registry'sinde (`entered_orders`) olmasıdır. Toplu akışlarda bu `insert_to_entered_orders` parametresine bağlıdır. Registry'de olmayan emrin olayı SDK callback'inde "no host registry entry" ile düşer ve riske de ulaşmaz (ayrıntı: [toplu-emirler.md](toplu-emirler.md)).
-- MAOrderSDK'nın yerel kontrolleri (hard cap, brüt takas, bölme) **bütün** emirlere uygulanır (§ 11).
+- MAOrderSDK ek bir yerel kontrol katmanıdır; hard cap/brüt takas/bölme bloğu limit tablosu doluyken ve `price > 0` iken çalışır. Her emre koşulsuz uygulandığı varsayılmaz (§ 11, K-104).
 
 ## 2. Açılış ve başlatma
 
@@ -140,7 +152,7 @@ while (isRunning()) { Connect(); if (isLoginSuccedd(token)) break; sleep 5 s }
    - `orderAmount = (Buy ? +1 : −1) × qty × price`. `price` raw `int32` (TL × 10^`decimal_count`), `qty` adet.
    - Geçme koşulu: `(int64)customerTLOverall − (int64)customerTLUsedInPassiveOrders > orderAmount` (kesin büyüktür).
    - Değilse ret: `"Insufficient Account Balance"`.
-   - ShortSell'de `orderAmount` negatif olduğundan bu kontrol pratikte hep geçer.
+   - ShortSell'de `orderAmount` negatiftir; kontrol satış miktarını pozitif nakit ihtiyacı gibi sınırlamaz. Yine de her durumda geçer denemez: serbest bakiye daha da negatifse bu karşılaştırma ret verebilir.
    - **Ölçek varsayımı:** Bakiye ×1000 ölçeklenir. Bu yüzden karşılaştırma yalnız `decimal_count = 3` olan enstrümanda TL ↔ TL'dir. `D` ile başlayan hesaplarda ×100 kullanılır, yani `decimal_count = 2` varsayılır; VİOP kontrat çarpanı hesaba katılmaz. ❓ doğrulanmadı: pay enstrümanlarının hepsinde `decimal_count = 3` olduğu ([sema](../trade-data-app/sema.md)), `D` önekinin VİOP hesabı anlamına geldiği.
 5. Enstrüman `instrument_service->GetInstrumentById(order.OrderBookId())`. `Instrument::IsBrutTakas()` (DB `isBrutTakas`) ise ret: `"Stock Has Brut Takas Restriction"`. Bütün yönlere uygulanır. Bu kontrol `StockLimitType`'tan bağımsızdır; MAOrderSDK'nın 1002 yerel reddiyle örtüşür.
 6. Hisse kısıtı `stckLimit` şöyle belirlenir: `stockRestrictions[symbol]` varsa o değer, yoksa `isDefaultShortSellRestriction` ise `ACIGA_SATIS`, o da değilse `NONE`.
@@ -155,6 +167,7 @@ while (isRunning()) { Connect(); if (isLoginSuccedd(token)) break; sleep 5 s }
 - ShortSell'de bakiye kontrolü yoktur.
 - Pazar geneli `ACIGA_SATIS`, listede adı geçmeyen hisselerde açığa satışı engellemez (yalnız adım 7'yi tetikler, o da Sell bakiye kontrolü olarak).
 - **Rezervasyon kontrol anında değil, `OrderAccepted` geldiğinde yapılır (§ 8).** Accept gelmeden art arda giren emirlerin her biri aynı serbest bakiyeye karşı kontrol edilir.
+- **Fiyatsız market alış:** `price=0` için `orderAmount=0`; nakit karşılaştırması yalnız serbest bakiyenin pozitifliğine bakar. En iyi fiyat/koruma fiyatı ile miktar × fiyat hesabı yapılmaz. Diğer hesap/enstrüman kısıtları çalışmaya devam eder; bu yüzden bütün market emirleri koşulsuz geçer sonucu çıkarılmaz (§ 11, K-229).
 
 ## 6. Replace kontrolü
 
@@ -189,7 +202,8 @@ while (isRunning()) { Connect(); if (isLoginSuccedd(token)) break; sleep 5 s }
   - `OrderServiceImpl::OnOrderRejected` → gRPC `SubscribeToOrders` aboneleri.
   - Ayrıntı: [arayuzler.md](arayuzler.md).
 - `rejected_orders` haritasına eklenmez, DB'ye yazılmaz, BIST'e gitmez.
-- İstemci emri token ile değil, passthrough/hesap/strateji ile eşleştirmek zorundadır. ❓ doğrulanmadı: ouch-sdk ve HFT tarafında token'sız `OrderRejected`'ın nasıl eşlendiği.
+- HFT OS yolu `ouchSDK::orderRejected`, token lookup yerine modeldeki enstrüman/hesap/strateji kimliğiyle `findStrategy` yapar; token boşluğu tek başına strateji eşlemesini engellemez. Miktarın HFT modeline set edilmemesi ayrı sorundur ([emir yaşam döngüsü](../hftsrvprod/emir-yasam-dongusu.md#os-yolu-eşdeğerleri-ouchmanagercpp-ouchsdkorder-serbest-fonksiyonları)).
+- AlgoProd `algoOrderRejected` önce passthrough'un 14 karakterlik istemci token'ını, sonra order-service token'ını `trackedOrders` içinde arar. Takipsiz iptal/replace reddi bu eşlemeye girmeyebilir; [AlgoProd emir yolu](../algorithmic-trading/emir-yolu.md#7-ret-yolu-ve-ptrm) esas alınır.
 
 ## 8. Rezervasyon takibi
 
@@ -232,7 +246,7 @@ Olaylar MAOrderSDK callback'lerinden (`MAOSdkManager::ConfigureSdkCallbacks`) ge
 3. Replay edilen fill/cancel'lar rezervasyonu düşürür. OUCH fill'leri bakiyeye de yazılır.
 4. Gün içi stream delta'ları yalnız yeni stream açıldıktan sonrakilerdir. Restart öncesi delta'lar `GetCustomerLimits`'e yansıdıysa korunur. ❓ doğrulanmadı: sağlayıcının `SetCustomerLimits`'i gün içinde güncelleyip güncellemediği.
 
-- **OUCH ve FIX tutarsızlığı:** Proto'ya göre doğru olan OUCH davranışıdır (bakiye bizim işlemleri içermiyor, replay yeniden uygular). FIX'teki "already include" varsayımı proto yorumuyla çelişir (§ 13).
+- **OUCH ve FIX tutarsızlığı:** Proto'nun "bizim işlemlerimiz hariç" yorumu esas alınırsa OUCH yeniden uygulaması bu sözleşmeyle uyumludur; FIX'teki "already include" varsayımı yorumla çelişir. Gerçek sağlayıcının gönderdiği bakiyenin kapsamı bilinmeden hangi yolun canlıda doğru olduğu kesinleştirilmez (§ 13).
 - **Yarış:** `risk_manager->Start` limitleri detached thread'de çeker; `order_dispatcher->Start` hemen ardından SDK'yı açar. Replay olayları `account_limits` dolmadan gelirse "RiskInfo not found" ile atılır. Bu durumda o emirlerin rezervasyon ve bakiye etkisi kaybolur. ❓ doğrulanmadı: pratikte bu sıranın tersine dönüp dönmediği.
 
 ## 10. `LimitControlService` ilişkisi
@@ -248,12 +262,14 @@ Olaylar MAOrderSDK callback'lerinden (`MAOSdkManager::ConfigureSdkCallbacks`) ge
 | | `RiskManager` | MAOrderSDK yerel kontrol |
 |---|---|---|
 | Yer | order-service, dispatcher ve replace yolu | SDK, `enterOrder` içinde |
-| Kapsam | § 1 tablosu (toplu emirler hariç) | Bu SDK'dan geçen **bütün** emirler: toplu emirler, FIX, HFT'nin kendi SDK'sı |
+| Kapsam | § 1 tablosu (toplu emirler hariç) | Aynı SDK API'sinden geçen toplu/FIX/HFT emirleri; **limit bloğu koşullu** (`instrument_limits` dolu ve `price > 0`) |
 | Kontrol | Hesap bakiyesi, hisse bakiyesi, kısıtlar (müşteri bazlı, dinamik) | `order_hard_cap_try` (tek emir notional, **tam TL**, statik), brüt takas, enstrüman limiti ve bölme (`max_order_value`) |
 | Ret | `OrderRejected`, kod 0, token boş | `onRejected` ile kod 1001–1004, `LOG_CRIT "LOCAL REJECT"` |
 
 - `maordersdk.orderHardCapTry` (`ConfigurationManager` → `SdkLimitsConfig`, varsayılan 50 000 000). `0` verilirse `LOG_CRIT` atılır ve SDK varsayılanı korunur (`MAOSdkManager` init).
 - İki mekanizma birbirinden habersizdir. RiskManager'ın geçirdiği emir hard cap'e takılabilir. Brüt takas enstrümanı iki yerde de reddedilir (önce RiskManager).
+- Bu son cümle iki kontrol bloğunun da çalıştığı yol içindir; risk kapalı/atlanan yolda ve SDK limit bloğu atlanmışsa aynı koruma varsayılmaz. K-104'ün ayrıntısı [MAOrderSDK limit kapsamı](../maordersdk/emir-akisi.md#6-hard-cap-ve-instrumentlimit)'ndadır.
+- **K-229 — FIX market alışında tutar kontrolü yokluğu (koddan çıkarım):** order-service RiskManager `price=0` alışta gerçek tutarı hesaplamaz (§ 5); SDK da `OrdType::Market`/`MarketWithLeftoverLimit` için sıfır fiyatı kabul eder ve `price > 0` limit bloğunu atlar. Böylece pozitif serbest bakiyeli bir hesapta bu iki katman miktarın tahmini TL tutarını sınırlandırmaz. Miktar sıfır kontrolü, hesap yasakları ve diğer retler ayrı çalışır; BIST/PTRM veya canlı kabul sonucu bu oturumda test edilmedi. Kaynak: `RiskManager::checkOrderConstraints`, MAOrderSDK `enterOrder`. SDK tarafı mevcut K-104 ile ilişkilidir.
 - Ayrıntı: [maordersdk § Emir gönderme](../maordersdk/emir-akisi.md), [kalicilik-ve-config.md](kalicilik-ve-config.md).
 
 ## 12. Thread ve kilit modeli
@@ -293,7 +309,7 @@ Hepsi `development` `b86c0cf` itibarıyla; düzeltme kararı verilmedi.
   - Hesap `account_limits`'te yoksa emir geçer.
   - Limitler henüz yüklenmemişse emir geçer.
   - `running` `setRunning(true)`'dan önce `false` iken emir geçer.
-  - Stream kopuksa emir geçer.
+  - Stream kopması tek başına emirleri koşulsuz geçirmez; **son bilinen** RiskInfo ile kontrol sürer, yeni delta alınmaz (§ 3.4).
   - Hiçbiri alarm üretmez; yalnız `LOG_CRIT`.
 - **bug? Limitler bir kez çekiliyor.** `StartTryingToFetchAccountLimits` ilk dolu yanıttan sonra duruyor. Sağlayıcının gün içi `SetCustomerLimits` güncellemesi (ör. hesap yasaklama, `isProhibited`) restart'a kadar görülmez.
 - **bug? Kilit yok.** § 12: `account_limits`, `stockRestrictions`, `RiskInfo` haritaları eşzamanlı yazılıp okunuyor.
@@ -301,3 +317,16 @@ Hepsi `development` `b86c0cf` itibarıyla; düzeltme kararı verilmedi.
 - **doğrula: Token yenilenmiyor.** Risk RPC'leri açılıştaki DataService JWT'sini (48 saat) kullanıyor. Süre dolunca fetch döngüleri `Unauthenticated` alır.
 - **doğrula: Başlangıç yarışı.** `ReadFromStream` döngüsü `isRunning()`'i `Read`'den sonra kontrol ediyor; thread `setRunning(true)`'dan önce başlıyor. İlk mesaj bu dar pencerede gelirse stream sessizce kapanır.
 - **doğrula: Ret mesajında token ve kod yok.** `sendOrderRejectedToApplication` `OrderToken` ve `RejectCode` atamıyor (§ 7).
+
+## 14. Güncel branch karşılaştırması (2026-10-23)
+
+Origin ref'leri fetch edildi, temiz development klonu `pull --ff-only` ile kontrol edildi. `development b86c0cf` ve `master 298403b` dokümanın önceki snapshot'larıyla aynı uçlardadır; yeni commit gelmemesi dokümandaki her iddianın doğru olduğunu göstermez.
+
+| Alan | Development ↔ master sonucu |
+|------|-----------------------------|
+| Hesap yoksa geçirme, TL/hisse kontrolü, `orderedDifference`, stream reconnect | Çekirdek koşullar aynı; farkların çoğu logger dönüşümü. K-69–K-72/K-74 çekirdek adayları master kodunda da bulunur; canlı sonuç doğrulanmadı. |
+| Replace rezervasyonu | Her iki RiskManager yeni accept'te PreTradeQuantity set etmez; OUCH master yolu da OnOrderReplaced çağırır. |
+| Execute bakiye güncellemesi | Development `apply_balance` parametresi içerir; SDK callback'i `!msg.is_replay` geçirir. Master RiskInfo bu parametreyi içermez. Development FIX replay kuralı master'a aynen genellenmez. |
+| Event bağlantısı | Development MAOSdkManager callback'leri; master eski OuchManager/FIXManager yapısı. Tablo yalnız incelenen ortak risk çekirdeği ve OUCH callback noktalarını kapsar; bütün legacy FIX akışı yeniden doğrulanmadı. |
+
+Kaynak tazeliği ve feature branch'ler [karşılaştırma kaydında](../../_surec/kaynak-karsilastirmasi-2026-10-23.md). Durum taslak kalır; kullanıcı onayı ve canlı test yapılmadı.

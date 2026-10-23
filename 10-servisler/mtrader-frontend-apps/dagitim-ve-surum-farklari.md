@@ -10,6 +10,9 @@ kaynak:
   - repo: trade-data-app
     branch: master
     commit: 4a43e19
+  - repo: mtrader-frontend-apps
+    branch: feat/ouch-repeat-count-core-to-pin
+    commit: 8ba2a67
 dogrulama: 2026-10-23
 durum: taslak
 ---
@@ -32,6 +35,8 @@ Frontend referansı main db10c12; backend development 1cca9a8 / master 4a43e19. 
 Bilinmeyen JSON alanının gateway'de reddedilmesi/atlanması çalıştırılarak test edilmedi; "bütün create/update kesin HTTP 400" sonucu çıkarılmaz. ⚠ master'da farklı: eski iki alan master'da hâlâ var; development uyumsuzluğu doğrudan prod arızası sayılmaz.
 
 Sözleşme kaynakları trade-data-app `admin_ui.proto`/`admin_ui.yaml`; UI seçeneği backend desteğinin kanıtı değildir. Alanların tüketimi [alanlar-ve-servislere-etkisi](alanlar-ve-servislere-etkisi.md)'ndedir.
+
+**Yolda (2026-10-23 fetch):** `feat/ouch-repeat-count-core-to-pin` (`8ba2a67`) tiplerinde yeni OUCH alanları bulunuyor, fakat main'e merge edilmemiş. Bu nedenle K-221 açık; feature'ı mevcut panel desteği sayma. [Güncel branch karşılaştırması](../../_surec/kaynak-karsilastirmasi-2026-10-23.md#6-son-iki-haftada-aktif-referansa-merge-edilmemiş-branchler).
 
 ## 2. Build ve servis etme
 

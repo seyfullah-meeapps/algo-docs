@@ -6,6 +6,8 @@
 
 olusturma: 2026-10-22
 son_guncelleme: 2026-10-23
+son_remote_kontrolu: 2026-10-23
+remote_kontrol_raporu: _surec/kaynak-karsilastirmasi-2026-10-23.md
 branch_akisi: development → preprod → master
 
 repolar:
@@ -80,7 +82,7 @@ repolar:
     commit_tarihi: 2026-10-21
     dokuman: 10-servisler/trade-data-app/
     durum: taslak
-    not: master'da development'ta olmayan 6 commit var (2026-10-22 itibarıyla) — prod hotfix'leri olabilir.
+    not: 2026-10-23 fetch sonrası master'da development'ta olmayan 9 commit var (6 merge dışı); master hotfix'leri ayrıca karşılaştırılmalı.
 
   - repo: mtrader-trade-ui
     gorev: Operatör arayüzü (TS/React)

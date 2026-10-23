@@ -8,11 +8,13 @@ durum: taslak
 
 Madde 10 için hazırlık kaydıdır. Kullanıcı onayı veya bütün teknik iddiaların yeniden kodla doğrulandığı anlamına gelmez. Açık sorunların ayrıntısı ilgili dosyadadır; burada yalnız okuma sırası verilir.
 
+**Sonraki aşama başladı:** Kullanıcı isteğiyle development ve master/main ref'leri remote'dan çekildi; ilk emir/risk içerik turu yapıldı. Güncel sonuçlar [kaynak karşılaştırması](kaynak-karsilastirmasi-2026-10-23.md) içinde. Aşağıdaki sayılar önceki yapısal hazırlık turunun kaydıdır.
+
 ## Yapılan kontrol
 
 - Başlangıçtaki 82 Markdown dosyası tüm repo genelinde tarandı. Fenced kod içindeki C++ lambda ifadesi bağlantı sanılmadığında kırık dosya/başlık bağlantısı bulunmadı.
 - Frontmatter ve manifestteki 15 kaynak repo kontrol edildi: 23 farklı commit nesnesi ve beyan edilen yerel origin branch ref'leri klonlarda mevcut. Fetch yapılmadı; güncel remote veya branch atalık kontrolü değildir.
-- Son kontrolde 84 Markdown belgesi ve 1.344 yerel bağlantı temiz; metadata taşıyan 81 belgenin tamamı taslak.
+- İlk yapısal turda 84 Markdown belgesi ve 1.344 yerel bağlantı temiz; metadata taşıyan 81 belgenin tamamı taslak.
 - Yeniden çalıştırılabilir [`kontrol.py`](kontrol.py) ve [kullanımı](kontrol.md) eklendi. Giriş README'sine frontmatter ve inceleme bağlantıları eklendi.
 - Özetlerdeki replay gate, handoff saati ve thread güvenliği ifadeleri kod/ayrıntı belgeleriyle karşılaştırıldı. 20 s zero-handoff watchdog ile handoff sonrasındaki 60 s timeout ayrıldı; manuel emir/close/cancel yollarının gate'i atlayabildiği açıklandı.
 - Önceki oturumda kapatılan HFT restart belirsizliği, eski strateji çekirdeği metninden kaldırılıp ilgili kurtarma senaryosuna bağlandı.

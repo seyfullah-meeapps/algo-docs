@@ -97,8 +97,9 @@ Ayrıntılar alt dosyaların kendi "şüpheli davranışlar" bölümlerinde.
 | K-71 | bug? | Hisse yeterlilik kontrolünde uint64 çıkarma sarıyor; rezervasyon bakiyeyi aşınca satış geçiyor | [risk](10-servisler/order-service/risk.md#13-şüpheli) |
 | K-72 | doğrula | Satış bakiye kontrolü yalnız kısıtlı hissede; açığa satışta bakiye kontrolü yok; pazar geneli `ACIGA_SATIS` listede olmayan hisseye uygulanmıyor | [risk](10-servisler/order-service/risk.md#13-şüpheli) |
 | K-73 | doğrula | Replay fill'i bakiyeye yazılmaması yalnız FIX'te; OUCH replay fill'leri risk bakiyesine yeniden uygulanıyor, pozisyonu yalnız 10 sn pencere koruyor | [risk](10-servisler/order-service/risk.md#13-şüpheli) |
-| K-74 | doğrula | Risk fail-open: hesap/limit yoksa, stream kopuksa emir geçiyor; hesap limitleri bir kez çekiliyor, gün içi güncelleme görülmüyor | [risk](10-servisler/order-service/risk.md#13-şüpheli) |
+| K-74 | doğrula | Risk fail-open: hesap/limit yoksa emir geçiyor; stream kopunca eski limitlerle kontrol sürüyor, hesap limitleri bir kez çekiliyor | [risk](10-servisler/order-service/risk.md#13-şüpheli) |
 | K-75 | bug? | `RiskManager`/`RiskInfo` kilitsiz; risk reddi `OrderRejected`'ta token boş, `RejectCode` 0 | [risk](10-servisler/order-service/risk.md#13-şüpheli) |
+| K-229 | bug? | price=0 FIX market alışta RiskManager tahmini TL tutarı hesaplamıyor; SDK hard cap de fiyat sıfırken atlanıyor (K-104 ile ilişkili) | [risk](10-servisler/order-service/risk.md#11-hard-cap-ve-maordersdk-yerel-kontrolleri) |
 | K-76 | bug? | Başarısız MARpc login'i `""` token'ını kullanıcıya eşliyor; boş token'lı istekler yetkili sayılıyor | [arayuzler](10-servisler/order-service/arayuzler.md#8-şüpheli) |
 | K-77 | bug? | Enter/Replace/Cancel hatalarının çoğu istemciye yanıtsız düşüyor; bağlı OUCH connection yoksa da sessiz kayıp (`onSdkError` 1/9/10) | [arayuzler](10-servisler/order-service/arayuzler.md#8-şüpheli) |
 | K-78 | bug? | MARpc'de GTC/AT_CROSSING TIF'i sessizce DAY'e çevriliyor | [arayuzler](10-servisler/order-service/arayuzler.md#8-şüpheli) |

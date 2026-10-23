@@ -2,6 +2,15 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-23 — Remote tazeliği ve ikinci kod incelemesi: risk
+
+- Kullanıcının development ve master/main'in güncel halleriyle kıyaslama isteği üzerine 15 kaynak klonda temizlik kontrolü, origin fetch ve referans branch pull --ff-only yapıldı. Hepsi zaten güncel; manifest doğrulama SHA'ları değiştirilmedi. Master/main ve test ortamı ref'leri de okundu; sonuçlar `_surec/kaynak-karsilastirmasi-2026-10-23.md` içinde.
+- Manifestte son remote kontrol tarihi/raporu eklendi. trade-data-app master-only sayısı 9 toplam / 6 merge dışı olarak netleştirildi.
+- order-service RiskManager/RiskInfo, development SDK callback'leri, master OUCH callback noktaları; MAOrderSDK limit bloğu, risk RPC/proto ve istemci ret eşlemesi incelendi. Risk belgesine güncel master farkları eklendi.
+- Düzeltmeler: kopuk stream son limitlerle kontrolü sürdürür; SDK hard cap koşulsuz değildir; ShortSell TL kontrolü her koşulda geçmez; token'sız ret eşlemesi açıklandı. K-74 metni düzeltildi; K-229 price=0 market alış tutar kontrolü adayı eklendi (canlıda test edilmedi).
+- order-service satış dağıtımı, GUI ve admin alanları için ayrı feature branch'ler kaydedildi; main/development davranışı sayılmadı. K-221 açık kaldı.
+- Kapsam ilk risk içerik turudur; bütün KB yeniden kodla doğrulandı denmedi. Kaynak uygulama kodu, canlı sistem ve durum etiketleri değiştirilmedi; push tekrar denenmedi.
+
 ## 2026-10-23 — Genel tutarlılık ve taslak incelemesine hazırlık
 
 - Tüm bilgi tabanı için `_surec/kontrol.py` eklendi: yerel inline bağlantılar/başlıklar, frontmatter alanları, 400 satır sınırı, K numarası tekilliği, manifest belge yolları; isteğe bağlı salt okunur Git commit ve yerel origin branch kontrolleri. Tam YAML parser'ı veya içerik doğrulaması değildir.
