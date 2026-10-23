@@ -28,6 +28,7 @@ Sistem içindeki yeri: [`00-genel/sistem-haritasi.md`](../../00-genel/sistem-har
 |-------|------|
 | [`arayuzler.md`](arayuzler.md) | MARpc sunucusu (`OrderServer`, ouch-sdk istemcileri: HFT, AlgoProd), gRPC sunucusu (`OrderServiceImpl`, istemci trade-data-app), wire alanları ve ölçekleri, `OrderDispatcher` ile emrin girişten BIST'e ve olayın geri dönüşüne yolu, açılış sırası, thread/kilit modeli |
 | [`sdk-ve-oturumlar.md`](sdk-ve-oturumlar.md) | `MAOSdkManager`: SDK boot, OUCH/FIX kullanıcı modeli, emir gönderme ve alan dönüşümleri, callback'ler, ölçek özeti, **OUCH handoff'un order-service tarafı**, FIX yolu ve şifre yenileme, yeniden bağlanma ve kopma senaryoları |
+| [`fix-branch-karsilastirmasi.md`](fix-branch-karsilastirmasi.md) | İkinci tur: legacy master ile development SDK FIX fill/replay ve miktar replace farkları |
 | [`toplu-emirler.md`](toplu-emirler.md) | Sabah (OUCH/VİOP/FIX), açılış, YİP, teorik/akşam, off-hours; zamanlama, kullanıcılara dağıtım, son atış ve `-110023` döngüsü, fazla kopya iptali, örnek zaman çizelgesi |
 | [`risk.md`](risk.md) | `RiskManager`: hangi emir riskten geçer, trade-data-app'ten gelen veri ve birimler, `checkEnterOrder`/replace adımları, rezervasyon takibi, replay/restart, `LimitControlService` ve hard cap ile ilişki |
 | [`kalicilik-ve-config.md`](kalicilik-ve-config.md) | trade-data-app `DataService` istemcisi, emir/pozisyon kalıcılığı ve gün içi restart, enstrüman verisi, `config.yaml` tam referansı, müşteri config farkları, deploy (Docker, Onload/Mlx) |

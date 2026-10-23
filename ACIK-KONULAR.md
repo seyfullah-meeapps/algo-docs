@@ -303,6 +303,8 @@ Koddan çıkarılan sonuçlar canlıda gözlemle doğrulanmış sayılmaz; ayrı
 | K-230 | bug? | Replace rekey'i kuyruktaki eski token'lı execute olayının GUI'de varsayılan proto'ya dönüşmesine yol açabilir | [emir yaşam döngüsü](10-servisler/hftsrvprod/emir-yasam-dongusu.md#ikinci-tur-gui-token-eşlemesi) |
 | K-231 | bug? | SDK main hard cap yalnız enstrüman limitini aşan emirlerde çalışıyor; development'ta koşul ve çarpım taşması koruması farklı | [branch kontrolü](10-servisler/maordersdk/branch-ve-replay-kontrolu.md#şüpheli) |
 
+| K-232 | bug? | Legacy master FIX fill handler'ında replay ayrımı/dedup yok; yeniden teslim edilen eşleşen geçmiş fill pozisyon kuyruğuna tekrar girer | [FIX branch kontrolü](10-servisler/order-service/fix-branch-karsilastirmasi.md#şüpheli) |
+
 ## Yolda / takip
 
 | # | Tür | Konu | Ayrıntı |

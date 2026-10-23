@@ -146,6 +146,10 @@ HftSrvProd, MAOrderSDK, ouch-sdk, network-sdk, order-service ve itch-sdk yeniden
 
 K-56 hard-cap aşımı ifadesi daraltıldı. Yeni [K-230 ayrıntısı](../10-servisler/hftsrvprod/emir-yasam-dongusu.md#ikinci-tur-gui-token-eşlemesi) eski token'lı GUI olayının rekey sonrasında çözülememesini kaydeder; iki HFT branch'inde statik kod senaryosudur. Build/canlı/zamanlamalı test yapılmadı. Replay/combiner zamanlaması, SDK main ayrıntılı farkları ve legacy FIX ikinci turu henüz tamamlanmadı.
 
+### Devam: legacy FIX fill/replay ve replace
+
+order-service ve SDK yeniden fetch/pull edildi, uçlar aynı. Master FIXManager/OrderUtility/OrderManager ile development host callback/restore, SDK FixEngine replay/ER ve FixCodec blokları karşılaştırıldı. [FIX branch belgesi](../10-servisler/order-service/fix-branch-karsilastirmasi.md) K-121'in legacy'de de bulunduğunu, fill fiyatı dönüşüm farkını ve koşullu K-232 geçmiş fill tekrar yazımı adayını kaydeder. QuickFIX/live test yok. Şifre, oturum config, cancel-reject ve admin/business reject tam ikinci turu sıradadır.
+
 ## 6. Son iki haftada aktif, referansa merge edilmemiş branch'ler
 
 İzleyen replay/combiner alt turu: SDK yeniden fetch/pull edildi, uçlar değişmedi. `Combiner.cpp`, `OuchConnection.cpp` development/main farkları ve `MAOrderSDK.cpp` ilgili callback/routing/limit blokları incelendi. Sonuçlar [SDK branch ve replay kontrolünde](../10-servisler/maordersdk/branch-ve-replay-kontrolu.md). K-106 süreç içi reconnect ile yeni süreç adopt ayrımı netleştirildi; K-231 main hard-cap koşulu kaydedildi. FIX engine/codec tam iç incelemesi ve host legacy FIX yolu henüz tamamlanmadı; build/canlı test yapılmadı.

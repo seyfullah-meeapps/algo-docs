@@ -2,6 +2,13 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-23 — Legacy FIX fill/replay ve replace
+
+- order-service ve SDK yeniden fetch/development pull: uçlar aynı. Master FIXManager/OrderUtility/OrderManager ile development host ve SDK FIX dönüş/replay blokları karşılaştırıldı.
+- Yeni FIX branch belgesi eklendi; README indeksi güncellendi. SDK codec'in birebir port olduğu iddiası fill fiyatı farkı nedeniyle düzeltildi.
+- K-121 miktar replace sonrası kayıt/tag 38 sayı farkının legacy master'da da olduğu koddan teyit edildi; exchange sonucu test edilmedi. K-232 geçmiş rapor yeniden teslim edilirse legacy fill'in pozisyon kuyruğuna tekrar girmesi adayı kaydedildi.
+- Build/canlı test yok; kaynak uygulama dosyaları değişmedi. Kalan FIX şifre/config ve ret yolları sırada; belgeler taslak.
+
 ## 2026-10-23 — SDK replay/combiner ve main farkları
 
 - SDK yeniden fetch/pull edildi, uçlar değişmedi. Combiner ve OUCH connection development/main farkları, SDK callback/routing/limit blokları karşılaştırıldı; yeni branch/replay belgesi ve README indeksi eklendi.
