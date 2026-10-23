@@ -153,6 +153,16 @@ GUI'ye giden mesajlar:
 
 **Eski GUI** (`origin/main`, [eski-gui § 3.9](../10-servisler/mtrader-trade-ui/eski-gui.md)): OrderBook paneli, `OrderBookSettings` (`Command_Type` 100), teorik fiyat `theoPrice / 100` (`StartStopButton.tsx`), paketler `FundTrackerSummaryView` + `FundTrackerPackagesContext`.
 
+## İkinci kod turu — hedge eşiği ve ret
+
+2026-10-23 AlgorithmicTrading fetch/development pull sonrası uçlar değişmedi: development `0dc32a7`, master `aa150ee`. İncelenen FundTracker cpp farkı iki yeni kotasyon miktarı ifadesidir; yukarıdaki K-194 sürer. Bu kaynak farkı tek başına prod'a yüklenmiş binary/config kanıtı değildir.
+
+K-194 için koşul: sepet fon-lot eşiği `Q=calculatedRequiredLotCount`, tarafın kotasyon limiti `L` ise master `min(L,L-toplam)` ile toplamı L'de durdurur. **Q>L** olduğunda yeni kotasyonlarla hedge eşiğine ulaşamaz; L=1 örneği Q>1 içindir. Q=1 ise ilk fill eşiğe ulaşabilir; “L=1 her koşulda hedge olmaz” genellemesi yapılmaz.
+
+`minTransactionUnitReached` fon alımına karşı sepet satışı, fon satışına karşı sepet alışı başlatır. Sepet reject'i `isRejected` işaretler; tamamlandı denetiminde rejected satır atlanır. Bu K-207'nin kaynağıdır; paket tamamlandı durumu her hissenin fill aldığı anlamına gelmez. `doPeriodicChecks` seans/eksik fon kontrolünde `stop()` sonrası return etmediğinden aynı tur kodu devam eder; stop'un o turu anında kestiği varsayılmamalı.
+
+İncelenenler: kotasyon formülü, BYF fill/reject kuyruğu, sepet eşik/yönü ve sepet reject/completion yolu. Build/canlı hedge denemesi yok. PCF dosyası ve müşteri limitleri bu turda yeniden okunmadı.
+
 ## Şüpheli
 
 - **master'da kotasyon miktarı hatası (prod etkisi, doğrula):** `min(L, L − alınan)` ile `Byf_Lot_Count = 1` iken ilk dolumdan sonra kotasyon biter, sepet eşiği aşılmaz, hedge gönderilmez; fon pozisyonu hedge'siz kalır. Düzeltme (41adb60) yalnız development'ta.

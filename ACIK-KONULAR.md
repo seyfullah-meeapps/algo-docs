@@ -229,8 +229,8 @@ Ayrıntılar alt dosyaların kendi "Şüpheli" bölümlerinde. Sistem genelindek
 
 | # | Tür | Konu | Ayrıntı |
 |---|-----|------|---------|
-| K-194 | bug | **Prod:** Fon Takibi lot düzeltmesi (`41adb60`, 2025-08) master'da yok; L=1 ile ilk dolumdan sonra kotasyon biter, sepet hedge'i hiç gönderilmez, fon pozisyonu hedge'siz kalır | [fon-takibi](20-stratejiler/fon-takibi.md#şüpheli) |
-| K-195 | bug | **Prod:** Arbitraj teorik fiyatta faiz `/100` düzeltmesi (`c811418`) master'da yok; `diffTick`, açma koşulu ve `Theo_Price` etkileniyor | [arbitraj](20-stratejiler/arbitraj.md#şüpheli) |
+| K-194 | bug | Fon Takibi master kotasyonu L'de durdurur; sepet eşiği Q>L ise yeni kotasyonla hedge eşiğine ulaşılamaz (prod binary/config teyit edilmedi) | [fon-takibi](20-stratejiler/fon-takibi.md#ikinci-kod-turu--hedge-eşiği-ve-ret) |
+| K-195 | bug | Arbitraj master teorik fiyatta yüzde faiz `/100` düzeltmesini taşımıyor; diffTick/açma koşulu etkilenebilir (prod binary/config teyit edilmedi) | [arbitraj](20-stratejiler/arbitraj.md#ikinci-kod-turu--branch-ve-ret-sınırı) |
 | K-196 | bug? | `Channel_Enum` yoksa kanal 0 gider, order-service emri yanıtsız düşürür (ret yok, takip kaydı kalır) | [emir-yolu](10-servisler/algorithmic-trading/emir-yolu.md#şüpheli) |
 | K-197 | bug? | order-service risk reddi `rejectCode=0` gelir: Arbitraj durur, VWAP durmaz/yeniden dener; PTRM kontrolleri yakalamaz | [emir-yolu](10-servisler/algorithmic-trading/emir-yolu.md#şüpheli) |
 | K-198 | bug? | Userbook yoksa `getOrderbook` callback thread'inde istisna → `std::terminate`; OUCH login 401'de olaylar sessizce atılır, emirler gider | [emir-yolu](10-servisler/algorithmic-trading/emir-yolu.md#şüpheli) |

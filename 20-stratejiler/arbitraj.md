@@ -272,6 +272,14 @@ GUI'ye giden mesajlar:
 - Parametreler `BasketArbitrageTrackerCommand` (`Deposit`, faiz, temettü verimi, satılacak enstrümanlar, minimum kapama kâr oranları); varsayılanlar `BasketParameters.h` (`interestRate 17,95 %`, endeks puan değeri 10).
 - **Kullanılmıyor** (kullanıcı beyanı, 2026-10-22); yeni GUI'de route'u yok. Kod: `algoSrc/Strategy/BasketArbitrage/`.
 
+## İkinci kod turu — branch ve ret sınırı
+
+2026-10-23 fetch/pull sonrası development `0dc32a7`, master `aa150ee` değişmedi. `calculateTheoreticalPrice` development'ta yüzde faizi `/100.0` yapar, master ham kullanır (K-195). Uygulamaya yüklenmiş sürüm/config bu kaynak farkından kanıtlanmaz.
+
+Development durmuş→çalışır geçişinde `BaseStrategy::setCommand` worker'ı başlatmadan önce `ArbitragePackageMtx` altında paket tutarlılığını denetler; master'da bu ek kapı yoktur. Bu ön kontrol hedge'in ileride mutlaka dolacağını garanti etmez. Development ayrıca seans/başlık beklemesini `retryAfterNs_` ile erteler; master thread içi sleep kullanır. Çalışan stratejide paket güncelleme/bakiye kontrol kilitleri de development'ta daha erken alınır.
+
+Türev ret yolunda PTRM/limit reddi stop+return, işlem saati reddi durum kontrolü+return, tanınmayan ret stop+return yapar. Dayanak retlerinin aynı şekilde işlenmesi varsayılmaz; K-205 açık kalır. K-197'nin risk code=0 asimetrisi bu stop dalıyla uyumludur. İncelenen scope: branch farkları, başlatma önkoşulu, türev ret yolu ve faiz formülü. Bütün paket indeksleri/thread yarışları yeniden test edilmedi; build/canlı emir yok.
+
 ## Şüpheli
 
 - **master'da teorik faiz `/100` yok (prod etkisi, doğrula):** master `calculateTheoreticalPrice` oranı ham kullanıyor. Yüzde girilmişse `diffTick` dev'e göre çok farklı çıkar; I/R'de yön ve `diffTick ≤ 0`/`> 0` açma koşulu, bütün tiplerde `isProfitableOpen` ve `Theo_Price` etkilenir. development düzeltmesi prod'a gitmemiş.

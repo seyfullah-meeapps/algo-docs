@@ -2,6 +2,13 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-23 — AlgoProd branch/ret ve hedge eşiği
+
+- AlgorithmicTrading fetch/development pull sonrası uçlar aynı. Fon Takibi kotasyon farkı, Arbitraj faiz/başlatma farkı ve VWAP incelenen strateji/command kaynaklarının aynı olması teyit edildi.
+- K-194 sepet eşiği Q>L koşuluyla daraltıldı; K-194/K-195 kaynak branch bulguları prod binary/config sonucu gibi sunulmadı.
+- Fon sepet reject/completion, Arbitraj başlatma ve türev ret yolu, VWAP accept/reject/lot sonu yolu okundu; üç belgeye inceleme kapsamı eklendi. Yeni sorun numarası açılmadı.
+- Build/canlı hedge testi ve uygulama değişikliği yok. Kalan AKD/Overall/stop-loss ve paket ayrıntıları sırada.
+
 ## 2026-10-23 — Varant (13) ve Teorik Fiyat ikinci turu
 
 - HFT yeniden fetch/development pull: uçlar aynı. Varant çekirdek/command ve Teorik çekirdek master/development farkları kontrol edildi; incelenen kaynaklar aynı.

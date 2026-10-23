@@ -27,6 +27,8 @@ Kod: `algoSrc/Strategy/TradeByVolume/TradeByVolume.{h,cpp}`, `TradeByVolumeOvera
 
 ## Döngü
 
+2026-10-23 ikinci tur: kaynak fetch/development pull sonrası development `0dc32a7` / master `aa150ee` aynı. `Strategy/TradeByVolume/` ve incelenen command cpp'de branch farkı yok. Bu, ortak event/order altyapısının da aynı olduğu anlamına gelmez. `parseMessages` accept/reject, hacim/kendi fill muhasebesi ve hedef lot sonu durma yolları kaynakla karşılaştırıldı. PTRM listesine giren ret stop eder; diğer retlerde `isOrderSent=false` ile yeniden deneme yolu kalır (K-197). Bütün AKD/Overall ve stop-loss alt yolları bu turda yeniden test edilmedi; build/canlı test yok.
+
 Kendi thread'inde çalışır (`runsOnWorkerPool() == false`, `BaseStrategy::workAsyncron`).
 
 `doPeriodicChecks`:

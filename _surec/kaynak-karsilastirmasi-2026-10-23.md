@@ -176,6 +176,10 @@ HFT ve GUI yeniden fetch/development pull, uçlar aynı. [Tavan Should_Sweep](..
 
 HFT yeniden fetch/pull sonrası uçlar aynı. [Varant ret/parçalı satış](../20-stratejiler/varant.md#ikinci-kod-turu--ret-ve-parçalı-satış-sınırları) K-241/K-242'yi kaydeder; tolerans/replace özeti daraltıldı. [Teorik ilk eşleşme feature](../20-stratejiler/teorik-fiyat.md#ikinci-kod-turu--branch-ve-ilk-eşleşme) bfe65e2 development üzerine ayrı dal olarak incelendi. K-04 çözülmüş sayılmadı; feature BIST sırası yorumu protokol/canlı kanıt sayılmadı. Canlı/build testi yok; sıradaki AlgoProd stratejileri.
 
+### AlgoProd ikinci turu — branch ve ret
+
+AlgorithmicTrading fetch/development pull sonrası development 0dc32a7 / master aa150ee aynı. [Fon hedge eşiği](../20-stratejiler/fon-takibi.md#ikinci-kod-turu--hedge-eşiği-ve-ret) K-194'ü Q>L koşuluyla daraltır; [Arbitraj](../20-stratejiler/arbitraj.md#ikinci-kod-turu--branch-ve-ret-sınırı) faiz/başlatma/ret farklarını kaydeder. VWAP incelenen strateji/command kaynakları aynı; event altyapısına genellenmez. K-207 sepet reject/completion ve K-197 ret asimetrisi açık kaldı. Yeni sorun numarası/canlı test yok; kalan AKD/Overall/stop-loss/paket ayrıntıları sırada.
+
 ## 6. Son iki haftada aktif, referansa merge edilmemiş branch'ler
 
 2026-10-09 ve sonrası commit tarihine göre tarandı. Branch'in adı niyet hakkında ipucu verir; bütün içeriğinin doğru/çalışır olduğu veya prod'a çıkacağı anlamına gelmez.

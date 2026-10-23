@@ -11,6 +11,8 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Şu an (2026-10-23)
 
+- AlgoProd ikinci turunun ilk alt turu tamamlandı: fetch/pull sonrası uçlar aynı. K-194 Q>L koşuluyla daraltıldı; K-195 faiz branch farkı tekrar görüldü. VWAP incelenen strateji/command kaynakları iki branch'te aynı. Fon sepet ret/completion ve Arbitraj başlatma/ret yolları kontrol edildi; prod binary/config sonucu çıkarılmadı.
+
 - Varant (13)/Teorik Fiyat statik ikinci turu tamamlandı; HFT yeniden fetch/pull sonrası uçlar aynı. K-241 senkron ret/recursive olmayan mutex, K-242 tek satış token'ı/parçalı fill sınırı eklendi. Teorik ilk eşleşme feature bfe65e2 incelendi, referans davranışına geçirilmedi; K-04 devam ediyor.
 
 - Süpürme UI/wire alt turu tamamlandı: HFT ve GUI fetch/pull sonrası referans uçlar aynı. Tavan `Should_Sweep` nihai payload'da pozitif Melt_Lot ile kapılanır; motor aynı kısıtı uygulamaz. Varant Toplu `Sweep_Left_Ask` ayrı GUI feature dalındadır; development motor desteği yok (K-240), eşleşen HFT feature doğrulanmadı.
@@ -38,7 +40,7 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Sıradaki
 
-**Sıradaki: AlgoProd stratejilerinin ikinci kod turu — Arbitraj, Fon Takibi, VWAP.** Varant (13)/Teorik ve HFT strateji alt turları kaydedildi; GUI yollarının tümü yeniden incelenmedi. Entegrasyon/gerçek exchange, thread yarışları ve prod doğrulaması yapılmadı. Bütün bilgi tabanının ikinci doğrulaması henüz tamamlanmadı.
+**Sıradaki: AlgoProd kalan ayrıntılar — VWAP AKD/Overall/stop-loss, Arbitraj paket/hedge takibi.** İlk branch/ret turu ve Fon Takibi hedge eşiği kontrolü kaydedildi. Ardından GUI/admin/operasyon ikinci turu izlenecek. Entegrasyon/gerçek exchange, thread yarışları ve prod doğrulaması yapılmadı. Bütün bilgi tabanının ikinci doğrulaması henüz tamamlanmadı.
 
 Kullanıcı içerik onayı geldikçe durum etiketi kapsamına göre güncellenir; genel devam talimatıyla topluca dogrulandi yapılmaz. Uygulama bug düzeltmesi/deploy bu doküman incelemesinin dışında kaldı.
 
