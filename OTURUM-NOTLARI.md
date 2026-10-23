@@ -13,7 +13,7 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 - Bütün dosyalar `taslak`; `bos` kalmadı. Kullanıcı gözden geçirmesi bekleniyor.
 - `main` push edildi; `dogrulama-2026-10-22` branch'i silindi. Önceki sohbetin transkripti silindi (içeriği bu dosyaya aktarıldı).
-- Madde 1–7: trade-data-app, HftSrvProd, order-service, MAOrderSDK, itch-sdk, ouch-sdk/network-sdk, mtrader-trade-ui. **Madde 1–9 ve 11 bitti** (11: AlgoProd 3 alt dosya + README indeks, AlgoProd stratejileri yeniden doğrulandı; K-194–K-207, ikisi prod'u etkiliyor). **Sıradaki: madde 12 (`30-akislar/`), sonra 13 (admin paneli).** Madde 10 kullanıcı incelemesine bağlı.
+- Madde 1–7: trade-data-app, HftSrvProd, order-service, MAOrderSDK, itch-sdk, ouch-sdk/network-sdk, mtrader-trade-ui. **Madde 1–9 ve 11 bitti.** **Şu an madde 12 (`30-akislar/`) sürüyor:** akış başına dosya — `hot-path.md`, `emir-donusu.md` (agent A); `strateji-baslatma.md`, `manuel-emir.md`, `algoprod-emri.md` (agent B); `sabah-emri-ve-handoff.md`, `kopma-ve-kurtarma.md` (agent C). README indekse dönecek. Sonra 13 (admin paneli). Madde 10 kullanıcı incelemesine bağlı.
 - Yöntem: konu başına paralel agent alt dosya yazar → çelişkileri koddan kontrol et → README'yi indekse çevir → ACIK-KONULAR'a tek satır ekle → CHANGELOG → push.
 - Remote: `seyfullah-meeapps/algo-docs` (kişisel hesap). Planlanan `MeeApps/algo-docs` (org) değil; bilinçli mi, sorulmadı.
 
