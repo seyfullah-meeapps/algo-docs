@@ -11,6 +11,8 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Şu an (2026-10-23)
 
+- FIX şifre/config/ret alt turu tamamlandı; order-service ve SDK yeniden fetch/pull sonrası aynı uçlarda. K-233 (1409'suz Logon SDK/host ayrımı), K-234 (manuel adayda DB yazma hatasına rağmen arm) kaydedildi; crash-safe garanti ifadesi daraltıldı. K-120 ortak ret sınırı açık. Statik inceleme, şifre değişimi/canlı test yok.
+
 - Legacy FIX fill/replay ve replace alt turu tamamlandı. order-service/SDK yeniden fetch/pull sonrası aynı uçlarda. K-121'in master'da da olduğu teyit edildi; K-232 legacy geçmiş fill'in yeniden pozisyon kuyruğuna girmesi adayı kaydedildi. Ayrıntı `10-servisler/order-service/fix-branch-karsilastirmasi.md`. Kaynak branch bulguları; prod sonucu/canlı test yok.
 
 - Replay/combiner ve SDK development/main ana fark turu tamamlandı: yeni süreç adopt'u ile süreç içi reconnect ayrıldı; K-106 açıklaması düzeltildi, K-231 main hard-cap koşulu eklendi. SDK yeniden fetch/pull sonrası aynı uçlarda. Ayrıntı `10-servisler/maordersdk/branch-ve-replay-kontrolu.md`; statik inceleme, canlı test yok.
@@ -26,7 +28,7 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Sıradaki
 
-**Sıradaki: FIX şifre/oturum config, cancel-reject ve admin/business reject kalan yolları.** Legacy fill/replay ve replace karşılaştırması tamamlandı; FIX iç mantığının tamamı henüz yeniden kontrol edilmedi. Ardından stratejiler, GUI/admin/operasyon sırası izlenecek. Bütün bilgi tabanının ikinci doğrulaması henüz tamamlanmadı.
+**Sıradaki: stratejilerin güncel development ve master kodlarıyla ikinci turu.** Önce HFT Classic/Tavan/Taban emir-dolum ve durma kuralları, sonra diğer stratejiler; ardından GUI/admin/operasyon sırası izlenecek. FIX için planlanan statik karşılaştırma tamamlandı; entegrasyon/gerçek exchange ve prod doğrulaması yapılmadı. Bütün bilgi tabanının ikinci doğrulaması henüz tamamlanmadı.
 
 Kullanıcı içerik onayı geldikçe durum etiketi kapsamına göre güncellenir; genel devam talimatıyla topluca dogrulandi yapılmaz. Uygulama bug düzeltmesi/deploy bu doküman incelemesinin dışında kaldı.
 

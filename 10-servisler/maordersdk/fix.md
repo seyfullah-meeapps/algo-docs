@@ -231,6 +231,8 @@ Anlamlar `public/MAOrderSDK.h` yorumlarından; SDK'nın davranışı koddan.
 
 SDK hiçbir şifreyi kalıcı yazmaz. Sözleşme (`MAOrderSDK.h` yorumu): yeni şifre **arm edilmeden önce** kalıcı yazılmalı; wire'a çıktığı anda BIST kabul etmiş olabilir. `onFixPasswordChangeResult` 0/1 → host yeni şifreyi hemen kalıcılaştırır.
 
+2026-10-23 host karşılaştırması: manuel config yolunda DB yazma hatası arm'ı durdurmaz; 1409'suz başarılı Logon sonucu SDK/host arasında farklı yorumlanır. Bu sözleşmenin uygulandığı koşulsuz varsayılmaz: [K-233/K-234](../order-service/fix-branch-karsilastirmasi.md#k-233--1409suz-logonda-sdk-ve-host-şifre-sonucu-ayrışıyor).
+
 Çökme senaryosu: aday kalıcı yazıldı (pending) → arm → Logon gitti, BIST kabul etti → host terfi ettirmeden çöktü → restart'ta kalıcı şifre eski → Logon eski şifreyle → `onFixLogonRejected(5)` → host pending'i `setFixPassword(pending)` ile verir → sonraki connect turunda logon. order-service'teki uygulaması (DB `pendingPassword`, 5 deneme sınırı, `autoRenewExpiredPasswords`): [sdk-ve-oturumlar.md § 8](../order-service/sdk-ve-oturumlar.md).
 
 ## 8. Thread modeli ve kilitler

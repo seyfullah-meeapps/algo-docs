@@ -271,7 +271,7 @@ Her emir callback'i `sdk_callback_mutex_` altında çalışır, `context_for(tok
 
 ### FIX şifre yaşam döngüsü (`SdkSessionManager`)
 
-Değişmez kural: BIST'in kabul ettiği şifre her zaman {DB `password`, DB `pendingPassword`} kümesindedir. Aday wire'a, DB'ye pending olarak yazılmadan gitmez.
+Amaçlanan kural: kabul edilen şifre {DB `password`, DB `pendingPassword`} kümesinde tutulur. Otomatik yenileme DB onayı bekler; manuel config akışı yazma hatasına rağmen arm edebilir (K-234). 1409'suz Logon'da SDK/host sonuç ayrımı da bu garantiyi bozabilir ([K-233/K-234 ayrıntısı](fix-branch-karsilastirmasi.md#k-233--1409suz-logonda-sdk-ve-host-şifre-sonucu-ayrışıyor)).
 
 | Tetik | Akış |
 |-------|------|
@@ -280,7 +280,7 @@ Değişmez kural: BIST'in kabul ettiği şifre her zaman {DB `password`, DB `pen
 | Logon reject **1409=5** (hatalı şifre) | DB pending varsa ve daha önce denenmediyse **bir kez** `setFixPassword(pending)` (BIST adayı kabul etmiş olabilir). Değilse `disconnectUser`: kilitlenme riski nedeniyle otomatik tekrar yok. |
 | Diğer 1409 (6 kilitli, 9 CompID, 100/101) | Yalnız log |
 | `onFixPasswordChangeResult` 0/1 | `live = armed`. DB'ye yazma logon-connected'da yapılır. |
-| 〃 −1 (1409'suz logout) | Sonuç bilinmiyor; pending DB'de kalır, sonraki logon çözer. |
+| 〃 −1 (1409 yok/parse edilemedi) | Host `armed` temizler, `live` değişmez. Logout'ta pending kalır; Logon'da SDK başarı saydığı için sonraki promote eski şifreyle pending'i temizleyebilir (K-233). |
 | 〃 3 (politika reddi) | Otomatik akışsa pending temizlenir, yeni aday üretilir. Config akışıysa log (oturum kapalı). |
 | `onUserConnected` (FIX) | `db_pending` doluysa veya `db_pw != live` ise worker'da `PromoteFixPasswordIfNeeded`: `UpdateOrderUserPassword(user, live, "")`, sayaçlar sıfırlanır. |
 

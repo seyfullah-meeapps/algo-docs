@@ -150,9 +150,13 @@ K-56 hard-cap aşımı ifadesi daraltıldı. Yeni [K-230 ayrıntısı](../10-ser
 
 order-service ve SDK yeniden fetch/pull edildi, uçlar aynı. Master FIXManager/OrderUtility/OrderManager ile development host callback/restore, SDK FixEngine replay/ER ve FixCodec blokları karşılaştırıldı. [FIX branch belgesi](../10-servisler/order-service/fix-branch-karsilastirmasi.md) K-121'in legacy'de de bulunduğunu, fill fiyatı dönüşüm farkını ve koşullu K-232 geçmiş fill tekrar yazımı adayını kaydeder. QuickFIX/live test yok. Şifre, oturum config, cancel-reject ve admin/business reject tam ikinci turu sıradadır.
 
-## 6. Son iki haftada aktif, referansa merge edilmemiş branch'ler
+### FIX kalan yolların sonucu
+
+order-service/SDK yeniden fetch/development pull sonrası aynı uçlarda. Legacy `fromAdmin` boş, development admin/business reject emir callback sınırı sürüyor (K-120). Temel config ve sabit oturum penceresi korunmuş; sequence reset kontrolü ve otomatik şifre yönetimi farklı. [FIX branch belgesi](../10-servisler/order-service/fix-branch-karsilastirmasi.md) K-233 (1409'suz Logon sonucu ayrımı) ve K-234 (manuel aday DB onaysız arm) ayrıntılarını içerir. Koşulsuz crash-safe iddiası düzeltildi. Planlanan FIX statik ikinci turu tamamlandı; canlı/QuickFIX entegrasyon testi ve şifre değişikliği yok. Sıradaki stratejiler.
 
 İzleyen replay/combiner alt turu: SDK yeniden fetch/pull edildi, uçlar değişmedi. `Combiner.cpp`, `OuchConnection.cpp` development/main farkları ve `MAOrderSDK.cpp` ilgili callback/routing/limit blokları incelendi. Sonuçlar [SDK branch ve replay kontrolünde](../10-servisler/maordersdk/branch-ve-replay-kontrolu.md). K-106 süreç içi reconnect ile yeni süreç adopt ayrımı netleştirildi; K-231 main hard-cap koşulu kaydedildi. FIX engine/codec tam iç incelemesi ve host legacy FIX yolu henüz tamamlanmadı; build/canlı test yapılmadı.
+
+## 6. Son iki haftada aktif, referansa merge edilmemiş branch'ler
 
 2026-10-09 ve sonrası commit tarihine göre tarandı. Branch'in adı niyet hakkında ipucu verir; bütün içeriğinin doğru/çalışır olduğu veya prod'a çıkacağı anlamına gelmez.
 

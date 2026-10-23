@@ -2,6 +2,13 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-23 — FIX şifre/config ve ret yolları
+
+- order-service ve SDK yeniden fetch/development pull: uçlar aynı. Legacy master ile SDK/host oturum ayarları, sequence başlangıcı, 35=3/35=j ve cancel-reject yolları karşılaştırıldı; FIX branch belgesi genişletildi.
+- K-233: 1409'suz Logon SDK'da başarı, host'ta bilinmiyor sayılıyor; eski live şifrenin promote edilip pending'in temizlenmesi statik adayı kaydedildi.
+- K-234: manuel config pending yazımı başarısızken arm devam ediyor; otomatik akış DB onayı bekliyor. Koşulsuz crash-safe invariant düzeltildi, SDK/host belgeleri çapraz bağlandı.
+- Şifre/uygulama kodu değiştirilmedi; canlı/QuickFIX testi yok. Planlanan FIX statik ikinci turu tamamlandı, sıradaki HFT Classic/Tavan/Taban strateji incelemesi.
+
 ## 2026-10-23 — Legacy FIX fill/replay ve replace
 
 - order-service ve SDK yeniden fetch/development pull: uçlar aynı. Master FIXManager/OrderUtility/OrderManager ile development host ve SDK FIX dönüş/replay blokları karşılaştırıldı.
