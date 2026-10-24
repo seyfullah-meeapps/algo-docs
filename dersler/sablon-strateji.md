@@ -28,7 +28,7 @@ Hazırlık, çalışır/bekler durumu, tetik koşulu ve eşitlik sınırı; yön
 
 ## Sayısal örnekler ve ayar değişiklikleri
 
-Örnek defter, başlangıç pozisyonu/açık emirler ve ayarlar yazılır. Her olaydan sonra hangi emir ve durum beklenir gösterilir. Aynı örnekte tek alan değiştirilir; hemen etki, sonraki tetikte etki, mevcut emir/pozisyon/timer ve restart ihtiyacı ayrı belirtilir. Amaçlanan davranış ile mevcut uygulama farkı saklanmaz.
+Örnek defter, başlangıç pozisyonu/açık emirler ve ayarlar yazılır. Her olaydan sonra hangi emir ve durum beklenir gösterilir. Aynı örnekte tek alan değiştirilir; hemen etki, sonraki tetikte etki, mevcut emir/pozisyon/timer ve restart ihtiyacı ayrı belirtilir. Örnekler kaynakla doğrulanır; mevcut hata anlatımı eklenmez. Düzeltme bekleyen ayrıntı teknik yazım takibinde tutulur; hedef davranış gerçekleşmiş gibi yazılmaz. Düzeltme doğrulanınca etkilenen örnek güncellenir.
 
 ## Test senaryoları
 

@@ -25,6 +25,7 @@ Bu klasör insan için konu bazlı rehberdir; repo kökündeki AI bilgi tabanın
 - Teknik ayrıntının aslı kök bilgi tabanında kalır. Burada açıklama, öğretici örnek ve kaynak bağlantısı bulunur; çelişkili ikinci bir parametre sözleşmesi üretilmez.
 - Frontend kaynaklarından çizilen SVG temsili şemadır; gerçek ekran görüntüsü diye sunulmaz. Ekrana erişilemiyorsa gerekli çekim tarifiyle yer tutucu bırakılır.
 - Öğrenme/rehber çalışması açık bug kuyruğunu otomatik yeniden açmaz. Gerçek yeni teknik bulgu kök açık konu düzenine göre kaydedilir.
+- Mevcut hataları rehberin okuyucu anlatımına ve dikkat kutularına ekleme. Hata takibi teknik bilgi tabanı/issue tarafında kalır. Düzeltme doğrulanınca etkilenen rehber dosyaları ve örnek/görsel/test beklentileri güncellenir; bu kontrolü düzeltme kapanışının parçası yap. Düzelmemiş hedef davranışı çalışıyormuş gibi yazma. Ayrıntılı bakım düzeni `calisma-duzeni.md` içindedir.
 
 ## Her oturumun sonu
 

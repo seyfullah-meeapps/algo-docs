@@ -2,6 +2,11 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-24 — Hata anlatımı ve düzeltme sonrası rehber bakımı
+
+- Kullanıcı mevcut hataların rehberde anlatılmamasını istedi. Teknik takip ayrı tutulacak; doğrulanan düzeltmenin rehbere etkisi kapanış kontrolüne dahil edildi.
+- Kararlar, agent/yazım kuralları, strateji şablonu ve devam kayıtları güncellendi. Düzelmemiş davranışın çalışıyormuş gibi yazılmaması korundu. Temel yazım tercihleri netleşti; sonraki içerik uygulamanın amacı.
+
 ## 2026-10-24 — Rehberin teknik derinliği
 
 - Kullanıcı mantık/davranış odaklı ana metni, gerektiğinde kısa açıklamalı kodu ve derin ayrıntıların ayrı bölümde tutulmasını kabul etti. Karar, yazım düzeni ve devam kayıtları güncellendi.

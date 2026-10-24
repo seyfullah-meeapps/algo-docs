@@ -31,6 +31,7 @@ Kullanıcı frontend'i yazdı; diğer katmanlardaki bilgisi sınırlı. PM rolü
 | R-13 | İlk ve ana okuyucu kullanıcıdır; rehber sonrasında görevi devralacak ve ekibe katılacak kişiler için kritik şirket içi bilgi aktarım kaynağı olacak | Kullanıcının okuyucu sorusuna açık yanıtı |
 | R-14 | Rehber bir süre ana çalışma konusu; yazıma başlamadan açık tercihler tek tek netleştirilecek | Kullanıcının önceki talebi; henüz cevaplanmamış tercihler kararlaştırılmış sayılmaz |
 | R-15 | Ana metin çalışma mantığı, parametreler ve beklenen davranışa odaklanır; gerektiğinde kısa açıklamalı kod örnekleri verilir. Dosya/fonksiyon referansları ve daha derin C++ ayrıntıları ayrı teknik ayrıntı bölümünde tutulur; satır satır kod anlatımı hedeflenmez | Kullanıcı önerilen derinliği kabul etti: “çok ayrıntı olmasın” |
+| R-16 | Mevcut hatalar rehberde anlatılmaz; sorun takibi teknik bilgi tabanı/issue tarafında kalır. Düzeltme doğrulandıktan sonra etkilenen rehber anlatımı, örnek, GUI/parametre, şema ve test beklentisi güncellenir | Kullanıcının açık tercihi; düzelmemiş davranış çalışıyormuş gibi yazılmaz |
 
 ## Konuşmada netleşen sorular — 24 Ekim 2026
 
@@ -56,7 +57,13 @@ Kullanıcı frontend'i yazdı; diğer katmanlardaki bilgisi sınırlı. PM rolü
 
 **Sonuç:** R-15 kabul edildi. Bu tercih, iddiaları koddan doğrulama gereğini azaltmaz; okuyucuya sunulan ayrıntı seviyesini belirler.
 
-**Sıradaki açık tercih:** Bilinen uygulama sorunlarının ana anlatımda nasıl gösterileceği. Henüz yanıtlanmadı; bug araştırması başlatılmadı.
+**Soru 3 — Mevcut hatalar:** İlgili konuda kısa bir dikkat notuyla gösterilsin mi?
+
+**Kullanıcı yanıtı:** “mevcut hatalardan dökümanda bahsetmeyelim. ama bunları süreçte bir yandan çözeceğiz onun için çözdükten sonra da dökümanı güncellemeyi unutmayalım”
+
+**Sonuç:** Dikkat notu önerisi kabul edilmedi. R-16 geçerli. Hatalar ve düzeltme kanıtları rehberin okuyucu anlatımına taşınmaz. Henüz düzelmeyen davranış için hedef tasarım gerçek davranış diye sunulmaz; ilgili anlatım gerekiyorsa yazım takibinde bekletilir. Sorunların süreçte ele alınacağı kaydedildi; bu yanıt bütün açık sorunlarda otomatik düzeltme veya deploy başlatma talebi sayılmaz.
+
+**Devam:** Okuyucu, teknik derinlik ve hataların kapsamı netleşti. Yazıma başlamak için başka zorunlu tercih yok; konuya özel eksikler ilgili bölümü yazarken sorulacak.
 
 ## Önceki planın değişimi
 
