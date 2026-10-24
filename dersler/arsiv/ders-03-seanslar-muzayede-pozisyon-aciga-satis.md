@@ -26,7 +26,7 @@ Alışlar: 1.000 lot 10,10; 1.000 lot 10,00; 500 lot 9,90 TL. Satışlar: 800 lo
 
 Bu basitleştirilmiş örnekte en fazla miktar 10,00 TL'de eşleşir. 10,10 limitli alışın eşleşen kısmı da 10,00'dan gerçekleşir. Birden çok adayın aynı miktarı vermesi gibi ek fiyat belirleme kuralları bu örneğin dışındadır. Yüksek alış limiti vermek ücretsiz öncelik değildir: denge fiyatı yükselirse kabul edilen fiyat riski de yükselir.
 
-Teorik Fiyat stratejisi denge/state olaylarını kullanır. Sabah ters emir, akşam iptal gibi mevcut davranışın ayrıntıları [strateji belgesindedir](../20-stratejiler/teorik-fiyat.md). Ters emir iki tarafın aynı miktarda kesin dolacağını veya pozisyonun kesin sıfırlanacağını garanti etmez. Eski dersteki “sabah iptal yasak, ters emir kesin nötrler” anlatımı genel borsa kuralı olarak kullanılmaz.
+Teorik Fiyat stratejisi denge/state olaylarını kullanır. Sabah ters emir, akşam iptal gibi mevcut davranışın ayrıntıları [strateji belgesindedir](../../20-stratejiler/teorik-fiyat.md). Ters emir iki tarafın aynı miktarda kesin dolacağını veya pozisyonun kesin sıfırlanacağını garanti etmez. Eski dersteki “sabah iptal yasak, ters emir kesin nötrler” anlatımı genel borsa kuralı olarak kullanılmaz.
 
 ## Pozisyon ile para aynı şey değil
 
@@ -34,7 +34,7 @@ Sıfırdan 1.000 lot alıp 400 lot satarsan net pozisyon +600 lot olur. Satış 
 
 Eğitim hesabı: 100 lot 10,00 TL'den alınıp 10,02 TL'den satılırsa ücretler hariç fark 2 TL'dir. Elindeki pozisyonun piyasa fiyatıyla değerlenmesi başka bir metriktir. Komisyon, maliyet yöntemi, başlangıç pozisyonu ve ölçek bilinmeden UI kârı bu hesapla karşılaştırılmaz.
 
-Kodda `balance`, `profit`, `net` gibi adların olması bunların her stratejide aynı muhasebe anlamına geldiğini göstermez. [Strateji çekirdeği](../10-servisler/hftsrvprod/strateji-cekirdegi.md) ve ilgili stratejinin raporlama hesabı okunur. Hesabın nakit bakiyesi, satılabilir hisse bakiyesi ve strateji pozisyonu da ayrı değerlerdir.
+Kodda `balance`, `profit`, `net` gibi adların olması bunların her stratejide aynı muhasebe anlamına geldiğini göstermez. [Strateji çekirdeği](../../10-servisler/hftsrvprod/strateji-cekirdegi.md) ve ilgili stratejinin raporlama hesabı okunur. Hesabın nakit bakiyesi, satılabilir hisse bakiyesi ve strateji pozisyonu da ayrı değerlerdir.
 
 Açığa satış, sahip olunmayan ürünü satış işlemiyle açılan pozisyonun temel kavramıdır. Normal satış işaretine geçmek, sahiplik ve izin koşullarını kendiliğinden sağlamaz. Güncel izin/uptick/takas uygulaması bu dersin ezber tablosu değildir; [ek derste](ders-03b-uptick-bait-brut-takas.md) kod ve kural ayrımını ele alıyoruz.
 
@@ -44,7 +44,7 @@ Açığa satış, sahip olunmayan ürünü satış işlemiyle açılan pozisyonu
 2. +300 lot pozisyon ve 200 lot bekleyen alış var. Kesin pozisyon kaç? **+300; kalan dolarsa +500 olabilir.**
 3. Ters yönde 300 lot emir göndermek pozisyonu sıfırladı mı? **Dolumları görmeden söyleyemeyiz.**
 
-Kaynaklar: [borsa kuralları](../00-genel/borsa-kurallari.md), [ITCH mesajları](../10-servisler/itch-sdk/mesajlar-ve-emir-defteri.md), [risk katmanı](../10-servisler/order-service/README.md).
+Kaynaklar: [borsa kuralları](../../00-genel/borsa-kurallari.md), [ITCH mesajları](../../10-servisler/itch-sdk/mesajlar-ve-emir-defteri.md), [risk katmanı](../../10-servisler/order-service/README.md).
 
 ## Oturum kaydı
 

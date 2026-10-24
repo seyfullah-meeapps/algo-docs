@@ -25,7 +25,7 @@ UI ← WebSocket ← trade-data-app ← gRPC stream ← motor olayları
 
 Tarayıcı motora doğrudan gRPC çağırmaz. `trade-data-app`, REST/WS giriş noktası ve servisler arası aracı rolündedir. Aynı uygulama bazı çağrılarda sunucu, bazı çağrılarda istemcidir. REST tarafındaki grpc-gateway ile hub'ın başka motora yaptığı gRPC çağrısı iki ayrı adımdır.
 
-HFT'nin handoff sonrası hızlı emir yolu ise `ITCH → motor kararı → MAOrderSDK → BIST OUCH` olur. gRPC ile komut taşımak ve OUCH ile borsaya emir göndermek farklı işlerdir. Handoff öncesindeki gateway yolu için [sistem haritasına](../00-genel/sistem-haritasi.md) bak.
+HFT'nin handoff sonrası hızlı emir yolu ise `ITCH → motor kararı → MAOrderSDK → BIST OUCH` olur. gRPC ile komut taşımak ve OUCH ile borsaya emir göndermek farklı işlerdir. Handoff öncesindeki gateway yolu için [sistem haritasına](../../00-genel/sistem-haritasi.md) bak.
 
 ## PM açısından neyi ayırıyoruz?
 
@@ -45,7 +45,7 @@ HFT'nin handoff sonrası hızlı emir yolu ise `ITCH → motor kararı → MAOrd
 
 Yanıt anahtarı: 1. İlgili emrin kabul olayı. 2. Hayır; bildirim yolu da incelenmeli. 3. Evet; çağrının yönüne bağlıdır.
 
-Kaynaklar: [sistem haritası](../00-genel/sistem-haritasi.md), [hub veri akışı](../10-servisler/trade-data-app/veri-akisi.md), [strateji başlatma](../30-akislar/strateji-baslatma.md).
+Kaynaklar: [sistem haritası](../../00-genel/sistem-haritasi.md), [hub veri akışı](../../10-servisler/trade-data-app/veri-akisi.md), [strateji başlatma](../../30-akislar/strateji-baslatma.md).
 
 ## Oturum kaydı
 

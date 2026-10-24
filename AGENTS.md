@@ -21,7 +21,7 @@ Bu repo, MeeApps'in BIST algo/HFT stack'inin **AI agent'lar için yazılmış** 
 
 ## Harita — hangi soru, hangi dosya
 
-**Eğitim kapsamı (2026-10-24):** Kullanıcı dersleri bu repoya dahil etti. İnsan için anlatım, oturum notları ve PM odaklı öğrenme sırası `dersler/README.md` üzerinden yürütülür. Teknik ayrıntının asıl adresi mevcut bilgi tabanıdır; derslere kopyalanmaz. Ders hazırlanması, kullanıcıyla işlendiği veya testin çalıştırıldığı anlamına gelmez. Bu talep açık sorun araştırmalarını otomatik yeniden başlatmaz.
+**İnsan rehberi (2026-10-24):** `dersler/` artık eski ders sırasıyla değil konu bazlı yazılı rehber olarak yürütülür. Alt talimat `dersler/AGENTS.md`; ayrıntılı indeks, kararlar ve ilerleme bu klasördedir. Önce uygulama amacı, borsa ve teknik temel, sonra sistem mimarisi ve stratejiler. Kullanıcı soruları/bağlamı ilgili konuya kaydedilir. İskelet, yazılmış içerik ve kullanıcı incelemesi ayrı durumlardır. Teknik ayrıntının asıl adresi mevcut KB'dir. Açık sorun araştırması otomatik başlamaz.
 
 | Soru tipi | Bak |
 |-----------|-----|

@@ -18,6 +18,6 @@ MeeApps BIST algo/HFT stack'inin bilgi tabanı. Birincil okuyucu AI agent'lardı
 - Kaynak tazeliği: [23 Ekim tam remote kontrolü](_surec/kaynak-karsilastirmasi-2026-10-23.md), [24 Ekim kısmi güncelleme ve devam](_surec/kaynak-karsilastirmasi-2026-10-24.md)
 - Taslak incelemesinin durumu ve öncelikleri: [`_surec/inceleme-durumu.md`](_surec/inceleme-durumu.md)
 
-İnsan için öğrenme rotası ve ders kayıtları: [dersler/README.md](dersler/README.md). 24 Ekim 2026 kullanıcı talebiyle açılan bu eğitim çalışması, kapanmış teknik inceleme aşamasından ayrıdır.
+İnsan için konu bazlı uygulama ve sistem rehberi: [dersler/README.md](dersler/README.md). 24 Ekim 2026 kullanıcı talebiyle yeniden düzenlenen bu rehber çalışması, kapanmış teknik inceleme aşamasından ayrıdır.
 
 Kapsam dışı: mate, Backoffice, Kripdome/DTA, Algo-GUI (emekli masaüstü arayüz). Eski bilgi tabanı `MeeApps/meeapps-ai` olduğu gibi duruyor; bu repo onun yerini alır.

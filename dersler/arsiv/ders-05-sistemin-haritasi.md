@@ -6,7 +6,7 @@ durum: taslak
 
 # Ders 05 — Sistemin haritası
 
-Amaç: bir problemi “backend sorunu” diye bırakmadan hangi katmanda kanıt arayacağımızı seçmek. Eski dersin sekiz bileşenli haritası güncel bilgi tabanına göre genişletildi. Teknik ayrıntının tek kaynağı [sistem haritasıdır](../00-genel/sistem-haritasi.md); burada öğrenme özeti var.
+Amaç: bir problemi “backend sorunu” diye bırakmadan hangi katmanda kanıt arayacağımızı seçmek. Eski dersin sekiz bileşenli haritası güncel bilgi tabanına göre genişletildi. Teknik ayrıntının tek kaynağı [sistem haritasıdır](../../00-genel/sistem-haritasi.md); burada öğrenme özeti var.
 
 ## Program ile kütüphane
 
@@ -40,7 +40,7 @@ Handoff, sabah emirleri sonrasında ilgili OUCH kullanıcılarının gateway'den
 
 UI, hub'a REST/WS ile bağlanır. Hub motorlara gRPC komutları gönderir, olayları alır. UI defterini hub'ın kendi ITCH beslemesi üretir; HFT'nin strateji verisi kendi ITCH yolundadır. Emir defteri, emir olayları ve strateji durumu farklı akışlardır.
 
-Açılışın öğrenme sırası: hub/veri → order-service → motorlar → UI. Bu sadece süreçlerin çalışması değildir; snapshot, login, bağlantı, handoff/replay ve gerekli verilerin hazır olması kontrol edilir. Hub'da GUI bağlantılarının başlaması da başarılı DataService login'iyle ilişkilidir. Gerçek kontrol adımları [operasyon belgelerindedir](../40-operasyon/README.md).
+Açılışın öğrenme sırası: hub/veri → order-service → motorlar → UI. Bu sadece süreçlerin çalışması değildir; snapshot, login, bağlantı, handoff/replay ve gerekli verilerin hazır olması kontrol edilir. Hub'da GUI bağlantılarının başlaması da başarılı DataService login'iyle ilişkilidir. Gerçek kontrol adımları [operasyon belgelerindedir](../../40-operasyon/README.md).
 
 ## PM için belirtiyi bölmek
 
@@ -58,7 +58,7 @@ Hot path düşük gecikmeye duyarlı ITCH→karar→emir yoludur. Kontrol ve bil
 
 Bir “Arbitraj emri reddedildi” bildirimi için sırayla UI payload'ı, hub yönlendirmesi, AlgoProd kararı, gateway risk sonucu ve borsa dönüşü istenir. Bunlardan hangisinin eksik olduğu problemi henüz çözmez ama araştırma sınırını daraltır. Gerçek kişiye görev atamadan önce bu sınır ve kanıt yazılır.
 
-Kaynaklar: [emir yolları](../00-genel/sistem-haritasi.md), [sabah/handoff](../30-akislar/sabah-emri-ve-handoff.md), [AlgoProd emri](../30-akislar/algoprod-emri.md), [kopma ve kurtarma](../30-akislar/kopma-ve-kurtarma.md).
+Kaynaklar: [emir yolları](../../00-genel/sistem-haritasi.md), [sabah/handoff](../../30-akislar/sabah-emri-ve-handoff.md), [AlgoProd emri](../../30-akislar/algoprod-emri.md), [kopma ve kurtarma](../../30-akislar/kopma-ve-kurtarma.md).
 
 ## Oturum kaydı
 

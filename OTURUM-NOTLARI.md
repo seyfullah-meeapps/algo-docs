@@ -11,9 +11,9 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Şu an (2026-10-24)
 
-**Yeni aktif kapsam: insan için dersler ve PM öğrenme rotası.** Kullanıcı frontend'i yazdığını, artık problem tespiti, test, issue düzenleme ve görev atamadan sorumlu olduğunu anlattı. Masaüstündeki `meeapps-ai/dersler` içindeki yedi kayıt ve eski çalışma listesi okundu; eski repoya dokunulmadan `dersler/` içinde revize edildi. İndeks, aktarım notları, çalışma düzeni ve strateji şablonu oluşturuldu. Kaynaklar mevcut KB ile karşılaştırıldı; yeni kod/canlı kural doğrulaması veya test yapılmadı. Dersler henüz birlikte tekrar edilmedi. Teknik ilk aşamanın kapanışı aşağıdaki tarihsel kapsamıyla geçerlidir.
+**Aktif kapsam: konu bazlı insan rehberinin indeksi.** Kullanıcı önceki ders düzeninden vazgeçip gelecekte yazılı dokümana dönüştürülebilecek bir rehber istedi. Yeni sıra ve kararlar `dersler/kararlar.md`, ayrıntılı indeks `dersler/README.md`, devam noktası `dersler/ilerleme.md` içinde. Altı bölüm ve 48 ayrı konu iskeleti oluşturuldu; anlatımlar henüz yazılmadı. Eski 11 dosya `dersler/arsiv/` altında tarihsel olarak korundu. Konu bazlı soru/yanıt kaydı, kaynak ve görsel kuralları `dersler/calisma-duzeni.md`, agent talimatları `dersler/AGENTS.md` içinde. Bu tur internet/kod araştırması veya uygulama testi yok.
 
-Eğitim aktarımının yapısal kontrolü: 105 Markdown, 1.526 bağlantı, 0 hata; diff kontrolü temiz. Yerel commit oluşturuldu. `git push origin main` otomatik onay incelemesince reddedildi: iç belgelerin uzak depoya yayını için bu talepte yeterli yetkilendirme ve depo sahipliği kanıtı görülmedi. Push yapılmadı; kullanıcıdan bu hedefe gönderim onayı bekleniyor. Ret dolaylı yoldan aşılmaz.
+Önceki push otomatik onay incelemesince reddedildi; kullanıcı henüz uzak depoya gönderim onayı vermedi. Bu tur push tekrar denenmez. Teknik incelemenin ilk aşama kapanışı aşağıdaki tarihsel kapsamıyla geçerlidir.
 
 **İlk aşama tamamlandı. Aktif devam işi yok.** Kullanıcı dokümantasyonun ilk aşamasını kapatmamızı, sorunlara şimdilik odaklanmamamızı istedi. Planlanan yazım, derinleştirme, güncel development–master/main karşılaştırması ve kapanış tutarlılığı tamamlandı. Tek kapanış kaydı `_surec/ikinci-tur-sonuc-2026-10-24.md`; açık indeks korunur, otomatik takip kuyruğu değildir. Belgeler içerik onayı yerine geçmemesi için taslak kaldı.
 
@@ -79,7 +79,7 @@ Eğitim aktarımının yapısal kontrolü: 105 Markdown, 1.526 bağlantı, 0 hat
 
 ## Sıradaki
 
-**Eğitim için:** `dersler/aktarim-notlari.md` ve eski derslerin kısa tekrarını kullanıcıyla gözden geçir; ardından Ders 06'da HFT UI ayarı → payload → hub → motor → emir dönüşünü işle. Sonraki sıra ve çıktılar `dersler/README.md`'de. Planlanan dersleri kullanıcıyla konuşulmuş sayma; gerçek soru/yanıtları tarihli oturum kaydına yaz. Sorun araştırması, canlı test veya uygulama değişikliği bu eğitim hazırlığıyla açılmadı.
+**Rehber için:** İndeks değişiklikleri gelirse işle; içerik yazımına geçildiğinde `dersler/01-uygulama/01-ne-yapiyoruz.md` ile başla. Eski Ders 06 planı geçersiz. Önce `dersler/AGENTS.md`, kararlar, indeks, ilerleme ve çalışma düzenini oku. Konuşulan gerçek soruları ilgili konuya tarihli kaydet; yazılmışı okunmuş/onaylanmış sayma. Güncel borsa iddialarını içerik yazılırken resmi kaynaklardan doğrula. Açık bug araştırması bu kapsamla otomatik açılmadı.
 
 **İlk aşama için sıradaki iş yok.** Yeni kullanıcı talebi gelmeden kaynak/feature/CI araştırmasına veya açık sorun doğrulamasına devam edilmez. Gelecekte doküman güncellemesi istenirse `_surec/guncelleme.md` uygulanır; sorun çalışması istenirse yalnız seçilen kapsam ele alınır. K-240 artifact/dağıtım, Teorik zamanlama, gerçek SDK/host entegrasyonu ve prod davranışı doğrulamaları bu aşamadan ertelendi; eksik doküman yazımı sayılmaz. K-233/K-234 düzeltilmedi, K-243 geri çekildi.
 

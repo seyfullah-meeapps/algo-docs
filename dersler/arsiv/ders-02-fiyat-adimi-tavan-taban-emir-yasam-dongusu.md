@@ -12,7 +12,7 @@ durum: taslak
 
 Tick, geçerli fiyatlar arasındaki adımdır. Fiyat bandına ve ürüne bağlı olabilir. “Üç kademe yukarı” hesabında fiyat bandı geçiliyorsa tek tick'i üçle çarpmak yanlış sonuç verebilir. Projede tick bilgisi ITCH'ten, ilgili fiyat ve enstrüman için okunur. Gerçek fiyat adımı tablosunun ayrı kopyasını burada tutmuyoruz.
 
-Tavan ve taban, ilgili ürünün izin verilen üst/alt fiyat sınırlarıdır. Bu değerleri bütün ürünler için sabit bir yüzdeyle hesaplamak yerine sistemin kullandığı kaynağı kontrol ederiz. Güncel mevzuat veya belirli günün sınırı gerektiğinde resmi kaynak ayrıca doğrulanır. [Borsa kuralları](../00-genel/borsa-kurallari.md) tarihli teknik referanstır.
+Tavan ve taban, ilgili ürünün izin verilen üst/alt fiyat sınırlarıdır. Bu değerleri bütün ürünler için sabit bir yüzdeyle hesaplamak yerine sistemin kullandığı kaynağı kontrol ederiz. Güncel mevzuat veya belirli günün sınırı gerektiğinde resmi kaynak ayrıca doğrulanır. [Borsa kuralları](../../00-genel/borsa-kurallari.md) tarihli teknik referanstır.
 
 Tavanda alış kuyruğu ve satış tarafının boş olması bir defter durumudur; **Tavan stratejisinin bütün giriş koşulları** demek değildir. Parametreler, çalışma durumu ve diğer korumalar da değerlendirilir. Taban stratejisi de Tavan kodunun bütün ayrıntılarıyla aynası değildir.
 
@@ -46,7 +46,7 @@ Ret borsadan gelebileceği gibi yerel doğrulamadan da gelebilir. Yerel ret call
 - “İptal edildi ama elimde hisse var” tek başına bug mı? **Hayır; önceki fill'ler kontrol edilir.**
 - Replace sonrası UI eski token'ı gösteriyor. İlk kanıt? **İstek, ACK ve UI olayındaki eski/yeni kimlikler.**
 
-Kaynaklar: [HFT emir yaşam döngüsü](../10-servisler/hftsrvprod/emir-yasam-dongusu.md), [emir dönüşü](../30-akislar/emir-donusu.md), [MAOrderSDK](../10-servisler/maordersdk/README.md), [Tavan](../20-stratejiler/tavan.md), [Taban](../20-stratejiler/taban.md).
+Kaynaklar: [HFT emir yaşam döngüsü](../../10-servisler/hftsrvprod/emir-yasam-dongusu.md), [emir dönüşü](../../30-akislar/emir-donusu.md), [MAOrderSDK](../../10-servisler/maordersdk/README.md), [Tavan](../../20-stratejiler/tavan.md), [Taban](../../20-stratejiler/taban.md).
 
 ## Oturum kaydı
 

@@ -1,54 +1,48 @@
 ---
-kapsam: Ders notu, öğrenme takibi, test kanıtı, issue ve görev yönlendirme düzeni
+kapsam: Konu dosyaları, soru kayıtları, kaynak doğrulaması, görseller ve yazılı çıktı kuralları
 dogrulama: 2026-10-24
 durum: taslak
 ---
 
-# Dersleri nasıl tutacağız?
+# Rehberin yazım ve kayıt düzeni
 
-Her dersin başında amaç, ön koşul ve teknik kaynaklar bulunur. Ana metin konu anlatımıdır. Sonundaki **Oturum kaydı** yalnız gerçekten konuşulan soruları, kullanıcının açıklamalarını ve birlikte alınan kararları taşır. Önceden hazırlanmış anlatım “konu işlendi” diye kaydedilmez.
+Bu rehber insan içindir. Kısa bir açıklamadan somut örneğe, ardından bizim sistemdeki karşılığına ilerler. Yeni teknik terim ilk kullanımda açıklanır. “Bunu biliyorsun” varsayımı yapılmaz; frontend bilgisinden yararlanan benzetmeler gerektiğinde kullanılır.
 
-Bir derse devam edince aynı dosyaya tarihli oturum eklenir: konuşulan konu, soru/yanıt, netleşen kavram, açık kalan nokta, alıştırma sonucu ve sonraki adım. Yanlış bir açıklama düzeltilir; önemli değişiklik kısaca not edilir. Uzayan oturumlar ayrı dosyaya ayrılıp dersten bağlanır. Hassas değerler maskelenir.
+## Konu dosyası
 
-İlerleme durumları: **planlandı → hazırlandı → konuşuldu → uygulandı → tekrar tamamlandı**. Bu öğrenme durumudur; frontmatter'daki `taslak/dogrulandi` teknik belge durumundan ayrıdır. Ders 00–05 ve 03b yalnız eski kayıtları bulunmuş, revize edilmiş durumdadır.
+Her dosya tek soruya/konuya odaklanır. Önerilen sıra: amaç ve ön bilgi; kavramların açıklaması; küçük örnek; sistemdeki karşılık; şekil/akış; sık karışan noktalar; gerçek sorular; kaynak/doğrulama; devam notu. İskeletler bu bölümleri içerir, boş bölümler hazır içerik sayılmaz. 400 satırı aşmadan alt konulara bölünür; dosya adları Türkçe karakter içermez.
 
-## Test kaydı
+Frontmatter `durum: bos` iskelet, `taslak` yazılmış fakat inceleme bekleyen içeriktir. `dogrulandi` ancak beyan edilen kapsamın kanıtı ve repo kuralları sağlanınca kullanılır. `dogrulama` düzenleme tarihini tek başına teknik doğrulama kanıtına dönüştürmez. Kod iddiası yazılan dosyada `kaynak` repo/branch/commit eklenir; dış kaynak iddialarında `dis_kaynak` ve erişim tarihi tutulur.
 
-Her test şu bilgileri içermeli:
+## Kullanıcının soruları ve bağlam
 
-| Alan | Yazılacak bilgi |
-|---|---|
-| Kimlik ve amaç | Örn. `HFT-TP-001`; sınanan tek davranış |
-| Sürüm | UI, motor, gateway/SDK için ilgili branch/commit; biliniyorsa binary sürümü |
-| Ortam | Test/replay/preprod; config farkları; saat dilimi |
-| Ön koşul | Hesap, enstrüman, seans, bağlantı/handoff, başlangıç pozisyonu ve açık emirler |
-| Ayarlar | UI değerleri + gönderilen payload; fiyat ve süre birimleri |
-| Girdi ve adımlar | Başlangıç defteri ve sıralı piyasa/emir olayları; değişen tek ayar |
-| Beklenen | Gönderilecek veya gönderilmeyecek emir; yön/fiyat/lot/TIF; sonraki durum |
-| Gözlenen | Gerçek olay dizisi, emir kimlikleri, zaman damgaları |
-| Kanıt | Maskeli payload/log/replay dosyası; ekran görüntüsü destekleyici olabilir |
-| Sonuç | Geçti / kaldı / koşul oluşmadı / bloke; bağlı issue ve tekrar sonucu |
+Kullanıcı soru sorunca önce cevaplanır; sonra aynı konu dosyasına kayıt eklenir:
 
-Beklenti bir dokümana veya koda dayanmalı. Beklenen davranış belirsizse önce ürün kararı sorusu yazılır; keyfî bir beklentiyle bug ilan edilmez. Statik kod incelemesi, yerel simülasyon ve uçtan uca test ayrı kanıtlardır. Emir üreten testin ortamı ve izni belirlenmeden canlı işlem yapılmaz.
+```text
+Tarih: YYYY-MM-DD
+Kullanıcının sorusu: Gerçek soru; uzun ise anlamı korunmuş özet olarak etiketlenir.
+Bağlam: Hangi örnek/ekran/ayar üzerine soruldu?
+Yanıt ve netleşen nokta: Anlaşılan kavram ve gerekiyorsa kaynak.
+Metindeki değişiklik: Hangi açıklama veya örnek geliştirildi?
+Açık kalan: Yanıtlanmadıysa açıkça belirtilir.
+```
 
-## Issue kaydı ve görev atama
+Soru birden çok konuya değiniyorsa asıl kaydı bir dosyada tutulur, diğerlerinden bağlanır. Kullanıcının sorusu, agent'ın ürettiği alıştırma ve agent'ın varsayımı birbirine karıştırılmaz. Kullanıcıya atfedilen yanıt uydurulmaz. Genel kapsam kararları [kararlar](kararlar.md) dosyasına yazılır; bütün sohbet her konuya tekrar kopyalanmaz.
 
-Issue başlığı tetikleyiciyi ve sonucu söyler: “Pozisyonsuz HFT'de stop kapatıldıktan sonra … koşulunda … oluyor.” Gövde: etki, sürüm/ortam, tekrar adımları, beklenen/gözlenen, kanıt, tekrar sıklığı ve kabul kriteri. Parola, token, gerçek hesap veya müşteri bilgisi eklenmez.
+Yazılı çıktı alınırken ana anlatım doğrudan okunabilir olmalı. Soruların yararlı açıklamaları ana metne işlenir; tarihli soru kayıtları ayrı bölüm olarak kalır. İleride dışa aktarımda bunlar ek olarak seçilebilir; bugün ayrı Word/PDF üretimi yok.
 
-Severity etkiyi anlatır (ör. yanlış miktarlı emir, açık pozisyon, yalnız görünüm). Priority ise etki, maruz kalan kullanıcı, sıklık, geçici çözüm ve sürüm takvimine göre iş sırasını anlatır. Eğitimdeki strateji sırası otomatik issue önceliği değildir.
+## Kaynak ve doğrulama
 
-| Bulgudaki sınır | İlk inceleme sorumluluğu |
-|---|---|
-| UI değeri ile payload farklı | Frontend |
-| Payload doğru; hub yanlış motora/yanlış alanla yönlendiriyor | trade-data-app/backend |
-| Motor girdisi doğru; emir kararı veya state yanlış | İlgili HFT/AlgoProd motor geliştiricisi |
-| Emir doğru; SDK callback/token/replay tutarsız | SDK/gateway geliştiricisi |
-| Sürüm, config, oturum, saat veya servis hazırlığı uyuşmuyor | Operasyon ve ilgili servis geliştiricisi |
+- Seans, emir koşulu, takas süresi, açığa satış ve tedbirler için resmi Borsa İstanbul/SPK/Takasbank/MKK kaynakları ilgili konuda araştırılır. Ürün, pazar, tarih, belge sürümü ve yürürlük kapsamı yazılır. “T+2” başlığı her üründe bugün aynı kural geçerli iddiası değildir.
+- Teknik kavramlarda güncel doğrulama gerekiyorsa protokolün/ürünün resmi dokümanı veya birincil kaynak kullanılır. Arama sonucu özeti nihai kanıt değildir.
+- Projede kod ve gerçek sürüm esas alınır; internet bizim implementasyonumuzu kanıtlamaz. Referans ve prod farkı açık yazılır. Eski KB aktarımı yeni kod kontrolü diye sunulmaz.
+- Kaynak bulunamaz veya çelişirse belirsizlik belirtilir; kesin hüküm üretilmez. İnternet erişimi, kod incelemesi, simülasyon, build, replay ve canlı test ayrı ayrı kaydedilir.
+- Kritik emir, risk, ölçek ve zaman hesabı anlatımında birimler ile ilgili kod kontrol edilir. Gerçek müşteri/hesap, IP, parola ve token maskelenir.
 
-Bu tablo başlangıç yönlendirmesidir; kişi adı ve ekip kapasitesi bilinmeden gerçek kişiye atama yapılmaz. Birden fazla katman etkileniyorsa bir ana sorumlu ve bağlı işler belirlenir. Kabul kriteri, düzeltmeden sonra hangi aynı senaryonun hangi çıktıyla geçeceğini belirtir. Kapanış için düzeltme sürümü, tekrar testi ve gereken regresyon kanıtı kaydedilir.
+## Görseller
 
-Yeni teknik şüphe bulunursa [ACIK-KONULAR](../ACIK-KONULAR.md) indeksine tek satır ve ayrıntı bağlantısı eklenir. Mevcut K numarası varsa ona bağlanılır. Eğitim sorusu tek başına yeni bug kaydı değildir. Bu klasörü oluşturmak yeni sorun araştırması başlatmaz.
+Mimari için küçük bileşen, dağıtım ve sequence çizimleri kullanılır; kaynak/config doğrulanmadan container adı ve bağlantı uydurulmaz. Gerçek ekran görüntüsü çalıştırılan sürümle etiketlenir. Koddan çizilen SVG “temsili” diye belirtilir; frontend'in render çıktısı gibi sunulmaz. Yer tutucuda ekran/route, görünmesi gereken alanlar ve maskelenecek bilgiler yazılır. Görseller konuya ait alt dizinde tutulur, göreli bağlantı kullanılır. Şimdilik hiçbir görsel hazır değildir.
 
-## Rehbere dönüşüm
+## Oturum kapatma
 
-Rota sonunda konuşma kayıtlarından onaylanan açıklamalar ve tekrarlanabilir örnekler seçilir. Teknik ayrıntılar yine mevcut kaynağa bağlanır. Yeni gelen okuyucu her modülde kavramı açıklayabilmeli, örneği çözebilmeli ve örnek bir test/issue üretebilmeli. Yazılı rehberin biçimi o aşamada seçilir; bugünden ikinci bir teknik kaynak üretilmez.
+İlgili konu, bölüm indeksi, [ilerleme](ilerleme.md), gerekiyorsa [kararlar](kararlar.md), kök oturum notları ve changelog güncellenir. `python _surec/kontrol.py` ve `git diff --check` çalıştırılır. Açık konu indeksine yalnız gerçek yeni teknik bulgu girilir; yazılmayı bekleyen başlıklar bug sayılmaz.

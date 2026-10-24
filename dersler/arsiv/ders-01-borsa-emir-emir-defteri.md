@@ -42,7 +42,7 @@ Fiyatlar raw tam sayı taşınabilir: `TL = raw / 10^decimalPrice`. Örneğin ya
 
 Yanıtlar: 1. Diğer koşullar uygunsa 300 lot 10,52 ve 300 lot 10,54; tek fiyattan 600 lot değil. 2. Hayır; pozisyon yaratmaz. 3. Motorun zamanlı piyasa olayı ve UI'ın gördüğü olay/görüntü.
 
-Kaynaklar: [sözlük](../00-genel/sozluk.md), [ITCH mesajları ve ölçek](../10-servisler/itch-sdk/mesajlar-ve-emir-defteri.md), [hot path](../30-akislar/hot-path.md).
+Kaynaklar: [sözlük](../../00-genel/sozluk.md), [ITCH mesajları ve ölçek](../../10-servisler/itch-sdk/mesajlar-ve-emir-defteri.md), [hot path](../../30-akislar/hot-path.md).
 
 ## Oturum kaydı
 

@@ -2,6 +2,13 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-24 — Derslerden konu bazlı rehbere geçiş
+
+- Kullanıcının isteğiyle önce ayrıntılı indeks yaklaşımına geçildi: uygulama amacı, borsa, teknik temel, mimari, stratejiler ve test/PM için altı bölüm, 48 ayrı konu iskeleti. İçerikler henüz yazılmadı; iskeletler `bos`.
+- Eski 11 ders/yönetim dosyası `dersler/arsiv/` altında korundu, göreli bağlantılar düzeltildi; eski sıra geçersiz olarak işaretlendi.
+- Rehbere özel AGENTS, kararlar, ilerleme, yazım/soru/kaynak/görsel düzeni ve strateji şablonu oluşturuldu. Kullanıcının bağlamı ve gerçek yapı soruları kaydedildi.
+- Kök talimatlar, giriş ve oturum devam noktası yeni yapıya bağlandı. Bu tur internet/kod doğrulaması, uygulama testi veya görsel üretimi yok; ilk içerik uygulamanın amacı olacak. Önceki push reddi nedeniyle gönderim tekrar denenmedi.
+
 ## 2026-10-24 — Derslerin aktarımı ve PM öğrenme rotası
 
 - Kullanıcının yeni talebiyle `dersler/` açıldı. Eski meeapps-ai içindeki yedi ders ve çalışma listesi incelendi; numaralar korunarak dersler yeniden yazıldı, eski repo değiştirilmedi.

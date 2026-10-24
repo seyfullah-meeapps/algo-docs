@@ -30,7 +30,7 @@ HFT düşük gecikmeyle karar ve emir üretme yaklaşımını anlatır. Projedek
 | Varant / Varant Toplu | Dayanak ve varant olayları; ayrı uygulamalar | Girişten sonra çıkış kotasyonunun kaybolması |
 | VWAP / BYF | Hacimle yürütme / fon-sepet ilişkisi | Eksik yürütme veya parça uyumsuzluğu |
 
-Aktiflik ve motor eşleşmesi için [strateji kataloğu](../20-stratejiler/README.md) esastır. OrderChase eski dersteki gibi aktif strateji olarak sayılmaz. Varant ile Varant Toplu'nun davranışı birbirine kopyalanmaz; Toplu Emirler de bu ikisinden farklıdır.
+Aktiflik ve motor eşleşmesi için [strateji kataloğu](../../20-stratejiler/README.md) esastır. OrderChase eski dersteki gibi aktif strateji olarak sayılmaz. Varant ile Varant Toplu'nun davranışı birbirine kopyalanmaz; Toplu Emirler de bu ikisinden farklıdır.
 
 ## Hız neyi değiştirir?
 
@@ -44,7 +44,7 @@ CPU pinning, kernel bypass, allocation ve kilit maliyeti bu nedenle önemlidir. 
 - Arbitrajda ilk bacak doldu. İşlem bitti mi? **Hedge ve paket durumunu kontrol ederiz.**
 - HFT hızlı diye stop emri kesin dolar mı? **Hayır; fiyat, likidite ve emir koşulları belirler.**
 
-Kaynaklar: [Varant](../20-stratejiler/varant.md), [Varant Toplu](../20-stratejiler/varant-toplu.md), [Arbitraj](../20-stratejiler/arbitraj.md), [hot path](../30-akislar/hot-path.md).
+Kaynaklar: [Varant](../../20-stratejiler/varant.md), [Varant Toplu](../../20-stratejiler/varant-toplu.md), [Arbitraj](../../20-stratejiler/arbitraj.md), [hot path](../../30-akislar/hot-path.md).
 
 ## Oturum kaydı
 
