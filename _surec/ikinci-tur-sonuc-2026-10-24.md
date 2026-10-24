@@ -45,7 +45,7 @@ Sorun ayrıntıları tek yerde tutulur; indeks [ACIK-KONULAR](../ACIK-KONULAR.md
 |---------|-------|
 | 1 | K-243 takipte geri çekildi: [gerçek preprod run kanıtı](dogrulama-k243-2026-10-24.md). Development dosya farkı mevcut run'ın main'e yazdığı anlamına gelmiyor |
 | 2 | K-233/K-234 gerçek handler gövdeleriyle [yerel 5 senaryoda gözlendi](dogrulama-sifre-akisi-2026-10-24.md); düzeltilmedi, canlı entegrasyon sınırı sürüyor |
-| 3 | [K-241/K-242 Varant](../20-stratejiler/varant.md#ikinci-kod-turu--ret-ve-parçalı-satış-sınırları): senkron ret ve çoklu satış senaryoları entegrasyonla sınanmalı |
+| 3 | [K-241/K-242 Varant](../20-stratejiler/varant.md#ikinci-kod-turu--ret-ve-parçalı-satış-sınırları): [yerel handler senaryoları](dogrulama-varant-2026-10-24.md) tamamlandı; gerçek SDK/host entegrasyonu ve prod platform davranışı sınanmalı |
 | 4 | K-194/K-195 ve diğer branch bulguları: kurulu binary/config kanıtıyla müşteri etkisi belirlenmeli |
 
 ## Kontrol ve tamamlanmayanlar

@@ -2,6 +2,12 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-24 — Varant handler senaryoları
+
+- HFT development fetch/pull sonrası 4275ccc aynı. Dört gerçek C++ gövdesi, sahte SDK/mesaj yüzeyi ve gerçek mutex ile beş yerel senaryo sınandı.
+- K-241 için MSVC yeniden kilit girişinde istisna gözlendi; prod kilitlenmesi olarak genellenmedi. K-242 iki ACK sonrası yalnız son token'a toplam miktarla replace üretildi. Kontroller geçti; kanıt `_surec/dogrulama-varant-2026-10-24.md`, araç `_surec/dogrula_varant_akisi.py`.
+- Adaylar açık, belgeler taslak; tam entegrasyon/canlı işlem veya uygulama düzeltmesi yok. Sıradaki Teorik feature ucu.
+
 ## 2026-10-24 — Şifre handler'larıyla yerel senaryo doğrulaması
 
 - SDK/order-service fetch/pull sonrası uçlar aynı. Gerçek yedi C++ fonksiyon gövdesini kaynaklardan çıkarıp MSVC ile derleyen, sahte DB/oturum kullanan araç eklendi; 5 senaryo geçti.

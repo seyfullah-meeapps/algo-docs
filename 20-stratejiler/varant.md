@@ -72,6 +72,8 @@ Karıştırmak emri 10× veya 1000× yanlış fiyata gönderir. UI tarafı `WARR
 
 **K-242 — birden çok satış için tek token:** Her buy fill'i ayrı satış gönderebilir; `addOrder` her satış accept'inde tek `sellOrderToken` alanını üzerine yazar. `replaceToTarget` yalnız bu token'a, bütün türev için `buyFilledQuantity-sellFilledQuantity` miktarıyla replace dener. Önceki satışlar böylece aynı hedef yönetiminde ayrı ayrı temsil edilmez. İki parçalı buy fill/iki satış ACK senaryosu koddan görülebilir; exchange miktar semantiği ve canlı sonuç test edilmedi. Varant Toplu'nun satış listesi modeliyle karıştırma.
 
+[Yerel handler senaryolarında](../_surec/dogrulama-varant-2026-10-24.md) K-241 için MSVC yeniden kilitte `resource deadlock would occur` istisnası üretti; K-242 için iki ACK sonrası yalnız S2'ye toplam 60 ile replace gözlendi. Gerçek SDK callback yönlendirmesi ve buy fill zinciri uçtan uca çalıştırılmadı; prod kilitlenmesi veya borsada fazla satış kanıtı değildir.
+
 `replaceToTarget` gönderim sonucu başarısız olsa da `isReplacedToTarget=true` yazar; bu alan ACK teyidi değildir ve otomatik tekrar garantisi vermez. Tolerans sınırı yalnız trade fill sayacında değil, tamamlanan tur `cycleCount` kontrollerinde de kullanılır. Ayar 0 komutta geçersiz sayılır; “0 sınırsız” değildir.
 
 ### Arayüz ve bakiye
