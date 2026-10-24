@@ -1,9 +1,10 @@
 {
   "title": "MTrader — Algoritmik İşlem Botu",
   "subtitle": "Uygulama ve Sistem Rehberi · MeeApps",
-  "version": "0.3",
+  "version": "0.4",
   "chapters": [
     "01-uygulama/01-ne-yapiyoruz.md",
-    "01-uygulama/02-kullanicilar-ve-is-gunu.md"
+    "01-uygulama/02-kullanicilar-ve-is-gunu.md",
+    "02-borsa-temelleri/01-piyasalar-ve-urunler.md"
   ]
 }

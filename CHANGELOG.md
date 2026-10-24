@@ -2,6 +2,12 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-24 — Borsa temellerine başlangıç
+
+- Kullanıcının devam talebiyle ilk bölümdeki bekleme kalktı. Piyasalar, ürünler ve miktar birimleri yazıldı; resmi BIST ürün/VİOP/pay vadeli kaynakları erişim tarihleriyle eklendi.
+- Pay/endeks/BYF/varant/vadeli ayrımı, miktar ve sözleşme büyüklüğü ile öğretici nominal değer örneği hazırlandı. Kod veya canlı sistem doğrulaması yapılmadı.
+- Üç konu yayın listesinde; sürüm 0.4. İndeks ve devam kayıtları güncellendi; PDF/HTML/EPUB üretildi.
+
 ## 2026-10-24 — MTrader kapsamı ve genel strateji testleri
 
 - Şirketin günlük kullanımını açıklayan paragraf ve tekrarlar kaldırıldı; anlatım MTrader’a odaklandı.

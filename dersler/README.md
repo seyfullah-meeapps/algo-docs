@@ -8,7 +8,7 @@ durum: taslak
 
 Bu rehber uygulamanın amacından başlayıp borsa ve teknik temellere, sistem mimarisine ve stratejilere ilerler. Okuyucu frontend bilgisi olan bir PM veya projeye yeni gelen biri olabilir. Hedef; uygulamayı anlamak, davranışı açıklamak, test tasarlamak ve kanıtıyla issue/görev yönetmektir.
 
-**İlk bölüm taslak olarak tamamlandı:** [Ne yapıyoruz ve neyi amaçlıyoruz?](01-uygulama/01-ne-yapiyoruz.md) ve [Kullanıcılar ve geliştirme süreci](01-uygulama/02-kullanicilar-ve-is-gunu.md) kitapta yer alıyor. Kullanıcı bu bölümü okuyup revizyon verecek; şimdilik borsa temellerine geçilmiyor. Diğer 46 konu iskelet durumunda. Eski ders numaraları yeni rotayı belirlemez. Klasör adı bağlantıların devamlılığı için `dersler/` kaldı; yapı artık konu bazlı rehberdir.
+**Borsa temellerine geçildi:** İlk bölümün revizyonları kullanıcı tarafından uygun bulundu. Borsa temellerinin ilk konusu [Piyasalar, ürünler ve miktar birimleri](02-borsa-temelleri/01-piyasalar-ve-urunler.md) taslak yazıldı ve kitaba eklendi; henüz okunmadı. Sıradaki konu emir defteri ve eşleşme. Diğer 45 konu iskelet durumunda. Klasör adı bağlantıların devamlılığı için `dersler/` kaldı; yapı konu bazlı rehberdir.
 
 ## Devam edecek agent için
 

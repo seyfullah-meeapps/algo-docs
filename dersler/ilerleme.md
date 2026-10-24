@@ -8,28 +8,15 @@ durum: taslak
 
 ## Şu an
 
-**İlk bölüm yazıldı; kullanıcının ilk içerik revizyonları işlendi, yeniden okuma bekleniyor.** “Uygulamanın amacı” bölümündeki iki konu taslak olarak kitapta. Kullanıcı ilk bölümde ürün/şirket ve test süreci düzeltmeleri verdi; bunlar uygulandı. Şimdilik borsa temellerine geçilmeyecek. İçeriklerin onaylandığı varsayılmaz.
-
-| Bölüm | Konu sayısı | Yazım durumu | Kullanıcı okuma durumu |
-|---|---|---|---|
-| Uygulamanın amacı | 2 | İki konu da taslak yazıldı; kitapta | İlk revizyon işlendi; yeniden okuma bekleniyor |
-| Borsa temelleri | 12 | İskelet | Henüz bildirilmedi |
-| Teknik temeller | 10 | İskelet | Henüz bildirilmedi |
-| Bizim sistemimiz | 11 | İskelet | Henüz bildirilmedi |
-| Stratejiler | 10 | İskelet | Henüz bildirilmedi |
-| Test ve proje yönetimi | 3 | İskelet | Henüz bildirilmedi |
+İlk bölüm revizyonlar sonrasında kullanıcı tarafından uygun bulundu; 24 Ekim 2026 talebiyle borsa temellerine geçildi. “Piyasalar, ürünler ve miktar birimleri” taslak yazıldı. Toplam 3 konu yazılı, 45 konu iskelet; yeni konu henüz okunmadı.
 
 ## Son tamamlanan iş
 
-**Son revizyon:** Rehberin kapsamı yalnız MTrader. Şirketin günlük kullanımını açıklayan paragraf ve tekrarlar kaldırıldı; test bölümü stratejiye özgü parametre/koşul/beklenen sonuç, ayar değişiklikleri ve işlem yapılmaması gereken durumlarla genelleştirildi. İlk bölümün diğer içeriği kullanıcı tarafından şimdilik uygun bulundu. Yeni bölüme geçme talebi yok; sonraki yönlendirme bekleniyor.
-
-24 Ekim 2026, ilk okuma revizyonu: ürün **MTrader**, şirket **MeeApps**. Müşteriler aracı kurumlar; günlük kullanıcılar onların traderları/fon yöneticileri. MeeApps'in kullanımı geliştirme/test içindir. Önceki birleşik günlük kullanım anlatımı yerine “Kullanıcılar ve geliştirme süreci” yazıldı. Özellik/senaryo/görev → geliştirici ön testi → test ortamı → anlaşılmış traderlarla preprod düşük lot → kararlılık sonrası yüksek lot → bütün müşterilere aktarım açıklandı. Sayısal lot/süre/onay yetkisi uydurulmadı. Ana KB tek referansı `00-genel/urun-ve-gelistirme-sureci.md` ve ilgili giriş bağlantıları güncellendi.
-
-Yayın sürümü 0.3: **7 A4 sayfa**, iki konu. “Okumaya başlamadan” sayfası kaldırıldı; HTML giriş sayfası ilk konudur. Kitap başlığı MTrader — Algoritmik İşlem Botu; ana başlıklar bölüm rozeti ve marka şeridiyle zenginleştirildi. PDF/HTML/EPUB yenilendi; PDF sayfaları, metin ve HTML görünümü kontrol edildi. Eski küçük harfli ürün adı ve kaldırılan önsöz PDF/EPUB'da yok. Güncel dosyalar aynı çıktı adlarını kullanır.
+BIST/Pay Piyasası/VİOP, pay/endeks/BYF/varant/vadeli ayrımı ve sözleşme büyüklüğü açıklandı. Borsa İstanbul'un resmi sayfaları okundu; standart pay vadeli sözleşme örneğinde adet ve nominal değer ayrımı kuruldu. MTrader bağlantısı kavramsal; yeni kod/canlı test yok. Yayın sürümü 0.4; PDF/HTML/EPUB yenilendi. PDF toplam 9 A4 sayfa; yeni iki sayfa görsel kontrol edildi, EPUB paket bütünlüğü doğrulandı.
 
 ## Sıradaki tek başlangıç noktası
 
-Kullanıcının ilk bölümle ilgili soruları ve revizyonları ilgili konu dosyasına işlenir; ardından çıktı tekrar üretilir. Kullanıcı devam istediğinde ilk yeni konu `02-borsa-temelleri/01-piyasalar-ve-urunler.md`. Sonraki başlıklarda güncel borsa iddiaları resmi kaynaktan, proje davranışı koddan doğrulanır.
+`02-borsa-temelleri/02-emir-defteri.md`: alış/satış tarafı, spread, kademe, eşleşme ve öncelik. Kullanıcının okuma revizyonları gelirse önce ilgili dosyada işlenir. İlk bölüm için önceki bekleme kararı son devam talebiyle kalktı.
 
 ## Kalıcı çalışma düzeni
 
@@ -39,4 +26,4 @@ Yayın kullanımı `yayin/README.md`, tasarım kaynakları `yayin/marka.md`, yay
 
 ## Doğrulama ve Git
 
-İki konu `taslak`, kalan 46 konu `bos`. Yapısal kontrol: 168 Markdown, 1.871 bağlantı, 0 hata; `git diff --check` temiz. Çıktılar ve araçlar Git dışında. Önceki push otomatik onay incelemesince reddedildi; kullanıcı uzak depoya gönderim onayı vermedi. Push tekrar denenmez; çalışmalar yerelde saklanır.
+Üç konu `taslak`, kalan 45 konu `bos`. Yapısal kontrol: 168 Markdown, 1.869 bağlantı, 0 hata; `git diff --check` temiz. Çıktılar ve araçlar Git dışında. Önceki push otomatik onay incelemesince reddedildi; kullanıcı uzak depoya gönderim onayı vermedi. Push tekrar denenmez; çalışmalar yerelde saklanır.
