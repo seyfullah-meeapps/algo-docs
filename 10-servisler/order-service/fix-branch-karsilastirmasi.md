@@ -62,11 +62,15 @@ Ret metni ve kayıt eşleşmesine dayanan dönüşler, borsanın bütün hata ç
 
 ### K-233 — 1409'suz Logon'da SDK ve host şifre sonucu ayrışıyor
 
+24 Ekim takip: gerçek SDK/host fonksiyon gövdeleri sahte oturum/DB adaptörleriyle derlenip çalıştırıldı; aşağıdaki ayrışma yerel handler düzeyinde gözlendi. Açık 1409=0/1 kontrol senaryoları doğru şifreyi promote etti. [Test kanıtı ve sınırları](../../_surec/dogrulama-sifre-akisi-2026-10-24.md); canlı QuickFIX/DB sonucu değildir.
+
 `FixEngine::fromAdmin`, aday varken **Logon + status=-1** sonucunu başarı kabul eder; SDK belleğinde mevcut şifreyi adaya geçirip adayı temizler. `onFixPasswordChangeResult(-1)` host'a iletilir. Host `SdkSessionManager` ise -1'i yalnız “1409'suz logout/bilinmiyor” gibi ele alır: `armed` temizlenir, `live` eski şifrede kalır. Ardından `onUserConnected` pending kayıt nedeniyle promote worker'ı başlatır; `UpdateOrderUserPassword(username, live, "")` eski şifreyi yazıp pending'i temizleyebilir.
 
 Statik senaryo: eski DB/live şifre A, pending/armed aday B → 1409'suz Logon → SDK canlı B, host canlı A → başarılı DB promote ile DB=A/pending boş. Böylece aday B'nin kalıcı kopyası kaybolabilir. Hem config hem auto-renew adayında geçerli olabilir. BIST'in bu cevap biçimini üretip üretmediği, gerçek callback sırası ve DB sonucu entegrasyon testinde denenmedi; adayın prod'da kaybolduğu iddia edilmez. Alan yokluğu ile parse edilemeyen 1409 kodda aynı -1 sonucuna gider.
 
 ### K-234 — manuel config adayı DB onayı olmadan arm ediliyor
+
+24 Ekim takip: başarısız sahte pending write sonrası gerçek armFromConfig gövdesi adayı döndürdü; çözülmemiş pending kontrolü yeni adayı engelledi. Aynı [yerel doğrulama](../../_surec/dogrulama-sifre-akisi-2026-10-24.md) beş senaryo içerir; otomatik renew bütünü çalıştırılmadı.
 
 `armFromConfig` pending yazma RPC'si başarısız olsa da adayı döndürür; `MAOSdkManager` bunu SDK kullanıcısının `fix_new_password` alanına koyar. Otomatik `RenewExpiredFixPassword` ise DB yazımı başarısızsa arm etmeden döner. Bu nedenle crash-safe invariant manuel yola koşulsuz genellenemez. Manuel aday kalıcı config'te bulunabilir; bulgu her kopyanın kaybolması değil, DB password/pending ikilisinin kabul edilen şifreyi kapsadığı garantisinin bozulmasıdır. Kaynak kod değiştirilmedi.
 

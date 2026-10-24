@@ -2,6 +2,12 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-24 — Şifre handler'larıyla yerel senaryo doğrulaması
+
+- SDK/order-service fetch/pull sonrası uçlar aynı. Gerçek yedi C++ fonksiyon gövdesini kaynaklardan çıkarıp MSVC ile derleyen, sahte DB/oturum kullanan araç eklendi; 5 senaryo geçti.
+- K-233 1409'suz Logon sonucu ayrışması ve K-234 başarısız pending write sonrası aday döndürme handler düzeyinde gözlendi; 1409=0/1 ve mevcut pending kontrolleri geçti. Açık indeks/ayrıntı ve kanıt raporu güncellendi.
+- Kaynak uygulama/şifre/DB değiştirilmedi. Full build, QuickFIX entegrasyonu ve gerçek async worker testi değil; PASS bug fix anlamına gelmez. Sıradaki Varant adayları.
+
 ## 2026-10-24 — K-243 gerçek run doğrulaması ve geri çekme
 
 - SDK preprod a647c9e workflow'u ve başarılı push run 40012991193/job 120620335238 okundu. Hedef ref/destination_branch preprod; development dosyasından yapılan main'e yönlendirme genellemesi yanlıştı.

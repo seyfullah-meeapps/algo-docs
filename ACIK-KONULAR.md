@@ -305,8 +305,8 @@ Koddan çıkarılan sonuçlar canlıda gözlemle doğrulanmış sayılmaz; ayrı
 
 | K-232 | bug? | Legacy master FIX fill handler'ında replay ayrımı/dedup yok; yeniden teslim edilen eşleşen geçmiş fill pozisyon kuyruğuna tekrar girer | [FIX branch kontrolü](10-servisler/order-service/fix-branch-karsilastirmasi.md#şüpheli) |
 
-| K-233 | bug? | 1409'suz Logon SDK'da şifre değişimi başarısı, host'ta bilinmiyor sayılıyor; DB promote eski şifreyi yazıp pending'i silebilir | [FIX karşılaştırması](10-servisler/order-service/fix-branch-karsilastirmasi.md#k-233--1409suz-logonda-sdk-ve-host-şifre-sonucu-ayrışıyor) |
-| K-234 | bug? | Manuel FIX config adayı pending DB yazımı başarısız olsa da arm ediliyor; otomatik akışın DB onayı garantisi burada yok | [FIX karşılaştırması](10-servisler/order-service/fix-branch-karsilastirmasi.md#k-234--manuel-config-adayı-db-onayı-olmadan-arm-ediliyor) |
+| K-233 | bug? | Gerçek handler gövdeleriyle yerelde gözlendi: 1409'suz Logon sonrası SDK yeni şifrede, DB eski şifrede/pending boş kalabiliyor; canlı test yok | [FIX karşılaştırması](10-servisler/order-service/fix-branch-karsilastirmasi.md#k-233--1409suz-logonda-sdk-ve-host-şifre-sonucu-ayrışıyor) |
+| K-234 | bug? | Gerçek armFromConfig ile yerelde gözlendi: pending DB yazımı başarısızken aday döndürülüyor; canlı test yok | [FIX karşılaştırması](10-servisler/order-service/fix-branch-karsilastirmasi.md#k-234--manuel-config-adayı-db-onayı-olmadan-arm-ediliyor) |
 
 | K-235 | doğrula | Taban PTRM reddinde durma development'ta var, master'da yok; ret sonrası aynı stop koruması varsayılmamalı | [Taban](20-stratejiler/taban.md#ikinci-kod-turu--branch-sınırı) |
 | K-236 | bug? | HFT Classic `Is_Stop_Loss_Enabled` strateji alanına alınır ama karar yolunda okunmaz; false tek başına stop'u kapatmaz | [Classic](20-stratejiler/hft-classic.md#ikinci-kod-turu--classic-kontrol-sınırları) |
