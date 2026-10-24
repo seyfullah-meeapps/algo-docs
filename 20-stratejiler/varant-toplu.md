@@ -172,7 +172,7 @@ Maliyetten kapanış değişikliği `sweepLeftAsk` koşuluna bağlı değildir; 
 
 **Ek SDK bağımlılığı:** Bu dal `itchsdk_subscribe_order_executed` yerine `itchsdk_subscribe_order_executed_ex` çağırır. Callback'e `isQuote`, `quoteBuyer`, `levelQtyAfter` eklenir ve `ItchOrderExecutedEvent` üzerinden motora gider. Tetik için birikimde kotasyoncu alıcı izi aranır (`execAccumQuoteBuyer`) ve kotasyon emri dolumu varsa (`execAccumQuoteFill`) tetik atlanır; değişiklik yalnız alış miktarı seçeneği değildir.
 
-Mevcut yerel itch-sdk çalışma ağacında bu yeni API/alan adları bulunmadı; bu sonuç bütün SDK feature ref'lerinin tarandığı anlamına gelmez. Uyumlu SDK kaynak/header/library ucu ve birlikte kurulu binary seti henüz doğrulanmadı. **K-240 bu daraltılmış kapsamla açık:** GUI–motor kaynak sözleşmesi bulundu, SDK ve dağıtım eşleşmesi bekliyor. Build, ABI/link kontrolü, browser veya ITCH replay/canlı emir testi yapılmadı. Feature değişiklikleri üstteki development akışına taşınmadı.
+Takipte uyumlu SDK kaynak API'si `warrant-open-quote-log-pp` `e800b3d` içinde bulundu; [callback semantiği ve build bağımlılığı](../10-servisler/itch-sdk/quote-executed-feature.md). SDK development/master'da API yok; aynı adlı SDK `hft_warrant_advanced` dalı da bu API'yi taşımıyor. **K-240 açık:** GUI–motor–SDK kaynak zinciri bulundu, uyumlu header/library artifact'i ve birlikte dağıtım bekliyor. Build, ABI/link kontrolü, browser veya ITCH replay/canlı emir testi yapılmadı. Feature değişiklikleri üstteki development akışına taşınmadı.
 
 ## Gölge kriter (log only)
 

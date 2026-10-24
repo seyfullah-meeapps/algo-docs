@@ -2,6 +2,12 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-24 — K-240 SDK kaynak zinciri
+
+- itch-sdk fetch/development pull sonrası 35a3b5c/master 00c51b1 aynı. Yeni executed_ex API warrant-open-quote-log-pp e800b3d içinde bulundu; HFT f20b5f2 callback imzası eşleşiyor. Aynı adlı SDK hft_warrant_advanced dalında API yok.
+- QuoteBuyer çıkarımı, kalan kademe miktarı ve sıfır miktarlı geç quote bildirimi ayrı SDK feature belgesine yazıldı. HFT build'inin dış header/library bağımlılığı ve workflow tetik sınırları kaydedildi.
+- K-240 artifact/dağıtım kapsamıyla açık. Kaynak incelemesi; CI run, binary export/link, replay veya canlı test yapılmadı. Sıradaki gerçek artifact/Setup eşleşmesi.
+
 ## 2026-10-24 — K-240 motor feature eşleşmesi
 
 - HFT/GUI fetch ve development pull sonrası referanslar aynı. GUI d2c35c7 sözleşmesi HFT hft_warrant_advanced f20b5f2 parser/runtime/summary ve kapanış koduyla eşleştirildi; feature referans dallara merge edilmemiş.

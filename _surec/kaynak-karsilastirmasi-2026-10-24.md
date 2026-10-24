@@ -50,6 +50,8 @@ Kapanış kapsam/tutarlılık kontrolü tamamlandı: [sonuç ve kalanlar](ikinci
 
 ## Teknik takip — Teorik feature 26ce9b2
 
+SDK takibinde itch-sdk fetch/development pull sonrası 35a3b5c/master 00c51b1 aynı. `warrant-open-quote-log-pp` e800b3d içinde HFT f20b5f2 ile uyumlu executed_ex API bulundu; aynı adlı SDK hft_warrant_advanced dalında yok. [SDK feature kanıtı](../10-servisler/itch-sdk/quote-executed-feature.md) quote çıkarımı, sıfır miktarlı geç bildirim ve build sınırlarını kaydeder. K-240 artık artifact/header/library ve birlikte dağıtım kanıtı bekliyor; gerçek build/run/link testi yok.
+
 Sonraki K-240 takibinde HFT/GUI fetch + development pull tekrarlandı; referans uçları aynı. GUI d2c35c7 için motor karşılığı `hft_warrant_advanced` f20b5f2 bulundu. [Kaynak eşleşmesi ve SDK sınırı](../20-stratejiler/varant-toplu.md#24-ekim--motor-feature-eşleşmesi): executed_ex/quote alanları uyumlu SDK gerektiriyor; kaynak sözleşmesi eşleşti, SDK/library/dağıtım kanıtı bekliyor. K-240 açık, build/canlı test yok.
 
 HFT yeniden fetch + development pull sonrası development `4275ccc`, master `052dd96`, feature `26ce9b2` aynı. Remote contains kontrolünde feature commit yalnız kendi dalında. `bfe65e2..26ce9b2` tek commit/beş dosya delta incelendi: [Teorik ayrıntısı](../20-stratejiler/teorik-fiyat.md#24-ekim--feature-26ce9b2-farkı). Açılış yayını, own-state guard, sıfır dengeyi koruma ve reverse Expected_Price farkları development davranışına geçirilmedi. K-04 açık; build/replay/canlı emir yok. Sıradaki K-240 motor feature eşleşmesi.

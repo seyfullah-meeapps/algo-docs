@@ -10,6 +10,8 @@ durum: taslak
 
 # itch-sdk (`libMAItchSDK`)
 
+Feature takibi: [extended execution/quote API ve build sınırı](quote-executed-feature.md) — referans development desteği değildir.
+
 BIST ITCH piyasa verisi SDK'sı (C++, namespace `itch`, tek paylaşımlı kütüphane, `extern "C"` API). Development'taki kod, eski bilgi tabanında "v3 rewrite" diye anlatılan sürümdür.
 
 **Kullananlar:**
