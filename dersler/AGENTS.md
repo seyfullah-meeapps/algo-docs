@@ -17,7 +17,7 @@ Bu klasör insan için konu bazlı rehberdir; repo kökündeki AI bilgi tabanın
 ## Çalışırken
 
 - Bir konu bir Markdown dosyasıdır; büyüyünce alt konulara böl ve indeksleri güncelle. Birleştirilmiş Word/PDF bu aşamada istenmedi.
-- Önce indeks, sonra içerik. İskeletleri doldurulmuş sayma. Bu turdan sonra ilk yazılacak konu `01-uygulama/01-ne-yapiyoruz.md`.
+- İndeks sırasıyla içerikleri doldur; iskeletleri yazılmış sayma. Güncel devam noktası `ilerleme.md` içindedir.
 - Kullanıcının gerçek sorularını ve verdiği bağlamı ilgili konu dosyasındaki “Sorularımız ve netleşen noktalar” bölümüne tarihli ekle. Soru ile agent yorumunu ayır; cevaplanmayan soruya yanıt uydurma. Yapı kararlarının tek adresi `kararlar.md`.
 - “Planlandı”, “yazıldı”, “kullanıcıyla konuşuldu/okundu” ayrı durumlardır. Sessizlik veya dosyanın açık olması içerik onayı değildir.
 - Güncel borsa kuralı, seans, T+N, tedbir veya değişebilir teknik bilgi yazılırken resmi/birincil kaynakları internetten doğrula. URL, erişim, belge sürümü ve yürürlük kapsamını yaz. İnternetten bilgi doğrulamayı uygulama testi olarak sunma.

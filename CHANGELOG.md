@@ -2,6 +2,12 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-24 — Rehberin ilk konu anlatımı
+
+- “Ne yapıyoruz ve neyi amaçlıyoruz?” taslağı yazıldı: ürün amacı, kullanıcı kontrolü, basit veri–karar–emir–sonuç örneği, kavramsal Mermaid akışı ve bileşenlerin görev özeti.
+- Mevcut KB kaynakları ve referans commit'ler belirtildi; yeni kod/internet/canlı doğrulama yapılmadı. Kullanıcının yazım sürerken kodları inceleme bağlamı kaydedildi; okuma/onay varsayılmadı.
+- Ana/bölüm indeksleri ve devam kayıtları güncellendi. Sıradaki konu kullanıcılar ve örnek iş günü; 47 konu iskelet olarak kaldı.
+
 ## 2026-10-24 — Hata anlatımı ve düzeltme sonrası rehber bakımı
 
 - Kullanıcı mevcut hataların rehberde anlatılmamasını istedi. Teknik takip ayrı tutulacak; doğrulanan düzeltmenin rehbere etkisi kapanış kontrolüne dahil edildi.
