@@ -13,6 +13,8 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 **Yeni aktif kapsam: insan için dersler ve PM öğrenme rotası.** Kullanıcı frontend'i yazdığını, artık problem tespiti, test, issue düzenleme ve görev atamadan sorumlu olduğunu anlattı. Masaüstündeki `meeapps-ai/dersler` içindeki yedi kayıt ve eski çalışma listesi okundu; eski repoya dokunulmadan `dersler/` içinde revize edildi. İndeks, aktarım notları, çalışma düzeni ve strateji şablonu oluşturuldu. Kaynaklar mevcut KB ile karşılaştırıldı; yeni kod/canlı kural doğrulaması veya test yapılmadı. Dersler henüz birlikte tekrar edilmedi. Teknik ilk aşamanın kapanışı aşağıdaki tarihsel kapsamıyla geçerlidir.
 
+Eğitim aktarımının yapısal kontrolü: 105 Markdown, 1.526 bağlantı, 0 hata; diff kontrolü temiz. Yerel commit oluşturuldu. `git push origin main` otomatik onay incelemesince reddedildi: iç belgelerin uzak depoya yayını için bu talepte yeterli yetkilendirme ve depo sahipliği kanıtı görülmedi. Push yapılmadı; kullanıcıdan bu hedefe gönderim onayı bekleniyor. Ret dolaylı yoldan aşılmaz.
+
 **İlk aşama tamamlandı. Aktif devam işi yok.** Kullanıcı dokümantasyonun ilk aşamasını kapatmamızı, sorunlara şimdilik odaklanmamamızı istedi. Planlanan yazım, derinleştirme, güncel development–master/main karşılaştırması ve kapanış tutarlılığı tamamlandı. Tek kapanış kaydı `_surec/ikinci-tur-sonuc-2026-10-24.md`; açık indeks korunur, otomatik takip kuyruğu değildir. Belgeler içerik onayı yerine geçmemesi için taslak kaldı.
 
 ## Tamamlanan teknik takip (tarihsel kayıt)
