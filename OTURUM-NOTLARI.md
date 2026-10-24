@@ -1,6 +1,6 @@
 ---
 kapsam: Çalışma oturumlarının devamlılığı — alınan kararlar, mevcut durum, sıradaki işler
-dogrulama: 2026-10-23
+dogrulama: 2026-10-24
 durum: taslak
 ---
 
@@ -9,7 +9,9 @@ durum: taslak
 Yeni oturuma başlayan agent **önce bunu okur**. Her oturumda karar alındıkça ve iş bittikçe güncellenir; oturum bitmeden "Şu an" ve "Sıradaki" bölümleri mutlaka güncel bırakılır.
 Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `ACIK-KONULAR.md`'de; burada tekrarlanmaz.
 
-## Şu an (2026-10-23)
+## Şu an (2026-10-24)
+
+- AlgoProd kalan AKD/Overall/stop-loss ve paket/hedge statik alt turu tamamlandı. Bugün yalnız AlgorithmicTrading yeniden fetch/pull edildi; dev/master aynı. K-205/K-206 sürüyor, yeni sorun numarası yok. Bugünkü kanıt ve sınırlar `_surec/kaynak-karsilastirmasi-2026-10-24.md` içinde; önceki 15 repo kontrolü 23 Ekim tarihidir.
 
 - AlgoProd ikinci turunun ilk alt turu tamamlandı: fetch/pull sonrası uçlar aynı. K-194 Q>L koşuluyla daraltıldı; K-195 faiz branch farkı tekrar görüldü. VWAP incelenen strateji/command kaynakları iki branch'te aynı. Fon sepet ret/completion ve Arbitraj başlatma/ret yolları kontrol edildi; prod binary/config sonucu çıkarılmadı.
 
@@ -40,7 +42,7 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Sıradaki
 
-**Sıradaki: AlgoProd kalan ayrıntılar — VWAP AKD/Overall/stop-loss, Arbitraj paket/hedge takibi.** İlk branch/ret turu ve Fon Takibi hedge eşiği kontrolü kaydedildi. Ardından GUI/admin/operasyon ikinci turu izlenecek. Entegrasyon/gerçek exchange, thread yarışları ve prod doğrulaması yapılmadı. Bütün bilgi tabanının ikinci doğrulaması henüz tamamlanmadı.
+**Sıradaki: GUI/admin/operasyon ikinci turu.** Önce strateji payload/snapshot ile backend alan eşleşmeleri ve güncel branch farkları. AlgoProd planlanan statik strateji alt turları kaydedildi. Entegrasyon/gerçek exchange, thread yarışları ve prod doğrulaması yapılmadı. Bütün bilgi tabanının ikinci doğrulaması henüz tamamlanmadı.
 
 Kullanıcı içerik onayı geldikçe durum etiketi kapsamına göre güncellenir; genel devam talimatıyla topluca dogrulandi yapılmaz. Uygulama bug düzeltmesi/deploy bu doküman incelemesinin dışında kaldı.
 

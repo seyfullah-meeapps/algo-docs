@@ -282,6 +282,14 @@ Türev ret yolunda PTRM/limit reddi stop+return, işlem saati reddi durum kontro
 
 ## Şüpheli
 
+### 24 Ekim kontrolü: paket ve hedge
+
+2026-10-24 fetch/pull sonrası uçlar aynı. Development `arePackagesConsistent`, her pakette `undExcQty == contractQty * effectiveMultiplier` ve paket kontrat toplamı `state.drvPos` eşitliğini başlangıçta kontrol eder. Bu bir kayıt tutarlılığı denetimidir; sonradan gönderilen hedge'in dolum garantisi değildir. Master'da bu ek başlatma kapısı yoktur.
+
+`checkPassiveUndOrders` yalnız aktif ve replace beklemeyen dayanak kayıtlarını işler. Pasif stop tipinde tick/zaman ve fill/değişim koşulları bekletebilir; aktif tip aynı bekleme bloğunu atlar. `order_id_orders.find(orderId)==end()` halinde `stop()` çağrısından sonra return/continue yok; aşağıda `order_it->second` okunur. K-205'teki geçersiz iterator adayı sürer. Dayanak retlerine türev ret handler'ı varmış gibi davranılmadı; yarım paket için başlangıç kapısının varlığı runtime ret kurtarma değildir.
+
+Kaynak: `ArbitrageTracker.cpp` ilgili fonksiyonlar ve subscriber kurulum araması. Canlı hedge/paket restore testi yapılmadı; bütün fiyat/kontrat kombinasyonları bu alt turda yeniden hesaplanmadı.
+
 - **master'da teorik faiz `/100` yok (prod etkisi, doğrula):** master `calculateTheoreticalPrice` oranı ham kullanıyor. Yüzde girilmişse `diffTick` dev'e göre çok farklı çıkar; I/R'de yön ve `diffTick ≤ 0`/`> 0` açma koşulu, bütün tiplerde `isProfitableOpen` ve `Theo_Price` etkilenir. development düzeltmesi prod'a gitmemiş.
 - **Yeni GUI "Automatic" yönü (bug?):** Spread (`F`) satırında `Fs_Arbitrage_Side = 79` (`O`) seçilince UI tick'leri `Open_Tick`/`Close_Tick`'e yazar, tipi yine `F` gönderir. Motor `F`'de yalnız `Fs_*` okur ve `O`'yu `A`/`B` olarak tanımaz: `checkOpenable` yönü `O` yapar, `openPosition` bunu Above (türev satış) gibi işler, eşik `Fs_Open_Tick` (çoğunlukla 0) ile `fsDiffTick ≥` kontrolüne düşer. Eski GUI'de de aynı seçenek var. Niyet büyük olasılıkla `D` (teorik fiyatlı) tipiydi.
 - **F/T eşik işaretleri (doğrula):** F Below aktif açma `drvAsk − undBid ≤ Fs_Open_Tick` (UI 0 ve üstünü kabul eder; yani prim varken de açar), pasif Below istenen fiyat ise `undBid − Fs_Open_Tick` tick (ters işaret). T aktif açma `|ifDiffTick| ≥ If_Open_Tick`; Below sabitken türev çok pahalıyken de türev alır.

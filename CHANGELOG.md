@@ -2,6 +2,12 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-24 — AlgoProd kalan strateji yolları
+
+- AlgorithmicTrading fetch/development pull: uçlar aynı; diğer repolar bugün yeniden kontrol edilmiş sayılmadı. Ayrı 24 Ekim kaynak raporu eklendi.
+- VWAP AKD/Overall ve stop-loss, Arbitraj paket tutarlılığı/hedge takibi okundu. K-205/K-206 sürüyor; yeni numara açılmadı. Stop-loss sonrası aynı runStrategy turunun devamı ve başlangıç paket denetiminin runtime hedge garantisi olmadığı açıklandı.
+- Build/canlı servis/emir testi ve uygulama değişikliği yok. Sıradaki GUI/admin/operasyon karşılaştırması.
+
 ## 2026-10-23 — AlgoProd branch/ret ve hedge eşiği
 
 - AlgorithmicTrading fetch/development pull sonrası uçlar aynı. Fon Takibi kotasyon farkı, Arbitraj faiz/başlatma farkı ve VWAP incelenen strateji/command kaynaklarının aynı olması teyit edildi.

@@ -96,6 +96,14 @@ Sıra:
 
 ## PTRM
 
+### 24 Ekim kontrolü: AKD/Overall ve stop-loss
+
+2026-10-24 AlgorithmicTrading fetch/pull sonrası development `0dc32a7`, master `aa150ee`; TradeByVolume dizininde fark yok. AKD `subscribeToVWAPData` hâlâ `isThisMainStrategy && false` ile kapalı. Overall `mainStrategy` boş/default, incelenen sınıfta ana/çocuk bağlama ataması yok; periyodik kontrol null durumunda bekler. Bunlar önceki K-206'yı kapatmaz.
+
+`checkStopLoss` kalan hedef miktarla karşı fiyattan DAY limit gönderip `stop()` çağırır. `exitProperly` 100 ms sonra kalan emirleri iptal eder. Çağıran `runStrategy`, checkStopLoss sonrasında return/running kontrolü yapmadan miktar küçültme veya kabul/AKD/mod kontrolüne devam eder. Bu, aynı turda ek kodun çalışabileceğini gösterir; yeni emrin mutlaka gittiği veya iki kez fill olduğu iddia edilmez. Stop anının fiyatı, cancel ACK sırası ve gerçek fill sonucu bu statik incelemede denenmedi.
+
+Alttaki AKD/Overall açıklamaları motor davranışıdır; GUI broker payload'ları bugün yeniden incelenmedi. Kaynaklar: `TradeByVolume.cpp`, `TradeByVolumeOverall.{h,cpp}`. Yeni sorun numarası yerine K-206 kapsamı netleştirildi.
+
 Ret kodu `-850002`, `-850004` veya `-850044` ise strateji durur (`TradeByVolume::parseMessages`; yalnız **kod** karşılaştırılır, ret metni değil). AlgoProd bu üç kodu tanımlar (`Globals/GlobalDefinitions.h`). HFT'deki `-850064` (margin user blocked) ve Arbitraj'daki `-420131` burada kontrol edilmez; bu kodlarla gelen ret yalnız loglanır, `isOrderSent` sıfırlanır ve strateji emir göndermeye devam eder. Kasıtlı mı, bilinmiyor. Kod listesi: [borsa-kurallari](../00-genel/borsa-kurallari.md).
 
 ## AKD (aracı kurum dağılımı) filtresi
