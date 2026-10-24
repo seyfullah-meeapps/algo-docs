@@ -11,6 +11,8 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Şu an (2026-10-24)
 
+- K-240 GUI–motor kaynak eşleşmesi bulundu: GUI d2c35c7 ↔ HFT hft_warrant_advanced f20b5f2. Parser/miktar/snapshot ve maliyet kapanışı incelendi; yeni executed_ex callback ve quote alanları SDK bağımlılığı getiriyor. Ayrıntı `20-stratejiler/varant-toplu.md`; K-240 SDK/dağıtım kapsamıyla açık. Development/master değişmedi; build/canlı test yok.
+
 - Teorik feature 26ce9b2 statik delta incelemesi tamamlandı. HFT fetch/pull sonrası development/master aynı, commit yalnız feature dalında; açılış bildirimi, own-state guard, sıfır denge ve reverse Expected_Price farkları `20-stratejiler/teorik-fiyat.md` içinde. K-04 değişmedi; runtime/build yok.
 
 - K-241/K-242 development 4275ccc gövdeleriyle yerelde sınandı: beş senaryo beklendiği gibi. MSVC senkron ret yeniden kilidinde istisna; iki satış ACK'i sonrası son token'a toplam miktarla replace gözlendi. Kanıt `_surec/dogrulama-varant-2026-10-24.md`; adaylar açık, tam entegrasyon/canlı test veya uygulama düzeltmesi yok.
@@ -67,7 +69,7 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Sıradaki
 
-**Sıradaki: K-240 GUI Sweep_Left_Ask için eşleşen motor feature dalını araştırmak.** Teorik 26ce9b2 statik delta tamamlandı; zamanlama entegrasyonu sınanmadı. K-241/K-242 yerel handler senaryoları tamamlandı; gerçek SDK/host entegrasyonu ve prod platform davranışı ayrıca doğrulanmalı. K-233/K-234 düzeltilmedi; canlı oturum testi yok. K-243 geri çekildi. Canlı ortam ve bug düzeltmeleri tamamlandı sayılmaz.
+**Sıradaki: K-240 için itch-sdk executed_ex API'sinin feature kaynak/header/library eşleşmesini araştırmak.** GUI–motor kaynak eşleşmesi tamamlandı; birlikte dağıtım doğrulanmadı. Teorik zamanlama entegrasyonu sınanmadı. K-241/K-242 gerçek SDK/host entegrasyonu ve prod platform davranışı ayrıca doğrulanmalı. K-233/K-234 düzeltilmedi; canlı oturum testi yok. K-243 geri çekildi.
 
 Kullanıcı içerik onayı geldikçe durum etiketi kapsamına göre güncellenir; genel devam talimatıyla topluca dogrulandi yapılmaz. Uygulama bug düzeltmesi/deploy bu doküman incelemesinin dışında kaldı.
 

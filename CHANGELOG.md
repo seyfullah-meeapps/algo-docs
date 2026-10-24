@@ -2,6 +2,12 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-24 — K-240 motor feature eşleşmesi
+
+- HFT/GUI fetch ve development pull sonrası referanslar aynı. GUI d2c35c7 sözleşmesi HFT hft_warrant_advanced f20b5f2 parser/runtime/summary ve kapanış koduyla eşleştirildi; feature referans dallara merge edilmemiş.
+- Motor aynı zamanda executed_ex API, quoteBuyer/isQuote/levelQtyAfter ve yeni tetik filtresi gerektiriyor. K-240 kaynak eşleşmesinden SDK/dağıtım eşleşmesine daraltıldı; kapatılmadı. Maliyet kapanış değişikliğinin sweep ayarından bağımsız olduğu kaydedildi.
+- Kaynak delta incelemesi; build/link/replay/canlı emir yok. Sıradaki uyumlu itch-sdk ucu.
+
 ## 2026-10-24 — Teorik feature yeni uç incelemesi
 
 - HFT fetch/development pull sonrası 4275ccc/master 052dd96 aynı. Feature 26ce9b2 yalnız kendi remote dalında; bfe65e2 sonrası tek commit/beş dosya incelendi.

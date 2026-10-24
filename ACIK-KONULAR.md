@@ -316,7 +316,7 @@ Koddan çıkarılan sonuçlar canlıda gözlemle doğrulanmış sayılmaz; ayrı
 
 | K-239 | doğrula | Varant Toplu nextCheckNs yalnız kuyruk boşken kontrol edilir; sürekli olay yükünde cost timeout repricing gecikebilir | [Varant Toplu](20-stratejiler/varant-toplu.md#ikinci-kod-turu--callback-ve-zamanlama-sınırları) |
 
-| K-240 | doğrula | GUI sweep-left-ask feature'ı Sweep_Left_Ask ve yeni maliyet kapanışı anlatıyor; HFT development bu sözleşmeyi taşımıyor, eşleşen motor dalı teyit edilmeli | [Varant Toplu feature](20-stratejiler/varant-toplu.md#ikinci-tur--sweep_left_ask-feature-sınırı) |
+| K-240 | doğrula | Sweep_Left_Ask GUI d2c35c7 ↔ HFT hft_warrant_advanced f20b5f2 kaynak eşleşmesi bulundu; yeni executed_ex SDK ve birlikte dağıtılan binary seti doğrulanmalı | [Varant Toplu feature](20-stratejiler/varant-toplu.md#24-ekim--motor-feature-eşleşmesi) |
 
 | K-241 | bug? | Varant (13) emir gönderimi derivativeMutex tutarken senkron SDK ret callback'i aynı recursive olmayan mutex'i yeniden istiyor | [Varant](20-stratejiler/varant.md#ikinci-kod-turu--ret-ve-parçalı-satış-sınırları) |
 | K-242 | doğrula | Varant (13) parçalı buy fill'lerinde ayrı satışlar üretirken yalnız tek sellOrderToken tutuyor; hedef replace toplu kalan miktarla yalnız o token'a gidiyor | [Varant](20-stratejiler/varant.md#ikinci-kod-turu--ret-ve-parçalı-satış-sınırları) |

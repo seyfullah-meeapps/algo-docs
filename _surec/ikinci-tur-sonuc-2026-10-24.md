@@ -39,6 +39,8 @@ Teorik feature `26ce9b2` takipte [statik delta olarak incelendi](../20-stratejil
 
 ## Öncelikli takip
 
+K-240 takibinde [GUI–motor kaynak eşleşmesi](../20-stratejiler/varant-toplu.md#24-ekim--motor-feature-eşleşmesi) bulundu: GUI d2c35c7 ↔ HFT f20b5f2. Açık kalan kapsam yeni executed_ex SDK API/header/library ve birlikte dağıtım eşleşmesidir; development desteği sayılmaz.
+
 Sorun ayrıntıları tek yerde tutulur; indeks [ACIK-KONULAR](../ACIK-KONULAR.md). Aşağıdaki sıra takip önerisidir, bug düzeltme veya deploy yapıldığı anlamına gelmez.
 
 | Öncelik | Takip |

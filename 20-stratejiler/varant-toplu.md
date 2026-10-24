@@ -4,13 +4,16 @@ kaynak:
   - repo: HftSrvProd
     branch: development
     commit: 4275ccc
+  - repo: HftSrvProd
+    branch: hft_warrant_advanced
+    commit: f20b5f2
   - repo: mtrader-trade-ui
     branch: development
     commit: b0474c3
   - repo: mtrader-trade-ui
     branch: feat/sweep-left-ask
     commit: d2c35c7
-dogrulama: 2026-10-23
+dogrulama: 2026-10-24
 durum: taslak
 ---
 
@@ -149,9 +152,27 @@ Varant (13) ile **hiçbir sözleşmeyi paylaşmaz**. Payload, fiyat ölçekleri 
 
 Feature `warrantBulkPayload.ts` ayarlarına `sweepLeftAsk` (varsayılan false), snapshot okumasına `Sweep_Left_Ask` ve payload'a Bool wrapper ekler; tekil/toplu modal ve liste düzenlemelerinde de değişiklikler vardır. Kod yorumu, açıkken tetik kademesinde kalan lotun `Warrant_Lot_Quantity` ile sınırlandığını ve maliyetten kapanan turun artık pasife alınmadığını söylüyor.
 
-**K-240 — feature GUI/motor eşleşmesi doğrulanmalı:** HFT development `4275ccc` içinde `Sweep_Left_Ask` parse/uygulama yolu yok; `sendBuyOrder` lotQuantity kullanır. `closeCycle` maliyetten fill olmuş turu hâlâ `ClosedAtCost` yapıp `deactivate` eder. Bu yüzden GUI feature yorumları güncel development motor desteğinin kanıtı değildir. Eşleşen bir HFT feature ucu bu alt turda doğrulanmadı; feature'ın hiçbir motor dalında çalışmadığı veya prod'da kullanıldığı iddia edilmez.
+**K-240 — feature dağıtım/SDK eşleşmesi doğrulanmalı:** HFT development `4275ccc` içinde `Sweep_Left_Ask` parse/uygulama yolu yok; `sendBuyOrder` lotQuantity kullanır. `closeCycle` maliyetten fill olmuş turu hâlâ `ClosedAtCost` yapıp `deactivate` eder. GUI sözleşmesinin motor karşılığı aşağıdaki feature dalında bulundu; bu development desteği veya çalışan dağıtım kanıtı değildir.
 
 Tavan'ın mevcut `Should_Sweep` alanıyla karıştırma ([Tavan UI/wire](tavan.md#ikinci-tur--süpürme-uiwire-sözleşmesi)). Bu branch yalnız adı nedeniyle Tavan sweep değişikliği sayılmadı; development'a göre incelenen farklar Varant Toplu sözleşmesi ve başka UI değişikliklerini de içeriyor. Feature'ın tamamı için build/browser testi yapılmadı.
+
+### 24 Ekim — motor feature eşleşmesi
+
+HFT ve GUI fetch + development pull sonrası referans uçları değişmedi (HFT development `4275ccc`/master `052dd96`, GUI development `b0474c3`/main `6715182`). HFT `hft_warrant_advanced` ucu `f20b5f2`; remote contains kontrolünde bu commit yalnız kendi dalında. GUI `feat/sweep-left-ask` hâlâ `d2c35c7`. İlgili beş HFT aday dalı arasında wire alanı bu dalda bulundu; tüm remote dalların kapsamlı içerik taraması yapılmadı.
+
+| GUI/motor sınırı | Feature kodundaki karşılık |
+|---|---|
+| GUI payload | `Sweep_Left_Ask`, Bool wrapper; varsayılan false |
+| HFT parser ve ayar dönüşü | `HftWarrantAdvancedCommand` BoolValue unpack/pack; default false |
+| HFT runtime ve summary | `setCommand` getter'ı alır; summary `sweepLeftAsk` taşır |
+| Alış miktarı | Açıkken `min(execAccumLevelLeft, lotQuantity)`, kapalıyken `lotQuantity`; 0 ise emir gönderilmez |
+| Maliyetten kapanış | `costFill` nedeniyle `ClosedAtCost/deactivate` dalı kaldırılmış; tolerans dolarsa Done, aksi durumda normal yeni tur hazırlığı |
+
+Maliyetten kapanış değişikliği `sweepLeftAsk` koşuluna bağlı değildir; false ayarında da feature'ın yeni kapanış kuralı geçerlidir. Alış miktarı kabul/ret takibinde `buyOrderQty` ile taşınır. `execAccumFired` miktar 0 kontrolünden önce set edilir; aynı birikim grubunda sonraki olayların yeniden tetik hakkı olduğu varsayılmaz.
+
+**Ek SDK bağımlılığı:** Bu dal `itchsdk_subscribe_order_executed` yerine `itchsdk_subscribe_order_executed_ex` çağırır. Callback'e `isQuote`, `quoteBuyer`, `levelQtyAfter` eklenir ve `ItchOrderExecutedEvent` üzerinden motora gider. Tetik için birikimde kotasyoncu alıcı izi aranır (`execAccumQuoteBuyer`) ve kotasyon emri dolumu varsa (`execAccumQuoteFill`) tetik atlanır; değişiklik yalnız alış miktarı seçeneği değildir.
+
+Mevcut yerel itch-sdk çalışma ağacında bu yeni API/alan adları bulunmadı; bu sonuç bütün SDK feature ref'lerinin tarandığı anlamına gelmez. Uyumlu SDK kaynak/header/library ucu ve birlikte kurulu binary seti henüz doğrulanmadı. **K-240 bu daraltılmış kapsamla açık:** GUI–motor kaynak sözleşmesi bulundu, SDK ve dağıtım eşleşmesi bekliyor. Build, ABI/link kontrolü, browser veya ITCH replay/canlı emir testi yapılmadı. Feature değişiklikleri üstteki development akışına taşınmadı.
 
 ## Gölge kriter (log only)
 
