@@ -11,6 +11,12 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Şu an (2026-10-24)
 
+- Planlanan konu bazlı ikinci statik inceleme ve kapanış tutarlılık kontrolü tamamlandı. Sonuç/kapsam: `_surec/ikinci-tur-sonuc-2026-10-24.md`. Tüm kod satırları veya canlı sistem doğrulandı denmiyor; belgeler taslak.
+- 23 Ekim 15 repo, 24 Ekim dokuz repo fetch/pull edildi. SDK c2b5060, order-service 26e9a02, Setup cade7d0 farkları işlendi; tam baseline'lar ilerletilmedi. Teorik feature 26ce9b2 yeniden incelenmedi, K-240 eşleşmesi açık.
+- Son tutarlılık taramasında sabah akışı dağıtım özeti ve SDK API brüt-takas özeti güncellendi. Build/browser/CI run/canlı emir/DB/deploy testi yok; yerel commit'ler push engeli nedeniyle bekliyor.
+
+## Önceki alt turlar (tarihsel ilerleme kaydı)
+
 - CI/config kaynak alt turu tamamlandı: K-243 SDK preprod artifact push job'ının main hedefinde kalması adayı eklendi. Aktif SDK/service matrix regular/onload; Mlx koşullu adımları aktif build kanıtı değil. K-182 ini/toml farkı sürüyor. CI run/deploy/canlı sunucu incelenmedi.
 
 - Operasyon ilk alt turunda gerçek delta geldi: Algo-Setup dev cade7d0, SDK dev c2b5060, order-service dev 26e9a02. Açılış için skip_brut_takas ve tekrarsız satır dağıtımı güncellendi; K-92 daraltıldı. Bugün toplam dokuz repo fetch/pull edildi. Baseline'lar topluca ilerletilmedi; kalan config/CI incelemesi sürüyor.
@@ -50,7 +56,7 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Sıradaki
 
-**Sıradaki: ikinci turun kapanış tutarlılık kontrolü ve kapsam raporu.** Yeni commit/feature kayıtları, tarih ve baseline farkları ile açık kalan prod/test sınırları toparlanacak. CI/config planlanan statik alt turu kaydedildi; canlı port/tuning ve kurulu binary envanteri doğrulanmadı. Bütün KB için koşulsuz “güncel/doğrulandı” sonucu çıkarılmayacak.
+**Sıradaki: öncelikli açık adayların ayrı teknik doğrulaması.** K-243 CI hedef/run kanıtı, K-233/K-234 şifre sonuç akışı, K-241/K-242 Varant senaryoları ve yeni Teorik feature ucu önceliklidir. Ayrıntı kapanış raporunda. Statik doküman incelemesi tamamlandı; canlı ortam ve bug düzeltmeleri tamamlandı sayılmaz.
 
 Kullanıcı içerik onayı geldikçe durum etiketi kapsamına göre güncellenir; genel devam talimatıyla topluca dogrulandi yapılmaz. Uygulama bug düzeltmesi/deploy bu doküman incelemesinin dışında kaldı.
 

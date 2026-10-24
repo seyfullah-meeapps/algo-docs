@@ -6,6 +6,8 @@ durum: taslak
 
 # Taslak incelemesi — 2026-10-23
 
+24 Ekim kapanışı: [ikinci statik turun sonucu ve kalan sınırlar](ikinci-tur-sonuc-2026-10-24.md). Aşağıdaki hazırlık turu tarihsel kayıttır; güncel kapsam için kapanış raporunu oku.
+
 Madde 10 için hazırlık kaydıdır. Kullanıcı onayı veya bütün teknik iddiaların yeniden kodla doğrulandığı anlamına gelmez. Açık sorunların ayrıntısı ilgili dosyadadır; burada yalnız okuma sırası verilir.
 
 **Sonraki aşama başladı:** Kullanıcı isteğiyle development ve master/main ref'leri remote'dan çekildi; ilk emir/risk içerik turu yapıldı. Güncel sonuçlar [kaynak karşılaştırması](kaynak-karsilastirmasi-2026-10-23.md) içinde. Aşağıdaki sayılar önceki yapısal hazırlık turunun kaydıdır.

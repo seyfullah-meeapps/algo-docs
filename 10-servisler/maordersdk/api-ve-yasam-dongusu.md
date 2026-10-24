@@ -121,7 +121,7 @@ Kod: `public/MAOrderSDK.h`, `public/MAOrderStruct.h`, `public/MAOrderEnums.h`, `
 | `order_hard_cap_try` | `uint32` | 50000000 | **tam TL** | Notional üst sınırı (1003) → [emir-akisi.md](emir-akisi.md) |
 | `enable_combiner` | bool | false | | `start()`'ta combiner'ı kurar. `setItchSdk` verilmemişse `onSdkError(13)`. SDK ITCH olmadan derlendiyse (`MAORDER_HAS_ITCHSDK=0`) sessizce etkisizdir. |
 
-**`InstrumentLimit`**: `max_order_value` (`uint32`, emir başına notional limiti, **tam TL**), `decimal_count` (`uint32`, fiyat ondalık basamağı; raw fiyat = TL × 10^`decimal_count`), `is_brut_takas` (bool; true → 1002 reddi).
+**`InstrumentLimit`**: `max_order_value` (`uint32`, emir başına notional limiti, **tam TL**), `decimal_count` (`uint32`, fiyat ondalık basamağı; raw fiyat = TL × 10^`decimal_count`), `is_brut_takas` (bool; limit bloğunda ve skip_brut_takas=false iken true → 1002). 24 Ekim development `c2b5060` per-call seçenek overload'ı için [güncel emir akışı](emir-akisi.md#7-cancelorder-ve-replaceorder).
 
 ### 2.2 İstek struct'ları
 

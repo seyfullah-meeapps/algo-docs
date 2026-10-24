@@ -2,6 +2,12 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-24 — İkinci statik turun kapanışı
+
+- Konu bazlı inceleme kapsamı, dokuz/15 repo tazelik ayrımı, üç ilerleyen development ucu ve değişmeyen tam baseline'lar kapanış raporunda toplandı; README ve inceleme durumundan bağlandı.
+- Son çelişki taramasında sabah akışı tekrarsız dağıtım özeti ve SDK API brüt-takas istisnası düzeltildi. Eski ilerleme notları tarihsel başlık altında ayrıldı.
+- Durumlar taslak kaldı; bütün kod/canlı ortam doğrulandı denmedi. Sonraki öncelik açık adayların teknik doğrulaması. Build/canlı işlem/deploy/push yapılmadı.
+
 ## 2026-10-24 — CI hedef branch ve config/varyant kontrolü
 
 - SDK/service güncel workflow'ları ve Setup run/config seçimi okundu. K-243 SDK preprod build artifact'ının push job'ında varsayılan main hedefine yönlenmesi statik adayı kaydedildi; gerçekleşmiş CI/prod değişimi iddia edilmedi.

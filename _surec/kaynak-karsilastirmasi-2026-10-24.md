@@ -46,4 +46,4 @@ Güncel SDK c2b5060/order-service 26e9a02 workflow'ları ve Setup cade7d0/main r
 
 ## Sıradaki
 
-İkinci turun kapanış kapsam/tutarlılık kontrolü: tarih, baseline ve yeni commit/feature kayıtları toparlanacak. K-240 eşleşen motor feature konusu açık; canlı binary/port/tuning doğrulanmadı. Statik alt turlar bütün KB'ye koşulsuz güncellik onayı değildir.
+Kapanış kapsam/tutarlılık kontrolü tamamlandı: [sonuç ve kalanlar](ikinci-tur-sonuc-2026-10-24.md). K-240 ve yeni Teorik feature ucu açık; canlı binary/port/tuning doğrulanmadı. Sonraki iş öncelikli adayların ayrı teknik doğrulamasıdır.

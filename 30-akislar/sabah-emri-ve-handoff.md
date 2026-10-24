@@ -105,7 +105,7 @@ Sıra ve bağımlılık: [sistem-haritasi § Başlatma sırası](../00-genel/sis
 
 - Her `repeatableOrders` satırı ayrı detached thread'dir. `WaitUntilFetch` T−60 s'ye kadar uyur, `GetMorningOrders(protocol)` ile satırları çeker.
 - Seçim koşulları (aktif, `B`/`S`, piyasa, `part`) ve tekrarlı/tekrarsız ayrımı: [toplu-emirler § 3.2–3.3](../10-servisler/order-service/toplu-emirler.md#32-emir-seçimi-partitionrepeatablenonrepetableorders).
-- Kullanıcılar `GetUsers(protocol, part, mode)` ile **DB'den taze** okunur. Her OUCH kullanıcısı izinli hesaplarının bütün emirlerini gönderir; tekrar sayısı `RepeatCount` ve `Capacity`'den hesaplanır.
+- Kullanıcılar `GetUsers(protocol, part, mode)` ile **DB'den taze** okunur. Tekrarlı satırlar izinli kullanıcılara kopyalanır; 24 Ekim development `26e9a02` tekrarsız satırları kullanıcılar arasında böler. Ayrıntı ve kapasite sınırı [güncel dağıtım farkında](../10-servisler/order-service/toplu-emirler.md#24-ekim-güncel-davranış-farkı); eski “bütün satırlar her kullanıcıya” özeti güncel değildir.
 - Servis T−5 s'den sonra açıldıysa akış log basmadan atlanır (K-94).
 
 ## 4. T — sabah gönderimi
