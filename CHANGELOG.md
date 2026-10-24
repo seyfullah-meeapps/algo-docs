@@ -2,6 +2,11 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-24 — Emir yaşam döngüsü
+
+- Gönderim/kabul/ret, kısmi/tam gerçekleşme, iptal/değişiklik ve belirsiz sonuç ayrıldı. İptal beklerken gerçekleşme örneği ile kalan/gerçekleşen/pozisyon farkı açıklandı. Resmi OUCH ve Pay SSS okundu; yeni kod/canlı test yok.
+- Konu yayın listesine eklendi; sürüm 0.8 PDF/HTML/EPUB yenilendi. İndeks ve devam kayıtları güncellendi.
+
 ## 2026-10-24 — Emir tipleri ve geçerlilik süreleri
 
 - Limit/piyasa/piyasadan limite ve günlük/KİE/FOK aynı defterden öğretici örneklerle yazıldı. Resmi Pay Prosedürü 3.34 ve VİOP sayfası okundu; piyasa emri kısıtı ve destek kapsamı ayrıldı.

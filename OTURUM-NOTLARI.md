@@ -11,6 +11,8 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Şu an (2026-10-24)
 
+**Güncel:** Emir yaşam döngüsü yazıldı; yayın 0.8, yedi konu ve 41 iskelet. İstek/sonuç, iptal sırasında gerçekleşme ve replace belirsizliği örneklerle açıklandı. Sıradaki seanslar/müzayede/denge fiyatı; yeni konu okuma bekliyor. Eski sıra ve sayılar aşağıda tarihseldir.
+
 **Son tamamlanan:** Emir tipleri/geçerlilik süreleri yazıldı, yayın 0.7; altı konu kitapta, 42 iskelet. Resmi Pay Prosedürü 3.34 ve VİOP emir sayfası okundu. Sıradaki emir yaşam döngüsü; yeni konu okuma bekliyor. Aşağıdaki eski sıra/sayılar tarihsel.
 
 **Güncel:** Sade vadeli anlatımı kullanıcı tarafından anlaşıldı ve kaydedildi. Kredili işlemler bakiye konusunda ayrı başlık olarak planlandı. Fiyat adımı/fiyat sınırları yazıldı; yayın 0.6, beş konu ve 43 iskelet. Sıradaki emir tipleri ve geçerlilik süreleri; aşağıdaki eski sayılar/teminat örnekleri tarihsel.
