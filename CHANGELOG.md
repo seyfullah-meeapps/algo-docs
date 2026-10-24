@@ -2,6 +2,12 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-24 — CI hedef branch ve config/varyant kontrolü
+
+- SDK/service güncel workflow'ları ve Setup run/config seçimi okundu. K-243 SDK preprod build artifact'ının push job'ında varsayılan main hedefine yönlenmesi statik adayı kaydedildi; gerçekleşmiş CI/prod değişimi iddia edilmedi.
+- SDK aktif matrix regular/onload olarak düzeltildi; Mlx adımları/dosyasının güncel build kanıtı olmadığı açıklandı. K-182 ini/toml farkı sürüyor.
+- Script/CI/container/deploy çalıştırılmadı; sıradaki kapanış kapsam ve tutarlılık kontrolü.
+
 ## 2026-10-24 — Operasyon paket deltası ve yeni emir davranışı
 
 - Algo-Setup dev cade7d0/preprod 959be34'e ilerledi; paket SDK/header ve regular/Onload order-service binary'leri değişti, script/workflow değişmedi. algo-configs master aynı.

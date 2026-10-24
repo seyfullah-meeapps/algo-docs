@@ -92,6 +92,14 @@ Yalnız `main` push'unda `MAProdEnv/Dockerfile`'ı build edip `meeapps/maprodenv
 
 ## Sunucuda kurulum
 
+### 24 Ekim CI hedef ve varyant kontrolü
+
+SDK `c2b5060` ordersdk.yaml ve order-service `26e9a02` orderservice.yml okundu. İkisinin aktif build matrix'i regular/onload'dır; Mlx koşullu adımları bulunması Mlx job'ı çalıştığı anlamına gelmez. Son Setup deltası da Mlx binary'lerini yenilemedi; eski Mlx dosyasının bulunması yeni API'yi içerdiği kanıtı değildir.
+
+**K-243 — SDK preprod artifact hedefi main kalıyor:** SDK build job'ı preprod için BRANCH_NAME=preprod yapar. Ayrı `push_binaries` job'ı ise BRANCH_NAME=main ile başlar, yalnız development için override içerir; preprod override yoktur. Download edilen regular/onload artifact'ları bu job'ın checkout/destination_branch=main hedefindeki Algo-Setup/MAProdEnv'e kopyalama konfigürasyonuna gider. Job env'i diğer job'dan miras alınmış sayılmaz. Bu statik workflow hedefidir; action'ın başarılı çalışıp prod paketini değiştirdiği iddia edilmez. order-service push job'ı preprod override'ını içerir; iki CI aynı kabul edilmez.
+
+K-182 config sınırı da sürüyor: development HFT run.sh Configuration.toml kullanır; main run.sh Configuration.ini, development run_mlx.sh da Configuration.ini kullanır. Paketleme HFT-Configuration.toml'ı Configuration.toml'a kopyalar. Çalışan sunucuda elle dosya/argüman düzeltmesi olup olmadığı bilinmiyor. Script/CI/deploy çalıştırılmadı.
+
 Algo-Setup `README.md` adımları: zip indirilir, `unzip -d Setup/ <Paket>.zip`, `cd Setup/`, `chmod +x *.sh`, gerekirse `install.sh`'taki `setup_mode` düzenlenir, `./install.sh`.
 
 ### `install.sh` sırası

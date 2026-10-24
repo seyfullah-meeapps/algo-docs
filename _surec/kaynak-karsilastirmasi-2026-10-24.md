@@ -40,6 +40,10 @@ Admin main db10c12 / backend development 1cca9a8 ve master 4a43e19 uçları değ
 
 Setup altı header/binary dosyası değişti; script/workflow değişmedi. SDK EnterOrderOptions.skip_brut_takas ekledi; order-service açılış yolunda true geçiyor. Tekrarsız satır dağıtımı development'a merge edildi; 23 Ekim'deki “ayrı feature” kaydı tarihsel kaldı. [Paket ayrıntısı](../40-operasyon/kurulum-ve-dagitim.md#24-ekim-paket-güncellemesi), [emir farkı](../10-servisler/order-service/toplu-emirler.md#24-ekim-güncel-davranış-farkı). K-92 tekrarsız kopya ifadesi daraltıldı; diğer kısımları açık. Tam binary/prod doğrulaması veya deploy yapılmadı. Eski baseline belgelerini bütünüyle yeni commit'e onaylanmış sayma.
 
+## Operasyon devamı — CI/config kontrolü
+
+Güncel SDK c2b5060/order-service 26e9a02 workflow'ları ve Setup cade7d0/main run/config seçimi okundu. [K-243 ve varyantlar](../40-operasyon/kurulum-ve-dagitim.md#24-ekim-ci-hedef-ve-varyant-kontrolü): SDK preprod artifact push job'ında hedef main kalır; CI çalışması incelenmedi. Aktif SDK/service matrix regular/onload, Mlx adımları tek başına güncel artifact kanıtı değil. K-182 config dosyası farkı sürüyor. Script/CI/container çalıştırılmadı.
+
 ## Sıradaki
 
-GUI/admin/operasyon ikinci turu: önce strateji payload/snapshot ile backend alan eşleşmeleri ve güncel branch farkları. Önceki gün belirlenen K-240 eşleşen motor feature konusu açık; bu turda ele alınmadı.
+İkinci turun kapanış kapsam/tutarlılık kontrolü: tarih, baseline ve yeni commit/feature kayıtları toparlanacak. K-240 eşleşen motor feature konusu açık; canlı binary/port/tuning doğrulanmadı. Statik alt turlar bütün KB'ye koşulsuz güncellik onayı değildir.

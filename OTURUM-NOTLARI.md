@@ -11,6 +11,8 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Şu an (2026-10-24)
 
+- CI/config kaynak alt turu tamamlandı: K-243 SDK preprod artifact push job'ının main hedefinde kalması adayı eklendi. Aktif SDK/service matrix regular/onload; Mlx koşullu adımları aktif build kanıtı değil. K-182 ini/toml farkı sürüyor. CI run/deploy/canlı sunucu incelenmedi.
+
 - Operasyon ilk alt turunda gerçek delta geldi: Algo-Setup dev cade7d0, SDK dev c2b5060, order-service dev 26e9a02. Açılış için skip_brut_takas ve tekrarsız satır dağıtımı güncellendi; K-92 daraltıldı. Bugün toplam dokuz repo fetch/pull edildi. Baseline'lar topluca ilerletilmedi; kalan config/CI incelemesi sürüyor.
 
 - Admin/backend alan alt turu tamamlandı: admin main ve TDA development fetch/pull, main/master ref'leri aynı. K-221 liste render sınırı ve K-224 password SQL yolu yeniden kontrol edildi; yeni sorun numarası yok. Bugün toplam beş kaynak repo güncellendi; canlı DB/browser testi yapılmadı.
@@ -48,7 +50,7 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Sıradaki
 
-**Sıradaki: operasyon CI/config yollarının kalan incelemesi ve yeni kaynak deltalarının doküman kapsamı kontrolü.** Paket/header-source farkı ve iki yeni emir davranışı kaydedildi; script/port/tuning envanterinin tamamı yeniden doğrulanmadı. GUI/admin alt turları kaydedildi. Entegrasyon/canlı prod doğrulaması yapılmadı; bütün KB ikinci doğrulaması henüz tamamlanmadı.
+**Sıradaki: ikinci turun kapanış tutarlılık kontrolü ve kapsam raporu.** Yeni commit/feature kayıtları, tarih ve baseline farkları ile açık kalan prod/test sınırları toparlanacak. CI/config planlanan statik alt turu kaydedildi; canlı port/tuning ve kurulu binary envanteri doğrulanmadı. Bütün KB için koşulsuz “güncel/doğrulandı” sonucu çıkarılmayacak.
 
 Kullanıcı içerik onayı geldikçe durum etiketi kapsamına göre güncellenir; genel devam talimatıyla topluca dogrulandi yapılmaz. Uygulama bug düzeltmesi/deploy bu doküman incelemesinin dışında kaldı.
 
