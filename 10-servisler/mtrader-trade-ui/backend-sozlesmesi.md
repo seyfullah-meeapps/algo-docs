@@ -254,6 +254,20 @@ TS tipleri bunu her yerde söylemez (ör. `SubscribeToStrategyResponse.instrumen
 
 Sabit ×1000'in kasıtlı tutulduğu yerler ve gerekçeleri: mtrader-trade-ui `AGENTS.md` → "Price Scale".
 
+## 24 Ekim — strateji snapshot/payload kontrolü
+
+GUI development `b0474c3` ve HFT development `4275ccc` yeniden fetch/pull edildi; uçlar değişmedi. GUI main `6715182`, HFT master `052dd96` origin ref'leri de yenilendi. Bu alt tur yeni `app/` payload'larıyla HFT command parser/snapshot'larını kapsar; eski GUI'nin tüm yollarını kapsamaz.
+
+| Alan grubu | Kontrol sonucu |
+|------------|----------------|
+| Tavan/Taban saat | Motor `End_Time` okur, snapshot'ta `Stop_Time` döner. Yeni `maxPricePayload`/`minPricePayload` End_Time → Stop_Time fallback'ıyla tekrar End_Time gönderir; 0/falsy değerde 36000/64800 kullanılır. Bu yüzden saat 0'ı koruyan bir round-trip varsayılmaz. |
+| Second rule | Tavan/Taban form saniye → wire Long ms; Classic wire saniye. Aynı alan adını tek birim sayma; strateji belgelerindeki ayrım sürer. |
+| Momentum delta | Tavan/Taban form µs → wire Int ns (×1000), snapshot ters yönde ÷1000; motor ilgili delta alanını Int olarak alır. Sayısal aralıkların tamamı browser testinden geçirilmedi. |
+| Taban Finish_With_Sell | Motor Bool parse/snapshot yapar; yeni minPricePayload göndermez. Bu bilinçli sözleşme farkıdır; Tavan simetrisiyle eklenmez. |
+| Classic stop-loss | Yeni hftPayload false enable + pozitif seviyeyi 0'a indirir. Motor enable bayrağını karar yolunda kullanmaz, kapatma seviyesi −1'dir. Mevcut [Classic sınırı](../../20-stratejiler/hft-classic.md#ikinci-kod-turu--classic-kontrol-sınırları) kapanmadı. |
+
+Kaynak: `app/components/dockview/{hft,max-price,min-price}/*Payload.ts`, ilgili `*Settings.ts`; HFT `Commands/{HftClassic,MaxPrice,MinPrice}Command.cpp`. Payload yapısının uyumu, trade-data-app üzerinden uçtan uca başarı veya çalışan binary sürümü garantisi değildir. Bu turda browser/build/canlı servis testi yapılmadı. Varant feature eşleşmesi K-240 ayrıca açıktır.
+
 ## Şüpheli
 
 - **bug? (E) `client_id: 0`'da el sıkışma kilitlenir.** trade-data-app `clientCount` 0'dan başlar (`ws_listener.go`), yani süreç açıldıktan sonraki ilk WS bağlantısı `{"client_id":0}` alır. Eski GUI `if (response.client_id)` ile kontrol ettiği için auth göndermez; o socket yetkisiz kalır ve otomatik yeniden bağlanma olmadığından ölü kalır. Yeni GUI `typeof` ile kontrol eder (`messageGuards.ts` `isClientIdMessage`), etkilenmez.

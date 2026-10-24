@@ -2,6 +2,12 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-24 — Yeni GUI strateji payload/snapshot
+
+- GUI/HFT fetch/development pull: referans uçlar aynı. Teorik feature ucu 26ce9b2'ye ilerledi; yeni feature kodu incelenmedi, önceki kayıt eski commit kapsamındadır.
+- Saat End_Time/Stop_Time alias'ı, second-rule ve momentum delta dönüşümleri, Taban Finish_With_Sell sözleşmesi ve Classic stop kapatma farkı kontrol edildi. Backend sözleşmesine kapsam tablosu eklendi; yeni sorun numarası yok.
+- Browser/build/canlı test ve uygulama değişikliği yok. Bugünkü kaynak raporu üç repoda tazelik kontrolü yapıldığını gösterecek şekilde güncellendi; sıradaki admin/backend alanları.
+
 ## 2026-10-24 — AlgoProd kalan strateji yolları
 
 - AlgorithmicTrading fetch/development pull: uçlar aynı; diğer repolar bugün yeniden kontrol edilmiş sayılmadı. Ayrı 24 Ekim kaynak raporu eklendi.

@@ -11,6 +11,8 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Şu an (2026-10-24)
 
+- GUI/HFT payload-snapshot alt turu tamamlandı: iki repo yeniden fetch/pull, referans uçlar aynı. Saat alias'ı ve süre/delta dönüşümleri kontrol edildi; Classic stop kapatma farkı sürüyor. Bugün toplam üç repo güncellendi (AlgoProd+GUI+HFT). Teorik feature ucu 26ce9b2'ye ilerledi, yeni uç incelenmedi.
+
 - AlgoProd kalan AKD/Overall/stop-loss ve paket/hedge statik alt turu tamamlandı. Bugün yalnız AlgorithmicTrading yeniden fetch/pull edildi; dev/master aynı. K-205/K-206 sürüyor, yeni sorun numarası yok. Bugünkü kanıt ve sınırlar `_surec/kaynak-karsilastirmasi-2026-10-24.md` içinde; önceki 15 repo kontrolü 23 Ekim tarihidir.
 
 - AlgoProd ikinci turunun ilk alt turu tamamlandı: fetch/pull sonrası uçlar aynı. K-194 Q>L koşuluyla daraltıldı; K-195 faiz branch farkı tekrar görüldü. VWAP incelenen strateji/command kaynakları iki branch'te aynı. Fon sepet ret/completion ve Arbitraj başlatma/ret yolları kontrol edildi; prod binary/config sonucu çıkarılmadı.
@@ -42,7 +44,7 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Sıradaki
 
-**Sıradaki: GUI/admin/operasyon ikinci turu.** Önce strateji payload/snapshot ile backend alan eşleşmeleri ve güncel branch farkları. AlgoProd planlanan statik strateji alt turları kaydedildi. Entegrasyon/gerçek exchange, thread yarışları ve prod doğrulaması yapılmadı. Bütün bilgi tabanının ikinci doğrulaması henüz tamamlanmadı.
+**Sıradaki: admin main ve backend development/master alan eşleşmeleri; ardından operasyon/deploy.** Yeni GUI strateji payload-snapshot alt turu kaydedildi; eski GUI ve bütün gateway yolları yeniden doğrulanmış sayılmaz. Entegrasyon/gerçek exchange, thread yarışları ve prod doğrulaması yapılmadı. Bütün bilgi tabanının ikinci doğrulaması henüz tamamlanmadı.
 
 Kullanıcı içerik onayı geldikçe durum etiketi kapsamına göre güncellenir; genel devam talimatıyla topluca dogrulandi yapılmaz. Uygulama bug düzeltmesi/deploy bu doküman incelemesinin dışında kaldı.
 
