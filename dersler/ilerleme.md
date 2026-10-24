@@ -8,11 +8,13 @@ durum: taslak
 
 ## Şu an
 
+**Son revizyon:** Kullanıcının 3.3.1 sorusuyla pay vadeli fiyat kotasyonu, 100 pay çarpanı, teminat, günlük kâr/zarar ve fiziki teslimat açıklandı. Önceki miktar konusu genişletildi; yeni konuya geçilmedi. 600 TL teminat ve sabit 21 TL vade senaryosu varsayımsaldır. Sıradaki yeni konu fiyat adımı ve limitler.
+
 Kullanıcı BYF açıklamasından sonra devam istedi. Emir defteri ve eşleşme taslağı yazıldı; önceki konuda BYF tekrarları azaltıldı, kısa ürün tanımı korundu. Dört konu kitapta, 44 konu iskelet. Yeni konu henüz kullanıcı okumasından geçmedi.
 
 ## Son tamamlanan iş
 
-Alış/satış, spread, kademe/derinlik, fiyat-zaman önceliği, kuyruk, kısmi ve çok seviyeli eşleşme örneği yazıldı. Header/erime ve piyasa defteri/kendi emri ayrımı açıklandı. Resmi BIST kaynakları okundu; yeni kod veya canlı test yok. Yayın sürümü 0.5; PDF/HTML/EPUB yenilendi. PDF 11 A4 sayfa; yeni sayfalar görsel olarak, EPUB paket bütünlüğü ve belge bağlantıları araçlarla kontrol edildi.
+Alış/satış, spread, kademe/derinlik, fiyat-zaman önceliği, kuyruk, kısmi ve çok seviyeli eşleşme örneği yazıldı. Header/erime ve piyasa defteri/kendi emri ayrımı açıklandı. Resmi BIST kaynakları okundu; yeni kod veya canlı test yok. Yayın sürümü 0.5; PDF/HTML/EPUB yenilendi. PDF 12 A4 sayfa; yeni sayfalar görsel olarak, EPUB paket bütünlüğü ve belge bağlantıları araçlarla kontrol edildi.
 
 ## Sıradaki tek başlangıç noktası
 

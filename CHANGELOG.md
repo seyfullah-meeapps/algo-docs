@@ -2,6 +2,11 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-24 — Vadeli fiyat, teminat ve teslimat açıklaması
+
+- Kullanıcının miktar tablosu sorusu kaynak dosyaya kaydedildi. Birim fiyat/sözleşme büyüklüğü/nominal değer/teminat ayrımı ve günlük uzlaşma ile fiziki teslimat örneği eklendi.
+- BIST ve Takasbank kaynakları okundu; teminat rakamı varsayımsal, kurum ödeme saati genellenmedi. PDF/HTML/EPUB yenilendi.
+
 ## 2026-10-24 — Emir defteri ve eşleşme
 
 - Alış/satış, spread, derinlik, kuyruk ve fiyat-zaman önceliği öğretici defter/eşleşme tablolarıyla yazıldı. BIST resmi kaynakları okundu; header/erime dili mevcut KB ile ilişkilendirildi, yeni kod/canlı test yok.
