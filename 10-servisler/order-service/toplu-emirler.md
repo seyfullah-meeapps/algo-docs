@@ -118,7 +118,11 @@ Sıralama: enstrüman id artan; aynı enstrümanda alış fiyatı azalan (en iyi
 - Süzme yalnız partition ve prod/test moduna göredir; **piyasa süzülmez**.
 - Bir kullanıcı, `IsAccountAllowed` ile izinli olduğu her hesaba eşlenir (`ouch_accounts`, `account_ouches`).
 
-**`PrepareOuchOrders`:** Her OUCH kullanıcısı izinli hesaplarının **bütün** emirlerini gönderir; kullanıcılar arasında bölme yoktur (#402 m5). Kullanıcı başına tekrar sayısı:
+### 24 Ekim güncel davranış farkı
+
+Development `26e9a02` tekrarsız dağıtım düzeltmesini içerir; artık ayrı feature sayılmaz. Tekrarsız satır i, hesabın kullanıcı listesindeki `i % N` kullanıcısına atanır; tekrarlı satırlar izinli kullanıcılara kopyalanır. Kapasiteden atılan satırın başka kullanıcıya yeniden dağıtım garantisi yoktur. `SendOpeningOrders` ayrıca `skip_brut_takas=true` geçirir; diğer çağrıların varsayılanı false. SDK `c2b5060` bu seçeneği destekler; bütün risk kontrolleri kapanmaz. Master uçları değişmedi; canlı test yok.
+
+**`PrepareOuchOrders`:** Aşağıdaki hesap artık kullanıcıya atanan tekrarsız satır sayısıyla yapılır. Eski `b86c0cf` bütün tekrarsızları da her kullanıcıya veriyordu. Kullanıcı başına tekrar sayısı:
 
 ```
 ouch_repeat = 0                                   (tekrarlı emir yoksa)
@@ -331,8 +335,7 @@ Her madde: tür, açıklama, kod yeri.
    - `CancelRepeatedOrders` içindeki `ss << Id << Price << Side << Quantity << TIF << Type` ifadesinde farklı (id, fiyat) çiftleri aynı string'i üretebilir (ör. id 1 / fiyat 2345 ile id 12 / fiyat 345).
    - Bu durumda başka bir hesap-stratejinin kabulleri aynı gruba girer ve iptal edilebilir. Olasılığı düşük.
 5. **doğrula — İptal izni olmayan hesapta kopyalar kalıcı.**
-   - Her kullanıcı izinli hesabının bütün emirlerini gönderiyor (`PrepareOuchOrders`); tekrarsız satışlar da buna dahil.
-   - Hesap N kullanıcıya izinliyse ve `IsCancelAllowed=false` ise, her satış N kez gider ve hiçbiri iptal edilmez.
+   - Tekrarlı satırlar kullanıcılara kopyalanır; iptal izni yoksa fazla kopyalar kalabilir. Güncel `26e9a02` tekrarsızları böler; eski “her tekrarsız satış N kez gider” iddiası bu commit'e taşınmaz.
    - `OrderRepeatRemainingCount=0` ise de kabul edilen **bütün** kopyalar iptal edilir. Kasıtlı mı?
 6. **doğrula — `morning_viop` sonrası disconnect pay OUCH kullanıcılarını da kapsıyor.**
    - `UserService::GetUsers(protocol, partition, mode)` piyasaya göre süzmüyor. VİOP sabah akışı (örnek 09:20) bittiğinde `DisconnectMorningOrderUsers`, partition'daki **pay** `onlyMorningOrderUser` kullanıcıları için de çağrılıyor.

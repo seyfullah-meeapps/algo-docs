@@ -11,6 +11,8 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Şu an (2026-10-24)
 
+- Operasyon ilk alt turunda gerçek delta geldi: Algo-Setup dev cade7d0, SDK dev c2b5060, order-service dev 26e9a02. Açılış için skip_brut_takas ve tekrarsız satır dağıtımı güncellendi; K-92 daraltıldı. Bugün toplam dokuz repo fetch/pull edildi. Baseline'lar topluca ilerletilmedi; kalan config/CI incelemesi sürüyor.
+
 - Admin/backend alan alt turu tamamlandı: admin main ve TDA development fetch/pull, main/master ref'leri aynı. K-221 liste render sınırı ve K-224 password SQL yolu yeniden kontrol edildi; yeni sorun numarası yok. Bugün toplam beş kaynak repo güncellendi; canlı DB/browser testi yapılmadı.
 
 - GUI/HFT payload-snapshot alt turu tamamlandı: iki repo yeniden fetch/pull, referans uçlar aynı. Saat alias'ı ve süre/delta dönüşümleri kontrol edildi; Classic stop kapatma farkı sürüyor. Bugün toplam üç repo güncellendi (AlgoProd+GUI+HFT). Teorik feature ucu 26ce9b2'ye ilerledi, yeni uç incelenmedi.
@@ -46,7 +48,7 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Sıradaki
 
-**Sıradaki: operasyon/deploy ikinci turu.** Algo-Setup, algo-configs ve servis CI/config yolları güncel referans ve development/master/main farklarıyla karşılaştırılacak. GUI/admin alan alt turları kaydedildi; eski GUI ve bütün gateway yolları yeniden doğrulanmış sayılmaz. Entegrasyon/canlı prod doğrulaması yapılmadı. Bütün bilgi tabanının ikinci doğrulaması henüz tamamlanmadı.
+**Sıradaki: operasyon CI/config yollarının kalan incelemesi ve yeni kaynak deltalarının doküman kapsamı kontrolü.** Paket/header-source farkı ve iki yeni emir davranışı kaydedildi; script/port/tuning envanterinin tamamı yeniden doğrulanmadı. GUI/admin alt turları kaydedildi. Entegrasyon/canlı prod doğrulaması yapılmadı; bütün KB ikinci doğrulaması henüz tamamlanmadı.
 
 Kullanıcı içerik onayı geldikçe durum etiketi kapsamına göre güncellenir; genel devam talimatıyla topluca dogrulandi yapılmaz. Uygulama bug düzeltmesi/deploy bu doküman incelemesinin dışında kaldı.
 

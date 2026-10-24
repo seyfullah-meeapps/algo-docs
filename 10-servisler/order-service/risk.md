@@ -48,6 +48,7 @@ Kod: `Managers/RiskManager.*`, `Data/Models/RiskInfo.*`, protolar `Service/limit
 - Kontrol protokolden bağımsızdır; `kFix` emirleri de aynı `checkEnterOrder`'dan geçer.
 - Riskten geçmeyen emirlerin olayları (accept/execute/cancel/replace) yine de rezervasyonları günceller. Bunun şartı, emrin host registry'sinde (`entered_orders`) olmasıdır. Toplu akışlarda bu `insert_to_entered_orders` parametresine bağlıdır. Registry'de olmayan emrin olayı SDK callback'inde "no host registry entry" ile düşer ve riske de ulaşmaz (ayrıntı: [toplu-emirler.md](toplu-emirler.md)).
 - MAOrderSDK ek bir yerel kontrol katmanıdır; hard cap/brüt takas/bölme bloğu limit tablosu doluyken ve `price > 0` iken çalışır. Her emre koşulsuz uygulandığı varsayılmaz (§ 11, K-104).
+- 24 Ekim development güncellemesi: açılış yolunda SDK brüt-takas kontrolü per-call seçenekle atlanabilir; diğer kontroller bütünüyle kapanmaz. [Güncel fark](toplu-emirler.md#24-ekim-güncel-davranış-farkı).
 
 ## 2. Açılış ve başlatma
 

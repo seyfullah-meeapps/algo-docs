@@ -25,6 +25,12 @@ Genel özet: [README](README.md). Servis config anahtarlarının anlamı burada 
 
 ## Repo düzeni
 
+### 24 Ekim paket güncellemesi
+
+Algo-Setup development `2a3c5d5 → cade7d0`, preprod `346306a → 959be34`; main `2907757` değişmedi. Altı dosya değişti: SDK header/struct, regular/Onload SDK .so ve regular/Onload order-service binary. Mlx bu deltada değişmedi. Header yeni EnterOrderOptions API'sini içerir; binary davranışının tamamı header'dan kanıtlanmaz.
+
+Eşleşen kaynaklar da güncellendi: SDK development `a788782 → c2b5060`, order-service `b86c0cf → 26e9a02`; main/master aynı. [Davranış farkı](../10-servisler/order-service/toplu-emirler.md#24-ekim-güncel-davranış-farkı). Paket script/workflow'ları bu deltada değişmedi; K-179 kapanmadı. algo-configs master `ab35dde` zaten günceldi. Script/binary/container/deploy çalıştırılmadı; bütün config envanteri yeni SHA'ya karşı doğrulandı denmez. Frontmatter önceki ayrıntılı turun commit'ini gösterir.
+
 | Yol | İçerik |
 |-----|--------|
 | `HFT/` | `HftSrvProd/` (binary'ler: `HftSrvProd`, `HftSrvProd_Onload`, `HftSrvProd_Mlx`), `Dockerfile`, `HFT_Onload_Dockerfile`, `HFT_Mlx_Dockerfile`, `docker-compose{,-onload,-mlx}.yml`, `scripts/run.sh`, `scripts/run_mlx.sh` |

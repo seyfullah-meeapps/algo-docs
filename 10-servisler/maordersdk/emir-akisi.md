@@ -71,7 +71,7 @@ Sonuç: HFT'de replace sonrası host id'si ile wire token'ı **farklıdır**. E�
 3. **Hesap anahtarı:** `routing_account`, boşsa `client_account`, boşsa `exchange_info`.
 4. **Limit bloğu** — yalnız `instrument_limits_` boş değilse **ve** `price > 0` ise (§6):
    1. `orderbook_id` tabloda yok → 1001
-   2. `is_brut_takas` → 1002
+   2. `is_brut_takas && !options.skip_brut_takas` → 1002 (24 Ekim development `c2b5060`: yeni per-call seçenek; eski overload'lar false kullanır)
    3. hard cap → 1003
    4. `no_split` değilse bölme kararı; tek lot sığmıyorsa → 1004
 5. **FIX'e mi?** `routes_to_fix(account, preferred_ouch_username)`: tercih edilen kullanıcı FIX kullanıcısıysa ya da hesap OUCH route'unda yok, FIX route'unda varsa FIX dalına girer ve orada döner. Bölme matematiği aynıdır → [fix.md](fix.md).
@@ -196,7 +196,7 @@ child sayısı  = full_children + (remainder_qty > 0 ? 1 : 0)
 |------|-----|-------|
 | `max_order_value` | `uint32` | **tam TL** (emir başı notional üst sınırı; bölme eşiği) |
 | `decimal_count` | `uint32` | fiyat ondalık hanesi; raw fiyat = TL × 10^`decimal_count` |
-| `is_brut_takas` | `bool` | true → 1002, emir hiç gönderilmez |
+| `is_brut_takas` | `bool` | true ve skip_brut_takas=false → 1002; limit bloğu koşulları geçerlidir |
 
 - Kaynak: HFT DB'den (`DatabaseServiceClient`), order-service `InstrumentService`'ten, açılışta bir kez yükler. Değerler: [order-service § 3](../order-service/sdk-ve-oturumlar.md), [hftsrvprod/config.md](../hftsrvprod/config.md).
 - **Hard cap:** `OrderSdkConfig.order_hard_cap_try` (`uint32`, **tam TL**, varsayılan 50 000 000).
@@ -208,6 +208,8 @@ child sayısı  = full_children + (remainder_qty > 0 ? 1 : 0)
   - Market emirleri (fiyat 0) ve negatif fiyatlar da bu bloğu atlar (Şüpheli #3).
 
 ## 7. `cancelOrder` ve `replaceOrder`
+
+24 Ekim farkı: development `c2b5060` yeni `enterOrder(order, assignment, EnterOrderOptions)` overload'ı ekler; `skip_brut_takas` yalnız 1002 kontrolünü atlar. Diğer limit koşulları değişmez. Seçenekler EnterOrderMsg dışındadır; layout koruma amacı ABI testi değildir. [Açılış kullanımı](../order-service/toplu-emirler.md#24-ekim-güncel-davranış-farkı).
 
 **`cancelOrder(id)`:**
 1. `split_parents_[id]` varsa §5'teki yayılım yapılır.

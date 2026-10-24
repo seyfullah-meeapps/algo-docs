@@ -8,6 +8,8 @@ olusturma: 2026-10-22
 son_guncelleme: 2026-10-23
 son_remote_kontrolu: 2026-10-23
 remote_kontrol_raporu: _surec/kaynak-karsilastirmasi-2026-10-23.md
+son_kismi_remote_kontrolu: 2026-10-24
+kismi_remote_kontrol_raporu: _surec/kaynak-karsilastirmasi-2026-10-24.md
 branch_akisi: development → preprod → master
 
 repolar:

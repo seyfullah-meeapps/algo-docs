@@ -2,6 +2,12 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-24 — Operasyon paket deltası ve yeni emir davranışı
+
+- Algo-Setup dev cade7d0/preprod 959be34'e ilerledi; paket SDK/header ve regular/Onload order-service binary'leri değişti, script/workflow değişmedi. algo-configs master aynı.
+- Kaynaklar da fetch/pull edildi: SDK c2b5060 EnterOrderOptions.skip_brut_takas ekliyor; order-service 26e9a02 açılışta seçeneği kullanıyor ve tekrarsız satırları hesap kullanıcıları arasında bir kez dağıtıyor. Master/main uçları aynı.
+- SDK emir, toplu emir, risk ve operasyon belgelerine kısmi güncel fark eklendi; K-92 daraltıldı. Tam baseline'lar ilerletilmedi. Deploy/binary/canlı emir çalıştırılmadı; kalan CI/config turu sırada.
+
 ## 2026-10-24 — Admin/backend alan sözleşmesi
 
 - Admin main ve trade-data-app development fetch/pull: referans uçlar aynı. Admin feature ayrı kaldı; main frontend / backend development-master proto farkları tekrar okundu.
