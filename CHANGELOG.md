@@ -2,6 +2,11 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-24 — Emir tipleri ve geçerlilik süreleri
+
+- Limit/piyasa/piyasadan limite ve günlük/KİE/FOK aynı defterden öğretici örneklerle yazıldı. Resmi Pay Prosedürü 3.34 ve VİOP sayfası okundu; piyasa emri kısıtı ve destek kapsamı ayrıldı.
+- Yeni konu yayın listesine eklendi; sürüm 0.7 PDF/HTML/EPUB yenilendi, indeks ve devam kayıtları güncellendi. Kod/canlı test yok.
+
 ## 2026-10-24 — Sade vadeli anlatımı ve fiyat kuralları
 
 - Kullanıcının anladığını belirttiği tek sözleşme/5.000 TL/varsayımsal 300 TL teminat anlatımı kaydedildi; açılışta 21 TL ödenmediği vurgulandı. Kredili işlemler için bakiye konusunda ayrı başlık planlandı.

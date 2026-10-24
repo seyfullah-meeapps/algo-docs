@@ -8,15 +8,15 @@ durum: taslak
 
 ## Şu an
 
-Kullanıcı sade vadeli anlatımını anladığını belirtti ve kaydedilmesini istedi. Tek sözleşme, 5.000 TL nakit ve varsayımsal 300 TL teminat örneği kaydedildi; 21 TL’nin açılışta ödenmediği açıklandı. Kredili işlemler için bakiye konusunda ayrı başlık planlandı. Fiyat adımı ve fiyat sınırları yazıldı; beş konu kitapta, 43 konu iskelet.
+Emir tipleri ve geçerlilik süreleri taslak yazıldı; altı konu kitapta, 42 konu iskelet. Yeni konu henüz kullanıcı tarafından okunmuş sayılmaz. Kredili işlemler bakiye konusunda ayrı başlıkta planlı.
 
 ## Son tamamlanan iş
 
-Vadeli örneği sadeleşti; kredi ile VİOP teminatı ayrıldı. Yeni konuda tick/spread, baz/tavan/taban, yuvarlama ve strateji fiyat koşulu açıklandı. Resmi BIST kaynakları okundu; gerçek günlük oran/adım kataloğu, kod veya canlı test yok. Yayın 0.6; PDF/HTML/EPUB yenilendi. PDF 14 A4 sayfa; değişen ve yeni sayfalar görsel kontrol edildi, EPUB bütünlüğü ve 1.870 bağlantı kontrolü geçti.
+Limit/piyasa/piyasadan limite aynı defterle, günlük/KİE/FOK ayrı miktar tablosuyla açıklandı. Pay Piyasası Prosedürü 3.34 (21 Eylül 2026) ve resmi web açıklamaları okundu. VİOP piyasa emri kısıtı ile teknik yetenek/fiili kullanım ayrıldı. MTrader kodu veya canlı test yapılmadı. Yayın 0.7 PDF/HTML/EPUB yenilendi. PDF 16 A4 sayfa; yeni iki sayfa görsel kontrol edildi, EPUB bütünlük kontrolü geçti.
 
 ## Sıradaki tek başlangıç noktası
 
-`02-borsa-temelleri/04-emir-tipleri-ve-sureleri.md`. Kredili işlemlerin ayrıntısı `07-pozisyon-bakiye-kar-zarar.md` içinde ayrı başlık olarak yazılacak; kurum bilgisi olmadan kredi/teminat bakiye eşlemesi uydurulmaz.
+`02-borsa-temelleri/05-emir-yasam-dongusu.md`: gönderim/kabul/ret/gerçekleşme/iptal/değişiklik. Okuma revizyonları gelirse önce ilgili konu güncellenir.
 
 ## Kalıcı çalışma düzeni
 
@@ -26,4 +26,4 @@ Yayın kullanımı `yayin/README.md`, tasarım kaynakları `yayin/marka.md`, yay
 
 ## Doğrulama ve Git
 
-Beş konu `taslak`, kalan 43 konu `bos`. Yapısal kontrol: 168 Markdown, 1.870 bağlantı, 0 hata; `git diff --check` temiz. Çıktılar ve araçlar Git dışında. Önceki push otomatik onay incelemesince reddedildi; kullanıcı uzak depoya gönderim onayı vermedi. Push tekrar denenmez; çalışmalar yerelde saklanır.
+Altı konu `taslak`, kalan 42 konu `bos`. Yapısal kontrol: 168 Markdown, 1.869 bağlantı, 0 hata; `git diff --check` temiz. Çıktılar ve araçlar Git dışında. Önceki push otomatik onay incelemesince reddedildi; kullanıcı uzak depoya gönderim onayı vermedi. Push tekrar denenmez; çalışmalar yerelde saklanır.

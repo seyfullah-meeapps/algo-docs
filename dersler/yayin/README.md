@@ -49,7 +49,7 @@ python dersler/yayin/uret.py --format epub
 - `output/rehber/index.html`: yerel HTML kitabının giriş sayfası. Diğer HTML dosyaları ve `site_libs` klasörüyle birlikte kullanılır.
 - `output/rehber/meeapps-rehber.epub`: ekran/yazı boyutuna göre akan e-kitap. PDF ile aynı sayfa sayısı beklenmez. EPUB uyumlu bir okuyucu gerekir; PDF okurken gerekli değildir.
 
-Güncel kitap beş konuyla 14 A4 sayfadır; bu sabit hedef değildir. Bölüm/metin değişince sayfa sayısı ve içindekiler yeniden hesaplanır. Kapak ve içindekiler toplam sayfaya dahildir. Kullanıcının kaldırdığı “Okumaya başlamadan” sayfası artık üretilmez; HTML'nin giriş sayfası ilk konunun kendisidir.
+Güncel kitap altı konuyla 16 A4 sayfadır; bu sabit hedef değildir. Bölüm/metin değişince sayfa sayısı ve içindekiler yeniden hesaplanır. Kapak ve içindekiler toplam sayfaya dahildir. Kullanıcının kaldırdığı “Okumaya başlamadan” sayfası artık üretilmez; HTML'nin giriş sayfası ilk konunun kendisidir.
 
 ## Neyi nerede düzenleyeceğiz?
 
