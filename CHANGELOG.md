@@ -2,6 +2,11 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-24 — Rehberin okuyucusu netleşti
+
+- Ana okuyucunun kullanıcı, sonraki okuyucuların görevi devralan ve ekibe katılan kişiler olduğu kaydedildi. Şirket içi bilgi aktarımı amacı ve rehberin ana çalışma konusu olması karar/ilerleme/oturum kayıtlarına işlendi.
+- Yazım öncesi sorular tek tek ilerliyor; sıradaki açık tercih teknik/kod anlatım derinliği. İçerik veya teknik doğrulama yapılmadı.
+
 ## 2026-10-24 — Derslerden konu bazlı rehbere geçiş
 
 - Kullanıcının isteğiyle önce ayrıntılı indeks yaklaşımına geçildi: uygulama amacı, borsa, teknik temel, mimari, stratejiler ve test/PM için altı bölüm, 48 ayrı konu iskeleti. İçerikler henüz yazılmadı; iskeletler `bos`.

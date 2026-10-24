@@ -28,6 +28,8 @@ Kullanıcı frontend'i yazdı; diğer katmanlardaki bilgisi sınırlı. PM rolü
 | R-10 | Gerçek ekran, temsili SVG ve kullanıcı tarafından eklenecek görsel birbirinden ayrılır | Kullanıcının görsel seçenekleri; hiçbiri bu tur üretilmedi |
 | R-11 | `dersler/` adı şimdilik korunur; eski 11 dosya `arsiv/` altındadır | Geri dönüş ve mevcut bağlantıları koruyan uygulama tercihi; arşiv güncel plan değildir |
 | R-12 | Kullanıcı okudukça sorularla metni geliştireceğiz; yazılanı okunmuş/onaylanmış saymayacağız | Kullanıcının “sen yazdıkça okurum” talebi |
+| R-13 | İlk ve ana okuyucu kullanıcıdır; rehber sonrasında görevi devralacak ve ekibe katılacak kişiler için kritik şirket içi bilgi aktarım kaynağı olacak | Kullanıcının okuyucu sorusuna açık yanıtı |
+| R-14 | Rehber bir süre ana çalışma konusu; yazıma başlamadan açık tercihler tek tek netleştirilecek | Kullanıcının önceki talebi; henüz cevaplanmamış tercihler kararlaştırılmış sayılmaz |
 
 ## Konuşmada netleşen sorular — 24 Ekim 2026
 
@@ -39,6 +41,16 @@ Kullanıcı frontend'i yazdı; diğer katmanlardaki bilgisi sınırlı. PM rolü
 
 **Bu turdaki karşılığı:** Altı bölüm, 48 planlı konu, bölüm indeksleri, yerel agent talimatları ve ilerleme kaydı. Henüz konu anlatımı, internet araştırması, kod incelemesi veya görsel çalışması yapılmadı.
 
-## Değişen önceki kararlar
+## Yazım öncesi netleştirme — 24 Ekim 2026
+
+**Soru 1 — Ana okuyucu:** Rehber kimin bilgi düzeyine göre yazılacak?
+
+**Kullanıcı yanıtı, anlamı korunmuş özet:** İlk ve ana okuyucu kendisi olacak. Sonrasında yerine gelecek veya ekibe katılacak arkadaşlar da kullanacak; şirket içi bilgi aktarımı için kritik bir doküman olacak.
+
+**Yazıma etkisi:** Önce kullanıcının öğrenmesini destekleyen açıklamalar verilir. Metin yalnız mevcut sohbeti bilen kişiye hitap etmez; ürün, roller ve varsayımlar sonraki okuyucuya da yeterli bağlam sağlar. Kod ayrıntısının seviyesi henüz ayrıca netleştirilmedi.
+
+**Sıradaki açık tercih:** Teknik anlatımda kod okuma ayrıntısının düzeyi. Henüz yanıtlanmadı.
+
+## Önceki planın değişimi
 
 Önceki “önce eski derslerin revizyonunu tekrar et, ardından Ders 06 ve hemen stratejiye geç” planı geçersizdir. Yeni başlangıç uygulamanın amacı, sonra borsa ve teknik ön bilgidir. Eski materyal silinmedi; yeni rehberin doğrulanmış veya tamamlanmış kısmı olarak sayılmıyor.

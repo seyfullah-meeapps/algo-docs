@@ -8,6 +8,8 @@ durum: taslak
 
 ## Şu an
 
+Yazım öncesi tercihler kullanıcıyla tek tek netleştiriliyor. Ana okuyucu sorusu cevaplandı; kalıcı kayıt [kararlar](kararlar.md) dosyasında. Sıradaki açık soru teknik/kod anlatım derinliği. Ana konu anlatımları henüz başlamadı; bu rehber bir süre ana çalışma konusu.
+
 24 Ekim 2026: kullanıcı ders düzeninden konu bazlı yazılı rehbere geçilmesini istedi. Ayrıntılı indeks, altı bölüm indeksi ve 48 konu iskeleti oluşturuldu. Eski 11 dosya `arsiv/` altında korundu. Rehbere özel talimatlar, kararlar, yazım düzeni ve strateji şablonu hazırlandı.
 
 | Bölüm | Konu sayısı | Yazım durumu | Kullanıcı okuma durumu |
