@@ -42,7 +42,7 @@ Setup altı header/binary dosyası değişti; script/workflow değişmedi. SDK E
 
 ## Operasyon devamı — CI/config kontrolü
 
-Güncel SDK c2b5060/order-service 26e9a02 workflow'ları ve Setup cade7d0/main run/config seçimi okundu. [K-243 ve varyantlar](../40-operasyon/kurulum-ve-dagitim.md#24-ekim-ci-hedef-ve-varyant-kontrolü): SDK preprod artifact push job'ında hedef main kalır; CI çalışması incelenmedi. Aktif SDK/service matrix regular/onload, Mlx adımları tek başına güncel artifact kanıtı değil. K-182 config dosyası farkı sürüyor. Script/CI/container çalıştırılmadı.
+SDK c2b5060/order-service 26e9a02 workflow'ları ve Setup run/config seçimi okundu. İlk K-243 main hedef yorumu sonradan geri çekildi: preprod workflow farklı, [gerçek run/job hedefi preprod](dogrulama-k243-2026-10-24.md). Aktif matrix regular/onload; Mlx adımları tek başına güncel artifact kanıtı değil. K-182 sürüyor. Agent CI/container tetiklemedi; var olan bir CI run'ı salt okunur incelendi.
 
 ## Sıradaki
 

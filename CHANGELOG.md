@@ -2,6 +2,12 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-24 — K-243 gerçek run doğrulaması ve geri çekme
+
+- SDK preprod a647c9e workflow'u ve başarılı push run 40012991193/job 120620335238 okundu. Hedef ref/destination_branch preprod; development dosyasından yapılan main'e yönlendirme genellemesi yanlıştı.
+- K-243 açık indeksten çıkarıldı, kanıt dosyası eklendi; operasyon ve kapanış raporu düzeltildi. Numara tekrar kullanılmaz. CI tetiklenmedi/deploy yapılmadı.
+- GitHub connector 404 sonrası gh CLI salt okunur sorguları kullanıldı. Oturum başında main origin/main ile eşitti; önceki push bekliyor bilgisi güncellendi, agent push yapmadı. Sıradaki şifre sonuç akışı.
+
 ## 2026-10-24 — İkinci statik turun kapanışı
 
 - Konu bazlı inceleme kapsamı, dokuz/15 repo tazelik ayrımı, üç ilerleyen development ucu ve değişmeyen tam baseline'lar kapanış raporunda toplandı; README ve inceleme durumundan bağlandı.

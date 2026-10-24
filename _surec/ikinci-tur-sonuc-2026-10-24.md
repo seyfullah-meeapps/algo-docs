@@ -43,7 +43,7 @@ Sorun ayrıntıları tek yerde tutulur; indeks [ACIK-KONULAR](../ACIK-KONULAR.md
 
 | Öncelik | Takip |
 |---------|-------|
-| 1 | [K-243 CI hedefi](../40-operasyon/kurulum-ve-dagitim.md#24-ekim-ci-hedef-ve-varyant-kontrolü): workflow hedefi ile gerçek run/artifact geçmişi ayrı doğrulanmalı |
+| 1 | K-243 takipte geri çekildi: [gerçek preprod run kanıtı](dogrulama-k243-2026-10-24.md). Development dosya farkı mevcut run'ın main'e yazdığı anlamına gelmiyor |
 | 2 | [K-233/K-234 şifre kalıcılığı](../10-servisler/order-service/fix-branch-karsilastirmasi.md#k-233--1409suz-logonda-sdk-ve-host-şifre-sonucu-ayrışıyor): sahte oturum/DB ile sonuç akışı sınanmalı; gerçek şifre kullanılmadı |
 | 3 | [K-241/K-242 Varant](../20-stratejiler/varant.md#ikinci-kod-turu--ret-ve-parçalı-satış-sınırları): senkron ret ve çoklu satış senaryoları entegrasyonla sınanmalı |
 | 4 | K-194/K-195 ve diğer branch bulguları: kurulu binary/config kanıtıyla müşteri etkisi belirlenmeli |
@@ -52,4 +52,4 @@ Sorun ayrıntıları tek yerde tutulur; indeks [ACIK-KONULAR](../ACIK-KONULAR.md
 
 Yerel bağlantı/frontmatter/satır sınırı/K-id/manifest ve yerel kaynak commit nesnesi kontrolleri `kontrol.py --sources` ile çalıştırıldı. Bu araç içerik doğruluğu, ABI, runtime veya remote atalık testi yapmaz. Build, browser, QuickFIX/ACK zamanlama testi, CI run incelemesi, canlı emir/şifre/DB işlemi ve deploy yapılmadı.
 
-Sonraki iş, öncelikli açık adayları ayrı doğrulama senaryolarıyla ele almak ve incelenmemiş yeni feature ucunu kontrol etmektir. Push, önceki otomatik onay reddi nedeniyle yerelde bekliyor; bu rapor remote'a gönderildiği iddiasında değildir.
+Sonraki iş, kalan açık adayları ayrı doğrulama senaryolarıyla ele almak ve incelenmemiş yeni feature ucunu kontrol etmektir. K-243 sonradan gerçek run kanıtıyla geri çekildi; kanıt yukarıda. Bu rapor ilk yazıldığında yerel commit'teydi; sonraki oturum başında yerel main origin/main ile eşit gözlendi, bu agent push yapmadı.

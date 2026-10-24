@@ -321,7 +321,6 @@ Koddan çıkarılan sonuçlar canlıda gözlemle doğrulanmış sayılmaz; ayrı
 | K-241 | bug? | Varant (13) emir gönderimi derivativeMutex tutarken senkron SDK ret callback'i aynı recursive olmayan mutex'i yeniden istiyor | [Varant](20-stratejiler/varant.md#ikinci-kod-turu--ret-ve-parçalı-satış-sınırları) |
 | K-242 | doğrula | Varant (13) parçalı buy fill'lerinde ayrı satışlar üretirken yalnız tek sellOrderToken tutuyor; hedef replace toplu kalan miktarla yalnız o token'a gidiyor | [Varant](20-stratejiler/varant.md#ikinci-kod-turu--ret-ve-parçalı-satış-sınırları) |
 
-| K-243 | bug? | SDK preprod build sonrası ayrı push_binaries job'ında preprod override yok; Algo-Setup artifact hedefi varsayılan main kalıyor | [CI hedefi](40-operasyon/kurulum-ve-dagitim.md#24-ekim-ci-hedef-ve-varyant-kontrolü) |
 
 ## Yolda / takip
 
