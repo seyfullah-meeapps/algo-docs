@@ -11,6 +11,8 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Şu an (2026-10-24)
 
+**Yeni aktif kapsam: insan için dersler ve PM öğrenme rotası.** Kullanıcı frontend'i yazdığını, artık problem tespiti, test, issue düzenleme ve görev atamadan sorumlu olduğunu anlattı. Masaüstündeki `meeapps-ai/dersler` içindeki yedi kayıt ve eski çalışma listesi okundu; eski repoya dokunulmadan `dersler/` içinde revize edildi. İndeks, aktarım notları, çalışma düzeni ve strateji şablonu oluşturuldu. Kaynaklar mevcut KB ile karşılaştırıldı; yeni kod/canlı kural doğrulaması veya test yapılmadı. Dersler henüz birlikte tekrar edilmedi. Teknik ilk aşamanın kapanışı aşağıdaki tarihsel kapsamıyla geçerlidir.
+
 **İlk aşama tamamlandı. Aktif devam işi yok.** Kullanıcı dokümantasyonun ilk aşamasını kapatmamızı, sorunlara şimdilik odaklanmamamızı istedi. Planlanan yazım, derinleştirme, güncel development–master/main karşılaştırması ve kapanış tutarlılığı tamamlandı. Tek kapanış kaydı `_surec/ikinci-tur-sonuc-2026-10-24.md`; açık indeks korunur, otomatik takip kuyruğu değildir. Belgeler içerik onayı yerine geçmemesi için taslak kaldı.
 
 ## Tamamlanan teknik takip (tarihsel kayıt)
@@ -75,6 +77,8 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Sıradaki
 
+**Eğitim için:** `dersler/aktarim-notlari.md` ve eski derslerin kısa tekrarını kullanıcıyla gözden geçir; ardından Ders 06'da HFT UI ayarı → payload → hub → motor → emir dönüşünü işle. Sonraki sıra ve çıktılar `dersler/README.md`'de. Planlanan dersleri kullanıcıyla konuşulmuş sayma; gerçek soru/yanıtları tarihli oturum kaydına yaz. Sorun araştırması, canlı test veya uygulama değişikliği bu eğitim hazırlığıyla açılmadı.
+
 **İlk aşama için sıradaki iş yok.** Yeni kullanıcı talebi gelmeden kaynak/feature/CI araştırmasına veya açık sorun doğrulamasına devam edilmez. Gelecekte doküman güncellemesi istenirse `_surec/guncelleme.md` uygulanır; sorun çalışması istenirse yalnız seçilen kapsam ele alınır. K-240 artifact/dağıtım, Teorik zamanlama, gerçek SDK/host entegrasyonu ve prod davranışı doğrulamaları bu aşamadan ertelendi; eksik doküman yazımı sayılmaz. K-233/K-234 düzeltilmedi, K-243 geri çekildi.
 
 Kullanıcı içerik onayı geldikçe durum etiketi kapsamına göre güncellenir; genel devam talimatıyla topluca dogrulandi yapılmaz. Uygulama bug düzeltmesi/deploy bu doküman incelemesinin dışında kaldı.
@@ -104,7 +108,8 @@ Kullanıcıyla alınmış kararlar; aksi söylenmedikçe geçerli.
 - **Amaç / okuyucu:** Bilgi tabanının okuyucusu AI agent; insana özet ve cevap üretmek için. Eski `MeeApps/meeapps-ai`'nin yerini alır, eski repoya dokunulmaz.
 - **Dil:** Metin Türkçe, terimler ve kod isimleri İngilizce.
 - **Referans branch:** `development`; akış `development → preprod → master`. Prod farkları `⚠ master'da yok` ile işaretlenir. İstisnalar `manifest.yaml`'da.
-- **Kapsam dışı:** kişisel dersler, mate, Backoffice, Kripdome/DTA, Algo-GUI (en eski arayüz), `mtrader-new` (yeni GUI'nin kişisel öncül reposu, artık `mtrader-trade-ui` development'ta).
+- **Eğitim kapsamı (2026-10-24):** Önceki kişisel dersler kapsam dışı kararı kullanıcı talebiyle değişti. İnsan için dersler `dersler/` altında; öncelik HFT → Arbitraj → Toplu Emirler → Tavan → Taban, BYF en son. Toplu Emirler, Varant Toplu'dan ayrıdır. Teknik kaynaklar mevcut yerinde kalır; eğitim katmanı anlatım, örnek ve gerçek konuşma notlarını tutar.
+- **Kapsam dışı:** mate, Backoffice, Kripdome/DTA, Algo-GUI (en eski arayüz), `mtrader-new` (yeni GUI'nin kişisel öncül reposu, artık `mtrader-trade-ui` development'ta).
 - **Eski ve yeni GUI:** İkisi de prod'da (parçalı geçiş); ikisi de belgelenir. Müşteri ↔ GUI tablosu `00-genel/branch-ve-ortamlar.md`'de.
 - **Kullanılmayan stratejiler** (OrderChase, Warrant Tracker, AKD, MovingAverage): tek satırla "kullanılmıyor", ayrıntı yazılmaz.
 - **Tazelik (2026-10-23 kullanıcı isteği):** İkinci inceleme development ile birlikte master/main güncel origin uçlarına karşı yapılır. Başlangıçta fetch, temiz referans çalışma branch'inde pull --ff-only; yerel değişiklikler ezilmez. Manifest istisnaları korunur.

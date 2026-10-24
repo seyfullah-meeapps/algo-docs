@@ -2,6 +2,14 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-24 — Derslerin aktarımı ve PM öğrenme rotası
+
+- Kullanıcının yeni talebiyle `dersler/` açıldı. Eski meeapps-ai içindeki yedi ders ve çalışma listesi incelendi; numaralar korunarak dersler yeniden yazıldı, eski repo değiştirilmedi.
+- Handoff/SDK yolu, ölçek, token, mod/strateji ayrımları mevcut KB'ye göre revize edildi. Doğrulanmamış güncel mevzuat ve kesin kâr/dolum iddiaları taşınmadı; değişiklik gerekçeleri aktarım notlarına yazıldı.
+- HFT → Arbitraj → Toplu Emirler → Tavan → Taban önceliği, BYF en son olacak şekilde ders indeksi oluşturuldu. Parametre/durum/ayar değişikliği/test şablonu ve PM test/issue/görev yönlendirme düzeni eklendi.
+- README, AGENTS ve oturum notları eğitim kapsamına bağlandı. Dersler hazırlanmış taslaktır; kullanıcıyla yeni ders işlenmedi, uygulama testi veya yeni sorun araştırması yapılmadı.
+- Yapısal kontrol: 105 Markdown, 1.526 bağlantı, 0 hata. `git diff --check` temiz; kaynak repo kontrolü bu aktarımda çalıştırılmadı.
+
 ## 2026-10-24 — İlk aşamanın nihai kapanışı
 
 - Kullanıcı sorun araştırmalarını şimdilik kapsam dışında bıraktı; yazım/derinleştirme ve ikinci kaynak karşılaştırması tamamlanmış ilk aşama olarak kapatıldı. Yeni araştırma veya canlı işlem açılmadı.
