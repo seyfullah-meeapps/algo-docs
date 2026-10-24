@@ -8,7 +8,7 @@ durum: taslak
 
 Bu rehber uygulamanın amacından başlayıp borsa ve teknik temellere, sistem mimarisine ve stratejilere ilerler. Okuyucu frontend bilgisi olan bir PM veya projeye yeni gelen biri olabilir. Hedef; uygulamayı anlamak, davranışı açıklamak, test tasarlamak ve kanıtıyla issue/görev yönetmektir.
 
-**Borsa temellerine geçildi:** İlk bölümün revizyonları kullanıcı tarafından uygun bulundu. Borsa temellerinin ilk konusu [Piyasalar, ürünler ve miktar birimleri](02-borsa-temelleri/01-piyasalar-ve-urunler.md) taslak yazıldı ve kitaba eklendi; henüz okunmadı. [Emir defteri ve eşleşme](02-borsa-temelleri/02-emir-defteri.md) de taslak yazıldı. Sıradaki konu fiyat adımı ve fiyat sınırları. Diğer 44 konu iskelet durumunda. Klasör adı bağlantıların devamlılığı için `dersler/` kaldı; yapı konu bazlı rehberdir.
+**Borsa temellerine geçildi:** İlk bölümün revizyonları kullanıcı tarafından uygun bulundu. Borsa temellerinin ilk konusu [Piyasalar, ürünler ve miktar birimleri](02-borsa-temelleri/01-piyasalar-ve-urunler.md) taslak yazıldı ve kitaba eklendi; henüz okunmadı. [Emir defteri ve eşleşme](02-borsa-temelleri/02-emir-defteri.md) de taslak yazıldı. Fiyat adımı ve fiyat sınırları da yazıldı. Sıradaki konu emir tipleri ve geçerlilik süreleri. Diğer 43 konu iskelet durumunda. Klasör adı bağlantıların devamlılığı için `dersler/` kaldı; yapı konu bazlı rehberdir.
 
 ## Devam edecek agent için
 
@@ -39,7 +39,7 @@ Repo kökündeki [oturum notları](../OTURUM-NOTLARI.md), ardından [rehber tali
 | 2.04 | [Emir tipleri ve geçerlilik süreleri](02-borsa-temelleri/04-emir-tipleri-ve-sureleri.md) | Limit, piyasa, piyasadan limite; DAY, IOC/KIE, FOK; seans ve destek sınırları |
 | 2.05 | [Emir yaşam döngüsü](02-borsa-temelleri/05-emir-yasam-dongusu.md) | Gönderim, kabul, ret, kısmi/tam gerçekleşme, iptal, replace; istek ve onay |
 | 2.06 | [Seanslar, müzayede ve denge fiyatı](02-borsa-temelleri/06-seanslar-ve-muzayede.md) | Toplama, eşleştirme, sürekli işlem, kapanış, tek fiyat/devre kesici; ürün bazlı saatler ve saat dilimi |
-| 2.07 | [Pozisyon, bakiye ve kâr/zarar](02-borsa-temelleri/07-pozisyon-bakiye-kar-zarar.md) | Long/short/flat, açık emir maruziyeti, nakit/satılabilir bakiye, maliyet ve komisyon |
+| 2.07 | [Pozisyon, bakiye ve kâr/zarar](02-borsa-temelleri/07-pozisyon-bakiye-kar-zarar.md) | Long/short/flat, açık emir maruziyeti, nakit/satılabilir bakiye, maliyet, komisyon ve kredili işlemler |
 | 2.08 | [Takas, T+2 ve brüt takas](02-borsa-temelleri/08-takas-ve-tedbirler.md) | İşlem/takas günü, iş günü ve tatil, T+N; ürün ve yürürlük tarihi; netleştirme ve tedbirler |
 | 2.09 | [Açığa satış ve uptick](02-borsa-temelleri/09-aciga-satis-ve-uptick.md) | Sahiplik, işaretleme, izin, fiyat kuralı; tarihli BIST/SPK kararı ve uygulama kontrolü |
 | 2.10 | [ITCH, OUCH ve FIX](02-borsa-temelleri/10-itch-ouch-fix.md) | Piyasa verisi ve emir protokolü; kendi emrimiz ve piyasanın defteri; mesaj aileleri |

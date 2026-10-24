@@ -2,6 +2,11 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-24 — Sade vadeli anlatımı ve fiyat kuralları
+
+- Kullanıcının anladığını belirttiği tek sözleşme/5.000 TL/varsayımsal 300 TL teminat anlatımı kaydedildi; açılışta 21 TL ödenmediği vurgulandı. Kredili işlemler için bakiye konusunda ayrı başlık planlandı.
+- Fiyat adımı ve fiyat sınırları yazıldı; BIST kaynakları okundu. Sayısal adım/marj örnekleri varsayımsal; canlı/kod testi yapılmadı. Yayın 0.6 PDF/HTML/EPUB yenilendi.
+
 ## 2026-10-24 — Vadeli fiyat, teminat ve teslimat açıklaması
 
 - Kullanıcının miktar tablosu sorusu kaynak dosyaya kaydedildi. Birim fiyat/sözleşme büyüklüğü/nominal değer/teminat ayrımı ve günlük uzlaşma ile fiziki teslimat örneği eklendi.

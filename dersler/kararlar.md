@@ -14,6 +14,8 @@ Kullanıcı frontend'i yazdı; diğer katmanlardaki bilgisi sınırlı. PM rolü
 
 ## Geçerli kararlar
 
+24 Ekim 2026 ek kararı: Kredili işlemler, pozisyon/bakiye konusunda ayrı başlıkta ele alınacak; vadeli girişinde yalnız kısa ayrım bulunacak. Kullanıcının anladığını belirttiği sade, tek sözleşmeli nakit/teminat örneği korunsun.
+
 | Kimlik | Karar | Dayanak |
 |---|---|---|
 | R-01 | Ders dizisi yerine konu bazlı, ileride yazılı dokümana dönüşebilecek rehber | Kullanıcının son talebi |

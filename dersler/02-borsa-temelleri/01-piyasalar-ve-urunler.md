@@ -62,38 +62,44 @@ Bir test örneğinde, birim fiyatı 20 TL olan 200 adet pay ile aynı paya dayal
 
 Fiyatlar öğretici varsayımdır; komisyonlar hesaba katılmamıştır. Tablo iki alternatif işlemi karşılaştırır; iki tarafın birlikte alınmasını önermiyor.
 
-### Neden iki sözleşme 42 TL etmiyor?
+### Vadeli işlem açarken 21 TL ödüyor muyuz?
 
-**21 TL, bir sözleşmenin toplam satış bedeli değil, bir adet dayanak pay için verilen vadeli fiyat teklifidir.** Emirde miktar ise sözleşme adedidir. Standart pay vadeli sözleşmesindeki **100**, bir sözleşmenin temsil ettiği pay adedidir. Bu nedenle bir sözleşme 100 × 21 = 2.100 TL, iki sözleşme 4.200 TL büyüklük taşır. 2 × 21 hesabında pay/sözleşme çarpanı eksik kalır. [Borsa İstanbul — Pay vadeli sözleşmeleri](https://www.borsaistanbul.com/piyasalar/viop/vadeli-islem-sozlesmeleri/pay-vadeli-islem-sozlesmeleri)
+**Hayır. Ekrandaki 21 TL, hesabımızdan kesilen sözleşme ücreti değildir.** Bir pay için üzerinde anlaştığımız vadeli fiyattır. Emir miktarı ise sözleşme adediyle girilir. Bir standart pay vadeli sözleşmesi 100 payı temsil ettiği için toplam büyüklük 100 × 21 = **2.100 TL** olur. İki sözleşme için bu değer 4.200 TL'dir. [Borsa İstanbul — Pay vadeli sözleşmeleri](https://www.borsaistanbul.com/piyasalar/viop/vadeli-islem-sozlesmeleri/pay-vadeli-islem-sozlesmeleri)
 
-Spot fiyatın 20 TL, vadeli fiyatın 21 TL olması başka bir ayrımdır: bunlar farklı tarihlerdeki teslim yükümlülüklerinin fiyatlarıdır. Vadeli fiyat spotla aynı olmak zorunda değildir; finansman, beklenen temettü ve piyasa koşulları gibi etkenler aradaki farkla ilişkilidir. Buradaki 1 TL fark teminat değildir.
+Bir sözleşme aldığımızda “vadesi geldiğinde bu 100 payı, pay başına 21 TL üzerinden alma yükümlülüğünü kabul ediyorum” deriz. Başlangıçta bir pay satın almış olmayız; sonradan ödenecek “kalan 99 pay” da yoktur. Pozisyon açılışında paylar hesabımıza geçmez.
 
-### Teminatı ne zaman yatırıyoruz?
+### Kendi paramız ve teminat nasıl değişir?
 
-Vadeli pozisyon açarken 4.200 TL'lik payı hemen satın alıp teslim almayız; sözleşme yükümlülüğü üstleniriz. Pozisyon için gereken **başlangıç teminatı**, bu yükümlülüğün güvencesidir. Teminatı bir peşinat veya sözleşmenin satın alma fiyatı gibi düşünmemeliyiz. Teminat yetersizleşirse tamamlama gereği doğabilir. [Borsa İstanbul — Vadeli işlem sözleşmeleri](https://borsaistanbul.com/piyasalar/viop/vadeli-islem-sozlesmeleri)
+Başlangıçta **5.000 TL kendi paramız** olduğunu düşünelim. Aşağıdaki iki işlem birbirinin alternatifidir; birlikte yapılmıyor. Komisyon ve diğer masrafları yok sayıyoruz. Bir sözleşmenin teminatını tamamen öğretici varsayım olarak **300 TL** kabul ediyoruz; bu, gerçek bir ürünün güncel teminatı değildir.
 
-Öğretici varsayım olarak iki sözleşme için toplam **600 TL teminat** gerektiğini düşünelim. Bu gerçek bir ürünün güncel teminatı değildir. 600 TL teminatla temsil edilen büyüklük yine 4.200 TL'dir. Teminat hesabına 600 TL koymak, kalan 3.600 TL'nin vade sonunda otomatik ödenecek sabit bir borç olduğu anlamına gelmez.
-
-Pozisyon açıkken fiyat değişiminden doğan kâr/zarar da hesaba yansır. Örneğin 21 TL'den alınmış iki sözleşme için ilk günün uzlaşma fiyatı 22 TL olursa uzun pozisyonun o güne ait kârı (22 − 21) × 100 × 2 = **200 TL** olur. 20 TL olursa aynı hesapla **200 TL zarar** oluşur. Sonraki gün taşınan pozisyonun hesabında önceki uzlaşma fiyatı esas alınır; her gün yeniden ilk 21 TL'den fark alınmaz. [Takasbank VİOP Prosedürü, madde 41–42](https://www.takasbank.com.tr/documents/prosedurler/viop-proseduru-24012024.pdf)
-
-Bu yüzden nakit ihtiyacı yalnız vade sonunda doğmaz. Teminat gereksinimi ve zararlar süreç boyunca takip edilir; teminatın üzerindeki kayıplar da mümkün olabilir. Gereken gerçek tutar ürün, portföy, güncel risk parametreleri ve aracı kurum koşullarına bağlıdır.
-
-### Vade sonunda 200 payı kim teslim eder?
-
-Pay vadeli sözleşmelerinde vade sonunda açık kalan pozisyonlar **fiziki teslimata** gider. Uzun taraf nakit ödeme, kısa taraf pay teslim etme yükümlülüğü taşır. Paylar hesaplar arasında kayden aktarılır; alıcının payları kendisinin ayrıca piyasadan bulması gerekmez. Fiziki teslimat takası Borsa İstanbul açıklamasında T+2 olarak belirtilir. Bu, aracı kurumun müşteriden parayı ancak o gün isteyeceği anlamına gelmez; kurumun önceden nakit/pay hazır bulundurma koşulları ayrıca kontrol edilir. [Borsa İstanbul — Pay vadeli sözleşmeleri](https://www.borsaistanbul.com/piyasalar/viop/vadeli-islem-sozlesmeleri/pay-vadeli-islem-sozlesmeleri)
-
-Örneği sadeleştirmek için işlemden vadeye kadar tüm uzlaşma fiyatlarının **21 TL'de kaldığını**, başka pozisyon ve masraf olmadığını varsayalım:
-
-| Aşama | İki sözleşme uzun pozisyon için karşılığı |
+| Seçenek | Paranın ve pozisyonun karşılığı |
 |---|---|
-| Pozisyon açılır | Örnek 600 TL teminat bulundurulur; 200 pay henüz teslim alınmaz |
-| Pozisyon taşınır | Bu özel varsayımda fiyat değişmediği için kâr/zarar sıfırdır |
-| Fiziki teslimat | 200 pay karşılığı 4.200 TL nakit yükümlülüğü yerine getirilir |
-| Teminat çözülür | Gerekli koşullar tamamlanınca serbestleşen teminat kullanılabilir hâle gelir |
+| Spotta 20 TL'den 100 pay almak | 2.000 TL alış bedeli oluşur; takas yükümlülüğü karşılandıktan sonra 3.000 TL nakit ve 100 pay kalır |
+| 21 TL'den 1 vadeli sözleşme almak | 300 TL teminat ayrılır, 4.700 TL bunun dışında kalır; henüz payımız yoktur, 100 paylık vadeli pozisyonumuz vardır |
 
-**600 TL teminatın teslimat ödemesine kendiliğinden sayıldığını varsaymayız.** Serbestleşme, mahsup ve kullanılabilir bakiye durumuna göre hesaba eklenecek nakit belirlenir. Fiyat değişirse günlük kâr/zarar ve teslimat hesabı birlikte değerlendirilir; yukarıdaki sabit fiyat örneği aynen uygulanmaz.
+Vadeli seçenekte **21 TL veya 2.100 TL satın alma bedeli ödemedik**. 300 TL güvence ayırdık. **Teminat**, sözleşme yükümlülüğünün güvencesidir; peşinat değildir. Pozisyon için başlangıç teminatı gerekir ve teminat yetersizleştiğinde tamamlama ihtiyacı doğabilir. [Borsa İstanbul — Vadeli işlem sözleşmeleri](https://borsaistanbul.com/piyasalar/viop/vadeli-islem-sozlesmeleri)
 
-Vade gelmeden aynı sözleşmedeki pozisyon uygun ters işlemle kapatılırsa kapanan miktar için teslim yükümlülüğü kalmaz. Örneğin iki sözleşme uzun pozisyonun aynı vadede iki sözleşme satılarak kapatılmasıyla sonuç kâr/zarar üzerinden oluşur. Ayrıca her vadeli ürün pay teslim etmez: **nakdi uzlaşmalı** sözleşmelerde sonuç para üzerinden kapatılır. [Borsa İstanbul — Vadeli işlem sözleşmeleri](https://borsaistanbul.com/piyasalar/viop/vadeli-islem-sozlesmeleri)
+### Vade sonunda ne öder, ne alırız?
+
+Bu kez fiyatın işlemden vadeye kadar **21 TL'de kaldığını**, günlük kâr/zarar ve masraf oluşmadığını varsayalım. Bir pay vadeli uzun pozisyonu teslimata bıraktığımızda 100 pay için **2.100 TL nakit yükümlülüğünü** karşılarız; 100 pay hesabımıza kayden aktarılır. Payları ayrıca piyasadan bizim bulmamız gerekmez. Başta 21 TL ödemediğimiz için geri alınacak bir “vadeli ücreti” de yoktur.
+
+Pay vadeli sözleşmeleri fiziki teslimatlıdır; Borsa İstanbul bu teslimatın takasını T+2 olarak açıklar. Aracı kurum paranın daha önce hazır bulunmasını isteyebilir; müşterinin son ödeme saati ayrıca öğrenilir. [Borsa İstanbul — Pay vadeli sözleşmeleri](https://www.borsaistanbul.com/piyasalar/viop/vadeli-islem-sozlesmeleri/pay-vadeli-islem-sozlesmeleri)
+
+300 TL teminat, ilgili yükümlülükler tamamlanıp serbestleştiğinde kullanılabilir hâle gelir. Bunun teslimat ödemesine ne zaman mahsup edilebildiğini bilmeden “yalnız 1.800 TL yeter” diyemeyiz. Bu sade örneğin sonunda, bütün yükümlülükler ve teminat blokajı çözüldüğünde **2.900 TL para + 100 pay** kalır. Teminat ayrıca kaybolmuş 300 TL değildir.
+
+### Fiyat değişirse ne olur?
+
+Vadeli pozisyonun kâr/zararı süreç boyunca hesaplanır. İlk gün 21 TL'den açılmış bir uzun sözleşmenin uzlaşma fiyatı 22 TL olursa (22 − 21) × 100 = **100 TL kâr**; 20 TL olursa **100 TL zarar** oluşur. Sonraki gün taşınan pozisyonun hesabında önceki uzlaşma fiyatı kullanılır. Bu yüzden nakit ihtiyacı için yalnız vade sonunu beklemeyiz. [Takasbank VİOP Prosedürü, madde 41–42](https://www.takasbank.com.tr/documents/prosedurler/viop-proseduru-24012024.pdf)
+
+Fiyat değişen durumda günlük kâr/zarar ile teslimat ödemesi birlikte değerlendirilir; yukarıdaki sabit fiyat örneği aynen uygulanmaz. Vade öncesinde aynı sözleşmede uygun ters işlemle pozisyon kapatılırsa kapanan miktar için teslim yükümlülüğü kalmaz. Her vadeli ürün de pay teslim etmez; nakdi uzlaşmalı sözleşmelerde sonuç para üzerinden kapatılır. [Borsa İstanbul — Vadeli işlem sözleşmeleri](https://borsaistanbul.com/piyasalar/viop/vadeli-islem-sozlesmeleri)
+
+### Kredili pay alımıyla farkı
+
+**Kredi limiti**, kurumun izin verdiği borçlanma kapasitesidir; **kullanılmış kredi**, gerçekten borç aldığımız tutardır. Örneğin 2.000 TL'lik spot pay alımının 1.000 TL'si kendi paramızdan, 1.000 TL'si krediden karşılanırsa 100 payımızın yanında 1.000 TL kredi borcumuz olur; kredi koşullarına göre faiz işler.
+
+Vadeli pozisyonun 2.100 TL büyüklük taşıması ise otomatik olarak 2.100 TL kredi kullandığımız anlamına gelmez. Buradaki kaldıraç, teminatla daha büyük bir yükümlülük taşımamızdan doğar. Pay alımında kullanılabilen kredi limitinin VİOP teminatında da kullanılabildiği varsayılmaz. Kurumun kabul ettiği teminat ve hesap aktarım düzeni ayrıca bilinmelidir.
+
+Kredi limiti, kredi borcu, faiz, özkaynak ve kullanılabilir bakiye ilişkisini [pozisyon ve bakiye konusundaki ayrı başlıkta](07-pozisyon-bakiye-kar-zarar.md) ele alacağız.
 
 ## MTrader'da neden önemli?
 
@@ -114,6 +120,8 @@ Bu temel, sonraki strateji belgelerinde parametrelerin anlamını doğru okumam�
 **24 Ekim 2026 — Kullanıcı sorusu, anlamı korunmuş özet:** Spot 20 TL, vadeli 21 TL iken iki sözleşme neden 42 TL değil? 100 neyi ifade ediyor; teminat nerede, kalan para ne zaman yatırılıyor ve 200 pay nasıl teslim alınıyor?
 
 **Metne yansıması:** Pay başına fiyat kotasyonu ile sözleşme adedi ayrıldı. Varsayımsal 600 TL teminat, günlük uzlaşma kâr/zararı ve sabit 21 TL vade örneğiyle ödeme/teslim süreci açıklandı. Teminat otomatik peşinat sayılmadı; kurumun nakit hazırlık zamanı için evrensel bir saat uydurulmadı.
+
+**24 Ekim 2026 — İkinci açıklama ve kullanıcı geri bildirimi:** Kullanıcı 21 TL'nin başlangıçta ödenip ödenmediğini, kalan 99 pay ve kredi bakiyesi ilişkisini sordu. Sohbette tek sözleşme, 5.000 TL nakit ve varsayımsal 300 TL teminatla sade anlatım yapıldı. Kullanıcı bu anlatımı anladığını belirtti ve dokümana aynı sadelikte aktarılmasını istedi. Önceki uzun örnek bu anlatımla değiştirildi; kredili işlemler için bakiye konusunda ayrı başlık planlandı. Kuruma özgü bakiye alanları açıklanmış sayılmaz.
 
 ## Kaynaklar ve doğrulama
 

@@ -11,6 +11,8 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Şu an (2026-10-24)
 
+**Güncel:** Sade vadeli anlatımı kullanıcı tarafından anlaşıldı ve kaydedildi. Kredili işlemler bakiye konusunda ayrı başlık olarak planlandı. Fiyat adımı/fiyat sınırları yazıldı; yayın 0.6, beş konu ve 43 iskelet. Sıradaki emir tipleri ve geçerlilik süreleri; aşağıdaki eski sayılar/teminat örnekleri tarihsel.
+
 **Son revizyon:** Kullanıcının 3.3.1 sorusuyla pay vadeli fiyat kotasyonu, 100 pay çarpanı, teminat, günlük kâr/zarar ve fiziki teslimat açıklandı. Önceki miktar konusu genişletildi; yeni konuya geçilmedi. 600 TL teminat ve sabit 21 TL vade senaryosu varsayımsaldır. Sıradaki yeni konu fiyat adımı ve limitler.
 
 **Son tamamlanan:** Kullanıcının devam talebiyle emir defteri/eşleşme konusu yazıldı; BYF tekrarları azaltıldı. Kitapta dört konu, 44 iskelet; yayın 0.5. Sıradaki konu fiyat adımı ve fiyat sınırları. Yeni konu okuma bekliyor; aşağıdaki önceki devam noktaları tarihsel.

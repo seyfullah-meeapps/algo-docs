@@ -12,6 +12,10 @@ durum: bos
 
 Long/short/flat, açık emir maruziyeti, nakit/satılabilir bakiye, maliyet ve komisyon.
 
+## Kredili işlemler — ayrı anlatılacak başlık
+
+Kullanıcının 24 Ekim 2026 talebiyle bu konu altında ayrı ele alınacak: kredi limiti/kullanılmış kredi borcu, nakit/özkaynak, kredili spot alımın faiz ve bakiye etkisi; VİOP teminatından farkı. Kuruma özgü bakiye alanları ve kredi limitinin VİOP’ta kullanımı doğrulanmadan genellenmeyecek. Bu başlık henüz yazılmadı; konu iskelet durumundadır.
+
 ## Anlatım ve örnekler
 
 Henüz yazılmadı. [Çalışma düzeni](../calisma-duzeni.md) uygulanacak.

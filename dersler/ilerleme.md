@@ -8,17 +8,15 @@ durum: taslak
 
 ## Şu an
 
-**Son revizyon:** Kullanıcının 3.3.1 sorusuyla pay vadeli fiyat kotasyonu, 100 pay çarpanı, teminat, günlük kâr/zarar ve fiziki teslimat açıklandı. Önceki miktar konusu genişletildi; yeni konuya geçilmedi. 600 TL teminat ve sabit 21 TL vade senaryosu varsayımsaldır. Sıradaki yeni konu fiyat adımı ve limitler.
-
-Kullanıcı BYF açıklamasından sonra devam istedi. Emir defteri ve eşleşme taslağı yazıldı; önceki konuda BYF tekrarları azaltıldı, kısa ürün tanımı korundu. Dört konu kitapta, 44 konu iskelet. Yeni konu henüz kullanıcı okumasından geçmedi.
+Kullanıcı sade vadeli anlatımını anladığını belirtti ve kaydedilmesini istedi. Tek sözleşme, 5.000 TL nakit ve varsayımsal 300 TL teminat örneği kaydedildi; 21 TL’nin açılışta ödenmediği açıklandı. Kredili işlemler için bakiye konusunda ayrı başlık planlandı. Fiyat adımı ve fiyat sınırları yazıldı; beş konu kitapta, 43 konu iskelet.
 
 ## Son tamamlanan iş
 
-Alış/satış, spread, kademe/derinlik, fiyat-zaman önceliği, kuyruk, kısmi ve çok seviyeli eşleşme örneği yazıldı. Header/erime ve piyasa defteri/kendi emri ayrımı açıklandı. Resmi BIST kaynakları okundu; yeni kod veya canlı test yok. Yayın sürümü 0.5; PDF/HTML/EPUB yenilendi. PDF 12 A4 sayfa; yeni sayfalar görsel olarak, EPUB paket bütünlüğü ve belge bağlantıları araçlarla kontrol edildi.
+Vadeli örneği sadeleşti; kredi ile VİOP teminatı ayrıldı. Yeni konuda tick/spread, baz/tavan/taban, yuvarlama ve strateji fiyat koşulu açıklandı. Resmi BIST kaynakları okundu; gerçek günlük oran/adım kataloğu, kod veya canlı test yok. Yayın 0.6; PDF/HTML/EPUB yenilendi. PDF 14 A4 sayfa; değişen ve yeni sayfalar görsel kontrol edildi, EPUB bütünlüğü ve 1.870 bağlantı kontrolü geçti.
 
 ## Sıradaki tek başlangıç noktası
 
-`02-borsa-temelleri/03-fiyat-adimi-ve-limitler.md`: fiyat adımı, baz fiyat, tavan/taban ve ürün bazlı kurallar. Okuma revizyonları gelirse önce ilgili dosyada işlenir.
+`02-borsa-temelleri/04-emir-tipleri-ve-sureleri.md`. Kredili işlemlerin ayrıntısı `07-pozisyon-bakiye-kar-zarar.md` içinde ayrı başlık olarak yazılacak; kurum bilgisi olmadan kredi/teminat bakiye eşlemesi uydurulmaz.
 
 ## Kalıcı çalışma düzeni
 
@@ -28,4 +26,4 @@ Yayın kullanımı `yayin/README.md`, tasarım kaynakları `yayin/marka.md`, yay
 
 ## Doğrulama ve Git
 
-Dört konu `taslak`, kalan 44 konu `bos`. Yapısal kontrol: 168 Markdown, 1.870 bağlantı, 0 hata; `git diff --check` temiz. Çıktılar ve araçlar Git dışında. Önceki push otomatik onay incelemesince reddedildi; kullanıcı uzak depoya gönderim onayı vermedi. Push tekrar denenmez; çalışmalar yerelde saklanır.
+Beş konu `taslak`, kalan 43 konu `bos`. Yapısal kontrol: 168 Markdown, 1.870 bağlantı, 0 hata; `git diff --check` temiz. Çıktılar ve araçlar Git dışında. Önceki push otomatik onay incelemesince reddedildi; kullanıcı uzak depoya gönderim onayı vermedi. Push tekrar denenmez; çalışmalar yerelde saklanır.
