@@ -32,22 +32,22 @@
   },
 )
 
-#page(fill: rgb("#0f0f0f"), header: none, footer: none, numbering: none)[
-  #set text(fill: white)
+#page(fill: white, header: none, footer: none, numbering: none)[
+  #set text(fill: black)
   #v(8mm)
-  #image("brand-logo.png", width: 48mm)
+  #block(fill: brand, inset: 7mm, radius: 3mm)[#image("brand-logo.png", width: 40mm)]
   #v(33mm)
   #line(length: 24mm, stroke: 3pt + brand)
   #v(10mm)
-  #text(size: 29pt, weight: "bold", fill: white, tracking: -0.2pt)[$title$]
+  #text(size: 29pt, weight: "bold", fill: black, tracking: -0.2pt)[$title$]
   #v(9mm)
-  #text(size: 12pt, fill: rgb("#dcdcdc"))[$subtitle$]
+  #text(size: 12pt, fill: black)[$subtitle$]
   #v(1fr)
-  #line(length: 100%, stroke: 0.5pt + rgb("#404040"))
+  #line(length: 100%, stroke: 0.5pt + border)
   #v(5mm)
   #grid(columns: (1fr, auto),
-    text(size: 9pt, fill: brand)[BIST · Algo / HFT],
-    text(size: 9pt, fill: rgb("#dcdcdc"))[A4 okuma sürümü],
+    text(size: 9pt, fill: black)[BIST · Algo / HFT],
+    text(size: 9pt, fill: black)[A4 okuma sürümü],
   )
 ]
 

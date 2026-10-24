@@ -11,6 +11,8 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Şu an (2026-10-24)
 
+**Son tasarım tercihi:** Kapak beyaz ve metinler siyah; beyaz logo primary yeşil zeminde. SVG ok uçları küçültüldü. Yayın çıktıları yenilendi ve kapak/şema görsel kontrol edildi. Önceki koyu kapak tercihi bu kullanıcı revizyonuyla değişti.
+
 **Son çalışma: rehber tasarımı revize edildi.** Kullanıcı frontend marka öğelerini, daha küçük metin ve daha geniş başlık aralarını istedi. mtrader-trade-ui development `b0474c3` logo/CSS kaynakları salt okunur incelendi. Yayın tasarımına kopya logo, yeşil/nötr palet, 10,25 pt gövde, 18/12 pt başlık ve daha geniş aralıklar uygulandı. Kaynak/ölçü kaydı `dersler/yayin/marka.md`. PDF/HTML/EPUB yeniden üretildi; yeni tasarımın kullanıcı tarafından onaylandığı varsayılmaz. Sonraki içerik kullanıcılar ve örnek iş günü.
 
 **A4 çıktı düzeni kuruldu.** Kullanıcı PDF/EPUB ve sürdürülebilir önizleme/revizyon istedi. `dersler/yayin/README.md` kullanım noktası; Quarto taşınabilir kurulum `.tools/` içinde. Üretim, A4 PDF izleme ve canlı HTML görevleri `.vscode/tasks.json` içinde. İlk örnek 5 A4 sayfa; tüm PDF sayfaları görsel, EPUB paket yapısı ve canlı HTML kaynak yenilemesi kontrol edildi. Çıktılar `output/` altında Git dışı; kaynak MD ve yayın ayarları izlenir. Sıradaki konu kullanıcılar ve örnek iş günü; ilk yazılan konu okundu/onaylandı varsayılmadı.

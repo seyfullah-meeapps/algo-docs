@@ -2,6 +2,11 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-24 — Beyaz kapak ve küçük ok uçları
+
+- Kullanıcı revizyonuyla kapak beyaz, metinler siyah yapıldı; özgün beyaz logo primary yeşil alana yerleştirildi. HTML logo alanı da aynı renge alındı.
+- SVG ok uçları çizgi kalınlığıyla büyümeyecek şekilde küçültüldü. Üç çıktı yeniden üretildi; kapak ve şema PDF üzerinden görsel kontrol edildi. İlerleme ve tasarım kaydı güncellendi.
+
 ## 2026-10-24 — Frontend markası ve rehber okunabilirliği
 
 - Frontend development b0474c3 içindeki özgün beyaz logo ve `app/global.css` renk tokenları okunarak yayın katmanına uygulandı; frontend değiştirilmedi. Kaynak/renk/ölçü kaydı eklendi.

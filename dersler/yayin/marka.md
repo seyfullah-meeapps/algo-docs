@@ -16,9 +16,9 @@ Kaynak klon `mtrader-trade-ui`, development `b0474c3f564a8f2513352014c3c1c80841d
 
 | Öğe | Kaynak | Rehber kullanımı |
 |---|---|---|
-| Beyaz, saydam MeeApps logosu | `public/assets/images/MeeApps_Logo.png` | Aynı dosya [brand-logo.png](brand-logo.png) olarak kopyalandı; koyu kapak ve HTML sidebar |
+| Beyaz, saydam MeeApps logosu | `public/assets/images/MeeApps_Logo.png` | Aynı dosya [brand-logo.png](brand-logo.png) olarak kopyalandı; marka yeşili logo alanı ve HTML sidebar |
 | Marka yeşili `#94c04e` | `app/global.css`, `--color-primary` | Ayırıcılar ve seçili bölüm vurgusu |
-| Koyu zemin `#0f0f0f` | Dark `--color-bg` | PDF kapağı ve logo zemini |
+| Kapak zemini beyaz `#ffffff` | Light `--color-bg` | Kullanıcı revizyonuyla beyaz kapak; siyah metin |
 | Başlık `#212121`, gövde `#333333` | Light `--color-fg-strong` / `--color-fg` | Beyaz iç sayfalardaki yüksek kontrastlı metin |
 | Çizgi `#d9d9d9`, yüzey `#f4f4f5` | `--color-border` / `--color-soft-dark` | Tablolar ve ayırıcılar |
 | Bağlantı `#15803d` | Light `--color-up` / `--color-action-start` | Beyaz zeminde daha koyu yeşil bağlantı tonu |
@@ -34,3 +34,7 @@ Logo yeniden çizilmedi, yeniden renklendirilmedi. SHA-256: `EAF8C713A28F508AB8B
 HTML ana metni 15 px, satır yüksekliği 1,85; başlık/paragraf boşlukları artırıldı. EPUB ayrı [epub.css](epub.css) ile göreli `1em` boyut kullanır; okuyucunun font tercihi korunur. PDF/HTML renk ve ölçüleri tek bir ekranın piksel eşlemesi değildir.
 
 PDF'nin beş sayfası ve HTML bölüm görünümü görsel olarak kontrol edildi. EPUB paket kontrolü yapıldı; ayrı e-kitap okuyucusundaki görünüm henüz denenmedi. Yeni tasarım kullanıcı tarafından onaylanmış sayılmaz.
+
+## Kapak ve ok ucu revizyonu
+
+24 Ekim 2026: kullanıcı koyu kapağı beyaz, kapak metinlerini siyah istedi. Beyaz logo marka primary rengi `#94c04e` zeminli bir alana yerleştirildi; HTML logo alanı da aynı yeşile alındı. SVG ok uçları `markerUnits=userSpaceOnUse` ile çizgi kalınlığından bağımsız 8 birimlik alana indirildi; önceki örtük strokeWidth ölçeklemesi kaldırıldı. Çıktılar yeniden üretildi, kapak ve şema PDF üzerinden görsel kontrol edildi.

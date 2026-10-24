@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1000" height="420" viewBox="0 0 1000 420" role="img" aria-labelledby="title desc">
   <title id="title">Piyasa verisinden kullanıcıya işlevsel akış</title>
   <desc id="desc">Piyasa verisi ve kullanıcı ayarları kuralların değerlendirilmesine girer. Koşullar uygunsa emir gönderilir; borsa sonucu ile durum ve pozisyon güncellenip kullanıcıya gösterilir.</desc>
-  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0 L8 4 L0 8" fill="none" stroke="#6b6b6b" stroke-width="1.5"/></marker></defs>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" viewBox="0 0 8 8" markerUnits="userSpaceOnUse" refX="7" refY="4" orient="auto"><path d="M1 1 L6 4 L1 7" fill="none" stroke="#6b6b6b" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
   <rect width="1000" height="420" fill="#f4f4f5" rx="18"/>
   <g fill="white" stroke="#d9d9d9" stroke-width="2">
     <rect x="35" y="35" width="270" height="90" rx="12"/>

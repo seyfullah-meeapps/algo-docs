@@ -8,6 +8,8 @@ durum: taslak
 
 ## Şu an
 
+Son küçük revizyon: kapak beyaz, metinler siyah; beyaz logo primary yeşil zemin üzerinde. Şemadaki ok uçları küçültüldü; PDF/HTML/EPUB yenilendi ve değişen PDF sayfaları kontrol edildi. Kaynak kayıt `yayin/marka.md`.
+
 **Son revizyon: marka ve okunabilirlik.** Kullanıcının “frontend logo/renklerini kullan, metni küçült ve başlık aralarını aç” geri bildirimi uygulandı. Frontend development `b0474c3` içindeki logo ve CSS tokenları okundu; kaynakta değişiklik yok. PDF gövdesi 10,25 pt, başlıklar 18/12 pt; başlık/paragraf araları artırıldı. Koyu logolu kapak, marka yeşili ve nötr iç sayfalar PDF/HTML/EPUB'a uygulandı. Detay `yayin/marka.md`. Yeni tasarım kullanıcı onayı bekleyen revizyondur; içerik yazım sırası değişmedi.
 
 **Yeni tamamlanan iş: A4 yayın ve önizleme düzeni.** `yayin/` altında Quarto ayarları, yayın listesi, üretim/kurulum scriptleri ve okuma yönergesi var. VS Code görevleri eklendi. Quarto 1.10.18 resmi ZIP paketi SHA-256 doğrulanarak `.tools/` içine taşınabilir kuruldu; sistem PATH ayarı değişmedi. PDF/HTML/EPUB üretildi; PDF 5 A4 sayfa. PDF'nin bütün sayfaları görsel kontrol edildi, EPUB paket kontrolü geçti. Canlı HTML'de kaynak değişikliği ve geri alma otomatik yenilenerek doğrulandı. Farklı EPUB okuyucu görünümü henüz denenmedi.

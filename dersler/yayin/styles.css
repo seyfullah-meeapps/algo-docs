@@ -29,7 +29,7 @@ img { max-width: 100%; height: auto; }
 figure { margin: 2rem 0; }
 figcaption { color: var(--guide-muted); font-size: .85em; margin-top: .7em; }
 pre { white-space: pre-wrap; overflow-wrap: anywhere; font-size: .85em; }
-.sidebar-logo { background: #0f0f0f; padding: 18px 28px; border-radius: 8px; width: 180px; }
+.sidebar-logo { background: var(--guide-primary); padding: 18px 28px; border-radius: 8px; width: 180px; }
 #quarto-sidebar { border-right: 1px solid #eee; }
 .sidebar-item-text.active { border-left: 3px solid var(--guide-primary); padding-left: 8px; color: #212121 !important; }
 .quarto-title-block { padding-bottom: 1.4rem; border-bottom: 3px solid var(--guide-primary); margin-bottom: 2rem; }
