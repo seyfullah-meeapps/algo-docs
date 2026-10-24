@@ -2,6 +2,12 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-24 — Admin/backend alan sözleşmesi
+
+- Admin main ve trade-data-app development fetch/pull: referans uçlar aynı. Admin feature ayrı kaldı; main frontend / backend development-master proto farkları tekrar okundu.
+- K-221'e hesap listesinde eksik repeat_count için doğrudan toLocaleString çağrısının render sınırı eklendi. K-224 parola request/model/SQL yolu kontrol edildi; optional OUCH alanlarıyla aynı koruma varsayılmadı.
+- Yeni sorun numarası ve uygulama değişikliği yok; browser/DB testi veya gerçek parola işlemi yapılmadı. Sıradaki operasyon/deploy kaynakları.
+
 ## 2026-10-24 — Yeni GUI strateji payload/snapshot
 
 - GUI/HFT fetch/development pull: referans uçlar aynı. Teorik feature ucu 26ce9b2'ye ilerledi; yeni feature kodu incelenmedi, önceki kayıt eski commit kapsamındadır.

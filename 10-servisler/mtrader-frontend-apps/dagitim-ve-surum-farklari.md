@@ -40,6 +40,16 @@ Sözleşme kaynakları trade-data-app `admin_ui.proto`/`admin_ui.yaml`; UI seçe
 
 ## 2. Build ve servis etme
 
+### 24 Ekim kaynak kontrolü
+
+Admin main `db10c12` ve trade-data-app development `1cca9a8` yeniden fetch/pull edildi, uçlar değişmedi; backend master `4a43e19` ref'i de yenilendi. Feature `feat/ouch-repeat-count-core-to-pin` hâlâ `8ba2a67`; main desteği sayılmadı. Alan farkı tablosu geçerlidir (K-221).
+
+K-221 yalnız edit formuyla sınırlı değildir: main `app/routes/accounts/index.tsx` repeat_count hücresi `row.original.repeat_count.toLocaleString("tr-TR")` çağırır. Development UserAccount proto'sunda bu alan reserved olduğundan, arada alanı üreten başka bir dönüşüm yoksa undefined değerde render hatası oluşabilir. Browser/gateway testi yapılmadı; bütün müşteri listelerinin çöktüğü iddia edilmez. Master proto alanı koruduğundan aynı risk main frontend + master backend'e koşulsuz taşınmaz.
+
+Development `UpdateOrderUser` eksik optional repeat_count/core_to_pin için mevcut kaydı okuyup değerleri korur. Bu, panelde yeni alanları düzenleyebilme desteği değildir. Parola aynı koruma altında değildir: request password doğrudan modele, oradan SQL `password=?` atamasına gider; boşaltılmış/atlanmış edit parolasının eski parolayı koruduğu varsayılmaz (K-224). SQL ayrıca parola farklıysa pendingPassword'ü temizler. Gerçek parola değiştirilmedi; canlı DB kullanılmadı.
+
+Kaynak: admin `types/{accounts,order-users}.ts`, hesap/order-user form ve liste; backend `api/protobuf-spec/admin_ui.proto`, `pkg/servicemodels/admin_api.go`, `pkg/db/mysql/admin_db.go`, master proto karşılığı. İnceleme statik alan sözleşmesidir; CI/build ve müşteri deployment'ı henüz bu turda doğrulanmadı.
+
 - `react-router.config.ts`: ssr:false, statik SPA. `npm run dev`: React Router dev server; `npm run typecheck`: typegen + TypeScript.
 - Build script'i `react-router build` sonrası client dosyalarını build köküne taşır, client/server alt dizinlerini kaldırır. POSIX mv/rm kullanır; PowerShell'e doğrudan taşınabilir değildir.
 - `npm start`, `react-router-serve ./build/server/index.js` bekler; build script'i server dizinini kaldırır. Production Dockerfile statik nginx kullanır.

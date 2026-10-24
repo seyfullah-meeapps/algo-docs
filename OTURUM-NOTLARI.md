@@ -11,6 +11,8 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Şu an (2026-10-24)
 
+- Admin/backend alan alt turu tamamlandı: admin main ve TDA development fetch/pull, main/master ref'leri aynı. K-221 liste render sınırı ve K-224 password SQL yolu yeniden kontrol edildi; yeni sorun numarası yok. Bugün toplam beş kaynak repo güncellendi; canlı DB/browser testi yapılmadı.
+
 - GUI/HFT payload-snapshot alt turu tamamlandı: iki repo yeniden fetch/pull, referans uçlar aynı. Saat alias'ı ve süre/delta dönüşümleri kontrol edildi; Classic stop kapatma farkı sürüyor. Bugün toplam üç repo güncellendi (AlgoProd+GUI+HFT). Teorik feature ucu 26ce9b2'ye ilerledi, yeni uç incelenmedi.
 
 - AlgoProd kalan AKD/Overall/stop-loss ve paket/hedge statik alt turu tamamlandı. Bugün yalnız AlgorithmicTrading yeniden fetch/pull edildi; dev/master aynı. K-205/K-206 sürüyor, yeni sorun numarası yok. Bugünkü kanıt ve sınırlar `_surec/kaynak-karsilastirmasi-2026-10-24.md` içinde; önceki 15 repo kontrolü 23 Ekim tarihidir.
@@ -44,7 +46,7 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Sıradaki
 
-**Sıradaki: admin main ve backend development/master alan eşleşmeleri; ardından operasyon/deploy.** Yeni GUI strateji payload-snapshot alt turu kaydedildi; eski GUI ve bütün gateway yolları yeniden doğrulanmış sayılmaz. Entegrasyon/gerçek exchange, thread yarışları ve prod doğrulaması yapılmadı. Bütün bilgi tabanının ikinci doğrulaması henüz tamamlanmadı.
+**Sıradaki: operasyon/deploy ikinci turu.** Algo-Setup, algo-configs ve servis CI/config yolları güncel referans ve development/master/main farklarıyla karşılaştırılacak. GUI/admin alan alt turları kaydedildi; eski GUI ve bütün gateway yolları yeniden doğrulanmış sayılmaz. Entegrasyon/canlı prod doğrulaması yapılmadı. Bütün bilgi tabanının ikinci doğrulaması henüz tamamlanmadı.
 
 Kullanıcı içerik onayı geldikçe durum etiketi kapsamına göre güncellenir; genel devam talimatıyla topluca dogrulandi yapılmaz. Uygulama bug düzeltmesi/deploy bu doküman incelemesinin dışında kaldı.
 
