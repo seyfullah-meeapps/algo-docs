@@ -2,6 +2,12 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-24 — Teorik feature yeni uç incelemesi
+
+- HFT fetch/development pull sonrası 4275ccc/master 052dd96 aynı. Feature 26ce9b2 yalnız kendi remote dalında; bfe65e2 sonrası tek commit/beş dosya incelendi.
+- Açılış ilk eşleşme yayını, işleme anında own-state guard, sıfır denge koruması ve reverse emirde Expected_Price farkları ayrı feature bölümüne işlendi; referans akış değiştirilmedi.
+- K-04/replace log-only sürüyor; statik inceleme, build/replay/canlı emir yok. Sıradaki K-240 motor eşleşmesi.
+
 ## 2026-10-24 — Varant handler senaryoları
 
 - HFT development fetch/pull sonrası 4275ccc aynı. Dört gerçek C++ gövdesi, sahte SDK/mesaj yüzeyi ve gerçek mutex ile beş yerel senaryo sınandı.

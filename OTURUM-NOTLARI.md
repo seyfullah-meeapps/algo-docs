@@ -11,6 +11,8 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Şu an (2026-10-24)
 
+- Teorik feature 26ce9b2 statik delta incelemesi tamamlandı. HFT fetch/pull sonrası development/master aynı, commit yalnız feature dalında; açılış bildirimi, own-state guard, sıfır denge ve reverse Expected_Price farkları `20-stratejiler/teorik-fiyat.md` içinde. K-04 değişmedi; runtime/build yok.
+
 - K-241/K-242 development 4275ccc gövdeleriyle yerelde sınandı: beş senaryo beklendiği gibi. MSVC senkron ret yeniden kilidinde istisna; iki satış ACK'i sonrası son token'a toplam miktarla replace gözlendi. Kanıt `_surec/dogrulama-varant-2026-10-24.md`; adaylar açık, tam entegrasyon/canlı test veya uygulama düzeltmesi yok.
 
 - K-233/K-234 handler düzeyinde yerelde yeniden üretildi: gerçek C++ gövdeleri, sahte DB/QuickFIX yüzeyi, MSVC; 5 senaryo geçti. Script `_surec/dogrula_sifre_akisi.py`, kanıt `_surec/dogrulama-sifre-akisi-2026-10-24.md`. SDK/order-service fetch/pull sonrası c2b5060/26e9a02 aynı. Canlı entegrasyon veya uygulama düzeltmesi yapılmadı.
@@ -65,7 +67,7 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Sıradaki
 
-**Sıradaki: yeni Teorik feature ucu 26ce9b2 incelemesi.** K-241/K-242 yerel handler senaryoları tamamlandı; gerçek SDK/host entegrasyonu ve prod platform davranışı ayrıca doğrulanmalı. K-233/K-234 handler düzeyinde üretildi, düzeltilmedi; canlı oturum testi yok. K-243 geri çekildi. Canlı ortam ve bug düzeltmeleri tamamlandı sayılmaz.
+**Sıradaki: K-240 GUI Sweep_Left_Ask için eşleşen motor feature dalını araştırmak.** Teorik 26ce9b2 statik delta tamamlandı; zamanlama entegrasyonu sınanmadı. K-241/K-242 yerel handler senaryoları tamamlandı; gerçek SDK/host entegrasyonu ve prod platform davranışı ayrıca doğrulanmalı. K-233/K-234 düzeltilmedi; canlı oturum testi yok. K-243 geri çekildi. Canlı ortam ve bug düzeltmeleri tamamlandı sayılmaz.
 
 Kullanıcı içerik onayı geldikçe durum etiketi kapsamına göre güncellenir; genel devam talimatıyla topluca dogrulandi yapılmaz. Uygulama bug düzeltmesi/deploy bu doküman incelemesinin dışında kaldı.
 

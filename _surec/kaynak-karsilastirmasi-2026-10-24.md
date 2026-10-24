@@ -46,4 +46,8 @@ SDK c2b5060/order-service 26e9a02 workflow'ları ve Setup run/config seçimi oku
 
 ## Sıradaki
 
-Kapanış kapsam/tutarlılık kontrolü tamamlandı: [sonuç ve kalanlar](ikinci-tur-sonuc-2026-10-24.md). K-240 ve yeni Teorik feature ucu açık; canlı binary/port/tuning doğrulanmadı. Sonraki iş öncelikli adayların ayrı teknik doğrulamasıdır.
+Kapanış kapsam/tutarlılık kontrolü tamamlandı: [sonuç ve kalanlar](ikinci-tur-sonuc-2026-10-24.md). Teorik feature ucu aşağıdaki takipte incelendi; K-240 ve canlı binary/port/tuning doğrulaması açık.
+
+## Teknik takip — Teorik feature 26ce9b2
+
+HFT yeniden fetch + development pull sonrası development `4275ccc`, master `052dd96`, feature `26ce9b2` aynı. Remote contains kontrolünde feature commit yalnız kendi dalında. `bfe65e2..26ce9b2` tek commit/beş dosya delta incelendi: [Teorik ayrıntısı](../20-stratejiler/teorik-fiyat.md#24-ekim--feature-26ce9b2-farkı). Açılış yayını, own-state guard, sıfır dengeyi koruma ve reverse Expected_Price farkları development davranışına geçirilmedi. K-04 açık; build/replay/canlı emir yok. Sıradaki K-240 motor feature eşleşmesi.

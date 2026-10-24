@@ -9,8 +9,8 @@ kaynak:
     commit: 052dd96
   - repo: HftSrvProd
     branch: theo-cancel-on-first-eslestirme
-    commit: bfe65e2
-dogrulama: 2026-10-22
+    commit: 26ce9b2
+dogrulama: 2026-10-24
 durum: taslak
 ---
 
@@ -53,6 +53,19 @@ Kod: `src/Strategy/HftTheoreticalPrice.{h,cpp}`, `src/Commands/TheoreticalPriceC
 Feature `theo-cancel-on-first-eslestirme` `bfe65e2`, development `4275ccc` üzerine ayrı değişikliktir. `ItchSdkClient` ilk `KapanisEmirToplama → Eslestirme` geçişini diğer çalışan Teorik stratejilere sentetik state olayıyla yayar; kendi orderbook'u ilk eşleşen strateji bu yayından hariçtir. `closingEvaluated` daha sonra kendi state olayında bir tekrar değerlendirmesini atlar. Başlat/durdur listener kaydı ekler/çıkarır.
 
 Bu “bütün emirler ilk dolumdan önce iptal edilir” garantisi değildir: olay alma, AlgoWorker kuyruğu, cancel gönderimi ve exchange işlemesi arada kalır. Feature K-04'ün log-only fill kaydını veya kalan miktar güncellemesini değiştirmez. Feature yorumundaki BIST fill/state sırası bu turda protokol veya canlı kayıtla teyit edilmedi. Referans doküman davranışı bu dala geçirilmedi; build/canlı test yok.
+
+### 24 Ekim — feature 26ce9b2 farkı
+
+Yeniden fetch + development pull sonrası development `4275ccc`, master `052dd96` değişmedi. Feature ucu `26ce9b2`; `bfe65e2` üzerine tek commit, beş dosyada değişiklik var. Remote ref'ler içinde bu commit yalnız `origin/theo-cancel-on-first-eslestirme` tarafından içeriliyor. Aşağıdaki davranışlar development/master'a ait değildir:
+
+- İlk eşleşme yayını açılışa da genişletildi: `AcilisEmirToplama → Eslestirme` ve `KapanisEmirToplama → Eslestirme` için ayrı atomik bayraklar var. İlgili emir toplama callback'i bayrağı sıfırlar. Listener API'si `add/removeAuctionMatchListener` oldu; manager başlangıç/durdurma çağrıları da güncellendi.
+- Başka orderbook'un sentetik eşleşmesi işlendiğinde kendi orderbook'unun **o anda cache'teki** state'i olayın `previousState` değeriyle aynı değilse olay atlanır. Aynıysa `matchEvaluated=true` yapılıp değerlendirme çalışır; sonraki kendi eşleşmesi bayrağı sıfırlayıp bir değerlendirmeyi atlar. Eski `closingEvaluated` adı değişti.
+- Denge fiyatı **0** ise ilgili emir için aksiyon alınmaz. Guard gerçek sıfır ile henüz alınmamış denge fiyatını ayırmaz; sıfır olmayan eski fiyatın tazeliğini kontrol etmez.
+- Sabah ters emrinin miktarı hâlâ accepted emrin miktarıdır; fiyatı artık accepted fiyat yerine `static_cast<int32_t>(Expected_Price)` olur. Örnek: accepted fiyat 100000, expected 99000, denge 101000 olan BUY için sabah ters SELL fiyatı 99000 olur. Akşam cancel/sabah reverse seçimi hâlâ `nightEmirToplama` ile yapılır; `evaluateTheoreticalOrders(true)` bunu değiştirmez.
+
+Own-state kontrolü olay kuyruğa alınırken değil **işlenirken** okunur. Kendi state'i worker olayı tüketmeden ilerlerse erken değerlendirme atlanabilir; ilk eşleşmede mutlaka müdahale garantisi çıkarılmaz. Bayraklar orderbook başına değil client genelinde açılış/kapanış içindir; farklı orderbook state'lerinin geliş sırası ayrıca zamanlama doğrulaması gerektirir. Bu statik delta incelemesidir, yeni runtime bug kanıtı değildir.
+
+K-04 ve replace log-only davranışı değişmedi. Build, worker/ITCH replay veya canlı emir testi yapılmadı; BIST fill/state sırası yorumları ayrıca doğrulanmadı. Yukarıdaki genel akış development/master'ı anlatmaya devam eder.
 
 ### Arayüz
 

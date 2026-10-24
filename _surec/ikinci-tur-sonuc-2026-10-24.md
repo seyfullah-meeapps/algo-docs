@@ -35,7 +35,7 @@ Planlanan konu bazlı statik karşılaştırma ve kapanış tutarlılık taramas
 
 24 Ekim'de SDK `c2b5060`, order-service `26e9a02`, Setup `cade7d0` development'a ilerledi. Brüt-takas per-call açılış istisnası ve tekrarsız satır dağıtımı ilgili belgelere işlendi. Manifestte tam doğrulama SHA'ları topluca ilerletilmedi; dosya frontmatter'ındaki eski baseline ile tarihli ek bölüm ayrımı korunur. Yeni alan dışındaki eski içeriğin tamamı bu yeni SHA'lara karşı onaylandı sayılmaz.
 
-Teorik feature `bfe65e2` incelendikten sonra `26ce9b2`'ye ilerledi; yeni uç yeniden incelenmedi. Varant GUI feature/motor eşleşmesi K-240 açık. Feature yorumları referans veya prod davranışı sayılmadı.
+Teorik feature `26ce9b2` takipte [statik delta olarak incelendi](../20-stratejiler/teorik-fiyat.md#24-ekim--feature-26ce9b2-farkı): açılış yayını, own-state guard, sıfır denge ve ters emir fiyatı farkları kaydedildi. Development/master'a merge edilmemiş; runtime zamanlaması sınanmadı. Varant GUI feature/motor eşleşmesi K-240 açık. Feature yorumları referans veya prod davranışı sayılmadı.
 
 ## Öncelikli takip
 
