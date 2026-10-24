@@ -1,0 +1,30 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Rehber: PDF + HTML + EPUB üret",
+      "type": "process",
+      "command": "python",
+      "args": ["dersler/yayin/uret.py", "--format", "all"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "group": {"kind": "build", "isDefault": true},
+      "problemMatcher": []
+    },
+    {
+      "label": "Rehber: A4 PDF değişikliklerini izle",
+      "type": "process",
+      "command": "python",
+      "args": ["dersler/yayin/uret.py", "--format", "pdf", "--watch"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": []
+    },
+    {
+      "label": "Rehber: Canlı tarayıcı önizlemesi",
+      "type": "process",
+      "command": "python",
+      "args": ["dersler/yayin/uret.py", "--preview"],
+      "options": {"cwd": "${workspaceFolder}"},
+      "problemMatcher": []
+    }
+  ]
+}

@@ -20,4 +20,6 @@ MeeApps BIST algo/HFT stack'inin bilgi tabanı. Birincil okuyucu AI agent'lardı
 
 İnsan için konu bazlı uygulama ve sistem rehberi: [dersler/README.md](dersler/README.md). 24 Ekim 2026 kullanıcı talebiyle yeniden düzenlenen bu rehber çalışması, kapanmış teknik inceleme aşamasından ayrıdır.
 
+A4 PDF, EPUB ve canlı HTML önizleme: [okuma ve çıktı yönergesi](dersler/yayin/README.md). VS Code'da `Ctrl+Shift+B` üç çıktıyı üretir; Markdown dosyaları ana kaynak olarak kalır.
+
 Kapsam dışı: mate, Backoffice, Kripdome/DTA, Algo-GUI (emekli masaüstü arayüz). Eski bilgi tabanı `MeeApps/meeapps-ai` olduğu gibi duruyor; bu repo onun yerini alır.

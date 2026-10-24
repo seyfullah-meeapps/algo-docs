@@ -2,6 +2,13 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-24 — A4 PDF, HTML ve EPUB yayın düzeni
+
+- Quarto 1.10.18 resmi Windows ZIP'i checksum ile doğrulanıp proje içine taşınabilir kuruldu. MD kaynaklarını koruyan hazırlama/üretim scripti, A4 Typst şablonu, yayın listesi ve tekrar kurulum scripti eklendi.
+- Kapak, otomatik içindekiler, sayfa numaraları ve ilk bölümden 5 sayfalık A4 örnek üretildi. SVG şema PDF/HTML/EPUB için eşlendi; kaynak Mermaid değişimi sessiz eski görsel kullanmak yerine hata verir.
+- Tek üretim, kaydetmede PDF yenileme ve canlı HTML için VS Code görevleri/kullanım yönergesi eklendi. Canlı kaynak yenilemesi ve geri alma doğrulandı. PDF sayfaları görsel incelendi; A4, Türkçe metin/font, sayfa sınırları ve EPUB paketi kontrol edildi; ayrı EPUB okuyucu görünümü denenmedi.
+- Yönetim/karar/soru takibi MD'de korunur; okuma kitabı yalnız seçilen konuları içerir. Araç, geçici dosya ve çıktılar Git dışında. Kaynak/publish talimatları yeni kullanıcı isteğiyle güncellendi; push yok.
+
 ## 2026-10-24 — Rehberin ilk konu anlatımı
 
 - “Ne yapıyoruz ve neyi amaçlıyoruz?” taslağı yazıldı: ürün amacı, kullanıcı kontrolü, basit veri–karar–emir–sonuç örneği, kavramsal Mermaid akışı ve bileşenlerin görev özeti.

@@ -32,6 +32,8 @@ Kullanıcı frontend'i yazdı; diğer katmanlardaki bilgisi sınırlı. PM rolü
 | R-14 | Rehber bir süre ana çalışma konusu; yazıma başlamadan açık tercihler tek tek netleştirilecek | Kullanıcının önceki talebi; henüz cevaplanmamış tercihler kararlaştırılmış sayılmaz |
 | R-15 | Ana metin çalışma mantığı, parametreler ve beklenen davranışa odaklanır; gerektiğinde kısa açıklamalı kod örnekleri verilir. Dosya/fonksiyon referansları ve daha derin C++ ayrıntıları ayrı teknik ayrıntı bölümünde tutulur; satır satır kod anlatımı hedeflenmez | Kullanıcı önerilen derinliği kabul etti: “çok ayrıntı olmasın” |
 | R-16 | Mevcut hatalar rehberde anlatılmaz; sorun takibi teknik bilgi tabanı/issue tarafında kalır. Düzeltme doğrulandıktan sonra etkilenen rehber anlatımı, örnek, GUI/parametre, şema ve test beklentisi güncellenir | Kullanıcının açık tercihi; düzelmemiş davranış çalışıyormuş gibi yazılmaz |
+| R-17 | Markdown kaynakları korunarak Quarto ile A4 PDF, HTML ve EPUB üretilir. A4 PDF'de otomatik içindekiler/sayfa numarası bulunur; EPUB akışkandır. Kaydetme sonrası izleme ve revizyon için yerel görevler kullanılır | Kullanıcı örnek çıktı ve sürdürülebilir üretim kurulumunu kabul etti |
+| R-18 | Kitap listesi açıkça yönetilir; boş konular, karar/ilerleme dosyaları ve süreç bölümleri okuma çıktısına alınmaz. Bunlar kaynak MD'de kalır | Önerilen okuma/yazım ayrımının uygulanması; ilk örnek yalnız yazılmış konuyu içerir |
 
 ## Konuşmada netleşen sorular — 24 Ekim 2026
 

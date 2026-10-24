@@ -1,0 +1,10 @@
+body { line-height: 1.6; }
+main { max-width: 900px; }
+table { font-size: .92em; }
+img { max-width: 100%; height: auto; }
+pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+@media print {
+  @page { size: A4; margin: 20mm; }
+  h1, h2, h3 { break-after: avoid; }
+  img, tr { break-inside: avoid; }
+}

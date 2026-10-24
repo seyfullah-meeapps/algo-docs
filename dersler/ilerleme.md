@@ -8,6 +8,10 @@ durum: taslak
 
 ## Şu an
 
+**Yeni tamamlanan iş: A4 yayın ve önizleme düzeni.** `yayin/` altında Quarto ayarları, yayın listesi, üretim/kurulum scriptleri ve okuma yönergesi var. VS Code görevleri eklendi. Quarto 1.10.18 resmi ZIP paketi SHA-256 doğrulanarak `.tools/` içine taşınabilir kuruldu; sistem PATH ayarı değişmedi. PDF/HTML/EPUB üretildi; PDF 5 A4 sayfa. PDF'nin bütün sayfaları görsel kontrol edildi, EPUB paket kontrolü geçti. Canlı HTML'de kaynak değişikliği ve geri alma otomatik yenilenerek doğrulandı. Farklı EPUB okuyucu görünümü henüz denenmedi.
+
+Kullanıcının sorusu: A4 okuyup gerekirse PDF/EPUB alırken ne kurmalı, nasıl takip ve revizyon yapmalı? Yanıt ve kalıcı kullanım düzeni `yayin/README.md` içinde. Bu bilgisayarda zorunlu ek indirme kalmadı. Güncel çıktılar Git'e alınmaz; ayarlar/scriptler saklanır. Sonraki içerik yine kullanıcılar ve örnek iş günü; yeni konular `yayin/kitap.json` listesine eklendikçe kitaba girer.
+
 Yazım öncesi temel tercihler netleşti: ana okuyucu kullanıcı; mantık/davranış odaklı anlatım, gerektiğinde kısa kod, derin ayrıntı ayrı bölümde. Mevcut hatalar rehberde anlatılmayacak; düzeltme doğrulandıktan sonra rehber güncellemesi kapanış kontrolüne dahil edilecek. Kalıcı kayıt [kararlar](kararlar.md) dosyasında. İlk konu “Ne yapıyoruz ve neyi amaçlıyoruz?” taslak olarak yazıldı; kullanıcı okuma geri bildirimi henüz yok. Sonraki konu kullanıcılar ve örnek iş günü; bu rehber ana çalışma konusu.
 
 24 Ekim 2026: kullanıcı ders düzeninden konu bazlı yazılı rehbere geçilmesini istedi. Ayrıntılı indeks, altı bölüm indeksi ve 48 konu iskeleti oluşturuldu. Eski 11 dosya `arsiv/` altında korundu. Rehbere özel talimatlar, kararlar, yazım düzeni ve strateji şablonu hazırlandı.
@@ -35,4 +39,4 @@ Konu dosyasındaki devam notuna yazılan kapsam, incelenen kaynak, kalan doğrul
 
 ## Doğrulama ve Git
 
-Yapısal kontrol tamamlandı: 165 Markdown, 1.848 bağlantı, 0 hata; ilk konu `taslak`, kalan 47 konu `bos`. `git diff --check` temiz. Önceki oturumda push otomatik onay incelemesince reddedildi; kullanıcı uzak depoya gönderim onayı vermedi. Push tekrar denenmez; çalışmalar yerelde saklanır.
+Yapısal kontrol tamamlandı: 166 Markdown, 1.856 bağlantı, 0 hata; ilk konu `taslak`, kalan 47 konu `bos`. `git diff --check` temiz. Yayın çıktıları ve araçlar Git dışında. Önceki oturumda push otomatik onay incelemesince reddedildi; kullanıcı uzak depoya gönderim onayı vermedi. Push tekrar denenmez; çalışmalar yerelde saklanır.

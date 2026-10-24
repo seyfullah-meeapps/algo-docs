@@ -12,6 +12,8 @@ Bu rehber uygulamanın amacından başlayıp borsa ve teknik temellere, sistem m
 
 ## Devam edecek agent için
 
+**A4 okuma ve çıktı:** PDF/HTML/EPUB üretimi, canlı önizleme ve VS Code görevleri için [yayın kullanımını](yayin/README.md) izle. Markdown dosyaları ana kaynaktır; PDF sayfaları ve içindekiler otomatik hesaplanır.
+
 Repo kökündeki [oturum notları](../OTURUM-NOTLARI.md), ardından [rehber talimatları](AGENTS.md), [kararlar](kararlar.md), [ilerleme](ilerleme.md) ve [çalışma düzeni](calisma-duzeni.md) okunur. Devamlılık sohbet belleğine bağlı değildir. Yazılmış ve kullanıcıyla konuşulmuş içerik ayrı izlenir.
 
 ## Ayrıntılı içerik planı

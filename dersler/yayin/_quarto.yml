@@ -1,0 +1,37 @@
+project:
+  type: book
+  output-dir: _book
+
+book:
+  title: "MeeApps Uygulama ve Sistem Rehberi"
+  subtitle: "Şirket içi bilgi aktarımı"
+  author: "MeeApps"
+  output-file: meeapps-rehber
+  chapters:
+    - index.qmd
+
+lang: tr
+toc: true
+toc-title: "İçindekiler"
+toc-depth: 2
+number-sections: true
+number-depth: 2
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    code-copy: true
+  typst:
+    template-partials:
+      - typst-show.typ
+    papersize: a4
+    margin:
+      x: 20mm
+      y: 20mm
+    mainfont: "Arial"
+    fontsize: 11pt
+    page-numbering: "1"
+  epub:
+    toc: true
+    css: styles.css

@@ -31,7 +31,7 @@ Açık kalan: Yanıtlanmadıysa açıkça belirtilir.
 
 Soru birden çok konuya değiniyorsa asıl kaydı bir dosyada tutulur, diğerlerinden bağlanır. Kullanıcının sorusu, agent'ın ürettiği alıştırma ve agent'ın varsayımı birbirine karıştırılmaz. Kullanıcıya atfedilen yanıt uydurulmaz. Genel kapsam kararları [kararlar](kararlar.md) dosyasına yazılır; bütün sohbet her konuya tekrar kopyalanmaz.
 
-Yazılı çıktı alınırken ana anlatım doğrudan okunabilir olmalı. Soruların yararlı açıklamaları ana metne işlenir; tarihli soru kayıtları ayrı bölüm olarak kalır. İleride dışa aktarımda bunlar ek olarak seçilebilir; bugün ayrı Word/PDF üretimi yok.
+Yazılı çıktı alınırken ana anlatım doğrudan okunabilir olmalı. Soruların yararlı açıklamaları ana metne işlenir; tarihli soru kayıtları kaynak MD'de ayrı bölüm olarak kalır. Kullanıcı A4 PDF, HTML ve EPUB üretimini başlattı. Mevcut okuma çıktısında soru/süreç/kaynak takip bölümleri çıkarılır; ileride bunları kaynakça/soru eki olarak sunma tercihi ayrıca ele alınabilir. Üretim ve revizyon adımları [yayın düzeninde](yayin/README.md).
 
 ## Kaynak ve doğrulama
 

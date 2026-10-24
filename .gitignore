@@ -1,0 +1,6 @@
+.tools/
+tmp/
+output/
+dersler/yayin/.build/
+dersler/yayin/.preview/
+__pycache__/

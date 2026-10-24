@@ -16,7 +16,7 @@ Bu klasör insan için konu bazlı rehberdir; repo kökündeki AI bilgi tabanın
 
 ## Çalışırken
 
-- Bir konu bir Markdown dosyasıdır; büyüyünce alt konulara böl ve indeksleri güncelle. Birleştirilmiş Word/PDF bu aşamada istenmedi.
+- Bir konu bir Markdown dosyasıdır; büyüyünce alt konulara böl ve indeksleri güncelle. Kullanıcı artık A4 PDF, HTML önizleme ve EPUB çıktısı istedi; yayın düzeni `yayin/README.md` içindedir. Kaynak MD düzenlenir, çıktılar yeniden üretilir.
 - İndeks sırasıyla içerikleri doldur; iskeletleri yazılmış sayma. Güncel devam noktası `ilerleme.md` içindedir.
 - Kullanıcının gerçek sorularını ve verdiği bağlamı ilgili konu dosyasındaki “Sorularımız ve netleşen noktalar” bölümüne tarihli ekle. Soru ile agent yorumunu ayır; cevaplanmayan soruya yanıt uydurma. Yapı kararlarının tek adresi `kararlar.md`.
 - “Planlandı”, “yazıldı”, “kullanıcıyla konuşuldu/okundu” ayrı durumlardır. Sessizlik veya dosyanın açık olması içerik onayı değildir.
@@ -30,3 +30,5 @@ Bu klasör insan için konu bazlı rehberdir; repo kökündeki AI bilgi tabanın
 ## Her oturumun sonu
 
 İlgili konu dosyasının devam notu, bölüm/ana indeks durumları, `ilerleme.md` ve kök oturum notlarının “Şu an/Sıradaki” alanları güncellenir. Yeni karar varsa `kararlar.md`, belge değişikliği varsa kök `CHANGELOG.md` güncellenir. Yapısal kontrol ve diff kontrolü çalıştırılır. Önceki push reddi onaysız tekrar denenmez.
+
+Kitaba yeni konu girecekse `yayin/kitap.json` güncellenir; çıktılar `python dersler/yayin/uret.py --format all` ile üretilir. Boş başlıklar ve rehber yönetim dosyaları kitaba alınmaz. PDF tasarımı değişince sayfa görüntüleriyle kontrol edilir; EPUB görünümü PDF ile aynı sayfalara zorlanmaz.
