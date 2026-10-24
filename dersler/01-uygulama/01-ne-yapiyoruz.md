@@ -99,6 +99,6 @@ Bu bölüm güncel seans saati, takas süresi veya belirli bir stratejinin emir/
 
 ## Devam notu
 
-İlk anlatım taslağı yazıldı; henüz kullanıcı tarafından okundu/onaylandı sayılmıyor. Sonraki konu [Kullanıcılar ve örnek iş günü](02-kullanicilar-ve-is-gunu.md). Kullanıcı bu metinle ilgili soru getirirse önce ilgili açıklama ve bu dosyadaki soru kaydı güncellenecek.
+İlk anlatım taslağı yazıldı; henüz kullanıcı tarafından okundu/onaylandı sayılmıyor. [Kullanıcılar ve örnek iş günü](02-kullanicilar-ve-is-gunu.md) de yazıldı; ilk bölümün iki taslağı okuma ve revizyon bekliyor. Kullanıcı bu metinle ilgili soru getirirse önce ilgili açıklama ve bu dosyadaki soru kaydı güncellenecek.
 
 [Bölüm indeksi](README.md) · [Ana indeks](../README.md)

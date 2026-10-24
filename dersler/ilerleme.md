@@ -1,5 +1,5 @@
 ---
-kapsam: Rehber yazımının mevcut durumu, tamamlanan yapı işleri ve sonraki adım
+kapsam: Rehber yazımının mevcut durumu, tamamlanan işler ve sonraki adım
 dogrulama: 2026-10-24
 durum: taslak
 ---
@@ -8,39 +8,33 @@ durum: taslak
 
 ## Şu an
 
-Son küçük revizyon: kapak beyaz, metinler siyah; beyaz logo primary yeşil zemin üzerinde. Şemadaki ok uçları küçültüldü; PDF/HTML/EPUB yenilendi ve değişen PDF sayfaları kontrol edildi. Kaynak kayıt `yayin/marka.md`.
-
-**Son revizyon: marka ve okunabilirlik.** Kullanıcının “frontend logo/renklerini kullan, metni küçült ve başlık aralarını aç” geri bildirimi uygulandı. Frontend development `b0474c3` içindeki logo ve CSS tokenları okundu; kaynakta değişiklik yok. PDF gövdesi 10,25 pt, başlıklar 18/12 pt; başlık/paragraf araları artırıldı. Koyu logolu kapak, marka yeşili ve nötr iç sayfalar PDF/HTML/EPUB'a uygulandı. Detay `yayin/marka.md`. Yeni tasarım kullanıcı onayı bekleyen revizyondur; içerik yazım sırası değişmedi.
-
-**Yeni tamamlanan iş: A4 yayın ve önizleme düzeni.** `yayin/` altında Quarto ayarları, yayın listesi, üretim/kurulum scriptleri ve okuma yönergesi var. VS Code görevleri eklendi. Quarto 1.10.18 resmi ZIP paketi SHA-256 doğrulanarak `.tools/` içine taşınabilir kuruldu; sistem PATH ayarı değişmedi. PDF/HTML/EPUB üretildi; PDF 5 A4 sayfa. PDF'nin bütün sayfaları görsel kontrol edildi, EPUB paket kontrolü geçti. Canlı HTML'de kaynak değişikliği ve geri alma otomatik yenilenerek doğrulandı. Farklı EPUB okuyucu görünümü henüz denenmedi.
-
-Kullanıcının sorusu: A4 okuyup gerekirse PDF/EPUB alırken ne kurmalı, nasıl takip ve revizyon yapmalı? Yanıt ve kalıcı kullanım düzeni `yayin/README.md` içinde. Bu bilgisayarda zorunlu ek indirme kalmadı. Güncel çıktılar Git'e alınmaz; ayarlar/scriptler saklanır. Sonraki içerik yine kullanıcılar ve örnek iş günü; yeni konular `yayin/kitap.json` listesine eklendikçe kitaba girer.
-
-Yazım öncesi temel tercihler netleşti: ana okuyucu kullanıcı; mantık/davranış odaklı anlatım, gerektiğinde kısa kod, derin ayrıntı ayrı bölümde. Mevcut hatalar rehberde anlatılmayacak; düzeltme doğrulandıktan sonra rehber güncellemesi kapanış kontrolüne dahil edilecek. Kalıcı kayıt [kararlar](kararlar.md) dosyasında. İlk konu “Ne yapıyoruz ve neyi amaçlıyoruz?” taslak olarak yazıldı; kullanıcı okuma geri bildirimi henüz yok. Sonraki konu kullanıcılar ve örnek iş günü; bu rehber ana çalışma konusu.
-
-24 Ekim 2026: kullanıcı ders düzeninden konu bazlı yazılı rehbere geçilmesini istedi. Ayrıntılı indeks, altı bölüm indeksi ve 48 konu iskeleti oluşturuldu. Eski 11 dosya `arsiv/` altında korundu. Rehbere özel talimatlar, kararlar, yazım düzeni ve strateji şablonu hazırlandı.
+**İlk bölümün yazımı tamamlandı; kullanıcı okuması ve revizyonları bekleniyor.** “Uygulamanın amacı” bölümündeki iki konu taslak olarak kitapta. Kullanıcı önce bu bölümü okuyup geri bildirim vereceğini belirtti. Şimdilik borsa temellerine geçilmeyecek. İçeriklerin onaylandığı varsayılmaz.
 
 | Bölüm | Konu sayısı | Yazım durumu | Kullanıcı okuma durumu |
 |---|---|---|---|
-| Uygulamanın amacı | 2 | İlk konu taslak; ikinci konu iskelet | Henüz bildirilmedi |
+| Uygulamanın amacı | 2 | İki konu da taslak yazıldı; kitapta | Okuma ve revizyon bekleniyor |
 | Borsa temelleri | 12 | İskelet | Henüz bildirilmedi |
 | Teknik temeller | 10 | İskelet | Henüz bildirilmedi |
 | Bizim sistemimiz | 11 | İskelet | Henüz bildirilmedi |
 | Stratejiler | 10 | İskelet | Henüz bildirilmedi |
 | Test ve proje yönetimi | 3 | İskelet | Henüz bildirilmedi |
 
-İlk konu mevcut KB kaynaklarından derlendi; kavramsal Mermaid akışı eklendi. Yeni kod incelemesi, internetten kural doğrulaması, uygulama testi veya gerçek ekran üretimi yapılmadı. `dogrulama` bu yapının düzenlenme tarihidir; boş konuya teknik doğruluk atfetmez. Konu iskeletlerinin frontmatter durumu `bos`.
+## Son tamamlanan iş
+
+24 Ekim 2026: “Kullanıcılar ve örnek iş günü” yazıldı. Roller, kullanıcı/hesap/ürün ayrımı, beş aşamalı örnek gün ve 100 lot emrin 40 lot gerçekleşip 60 lot iptal edildiği takip örneği eklendi. Roller kesin şirket unvanı olarak sunulmadı; müşteri/seans saatleri uydurulmadı. Metin mevcut KB ve kullanıcının PM bağlamından derlendi; yeni kod incelemesi, internetten kural doğrulaması veya uygulama testi yok.
+
+Kitap sürümü 0.2: iki konu, kapak ve ön sayfalarla **8 A4 sayfa**. PDF/HTML/EPUB yenilendi; yeni sayfalar ve içindekiler görsel kontrol edildi. Takip örneğinin tablosu tek sayfada tutuldu. Önceki beyaz kapak, siyah metin, primary yeşil logo alanı ve küçük ok uçları korundu. Kullanıcının son mesajı görsel tasarımı olumlu bulduğunu gösterir; içerik onayı değildir.
 
 ## Sıradaki tek başlangıç noktası
 
-Sıradaki dosya [Kullanıcılar ve örnek iş günü](01-uygulama/02-kullanicilar-ve-is-gunu.md). Önce ilk konuya gelen kullanıcı soruları varsa işlenir. İş günü anlatımı müşteri veya resmi seans saatleri uydurmadan, roller ve örnek akış üzerinden yazılır. Kullanıcı yazım sürerken kodları inceleyeceğini belirtti; kod incelemesinin tamamlandığı varsayılmaz. Sonrasında borsa temellerine geçilir.
+Kullanıcının ilk bölümle ilgili soruları ve revizyonları ilgili konu dosyasına işlenir; ardından çıktı tekrar üretilir. Kullanıcı devam istediğinde ilk yeni konu `02-borsa-temelleri/01-piyasalar-ve-urunler.md`. Sonraki başlıklarda güncel borsa iddiaları resmi kaynaktan, proje davranışı koddan doğrulanır.
 
-İndeksin gözden geçirilmesi formal onay kapısı değildir; kullanıcı içerikten devam et derse mevcut sıra uygulanır. Borsa bölümüne gelindiğinde seans/T+N gibi güncel iddiaların resmi kaynak araştırması yapılır. Bugün araştırılmadığı için güncel kural ilan edilmez.
+## Kalıcı çalışma düzeni
 
-## Her konu için takip
+Önce `AGENTS.md`, `kararlar.md`, ana indeks ve `calisma-duzeni.md` okunur. Ana okuyucu kullanıcı; sonraki okuyucular görevi devralan/yeni katılan kişiler. Mantık/davranış odaklı, kısa kodlu anlatım; mevcut hatalar rehber dışında, düzeltme sonrası rehber güncellemesi kapanış kontrolünde. Kullanıcının gerçek soru/bağlamı ilgili konuya tarihli yazılır.
 
-Konu dosyasındaki devam notuna yazılan kapsam, incelenen kaynak, kalan doğrulama, sorular ve sonraki adım eklenir. İçerik yazılınca bölüm indeksindeki “Planlandı” durumu “Taslak yazıldı” yapılır; kullanıcı okuduğunu/konuştuğunu bildirdiğinde o bilgi tarihli ve ayrıca kaydedilir. Sorular cevaplandıkça ilgili anlatım güncellenir.
+Yayın kullanımı `yayin/README.md`, tasarım kaynakları `yayin/marka.md`, yayın listesi `yayin/kitap.json` içinde. MD kaynakları düzenlenir; çıktılar yeniden üretilir. Quarto proje içindeki `.tools/` altında taşınabilir kurulu. Eski dersler `arsiv/` içinde tarihsel kayıttır; eski Ders 06 sırası geçersiz.
 
 ## Doğrulama ve Git
 
-Yapısal kontrol tamamlandı: 167 Markdown, 1.860 bağlantı, 0 hata; ilk konu `taslak`, kalan 47 konu `bos`. `git diff --check` temiz. Yayın çıktıları ve araçlar Git dışında. Önceki oturumda push otomatik onay incelemesince reddedildi; kullanıcı uzak depoya gönderim onayı vermedi. Push tekrar denenmez; çalışmalar yerelde saklanır.
+İki konu `taslak`, kalan 46 konu `bos`. Yapısal kontrol: 167 Markdown, 1.863 bağlantı, 0 hata; `git diff --check` temiz. Çıktılar ve araçlar Git dışında. Önceki push otomatik onay incelemesince reddedildi; kullanıcı uzak depoya gönderim onayı vermedi. Push tekrar denenmez; çalışmalar yerelde saklanır.

@@ -11,6 +11,8 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Şu an (2026-10-24)
 
+**Güncel devam noktası: ilk bölüm tamamlandı, kullanıcı revizyonları bekleniyor.** Uygulamanın amacı ve kullanıcılar/örnek iş günü iki ayrı taslak olarak kitapta; sürüm 0.2, toplam 8 A4 sayfa. Kullanıcı okuyup revizyon verecek; şimdilik borsa temellerine geçilmez. Görsel tasarıma olumlu geri bildirim var, içerik onayı yok. Son durumun tek özeti `dersler/ilerleme.md`; aşağıdaki eski tur özetleri tarihsel bağlamdır.
+
 **Son tasarım tercihi:** Kapak beyaz ve metinler siyah; beyaz logo primary yeşil zeminde. SVG ok uçları küçültüldü. Yayın çıktıları yenilendi ve kapak/şema görsel kontrol edildi. Önceki koyu kapak tercihi bu kullanıcı revizyonuyla değişti.
 
 **Son çalışma: rehber tasarımı revize edildi.** Kullanıcı frontend marka öğelerini, daha küçük metin ve daha geniş başlık aralarını istedi. mtrader-trade-ui development `b0474c3` logo/CSS kaynakları salt okunur incelendi. Yayın tasarımına kopya logo, yeşil/nötr palet, 10,25 pt gövde, 18/12 pt başlık ve daha geniş aralıklar uygulandı. Kaynak/ölçü kaydı `dersler/yayin/marka.md`. PDF/HTML/EPUB yeniden üretildi; yeni tasarımın kullanıcı tarafından onaylandığı varsayılmaz. Sonraki içerik kullanıcılar ve örnek iş günü.
@@ -87,7 +89,7 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Sıradaki
 
-**Rehber için:** İlk konuya kullanıcı sorusu gelirse işle; sonraki dosya `dersler/01-uygulama/02-kullanicilar-ve-is-gunu.md`. Eski Ders 06 planı geçersiz. Önce `dersler/AGENTS.md`, kararlar, indeks, ilerleme ve çalışma düzenini oku. Konuşulan gerçek soruları ilgili konuya tarihli kaydet; yazılmışı okunmuş/onaylanmış sayma. Güncel borsa iddialarını içerik yazılırken resmi kaynaklardan doğrula. Açık bug araştırması bu kapsamla otomatik açılmadı.
+**Rehber için:** İlk bölümün iki taslağı tamamlandı. Kullanıcı okuyup revizyon verecek; gelen soruları/değişiklikleri işle, şimdilik borsa temellerine geçme. Kullanıcı devam dediğinde ilk yeni dosya `dersler/02-borsa-temelleri/01-piyasalar-ve-urunler.md`. Eski Ders 06 planı geçersiz. Önce `dersler/AGENTS.md`, kararlar, indeks, ilerleme ve çalışma düzenini oku. Konuşulan gerçek soruları ilgili konuya tarihli kaydet; yazılmışı okunmuş/onaylanmış sayma. Güncel borsa iddialarını içerik yazılırken resmi kaynaklardan doğrula. Açık bug araştırması bu kapsamla otomatik açılmadı.
 
 **İlk aşama için sıradaki iş yok.** Yeni kullanıcı talebi gelmeden kaynak/feature/CI araştırmasına veya açık sorun doğrulamasına devam edilmez. Gelecekte doküman güncellemesi istenirse `_surec/guncelleme.md` uygulanır; sorun çalışması istenirse yalnız seçilen kapsam ele alınır. K-240 artifact/dağıtım, Teorik zamanlama, gerçek SDK/host entegrasyonu ve prod davranışı doğrulamaları bu aşamadan ertelendi; eksik doküman yazımı sayılmaz. K-233/K-234 düzeltilmedi, K-243 geri çekildi.
 

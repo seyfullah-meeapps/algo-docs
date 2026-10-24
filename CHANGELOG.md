@@ -2,6 +2,12 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-24 — İlk rehber bölümü okumaya hazır
+
+- “Kullanıcılar ve örnek iş günü” taslağı yazıldı: sorumluluk rolleri, kullanıcı/hesap/ürün ayrımı, hazırlıktan kapanışa örnek gün ve kısmi dolum/iptal takip örneği. Mevcut KB'den derlendi; yeni kod/internet/canlı doğrulama yok.
+- İlk bölümün iki konusu yayın listesine alındı; sürüm 0.2 ile PDF/HTML/EPUB yeniden üretildi. PDF 8 A4 sayfa; yeni sayfalar ve içindekiler görsel kontrol edildi, örnek tablo tek sayfaya alındı.
+- İndeks, devam ve karar kayıtları güncellendi. Kullanıcı ilk bölümü okuyup revizyon verecek; şimdilik ikinci bölüme geçilmiyor. Görsel tasarım beğenisi içerik onayı sayılmadı.
+
 ## 2026-10-24 — Beyaz kapak ve küçük ok uçları
 
 - Kullanıcı revizyonuyla kapak beyaz, metinler siyah yapıldı; özgün beyaz logo primary yeşil alana yerleştirildi. HTML logo alanı da aynı renge alındı.

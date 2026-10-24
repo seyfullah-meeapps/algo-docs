@@ -8,7 +8,7 @@ durum: taslak
 
 Bu rehber uygulamanın amacından başlayıp borsa ve teknik temellere, sistem mimarisine ve stratejilere ilerler. Okuyucu frontend bilgisi olan bir PM veya projeye yeni gelen biri olabilir. Hedef; uygulamayı anlamak, davranışı açıklamak, test tasarlamak ve kanıtıyla issue/görev yönetmektir.
 
-**Yazım başladı:** [Ne yapıyoruz ve neyi amaçlıyoruz?](01-uygulama/01-ne-yapiyoruz.md) ilk taslak olarak hazır; kullanıcı okuma geri bildirimi henüz gelmedi. Diğer 47 konu iskelet durumunda. Sonraki konu kullanıcılar ve örnek iş günü. Eski ders numaraları yeni rotayı belirlemez. Klasör adı bağlantıların devamlılığı için `dersler/` kaldı; yapı artık konu bazlı rehberdir.
+**İlk bölüm taslak olarak tamamlandı:** [Ne yapıyoruz ve neyi amaçlıyoruz?](01-uygulama/01-ne-yapiyoruz.md) ve [Kullanıcılar ve örnek iş günü](01-uygulama/02-kullanicilar-ve-is-gunu.md) kitapta yer alıyor. Kullanıcı bu bölümü okuyup revizyon verecek; şimdilik borsa temellerine geçilmiyor. Diğer 46 konu iskelet durumunda. Eski ders numaraları yeni rotayı belirlemez. Klasör adı bağlantıların devamlılığı için `dersler/` kaldı; yapı artık konu bazlı rehberdir.
 
 ## Devam edecek agent için
 

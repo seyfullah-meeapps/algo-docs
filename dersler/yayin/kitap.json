@@ -1,8 +1,9 @@
 {
   "title": "MeeApps Uygulama ve Sistem Rehberi",
   "subtitle": "Şirket içi bilgi aktarımı • Çalışma taslağı",
-  "version": "0.1",
+  "version": "0.2",
   "chapters": [
-    "01-uygulama/01-ne-yapiyoruz.md"
+    "01-uygulama/01-ne-yapiyoruz.md",
+    "01-uygulama/02-kullanicilar-ve-is-gunu.md"
   ]
 }
