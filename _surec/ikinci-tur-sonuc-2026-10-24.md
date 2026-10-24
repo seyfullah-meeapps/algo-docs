@@ -14,7 +14,9 @@ dogrulama: 2026-10-24
 durum: taslak
 ---
 
-# İkinci statik tur — sonuç
+# İlk aşama kapanışı — 24 Ekim 2026
+
+**İlk aşama tamamlandı; aktif devam işi yok.** Kullanıcının son kapsam kararıyla sorun araştırmaları şimdilik ertelendi. Planlanan doküman yazımı, servis/strateji/akış/operasyon derinleştirmesi, development–master/main karşılaştırması ve son tutarlılık kontrolü kapatıldı. Açık konuların çözümü, artifact incelemesi veya canlı test bu kapanışın ön şartı değildir.
 
 Planlanan konu bazlı statik karşılaştırma ve kapanış tutarlılık taraması tamamlandı. Bu, her repo satırının yeniden incelendiği, bütün açık adayların doğrulandığı veya prod'un test edildiği anlamına gelmez. Kaynak uygulama kodları değiştirilmedi; dokümanlar kullanıcı içerik onayını bekleyen taslak durumundadır.
 
@@ -37,13 +39,13 @@ Planlanan konu bazlı statik karşılaştırma ve kapanış tutarlılık taramas
 
 Teorik feature `26ce9b2` takipte [statik delta olarak incelendi](../20-stratejiler/teorik-fiyat.md#24-ekim--feature-26ce9b2-farkı): açılış yayını, own-state guard, sıfır denge ve ters emir fiyatı farkları kaydedildi. Development/master'a merge edilmemiş; runtime zamanlaması sınanmadı. Varant GUI feature/motor eşleşmesi K-240 açık. Feature yorumları referans veya prod davranışı sayılmadı.
 
-## Öncelikli takip
+## Kayda alınan teknik takip — ertelendi
 
 K-240 takibinde [GUI–motor kaynak eşleşmesi](../20-stratejiler/varant-toplu.md#24-ekim--motor-feature-eşleşmesi) ve [SDK API karşılığı](../10-servisler/itch-sdk/quote-executed-feature.md) bulundu: GUI d2c35c7 ↔ HFT f20b5f2 ↔ itch-sdk e800b3d. Açık kalan kapsam uyumlu header/library artifact'i ve birlikte dağıtım eşleşmesidir; development desteği sayılmaz.
 
-Sorun ayrıntıları tek yerde tutulur; indeks [ACIK-KONULAR](../ACIK-KONULAR.md). Aşağıdaki sıra takip önerisidir, bug düzeltme veya deploy yapıldığı anlamına gelmez.
+Sorun ayrıntıları tek yerde tutulur; indeks [ACIK-KONULAR](../ACIK-KONULAR.md). Aşağıdaki kayıtlar tamamlanmış incelemeyi ve kalan kanıt sınırını gösterir; aktif iş sırası değildir. Yeni kullanıcı talebi olmadan bunlar üzerinden araştırma sürdürülmez.
 
-| Öncelik | Takip |
+| Kayıt | Son durum / ertelenen sınır |
 |---------|-------|
 | 1 | K-243 takipte geri çekildi: [gerçek preprod run kanıtı](dogrulama-k243-2026-10-24.md). Development dosya farkı mevcut run'ın main'e yazdığı anlamına gelmiyor |
 | 2 | K-233/K-234 gerçek handler gövdeleriyle [yerel 5 senaryoda gözlendi](dogrulama-sifre-akisi-2026-10-24.md); düzeltilmedi, canlı entegrasyon sınırı sürüyor |
@@ -52,6 +54,12 @@ Sorun ayrıntıları tek yerde tutulur; indeks [ACIK-KONULAR](../ACIK-KONULAR.md
 
 ## Kontrol ve tamamlanmayanlar
 
-Yerel bağlantı/frontmatter/satır sınırı/K-id/manifest ve yerel kaynak commit nesnesi kontrolleri `kontrol.py --sources` ile çalıştırıldı. Bu araç içerik doğruluğu, ABI, runtime veya remote atalık testi yapmaz. Build, browser, QuickFIX/ACK zamanlama testi, CI run incelemesi, canlı emir/şifre/DB işlemi ve deploy yapılmadı.
+Yerel bağlantı/frontmatter/satır sınırı/K-id/manifest ve yerel kaynak commit nesnesi kontrolleri `kontrol.py --sources` ile çalıştırıldı. Bu araç içerik doğruluğu, ABI, runtime veya remote atalık testi yapmaz. Tam uygulama build'i, browser, gerçek QuickFIX/ACK zamanlama testi, canlı emir/şifre/DB işlemi ve deploy yapılmadı. Takipte iki odaklı C++ harness çalıştırıldı (toplam 10 senaryo); bunlar sahte adaptörlerle gerçek handler gövdelerini sınar. K-243 için var olan bir CI run/job salt okunur incelendi. Bunlar tam entegrasyon veya prod doğrulaması değildir.
 
-Sonraki iş, kalan açık adayları ayrı doğrulama senaryolarıyla ele almak ve incelenmemiş yeni feature ucunu kontrol etmektir. K-243 sonradan gerçek run kanıtıyla geri çekildi; kanıt yukarıda. Bu rapor ilk yazıldığında yerel commit'teydi; sonraki oturum başında yerel main origin/main ile eşit gözlendi, bu agent push yapmadı.
+Teorik yeni feature ucu ve K-240 GUI–motor–SDK kaynak zinciri incelendi; bunlar incelenmemiş işler olarak bırakılmadı. K-240 artifact/dağıtım ve diğer runtime kanıtları bilinçli olarak ayrı aşamaya ertelendi. Bu aşama için kullanıcıdan beklenen işlem yok.
+
+## Teslim ve bakım
+
+Giriş [README](../README.md), agent haritası [AGENTS](../AGENTS.md), repo/branch/commit envanteri [manifest](../manifest.yaml), açık kayıtlar [indeks](../ACIK-KONULAR.md), yeniden çalıştırılabilir kontrol [kontrol aracı](kontrol.md). Kaynak tazeliği yukarıdaki tarihli raporlarla sınırlıdır; kapanış için bütün repolarda yeni fetch veya tüm kodu yeniden inceleme iddiası yoktur.
+
+Belgelerin `taslak` etiketi korunur; ilk aşamanın tamamlanması içeriklerin topluca onaylandığı anlamına gelmez. Tam baseline SHA'ları kısmi incelemeler nedeniyle ilerletilmedi. İleride kullanıcı doküman güncellemesi veya belirli bir sorun çalışması isterse yeni kapsam açılır; sürekli bir “sıradaki” kuyruğu bırakılmadı. Değişiklikler yerel commit olarak kaydedilir; bu agent remote'a push yapmadı.

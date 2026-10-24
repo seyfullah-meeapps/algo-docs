@@ -1,12 +1,14 @@
 ---
 kapsam: Bilgi tabanının giriş noktaları, kapsamı ve inceleme araçları
-dogrulama: 2026-10-23
+dogrulama: 2026-10-24
 durum: taslak
 ---
 
 # algo-docs
 
 MeeApps BIST algo/HFT stack'inin bilgi tabanı. Birincil okuyucu AI agent'lardır; giriş noktası [`AGENTS.md`](AGENTS.md).
+
+**İlk aşama tamamlandı (24 Ekim 2026):** planlanan doküman yazımı, derinleştirme ve development–master/main kod karşılaştırması kapatıldı. Aktif devam işi yok. Açık sorun araştırmaları, bug düzeltmeleri ve canlı ortam doğrulamaları kullanıcı yeniden istediğinde ayrı kapsamda ele alınacak. İçerik etiketleri `taslak` kalır; aşamanın tamamlanması bütün belgelerin içerik onayı değildir. [Kapsam ve kapanış](_surec/ikinci-tur-sonuc-2026-10-24.md).
 
 - Hangi repo, hangi branch, hangi commit'e karşı doğrulandı: [`manifest.yaml`](manifest.yaml)
 - Güncelleme geçmişi: [`CHANGELOG.md`](CHANGELOG.md)

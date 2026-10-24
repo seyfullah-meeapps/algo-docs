@@ -6,6 +6,8 @@ durum: taslak
 
 # Açık konular
 
+**24 Ekim 2026 kapsam kararı:** İlk dokümantasyon aşaması tamamlandı. Bu indeks kayıt amaçlı korunur; sorun araştırması/düzeltmesi ve canlı doğrulamalar şimdilik ertelendi. Açık satırlar ilk aşamanın eksik işi veya otomatik çalışma kuyruğu değildir.
+
 Her konu **tek satır**. Ayrıntı yalnızca linklenen dosyada yazılır; burada açıklama büyütülmez.
 Kapanan konu buradan silinir, kapanışı `CHANGELOG.md`'ye yazılır. Yeni konu sıradaki numarayı alır (numara tekrar kullanılmaz).
 

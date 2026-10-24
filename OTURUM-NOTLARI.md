@@ -11,6 +11,10 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Şu an (2026-10-24)
 
+**İlk aşama tamamlandı. Aktif devam işi yok.** Kullanıcı dokümantasyonun ilk aşamasını kapatmamızı, sorunlara şimdilik odaklanmamamızı istedi. Planlanan yazım, derinleştirme, güncel development–master/main karşılaştırması ve kapanış tutarlılığı tamamlandı. Tek kapanış kaydı `_surec/ikinci-tur-sonuc-2026-10-24.md`; açık indeks korunur, otomatik takip kuyruğu değildir. Belgeler içerik onayı yerine geçmemesi için taslak kaldı.
+
+## Tamamlanan teknik takip (tarihsel kayıt)
+
 - K-240 SDK kaynağı bulundu: warrant-open-quote-log-pp e800b3d; extended callback HFT f20b5f2 ile eşleşiyor. Aynı adlı SDK hft_warrant_advanced dalında API yok. Ayrıntı `10-servisler/itch-sdk/quote-executed-feature.md`; kaynak zinciri tamam, artifact/header/library ve dağıtım açık. SDK fetch/pull sonrası development/master aynı. QuoteBuyer çıkarımı ve sıfır miktarlı geç bildirim belgelendi.
 
 - K-240 GUI–motor kaynak eşleşmesi bulundu: GUI d2c35c7 ↔ HFT hft_warrant_advanced f20b5f2. Parser/miktar/snapshot ve maliyet kapanışı incelendi; yeni executed_ex callback ve quote alanları SDK bağımlılığı getiriyor. Ayrıntı `20-stratejiler/varant-toplu.md`; K-240 SDK/dağıtım kapsamıyla açık. Development/master değişmedi; build/canlı test yok.
@@ -71,7 +75,7 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Sıradaki
 
-**Sıradaki: K-240 için feature'a ait gerçek CI run/artifact veya Algo-Setup dalında uyumlu SDK header/library kanıtını araştırmak.** GUI–motor–SDK kaynak zinciri tamamlandı; birlikte build/dağıtım doğrulanmadı. Teorik zamanlama entegrasyonu sınanmadı. K-241/K-242 gerçek SDK/host entegrasyonu ve prod platform davranışı ayrıca doğrulanmalı. K-233/K-234 düzeltilmedi; canlı oturum testi yok. K-243 geri çekildi.
+**İlk aşama için sıradaki iş yok.** Yeni kullanıcı talebi gelmeden kaynak/feature/CI araştırmasına veya açık sorun doğrulamasına devam edilmez. Gelecekte doküman güncellemesi istenirse `_surec/guncelleme.md` uygulanır; sorun çalışması istenirse yalnız seçilen kapsam ele alınır. K-240 artifact/dağıtım, Teorik zamanlama, gerçek SDK/host entegrasyonu ve prod davranışı doğrulamaları bu aşamadan ertelendi; eksik doküman yazımı sayılmaz. K-233/K-234 düzeltilmedi, K-243 geri çekildi.
 
 Kullanıcı içerik onayı geldikçe durum etiketi kapsamına göre güncellenir; genel devam talimatıyla topluca dogrulandi yapılmaz. Uygulama bug düzeltmesi/deploy bu doküman incelemesinin dışında kaldı.
 
@@ -94,6 +98,8 @@ Boşluk analizi (2026-10-22): yeni KB ~3.100 satır, eski `meeapps-ai` ~25.000 s
 ## Kararlar
 
 Kullanıcıyla alınmış kararlar; aksi söylenmedikçe geçerli.
+
+- **İlk aşama kapanışı (2026-10-24):** Doküman çalışması tamamlanır; sorunlara şimdilik odaklanılmaz. Sonraya bırakılan teknik doğrulamaları otomatik sıradaki iş olarak sürdürme. Genel kapanış talebi içeriklerin topluca `dogrulandi` yapılması anlamına gelmez.
 
 - **Amaç / okuyucu:** Bilgi tabanının okuyucusu AI agent; insana özet ve cevap üretmek için. Eski `MeeApps/meeapps-ai`'nin yerini alır, eski repoya dokunulmaz.
 - **Dil:** Metin Türkçe, terimler ve kod isimleri İngilizce.

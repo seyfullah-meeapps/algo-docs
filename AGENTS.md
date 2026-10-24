@@ -13,6 +13,8 @@ Bu repo, MeeApps'in BIST algo/HFT stack'inin **AI agent'lar için yazılmış** 
 
 ## Çalışma oturumu (dokümanı yazan/güncelleyen agent için)
 
+- **İlk aşama kapandı (2026-10-24).** Kullanıcı sorun araştırmalarını şimdilik kapsam dışında bıraktı. Yeni görev verilmeden açık konulardan otomatik devam zinciri oluşturma; belgeleri soruları yanıtlamak için kullan. Sonraki doküman güncellemesi veya sorun çalışması ayrı kullanıcı talebiyle başlar. Kapanış kapsamı `_surec/ikinci-tur-sonuc-2026-10-24.md` içinde.
+
 - **Başlarken** `OTURUM-NOTLARI.md`'yi oku: kararlar, mevcut durum, sıradaki işler orada.
 - **Çalışırken** karar alındıkça ve iş bittikçe `OTURUM-NOTLARI.md`'yi güncelle; oturum bitmeden "Şu an" ve "Sıradaki" güncel olsun (context dolarsa sonraki oturum buradan devam eder).
 - Bulunan sorun / şüphe / doğrulanmamış iddia → `ACIK-KONULAR.md`'ye **tek satır** + ayrıntı dosyasına link. Ayrıntı ilgili dosyada yazılır, indekste büyütülmez.

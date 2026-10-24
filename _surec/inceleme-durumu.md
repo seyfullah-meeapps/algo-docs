@@ -1,10 +1,12 @@
 ---
 kapsam: Derinleştirme sonrası taslak incelemesinin kapsamı, giderilen özet çelişkileri ve kullanıcı değerlendirmesi öncelikleri
-dogrulama: 2026-10-23
+dogrulama: 2026-10-24
 durum: taslak
 ---
 
 # Taslak incelemesi — 2026-10-23
+
+**Güncel durum (24 Ekim): ilk aşama tamamlandı; aktif inceleme görevi yok.** Aşağıdaki okuma sırası tarihsel öneridir, kullanıcıdan beklenen zorunlu işlem değildir. Açık sorunlar ve canlı ortam doğrulamaları ayrı bir talebe kadar ertelendi. Güncel kapsam ve kanıt sınırları [kapanış raporunda](ikinci-tur-sonuc-2026-10-24.md).
 
 24 Ekim kapanışı: [ikinci statik turun sonucu ve kalan sınırlar](ikinci-tur-sonuc-2026-10-24.md). Aşağıdaki hazırlık turu tarihsel kayıttır; güncel kapsam için kapanış raporunu oku.
 

@@ -46,6 +46,8 @@ SDK c2b5060/order-service 26e9a02 workflow'ları ve Setup run/config seçimi oku
 
 ## Sıradaki
 
+**Kapanış kararı:** İlk aşama tamamlandı. Aşağıdaki teknik takip kayıtları tarihsel kanıttır; aktif görev yok. Artifact/dağıtım ve açık sorun doğrulamaları yeni kullanıcı talebine kadar ertelendi. Güncel durum [ilk aşama kapanışında](ikinci-tur-sonuc-2026-10-24.md).
+
 Kapanış kapsam/tutarlılık kontrolü tamamlandı: [sonuç ve kalanlar](ikinci-tur-sonuc-2026-10-24.md). Teorik feature ucu aşağıdaki takipte incelendi; K-240 ve canlı binary/port/tuning doğrulaması açık.
 
 ## Teknik takip — Teorik feature 26ce9b2

@@ -2,6 +2,13 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-24 — İlk aşamanın nihai kapanışı
+
+- Kullanıcı sorun araştırmalarını şimdilik kapsam dışında bıraktı; yazım/derinleştirme ve ikinci kaynak karşılaştırması tamamlanmış ilk aşama olarak kapatıldı. Yeni araştırma veya canlı işlem açılmadı.
+- README, agent talimatı, manifest, inceleme durumu ve oturum notları aynı kapanış kararına bağlandı. Açık konuların otomatik görev kuyruğu olmadığı, kullanıcıdan beklenen işlem bulunmadığı belirtildi.
+- Kapanış raporundaki eski “CI run incelenmedi / yeni feature incelenmedi” ifadeleri sonraki kanıtlarla düzeltildi. Yerel harness, statik kaynak ve gerçek entegrasyon sınırları ayrıldı; K-240 artifact/dağıtım dahil kalan teknik doğrulamalar ayrı aşamaya ertelendi.
+- Taslak etiketleri ve tam baseline commit'leri korundu; aşama kapanışı toplu içerik onayı sayılmadı. Son yapısal/kaynak referansı ve diff kontrolleri çalıştırıldı; aktif sıradaki iş bırakılmadı.
+
 ## 2026-10-24 — K-240 SDK kaynak zinciri
 
 - itch-sdk fetch/development pull sonrası 35a3b5c/master 00c51b1 aynı. Yeni executed_ex API warrant-open-quote-log-pp e800b3d içinde bulundu; HFT f20b5f2 callback imzası eşleşiyor. Aynı adlı SDK hft_warrant_advanced dalında API yok.
