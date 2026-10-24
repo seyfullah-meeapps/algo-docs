@@ -2,6 +2,12 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-24 — Frontend markası ve rehber okunabilirliği
+
+- Frontend development b0474c3 içindeki özgün beyaz logo ve `app/global.css` renk tokenları okunarak yayın katmanına uygulandı; frontend değiştirilmedi. Kaynak/renk/ölçü kaydı eklendi.
+- Koyu logolu kapak, marka yeşili, nötr iç sayfalar ve üst/alt bilgi; PDF gövdesi 11 → 10,25 pt, başlıklar 18/12 pt ve genişletilmiş başlık/paragraf araları. HTML düzeni aynı markaya uyarlandı; EPUB göreli yazı boyutu ayrı stile alındı.
+- Üç çıktı yeniden üretildi; PDF sayfaları ve HTML görünümü görsel kontrol edildi. İlk bölüm içeriği değiştirilmedi; tasarım revizyonu kullanıcı incelemesini bekliyor.
+
 ## 2026-10-24 — A4 PDF, HTML ve EPUB yayın düzeni
 
 - Quarto 1.10.18 resmi Windows ZIP'i checksum ile doğrulanıp proje içine taşınabilir kuruldu. MD kaynaklarını koruyan hazırlama/üretim scripti, A4 Typst şablonu, yayın listesi ve tekrar kurulum scripti eklendi.

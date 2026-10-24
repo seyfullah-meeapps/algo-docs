@@ -1,10 +1,41 @@
-body { line-height: 1.6; }
-main { max-width: 900px; }
-table { font-size: .92em; }
+/* mtrader-trade-ui/app/global.css marka tokenlarından derlendi. */
+:root {
+  --guide-primary: #94c04e;
+  --guide-ink: #333333;
+  --guide-strong: #212121;
+  --guide-muted: #6b6b6b;
+  --guide-border: #d9d9d9;
+  --bs-link-color: #15803d;
+  --bs-link-hover-color: #065f46;
+}
+body {
+  font-family: Arial, "Segoe UI", sans-serif;
+  color: var(--guide-ink);
+  font-size: 15px;
+  line-height: 1.85;
+  background: #fff;
+}
+main { max-width: 780px; }
+p { margin-bottom: 1.15em; }
+h1, h2, h3 { color: var(--guide-strong); line-height: 1.35; }
+h1 { font-size: 1.9rem; margin-bottom: 1.8rem; }
+h2 { font-size: 1.3rem; margin-top: 2.8rem; margin-bottom: 1.15rem; padding-bottom: .55rem; border-bottom: 1px solid var(--guide-border); }
+h3 { font-size: 1.08rem; margin-top: 2rem; margin-bottom: .85rem; }
+li { margin-bottom: .45em; }
+table { font-size: .9em; line-height: 1.7; margin: 1.5rem 0; }
+th { color: var(--guide-strong); background: #f4f4f5; }
+td, th { padding: .7rem .8rem !important; border-color: var(--guide-border) !important; }
 img { max-width: 100%; height: auto; }
-pre { white-space: pre-wrap; overflow-wrap: anywhere; }
+figure { margin: 2rem 0; }
+figcaption { color: var(--guide-muted); font-size: .85em; margin-top: .7em; }
+pre { white-space: pre-wrap; overflow-wrap: anywhere; font-size: .85em; }
+.sidebar-logo { background: #0f0f0f; padding: 18px 28px; border-radius: 8px; width: 180px; }
+#quarto-sidebar { border-right: 1px solid #eee; }
+.sidebar-item-text.active { border-left: 3px solid var(--guide-primary); padding-left: 8px; color: #212121 !important; }
+.quarto-title-block { padding-bottom: 1.4rem; border-bottom: 3px solid var(--guide-primary); margin-bottom: 2rem; }
 @media print {
   @page { size: A4; margin: 20mm; }
+  body { font-size: 10.25pt; }
   h1, h2, h3 { break-after: avoid; }
   img, tr { break-inside: avoid; }
 }

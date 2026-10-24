@@ -34,6 +34,7 @@ Kullanıcı frontend'i yazdı; diğer katmanlardaki bilgisi sınırlı. PM rolü
 | R-16 | Mevcut hatalar rehberde anlatılmaz; sorun takibi teknik bilgi tabanı/issue tarafında kalır. Düzeltme doğrulandıktan sonra etkilenen rehber anlatımı, örnek, GUI/parametre, şema ve test beklentisi güncellenir | Kullanıcının açık tercihi; düzelmemiş davranış çalışıyormuş gibi yazılmaz |
 | R-17 | Markdown kaynakları korunarak Quarto ile A4 PDF, HTML ve EPUB üretilir. A4 PDF'de otomatik içindekiler/sayfa numarası bulunur; EPUB akışkandır. Kaydetme sonrası izleme ve revizyon için yerel görevler kullanılır | Kullanıcı örnek çıktı ve sürdürülebilir üretim kurulumunu kabul etti |
 | R-18 | Kitap listesi açıkça yönetilir; boş konular, karar/ilerleme dosyaları ve süreç bölümleri okuma çıktısına alınmaz. Bunlar kaynak MD'de kalır | Önerilen okuma/yazım ayrımının uygulanması; ilk örnek yalnız yazılmış konuyu içerir |
+| R-19 | Rehber frontend logosu ve renk tokenlarını kullanır; metin küçültülüp başlık/paragraf boşlukları artırılır. Marka kaynağı ve ölçüler `yayin/marka.md` içinde tutulur | Kullanıcı ilk tasarımda yazıları büyük ve başlık aralarını yakın buldu; bu tur revize edildi, henüz yeni tasarım onayı yok |
 
 ## Konuşmada netleşen sorular — 24 Ekim 2026
 

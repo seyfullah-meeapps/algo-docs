@@ -114,7 +114,7 @@ Kaynak Markdown dosyaları düzenlenir; üretilen PDF, EPUB veya HTML üzerinde 
     config = config.replace('title: "MeeApps Uygulama ve Sistem Rehberi"', 'title: ' + json.dumps(settings['title'], ensure_ascii=False))
     config = config.replace('subtitle: "Şirket içi bilgi aktarımı"', 'subtitle: ' + json.dumps(settings['subtitle'], ensure_ascii=False))
     save(BUILD / '_quarto.yml', config)
-    for asset in ['styles.css', 'akisin-ozeti.svg', 'typst-show.typ']:
+    for asset in ['styles.css', 'epub.css', 'akisin-ozeti.svg', 'typst-show.typ', 'brand-logo.png']:
         shutil.copyfile(HERE / asset, BUILD / asset)
 
 

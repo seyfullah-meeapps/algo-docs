@@ -45,7 +45,7 @@ python dersler/yayin/uret.py --format epub
 
 Çıktılar:
 
-- `output/pdf/meeapps-rehber.pdf`: A4, 20 mm kenar boşluğu, Arial 11 pt, sayfa numarası, kapak ve otomatik içindekiler.
+- `output/pdf/meeapps-rehber.pdf`: A4, 20 mm kenar boşluğu, Arial 10,25 pt, sayfa numarası, logolu kapak ve otomatik içindekiler.
 - `output/rehber/index.html`: yerel HTML kitabının giriş sayfası. Diğer HTML dosyaları ve `site_libs` klasörüyle birlikte kullanılır.
 - `output/rehber/meeapps-rehber.epub`: ekran/yazı boyutuna göre akan e-kitap. PDF ile aynı sayfa sayısı beklenmez. EPUB uyumlu bir okuyucu gerekir; PDF okurken gerekli değildir.
 
@@ -60,6 +60,8 @@ PDF'nin ilk örneği 5 A4 sayfadır; bu sabit hedef değildir. Bölüm/metin de�
 | A4 ölçüsü, yazı tipi/boyutu, format seçenekleri | [_quarto.yml](_quarto.yml) |
 | PDF kapağı, başlık/tablo stili | [typst-show.typ](typst-show.typ) |
 | HTML/EPUB stili | [styles.css](styles.css) |
+| EPUB göreli yazı boyutu | [epub.css](epub.css) |
+| Frontend logo/renk kaynakları ve tipografi kararları | [marka.md](marka.md) |
 | İlk konudaki kavramsal şema | [akisin-ozeti.svg](akisin-ozeti.svg) |
 
 Yeni yazılan konu otomatik olarak kitaba girmez: okunabilir duruma gelince `kitap.json` içindeki `chapters` listesine eklenir. `bos` ve `eski` durumundaki dosyalar üretimde reddedilir; taslak dosya kullanılabilir. Böylece 47 boş konu ilk örnek kitabı doldurmaz.

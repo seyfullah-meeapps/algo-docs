@@ -7,6 +7,8 @@ book:
   subtitle: "Şirket içi bilgi aktarımı"
   author: "MeeApps"
   output-file: meeapps-rehber
+  sidebar:
+    logo: brand-logo.png
   chapters:
     - index.qmd
 
@@ -30,8 +32,10 @@ format:
       x: 20mm
       y: 20mm
     mainfont: "Arial"
-    fontsize: 11pt
+    fontsize: 10.25pt
     page-numbering: "1"
   epub:
     toc: true
-    css: styles.css
+    css:
+      - styles.css
+      - epub.css

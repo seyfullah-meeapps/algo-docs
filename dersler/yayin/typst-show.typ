@@ -1,31 +1,67 @@
-// Quarto'nun kitap filtresi korunur; ekran okumaya uygun tek yüzlü tasarım.
-#set text(font: "$mainfont$", size: $fontsize$, lang: "tr", fill: rgb("#20354a"))
-#set par(justify: false, first-line-indent: 0pt, leading: 0.65em, spacing: 0.75em)
+// Frontend light/dark tokenları: brand #94c04e, ink #333, strong #212121.
+#let brand = rgb("#94c04e")
+#let ink = rgb("#333333")
+#let heading-ink = rgb("#212121")
+#let muted = rgb("#6b6b6b")
+#let border = rgb("#d9d9d9")
+#set text(font: "$mainfont$", size: $fontsize$, lang: "tr", fill: ink)
+#set par(justify: false, first-line-indent: 0pt, leading: 0.68em, spacing: 0.95em)
 #set heading(numbering: "1.1")
-#set table(inset: 7pt, stroke: 0.4pt + rgb("#ced8e0"))
-#show table.cell.where(y: 0): set text(weight: "bold")
-#show table.cell.where(y: 0): set table.cell(fill: rgb("#edf2f7"))
-#show link: set text(fill: rgb("#246b88"))
-#set page(footer: context align(center, text(size: 9pt, fill: rgb("#63768a"), counter(page).display("1"))))
+#set list(spacing: 0.5em)
+#set enum(spacing: 0.5em)
+#set table(inset: 8pt, stroke: 0.4pt + border)
+#show table: set text(size: 9pt)
+#show table.cell.where(y: 0): set text(weight: "bold", fill: heading-ink)
+#show table.cell.where(y: 0): set table.cell(fill: rgb("#f4f4f5"))
+#show link: set text(fill: rgb("#15803d"))
+#set page(
+  header: context {
+    if counter(page).get().first() > 1 {
+      text(size: 8pt, fill: muted)[MeeApps / Uygulama ve Sistem Rehberi]
+      v(2mm)
+      line(length: 100%, stroke: 0.5pt + border)
+    }
+  },
+  footer: context {
+    line(length: 100%, stroke: 0.5pt + border)
+    v(2mm)
+    grid(columns: (1fr, auto),
+      text(size: 8pt, fill: muted)[Şirket içi bilgi aktarımı],
+      text(size: 8pt, fill: muted)[#counter(page).display("1")],
+    )
+  },
+)
 
-#align(center)[
-  #v(38mm)
-  #text(size: 12pt, tracking: 2pt, fill: rgb("#63768a"))[MEEAPPS]
-  #v(9mm)
-  #text(size: 28pt, weight: "bold")[$title$]
-  #v(7mm)
-  #text(size: 13pt)[$subtitle$]
-  #v(14mm)
-  #line(length: 38mm, stroke: 2pt + rgb("#246b88"))
+#page(fill: rgb("#0f0f0f"), header: none, footer: none, numbering: none)[
+  #set text(fill: white)
   #v(8mm)
-  #text(size: 10pt)[A4 okuma sürümü · Çalışma taslağı]
+  #image("brand-logo.png", width: 48mm)
+  #v(33mm)
+  #line(length: 24mm, stroke: 3pt + brand)
+  #v(10mm)
+  #text(size: 29pt, weight: "bold", fill: white, tracking: -0.2pt)[$title$]
+  #v(9mm)
+  #text(size: 12pt, fill: rgb("#dcdcdc"))[$subtitle$]
+  #v(1fr)
+  #line(length: 100%, stroke: 0.5pt + rgb("#404040"))
+  #v(5mm)
+  #grid(columns: (1fr, auto),
+    text(size: 9pt, fill: brand)[BIST · Algo / HFT],
+    text(size: 9pt, fill: rgb("#dcdcdc"))[A4 okuma sürümü],
+  )
 ]
-#pagebreak()
-#outline(title: [İçindekiler], depth: $toc-depth$)
-#pagebreak()
 
 #show heading.where(level: 1): it => {
   pagebreak(weak: true)
-  block(above: 0pt, below: 8mm)[#text(size: 20pt, weight: "bold")[#it]]
+  block(above: 0pt, below: 9mm, sticky: true)[
+    #line(length: 12mm, stroke: 2pt + brand)
+    #v(4mm)
+    #text(size: 18pt, weight: "bold", fill: heading-ink)[#it]
+  ]
 }
-#show heading.where(level: 2): it => block(above: 5mm, below: 3mm)[#text(size: 14pt, weight: "bold")[#it]]
+#show heading.where(level: 2): set text(size: 12pt, weight: "bold", fill: heading-ink)
+#show heading.where(level: 2): set block(above: 7mm, below: 3.5mm)
+#show heading.where(level: 3): set text(size: 10.5pt, weight: "bold", fill: heading-ink)
+#show heading.where(level: 3): set block(above: 5mm, below: 2.5mm)
+#outline(title: [İçindekiler], depth: $toc-depth$)
+#pagebreak()

@@ -1,0 +1,5 @@
+/* E-kitap okuyucusunun seçtiği metin boyutunu koru. */
+body { font-size: 1em; line-height: 1.8; }
+h1 { font-size: 1.8em; }
+h2 { font-size: 1.25em; margin-top: 2em; margin-bottom: 1em; }
+h3 { font-size: 1.1em; }
