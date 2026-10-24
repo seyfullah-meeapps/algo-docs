@@ -2,6 +2,12 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-24 — MTrader kapsamı ve genel strateji testleri
+
+- Şirketin günlük kullanımını açıklayan paragraf ve tekrarlar kaldırıldı; anlatım MTrader’a odaklandı.
+- Test bölümü stratejiye özgü parametreler, koşullar, ayar değişiklikleri ve beklenen sonuçlarla genelleştirildi. Tek emir/kısmi gerçekleşme örneği çıkarıldı. Kullanıcı geri bildirimi ve kalıcı kararlar kaydedildi.
+- PDF, HTML ve EPUB çıktıları yenilendi; bu çalışma uygulama testi veya dağıtım içermez.
+
 ## 2026-10-24 — MTrader kimliği ve müşteri/test süreci düzeltmesi
 
 - Kullanıcı beyanıyla ürün MTrader (algoritmik işlem botu), şirket MeeApps ve müşteriler aracı kurumlar olarak netleşti. MeeApps'in geliştirme/test kullanımı ile müşteri trader/fon yöneticisinin günlük kullanımı ayrıldı.

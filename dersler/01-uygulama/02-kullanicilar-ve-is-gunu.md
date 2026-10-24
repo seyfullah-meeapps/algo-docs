@@ -1,5 +1,5 @@
 ---
-kapsam: Müşteri kullanıcıları ile MeeApps ekibinin ayrımı; özellik geliştirme, test, preprod ve dağıtım
+kapsam: MTrader kullanıcıları; özellik geliştirme, strateji testleri, preprod ve dağıtım
 kaynak:
   - repo: HftSrvProd
     branch: development
@@ -24,17 +24,15 @@ kullanici_beyani:
 
 MTrader'ın müşterileri **aracı kurumlardır**. Günlük işlem kullanıcıları bu kurumların çalışanlarıdır; traderlar ve fon yöneticileri bunlara örnektir. Kullanıcılar yetkili oldukları hesap ve ürünlerde stratejileri çalıştırır, ayarları yönetir, emirleri ve pozisyonları takip eder.
 
-**MeeApps ise MTrader'ı geliştiren ve müşterilere sunan şirkettir.** Biz uygulamayı her gün kendi adımıza düzenli trade yapmak için kullanmayız. Yeni özellikleri, değişiklikleri ve beklenen davranışları test senaryolarında sınamak için kullanırız. Bu nedenle müşterinin işlem günü ile bizim geliştirme ve test sürecimizi ayrı düşünmeliyiz.
-
 ## Müşteri tarafında kim kullanır?
 
 Trader veya fon yöneticisi, kendi kurumunun yetkileri ve çalışma yaklaşımı doğrultusunda MTrader'ı kullanır. Gün içinde hangi hesapta, hangi ürün için, hangi stratejinin çalıştığını; açık emirleri, gerçekleşmeleri ve elde kalan pozisyonu izler. Buradaki **pozisyon**, yapılan işlemler sonucunda ilgili üründe elde tutulan net miktardır.
 
-Günün başında mevcut durum ve ayarlar değerlendirilir, işlem sırasında sonuçlar takip edilir, günün sonunda açık emir ve pozisyonlar kurumun kendi sürecine göre ele alınır. Bu, MeeApps çalışanlarının günlük trade rutini olarak anlaşılmamalıdır. Müşteriye ait işlem kararları ile bizim ürünün beklenen davranışını sınamamız farklı sorumluluklardır.
+Günün başında mevcut durum ve ayarlar değerlendirilir, işlem sırasında sonuçlar takip edilir, günün sonunda açık emir ve pozisyonlar kurumun kendi sürecine göre ele alınır.
 
-## MeeApps tarafında kim ne yapar?
+## Geliştirmede sorumluluklar
 
-Bizim taraftaki çalışma, bir özellik ihtiyacının anlaşılmasıyla başlar; geliştirme, test ve müşteriye aktarım boyunca sürer. Aşağıdaki tablo sorumlulukları açıklar; değişmez kişi veya unvan ataması değildir.
+MTrader'da bir özellik ihtiyacının anlaşılmasıyla başlayan çalışma, geliştirme, test ve müşteriye aktarım boyunca sürer. Aşağıdaki tablo bu süreçteki sorumlulukları açıklar; değişmez kişi veya unvan ataması değildir.
 
 | Sorumluluk | Ürün geliştirme sürecindeki karşılığı |
 |---|---|
@@ -47,7 +45,7 @@ Bir özellik yalnız arayüzdeki bir alanı etkileyebilir; başka bir özellik a
 
 ## Bir özellik müşteriye nasıl ulaşır?
 
-MeeApps'teki akış, yalnız kodun yazılıp dağıtılması değildir. Farklı kişilerin ve ortamların katıldığı aşamalardan oluşur. **Ortam**, bir geliştirmenin hangi sistem ve sürüm üzerinde çalıştırılıp izlendiğini belirtir; test ve preprod bu akışta farklı amaçlarla kullanılır.
+MTrader'ın özellik geliştirme süreci, farklı kişilerin ve ortamların katıldığı aşamalardan oluşur. **Ortam**, bir geliştirmenin hangi sistem ve sürüm üzerinde çalıştırılıp izlendiğini belirtir; test ve preprod bu akışta farklı amaçlarla kullanılır.
 
 ### Özellik detayları, senaryolar ve görevler
 
@@ -61,7 +59,7 @@ Yazılımcılar görevlerini tamamlar ve kendi ön testlerini gerçekleştirir. 
 
 ### Test ortamında izleme
 
-Geliştirme test ortamına alınır; bir süre test edilir ve takip edilir. Bu aşamada çıkan hatalara müdahale edilir, düzeltmelerden sonra ilgili senaryolar yeniden değerlendirilir. MeeApps'in uygulamayı kullanmasının temel bağlamı budur: ürün davranışını sınamak ve müşteriye geçmeden önce geliştirmeyi değerlendirmek.
+Geliştirme test ortamına alınır; bir süre test edilir ve takip edilir. Bu aşamada çıkan hatalara müdahale edilir, düzeltmelerden sonra ilgili senaryolar yeniden değerlendirilir.
 
 Önceki aşamalarda ve preprod'un başlangıcında düşük lot miktarlarıyla test edilir. Lot, işlem miktarının birimidir; bu bölümde “düşük” veya “yüksek” için sabit sayılar vermiyoruz. Miktarlar ilgili testin koşullarına göre değerlendirilir.
 
@@ -77,7 +75,7 @@ Test ortamındaki çalışmalardan sonra geliştirme **preprod** ortamına alın
 
 ### Bütün müşterilere aktarım
 
-Yüksek lotlu preprod testlerinde de sorun görülmezse özelliğin bütün müşterilere aktarımı sağlanır. Ürünü geliştiren MeeApps ekibi ile onu düzenli kullanan müşteri kurumların buluştuğu nokta, bu aşamalardan geçmiş özelliğin sunulmasıdır.
+Yüksek lotlu preprod testlerinde de sorun görülmezse özelliğin bütün müşterilere aktarımı sağlanır.
 
 Bu akıştaki test süreleri ve lot sınırları burada sabitlenmez. Ayrıca bir kod branch'inin adı, testlerin tamamlandığı veya özelliğin müşterilere açıldığı bilgisinin yerine geçmez. Branch, sürüm ve dağıtımın teknik ayrıntılarını sistem mimarisi bölümünde ayrıca inceleyeceğiz.
 
@@ -85,31 +83,36 @@ Bu akıştaki test süreleri ve lot sınırları burada sabitlenmez. Ayrıca bir
 
 ## Testte neyi takip ederiz?
 
-MeeApps ekibinin yaptığı bir testte başlangıç ayarlarını, başlangıç pozisyonunu ve gelen olayları birlikte kaydetmesi gerekir. Örneğin belirli bir ürün için 100 lot alış beklenen basitleştirilmiş bir senaryo düşünelim. Bu sayılar yalnız anlatım örneğidir; düşük/yüksek lot sınırı veya hazır strateji ayarı değildir.
+Her stratejinin amacı, giriş parametreleri ve çalışma koşulları farklıdır. Bu yüzden testin başlangıç noktası, **seçilen stratejinin belirli ayarlar ve koşullar altında ne yapmasının beklendiğini** yazmaktır. Aynı parametre adı farklı stratejilerde aynı anlama gelmeyebilir; alanın birimi, sınırları ve diğer ayarlarla ilişkisi ilgili stratejinin açıklamasından alınır.
 
-| Gözlenen olay | Nasıl yorumlarız? |
+| Takip edilen | Testte sorulacak soru |
 |---|---|
-| Testi yapan kişi stratejiyi başlattı | Başlatma isteği verildi; motorun dönen durumu ayrıca izlenir |
-| Motor stratejinin çalıştığını bildirdi | Çalışma durumu alındı; işlem koşulunun oluştuğu henüz söylenemez |
-| Koşul oluştu ve 100 lot emir üretildi | Emir kararı oluştu; kabul ve gerçekleşme sonucu takip edilir |
-| Emirden 40 lot gerçekleşti | 40 lot gerçekleşti; emrin tamamı gerçekleşmedi |
-| Kalan 60 lotun iptali onaylandı | Bekleyen miktar kalmadı; gerçekleşmiş 40 lot geri alınmadı |
+| Strateji ve başlangıç durumu | Hangi strateji/mod, hesap ve ürün seçili? Senaryoyu etkileyen mevcut emir veya pozisyon var mı? |
+| Girilen parametreler | Hangi değerler kullanıldı? Arayüzde girilen değerler beklenen ayarlarla eşleşiyor mu? |
+| Koşullar ve olay sırası | Stratejinin değerlendirdiği piyasa, zaman veya diğer koşullar hangi sırayla oluştu? |
+| Beklenen ve gözlenen davranış | Strateji işlem yapmalı mı, beklemeli mi? Oluşan emirler ve durum değişiklikleri beklentiyle uyuşuyor mu? |
+| Ayar değişikliğinin etkisi | İlgili değer değiştiğinde hangi davranış değişmeli? Yeni değer ne zaman geçerli olmalı? |
+| Sonuç ve izlenebilirlik | Arayüz, strateji durumu ve varsa emir/gerçekleşme kayıtları aynı sonucu gösteriyor mu? |
 
-Başlangıç pozisyonu sıfırsa ve başka işlem yoksa sonuç +40 lot pozisyondur. “Emir iptal edildi” ile “pozisyon sıfır” arasındaki farkı görmek, doğru test beklentisi yazmanın bir parçasıdır.
+Önce temel bir senaryo belirler, sonra bir parametreyi değiştirerek etkisini karşılaştırırız. Ardından birbirine bağlı ayarları birlikte sınarız. İlgili alanın izin verilen sınırları, geçersiz değer girişleri ve koşulun oluşmadığı durumlar da senaryolara eklenir. Beklemek veya emir üretmemek de doğru sonuç olabilir; başarı ölçütü her zaman işlem yapılması değildir.
+
+Başlatma, durdurma ve çalışma sırasında ayar değiştirme davranışları da stratejiye göre değerlendirilir. Her stratejinin aynı alanlara sahip olduğu veya çalışan stratejide her ayarın anında değiştirilebildiği varsayılmaz. Ayrıntılı parametre–koşul–beklenen sonuç örneklerini ileride her stratejinin kendi bölümünde açıklayacağız.
 
 Arayüzde oturum açan **kullanıcı**, işlemin adına yapıldığı **hesap** ve işlem yapılan **ürün** de ayrı bilgilerdir. Testi açıklarken bunlara ortam, sürüm, ayarlar ve olay sırası eklenir. Böylece aynı senaryoyu tekrar çalıştırıp sonucu karşılaştırabiliriz. Paylaşılacak kayıtlarda gerçek hesap ve erişim bilgileri maskelenir.
 
-## Bu ayrım sistem bilgisiyle nasıl birleşir?
+## Strateji testleri sistem bilgisiyle nasıl birleşir?
 
-MTrader arayüzü kullanıcı eylemlerini ve sonuçları gösterir; strateji motorları kuralları değerlendirir, ilgili emir katmanı emir iletimini ve dönüşlerini işler. Müşteri bunları işlem yapmak için kullanır. MeeApps ekibi ise yeni özelliğin bu parçalar üzerindeki etkisini geliştirmek ve doğrulamak için inceler.
+MTrader arayüzü kullanıcı eylemlerini ve sonuçları gösterir; strateji motorları kuralları değerlendirir, ilgili emir katmanı emir iletimini ve dönüşlerini işler. Bir stratejiyi test ederken ekrandaki ayarı, arka taraftaki değerlendirmeyi ve oluşan sonucu birlikte anlamamız gerekir.
 
-İlk bölümün amacı bu çerçeveyi kurmaktır: ürünümüz MTrader, geliştirici şirketimiz MeeApps, müşterilerimiz aracı kurumlar ve geliştirmeyi müşteriye ulaştıran aşamalı bir test sürecimiz var. Sıradaki bölümde ürün, lot, emir defteri ve eşleşme gibi borsa kavramlarını temelden açacağız.
+İlk bölümde MTrader'ın amacını, kullanıcılarını ve bir özelliğin geliştirmeden müşteriye ulaşmasına kadar geçen süreci tanıdık. Sıradaki bölümde ürün, lot, emir defteri ve eşleşme gibi borsa kavramlarını temelden açacağız.
 
 ## Sorularımız ve netleşen noktalar
 
 **24 Ekim 2026 — Kullanıcı düzeltmesi, anlamı korunmuş özet:** MTrader algoritmik işlem botunun adı, MeeApps şirketin adı. Günlük kullanıcılar müşteri aracı kurumların traderları/fon yöneticileri; MeeApps günlük trade yapmıyor. Şirket, özellik detayları/senaryolar → görev dağılımı → geliştirici ön testi → test ortamı → anlaşılmış traderlarla preprod düşük lot → kararlılık sonrası yüksek lot → bütün müşterilere dağıtım akışıyla ilerliyor.
 
 **Metne yansıması:** Önceki birleşik günlük kullanım anlatımı kaldırıldı. Müşterinin işlem günü ile MeeApps'in geliştirme/test sorumlulukları ayrıldı; preprod katılımı ve miktar artırma koşulu açıklandı. Sayısal lot sınırı, test süresi ve son onay yetkisi belirtilmediği için eklenmedi.
+
+**24 Ekim 2026 — İkinci okuma revizyonu:** Kullanıcı, rehberin yalnız MTrader dokümanı olduğunu; MeeApps’in birden fazla ürünü bulunduğunu belirtti. Şirketin günlük kullanımını açıklayan paragraf ve tekrarlar kaldırıldı. Test anlatımı tek emir/miktar örneğinden çıkarılıp stratejiye özgü parametreler, koşullar, ayar değişiklikleri ve beklenen sonuçlar üzerinden genelleştirildi. Diğer içerik şimdilik uygun bulundu; yeni bölüm talebi verilmedi.
 
 ## Kaynaklar ve doğrulama
 

@@ -21,8 +21,6 @@ durum: taslak
 
 **MTrader**, MeeApps'in aracı kurumlar için geliştirdiği **algoritmik işlem botudur**. Borsa İstanbul'daki piyasa verisini takip eder, kullanıcı tarafından belirlenen kurallarla alım-satım emirleri üretir ve sonuçlarını kullanıcıya gösterir. MTrader arayüzü, bu sistemi yönetmenin ve izlemenin yoludur.
 
-**MeeApps şirketin, MTrader ürünün adıdır.** Ürünü günlük işlemlerinde kullananlar müşteri aracı kurumların çalışanlarıdır; traderlar ve fon yöneticileri bunlara örnektir. Biz MeeApps olarak ürünü geliştirir, test eder ve müşterilere sunarız. Uygulamayı kullanımımız özellikleri ve test senaryolarını sınamaya yöneliktir.
-
 Buradaki **emir**, belirli bir üründen belirli miktarda almak veya satmak için verilen talimattır. **Strateji** ise hangi koşulda, hangi fiyat ve miktarla emir verileceğini belirleyen kurallar bütünüdür. Kullanıcı bu kuralların ayarlarını seçer; çalışan yazılım, piyasa olaylarını bu ayarlara göre değerlendirir.
 
 ## Hangi ihtiyacı karşılıyoruz?

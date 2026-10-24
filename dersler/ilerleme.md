@@ -21,6 +21,8 @@ durum: taslak
 
 ## Son tamamlanan iş
 
+**Son revizyon:** Rehberin kapsamı yalnız MTrader. Şirketin günlük kullanımını açıklayan paragraf ve tekrarlar kaldırıldı; test bölümü stratejiye özgü parametre/koşul/beklenen sonuç, ayar değişiklikleri ve işlem yapılmaması gereken durumlarla genelleştirildi. İlk bölümün diğer içeriği kullanıcı tarafından şimdilik uygun bulundu. Yeni bölüme geçme talebi yok; sonraki yönlendirme bekleniyor.
+
 24 Ekim 2026, ilk okuma revizyonu: ürün **MTrader**, şirket **MeeApps**. Müşteriler aracı kurumlar; günlük kullanıcılar onların traderları/fon yöneticileri. MeeApps'in kullanımı geliştirme/test içindir. Önceki birleşik günlük kullanım anlatımı yerine “Kullanıcılar ve geliştirme süreci” yazıldı. Özellik/senaryo/görev → geliştirici ön testi → test ortamı → anlaşılmış traderlarla preprod düşük lot → kararlılık sonrası yüksek lot → bütün müşterilere aktarım açıklandı. Sayısal lot/süre/onay yetkisi uydurulmadı. Ana KB tek referansı `00-genel/urun-ve-gelistirme-sureci.md` ve ilgili giriş bağlantıları güncellendi.
 
 Yayın sürümü 0.3: **7 A4 sayfa**, iki konu. “Okumaya başlamadan” sayfası kaldırıldı; HTML giriş sayfası ilk konudur. Kitap başlığı MTrader — Algoritmik İşlem Botu; ana başlıklar bölüm rozeti ve marka şeridiyle zenginleştirildi. PDF/HTML/EPUB yenilendi; PDF sayfaları, metin ve HTML görünümü kontrol edildi. Eski küçük harfli ürün adı ve kaldırılan önsöz PDF/EPUB'da yok. Güncel dosyalar aynı çıktı adlarını kullanır.

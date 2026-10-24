@@ -11,6 +11,8 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Şu an (2026-10-24)
 
+**Son revizyon:** Rehberin kapsamı yalnız MTrader. Şirketin günlük kullanımını açıklayan paragraf ve tekrarlar kaldırıldı; test bölümü stratejiye özgü parametre/koşul/beklenen sonuç, ayar değişiklikleri ve işlem yapılmaması gereken durumlarla genelleştirildi. İlk bölümün diğer içeriği kullanıcı tarafından şimdilik uygun bulundu. Yeni bölüme geçme talebi yok; sonraki yönlendirme bekleniyor.
+
 **Son kullanıcı revizyonu işlendi:** Ürün MTrader (algoritmik işlem botu), şirket MeeApps; müşteriler aracı kurumlar ve günlük kullanıcıları onların traderları/fon yöneticileri. MeeApps düzenli trade yapmaz, geliştirme/test yapar. İş sürecinin tek kaydı `00-genel/urun-ve-gelistirme-sureci.md`; ana KB girişleri buna bağlandı. İkinci konu “Kullanıcılar ve geliştirme süreci” olarak yeniden yazıldı. Test → preprod düşük lot → kararlılık sonrası yüksek lot → bütün müşteriler akışı kullanıcı beyanı; teknik dağıtım kanıtı değildir. Önsöz kaldırıldı, bölüm başlıkları zenginleştirildi, ürün adı MTrader olarak düzeltildi. Yayın 0.3, 7 A4 sayfa; yeniden okuma bekleniyor. Aşağıdaki önceki tur sayfa sayıları/sıra notları tarihsel; güncel devam noktası `dersler/ilerleme.md`.
 
 **Güncel devam noktası: ilk bölüm tamamlandı, kullanıcı revizyonları bekleniyor.** Uygulamanın amacı ve kullanıcılar/örnek iş günü iki ayrı taslak olarak kitapta; sürüm 0.2, toplam 8 A4 sayfa. Kullanıcı okuyup revizyon verecek; şimdilik borsa temellerine geçilmez. Görsel tasarıma olumlu geri bildirim var, içerik onayı yok. Son durumun tek özeti `dersler/ilerleme.md`; aşağıdaki eski tur özetleri tarihsel bağlamdır.

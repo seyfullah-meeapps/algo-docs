@@ -16,6 +16,8 @@ Bu klasör insan için konu bazlı rehberdir; repo kökündeki AI bilgi tabanın
 
 ## Çalışırken
 
+- Rehber yalnız MTrader kapsamındadır; şirketin diğer ürünlerini veya şirket genelini anlatmaz. Şirket/kullanıcı ayrımını tekrarlayan açıklamalar ekleme. Strateji testlerini her stratejinin kendi parametreleri, koşulları ve beklenen davranışı üzerinden anlat.
+
 - Ürün adı **MTrader**, şirket **MeeApps**. MTrader aracı kurumların günlük kullandığı algoritmik işlem botudur; MeeApps'in kullanımı geliştirme/test içindir. Tek süreç referansı kök `00-genel/urun-ve-gelistirme-sureci.md`. Müşteri gününü şirket ekibinin günlük trade rutini olarak yazma. Ön test → test ortamı → preprod düşük lot → kararlılık sonrası yüksek lot → müşteriler akışını branch/CI bilgisiyle eşitleme.
 - Kullanıcı okuma çıktısındaki “Okumaya başlamadan” sayfasını kaldırdı. Kitap doğrudan ilk konuyla başlar; bu sayfayı yeniden ekleme. Ana başlıklar bölüm rozeti ve marka şeridiyle biçimlenir.
 
