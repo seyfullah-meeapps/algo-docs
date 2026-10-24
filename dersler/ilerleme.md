@@ -8,15 +8,15 @@ durum: taslak
 
 ## Şu an
 
-İlk bölüm revizyonlar sonrasında kullanıcı tarafından uygun bulundu; 24 Ekim 2026 talebiyle borsa temellerine geçildi. “Piyasalar, ürünler ve miktar birimleri” taslak yazıldı. Toplam 3 konu yazılı, 45 konu iskelet; yeni konu henüz okunmadı.
+Kullanıcı BYF açıklamasından sonra devam istedi. Emir defteri ve eşleşme taslağı yazıldı; önceki konuda BYF tekrarları azaltıldı, kısa ürün tanımı korundu. Dört konu kitapta, 44 konu iskelet. Yeni konu henüz kullanıcı okumasından geçmedi.
 
 ## Son tamamlanan iş
 
-BIST/Pay Piyasası/VİOP, pay/endeks/BYF/varant/vadeli ayrımı ve sözleşme büyüklüğü açıklandı. Borsa İstanbul'un resmi sayfaları okundu; standart pay vadeli sözleşme örneğinde adet ve nominal değer ayrımı kuruldu. MTrader bağlantısı kavramsal; yeni kod/canlı test yok. Yayın sürümü 0.4; PDF/HTML/EPUB yenilendi. PDF toplam 9 A4 sayfa; yeni iki sayfa görsel kontrol edildi, EPUB paket bütünlüğü doğrulandı.
+Alış/satış, spread, kademe/derinlik, fiyat-zaman önceliği, kuyruk, kısmi ve çok seviyeli eşleşme örneği yazıldı. Header/erime ve piyasa defteri/kendi emri ayrımı açıklandı. Resmi BIST kaynakları okundu; yeni kod veya canlı test yok. Yayın sürümü 0.5; PDF/HTML/EPUB yenilendi. PDF 11 A4 sayfa; yeni sayfalar görsel olarak, EPUB paket bütünlüğü ve belge bağlantıları araçlarla kontrol edildi.
 
 ## Sıradaki tek başlangıç noktası
 
-`02-borsa-temelleri/02-emir-defteri.md`: alış/satış tarafı, spread, kademe, eşleşme ve öncelik. Kullanıcının okuma revizyonları gelirse önce ilgili dosyada işlenir. İlk bölüm için önceki bekleme kararı son devam talebiyle kalktı.
+`02-borsa-temelleri/03-fiyat-adimi-ve-limitler.md`: fiyat adımı, baz fiyat, tavan/taban ve ürün bazlı kurallar. Okuma revizyonları gelirse önce ilgili dosyada işlenir.
 
 ## Kalıcı çalışma düzeni
 
@@ -26,4 +26,4 @@ Yayın kullanımı `yayin/README.md`, tasarım kaynakları `yayin/marka.md`, yay
 
 ## Doğrulama ve Git
 
-Üç konu `taslak`, kalan 45 konu `bos`. Yapısal kontrol: 168 Markdown, 1.869 bağlantı, 0 hata; `git diff --check` temiz. Çıktılar ve araçlar Git dışında. Önceki push otomatik onay incelemesince reddedildi; kullanıcı uzak depoya gönderim onayı vermedi. Push tekrar denenmez; çalışmalar yerelde saklanır.
+Dört konu `taslak`, kalan 44 konu `bos`. Yapısal kontrol: 168 Markdown, 1.870 bağlantı, 0 hata; `git diff --check` temiz. Çıktılar ve araçlar Git dışında. Önceki push otomatik onay incelemesince reddedildi; kullanıcı uzak depoya gönderim onayı vermedi. Push tekrar denenmez; çalışmalar yerelde saklanır.

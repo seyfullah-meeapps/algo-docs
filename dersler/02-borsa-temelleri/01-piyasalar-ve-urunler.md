@@ -32,7 +32,7 @@ Pay Piyasası'nın adı, oradaki her ürünün şirket payı olduğu anlamına g
 
 **Pay (hisse senedi)**, bir şirkette ortaklık payını temsil eder. **Borsa yatırım fonu (BYF)** ise payları borsada işlem gören, bir endeksin performansını izlemeyi amaçlayan fondur. BYF almak, tek bir şirketin payını almakla aynı şey değildir.
 
-**Endeks**, belirli araçların performansını bir hesaplama yöntemiyle gösteren değerdir. Örneğin BIST 30 bir endekstir. “Endeks değeri”, “o endeksi izleyen BYF” ve “endekse dayalı vadeli sözleşme” ayrı kavramlardır. Emir verirken işlem gören aracın kendisi seçilir.
+**Endeks**, belirli araçların performansını bir hesaplama yöntemiyle gösteren değerdir. Örneğin BIST 30 bir endekstir. Endeksin kendisi ile endekse dayalı vadeli sözleşme ayrı kavramlardır. Emir verirken işlem gören aracın kendisi seçilir.
 
 **Vadeli işlem sözleşmesi**, belirlenmiş koşullarla ileri bir tarihe ilişkin alım-satım yükümlülüğü doğuran sözleşmedir. Değerinin bağlı olduğu pay, endeks veya başka varlığa **dayanak varlık** denir. Aynı dayanağın farklı vadelerdeki sözleşmeleri ayrı ürünlerdir; vade, sözleşmenin zaman bilgisidir. VİOP'ta sözleşme kodu da dayanak ve vade bilgilerini içerir. [Borsa İstanbul — VİOP](https://www.borsaistanbul.com/sss/viop)
 
@@ -62,7 +62,7 @@ Fiyatlar öğretici varsayımdır; komisyonlar hesaba katılmamıştır. **Nomin
 
 ## MTrader'da neden önemli?
 
-**Ürün, üzerinde işlem yapılan araçtır; strateji, o araçla ne yapılacağını belirleyen kurallardır.** Örneğin BYF bir ürün türüdür; BYF üzerinde çalışan stratejinin mantığı ayrıca açıklanır. Aynı şekilde, varantın tanımı ile MTrader'daki varant stratejisinin ayarları ayrı konulardır.
+**Ürün, üzerinde işlem yapılan araçtır; strateji, o araçla ne yapılacağını belirleyen kurallardır.** Örneğin bir pay üzerinde HFT veya tavan stratejisinin çalışması, ürünün kimliğini değiştirmez; değişen, hangi koşullarla işlem yapılacağıdır.
 
 Bir strateji ayarını veya test senaryosunu okurken önce ürünün kimliğini, piyasa bilgisini, miktar birimini ve varsa vadesini netleştiririz. İki ürün kullanan bir senaryoda her iki taraf için bunu ayrı yaparız. “İki tarafa da 10 girdik” ifadesi, iki tarafta aynı büyüklükte işlem beklendiğini tek başına açıklamaz.
 
@@ -71,6 +71,10 @@ Bu temel, sonraki strateji belgelerinde parametrelerin anlamını doğru okumam�
 ## Sorularımız ve netleşen noktalar
 
 **24 Ekim 2026 — Kullanıcı yönlendirmesi:** “Tamam çok güzel sıradaki bölüme geçebiliriz yazmaya.” İlk bölüm revizyonlarından sonra borsa temellerine geçildi. Bu konuya özgü bir soru henüz sorulmadı; miktar örneği agent tarafından eğitim amacıyla hazırlandı.
+
+**24 Ekim 2026 — Kullanıcı sorusu, anlamı korunmuş özet:** BYF kullanılmayan bir strateji olmasına rağmen neden sık geçiyor; borsada gerçekten BYF var mı, uygulamadaki BYF ile ilişkili mi?
+
+**Yanıt:** BYF, Borsa Yatırım Fonu adlı gerçek ürün türüdür. Mevcut teknik KB taslağında MTrader’ın FundTracker/Fon Takibi stratejisi bu fon ve sepeti arasındaki ilişkiyi kullanır; ürün ile strateji aynı şey değildir. Teknik KB 22 Ekim referanslarına dayanır, bu tur kod yeniden incelenmedi. Kullanıcı stratejinin kullanılmadığını belirtti; kodda bulunması aktif kullanım kanıtı sayılmaz. Genel anlatımda BYF vurgusu azaltılmalı, örnekler öncelikli stratejilere hizmet etmeli. Kullanıcı önce yanıt istediği için bu tur yeni konu yazılmadı ve okuma çıktısı değiştirilmedi.
 
 ## Kaynaklar ve doğrulama
 

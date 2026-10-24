@@ -11,6 +11,10 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Şu an (2026-10-24)
 
+**Son tamamlanan:** Kullanıcının devam talebiyle emir defteri/eşleşme konusu yazıldı; BYF tekrarları azaltıldı. Kitapta dört konu, 44 iskelet; yayın 0.5. Sıradaki konu fiyat adımı ve fiyat sınırları. Yeni konu okuma bekliyor; aşağıdaki önceki devam noktaları tarihsel.
+
+**Son soru:** Kullanıcı BYF stratejisinin kullanılmadığını belirtti; borsadaki BYF ürünü ile uygulamadaki Fon Takibi ayrımı açıklandı. Genel anlatımda BYF vurgusu azaltılacak. Önce sorunun yanıtı istendiği için emir defteri yazımına bu tur geçilmedi. Soru kaydı piyasalar/ürünler dosyasında; PDF değişmedi.
+
 **Güncel devam noktası:** Kullanıcı ilk bölüm revizyonlarını uygun buldu ve sıradaki bölüme geçilmesini istedi. Borsa temellerinin ilk konusu `dersler/02-borsa-temelleri/01-piyasalar-ve-urunler.md` yazıldı; Borsa İstanbul resmi kaynakları okundu. Üç konu kitapta, 45 konu iskelet; yayın 0.4. Yeni konu henüz okunmadı. Sıradaki dosya emir defteri ve eşleşme. Aşağıdaki bekleme/sürüm notları tarihsel; güncel takip `dersler/ilerleme.md`.
 
 **Son kullanıcı revizyonu işlendi:** Ürün MTrader (algoritmik işlem botu), şirket MeeApps; müşteriler aracı kurumlar ve günlük kullanıcıları onların traderları/fon yöneticileri. MeeApps düzenli trade yapmaz, geliştirme/test yapar. İş sürecinin tek kaydı `00-genel/urun-ve-gelistirme-sureci.md`; ana KB girişleri buna bağlandı. İkinci konu “Kullanıcılar ve geliştirme süreci” olarak yeniden yazıldı. Test → preprod düşük lot → kararlılık sonrası yüksek lot → bütün müşteriler akışı kullanıcı beyanı; teknik dağıtım kanıtı değildir. Önsöz kaldırıldı, bölüm başlıkları zenginleştirildi, ürün adı MTrader olarak düzeltildi. Yayın 0.3, 7 A4 sayfa; yeniden okuma bekleniyor. Aşağıdaki önceki tur sayfa sayıları/sıra notları tarihsel; güncel devam noktası `dersler/ilerleme.md`.

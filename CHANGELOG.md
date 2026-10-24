@@ -2,6 +2,15 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-24 — Emir defteri ve eşleşme
+
+- Alış/satış, spread, derinlik, kuyruk ve fiyat-zaman önceliği öğretici defter/eşleşme tablolarıyla yazıldı. BIST resmi kaynakları okundu; header/erime dili mevcut KB ile ilişkilendirildi, yeni kod/canlı test yok.
+- Önceki konudaki BYF tekrarları azaltıldı. Yayın 0.5; dördüncü konu PDF/HTML/EPUB kitabına eklendi, devam kayıtları güncellendi.
+
+## 2026-10-24 — BYF kavramı ve kullanım bağlamı
+
+- Kullanıcının BYF sorusu ve stratejinin kullanılmadığı bilgisi konu/oturum kayıtlarına eklendi. Borsadaki ürün tanımı resmi kaynaktan, Fon Takibi bağlantısı mevcut teknik KB taslağından okundu; yeni kod kontrolü yok. Okuma çıktısı değiştirilmedi.
+
 ## 2026-10-24 — Borsa temellerine başlangıç
 
 - Kullanıcının devam talebiyle ilk bölümdeki bekleme kalktı. Piyasalar, ürünler ve miktar birimleri yazıldı; resmi BIST ürün/VİOP/pay vadeli kaynakları erişim tarihleriyle eklendi.

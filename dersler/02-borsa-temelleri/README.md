@@ -9,7 +9,7 @@ durum: taslak
 | Konu | Kapsam | Durum |
 |---|---|---|
 | [Piyasalar, ürünler ve miktar birimleri](01-piyasalar-ve-urunler.md) | BIST, Pay Piyasası, VİOP; pay, endeks, vadeli, varant, BYF; lot ve sözleşme çarpanı | Taslak yazıldı; okuma bekliyor |
-| [Emir defteri ve eşleşme](02-emir-defteri.md) | Bid/ask, spread, kademe, likidite, fiyat-zaman önceliği, kuyruk, header ve erime | Planlandı |
+| [Emir defteri ve eşleşme](02-emir-defteri.md) | Bid/ask, spread, kademe, likidite, fiyat-zaman önceliği, kuyruk, header ve erime | Taslak yazıldı; okuma bekliyor |
 | [Fiyat adımı ve fiyat sınırları](03-fiyat-adimi-ve-limitler.md) | Tick, fiyat bandı, baz fiyat, tavan/taban; günlük veri ve kural ayrımı | Planlandı |
 | [Emir tipleri ve geçerlilik süreleri](04-emir-tipleri-ve-sureleri.md) | Limit, piyasa, piyasadan limite; DAY, IOC/KIE, FOK; seans ve destek sınırları | Planlandı |
 | [Emir yaşam döngüsü](05-emir-yasam-dongusu.md) | Gönderim, kabul, ret, kısmi/tam gerçekleşme, iptal, replace; istek ve onay | Planlandı |
