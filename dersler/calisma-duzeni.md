@@ -10,6 +10,8 @@ Bu rehber insan içindir. Kısa bir açıklamadan somut örneğe, ardından bizi
 
 Kullanıcının seçtiği derinlik: ana metin çalışma mantığı, parametreler ve beklenen davranışa odaklanır. Kod yalnız gerektiğinde kısa ve açıklamalı verilir. Dosya/fonksiyon referansları ve derin C++ ayrıntıları ayrı “Teknik ayrıntı” bölümünde tutulur; satır satır kod incelemesi hedeflenmez. Kaynak kod doğrulaması yine yapılır.
 
+Ürün adı **MTrader**, şirket adı **MeeApps**. Müşterinin günlük kullanımı ile şirketin geliştirme/test çalışması ayrı anlatılır. Kaynak [ürün ve geliştirme süreci](../00-genel/urun-ve-gelistirme-sureci.md) kullanıcı beyanına dayanır; şirket süreci kodla doğrulanmış dağıtım kanıtı gibi sunulmaz.
+
 ## Konu dosyası
 
 Her dosya tek soruya/konuya odaklanır. Önerilen sıra: amaç ve ön bilgi; kavramların açıklaması; küçük örnek; sistemdeki karşılık; şekil/akış; sık karışan noktalar; gerçek sorular; kaynak/doğrulama; devam notu. İskeletler bu bölümleri içerir, boş bölümler hazır içerik sayılmaz. 400 satırı aşmadan alt konulara bölünür; dosya adları Türkçe karakter içermez.

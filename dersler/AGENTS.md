@@ -16,6 +16,9 @@ Bu klasör insan için konu bazlı rehberdir; repo kökündeki AI bilgi tabanın
 
 ## Çalışırken
 
+- Ürün adı **MTrader**, şirket **MeeApps**. MTrader aracı kurumların günlük kullandığı algoritmik işlem botudur; MeeApps'in kullanımı geliştirme/test içindir. Tek süreç referansı kök `00-genel/urun-ve-gelistirme-sureci.md`. Müşteri gününü şirket ekibinin günlük trade rutini olarak yazma. Ön test → test ortamı → preprod düşük lot → kararlılık sonrası yüksek lot → müşteriler akışını branch/CI bilgisiyle eşitleme.
+- Kullanıcı okuma çıktısındaki “Okumaya başlamadan” sayfasını kaldırdı. Kitap doğrudan ilk konuyla başlar; bu sayfayı yeniden ekleme. Ana başlıklar bölüm rozeti ve marka şeridiyle biçimlenir.
+
 - Bir konu bir Markdown dosyasıdır; büyüyünce alt konulara böl ve indeksleri güncelle. Kullanıcı artık A4 PDF, HTML önizleme ve EPUB çıktısı istedi; yayın düzeni `yayin/README.md` içindedir. Kaynak MD düzenlenir, çıktılar yeniden üretilir.
 - İndeks sırasıyla içerikleri doldur; iskeletleri yazılmış sayma. Güncel devam noktası `ilerleme.md` içindedir.
 - Kullanıcının gerçek sorularını ve verdiği bağlamı ilgili konu dosyasındaki “Sorularımız ve netleşen noktalar” bölümüne tarihli ekle. Soru ile agent yorumunu ayır; cevaplanmayan soruya yanıt uydurma. Yapı kararlarının tek adresi `kararlar.md`.

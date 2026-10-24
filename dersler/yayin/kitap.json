@@ -1,7 +1,7 @@
 {
-  "title": "MeeApps Uygulama ve Sistem Rehberi",
-  "subtitle": "Şirket içi bilgi aktarımı • Çalışma taslağı",
-  "version": "0.2",
+  "title": "MTrader — Algoritmik İşlem Botu",
+  "subtitle": "Uygulama ve Sistem Rehberi · MeeApps",
+  "version": "0.3",
   "chapters": [
     "01-uygulama/01-ne-yapiyoruz.md",
     "01-uygulama/02-kullanicilar-ve-is-gunu.md"

@@ -17,7 +17,7 @@
 #set page(
   header: context {
     if counter(page).get().first() > 1 {
-      text(size: 8pt, fill: muted)[MeeApps / Uygulama ve Sistem Rehberi]
+      text(size: 8pt, fill: muted)[MTrader / Uygulama ve Sistem Rehberi]
       v(2mm)
       line(length: 100%, stroke: 0.5pt + border)
     }
@@ -53,10 +53,15 @@
 
 #show heading.where(level: 1): it => {
   pagebreak(weak: true)
-  block(above: 0pt, below: 9mm, sticky: true)[
-    #line(length: 12mm, stroke: 2pt + brand)
-    #v(4mm)
-    #text(size: 18pt, weight: "bold", fill: heading-ink)[#it]
+  block(above: 0pt, below: 9mm, sticky: true, width: 100%,
+    fill: rgb("#f4f7ef"), inset: 5mm, radius: 2mm,
+    stroke: (left: 2pt + brand),
+  )[
+    #if it.numbering != none [
+      #text(size: 8pt, weight: "bold", tracking: 1pt, fill: rgb("#486422"))[BÖLÜM #context counter(heading).display("1")]
+      #v(3mm)
+    ]
+    #text(size: 18pt, weight: "bold", fill: heading-ink)[#it.body]
   ]
 }
 #show heading.where(level: 2): set text(size: 12pt, weight: "bold", fill: heading-ink)

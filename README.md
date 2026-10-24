@@ -6,6 +6,8 @@ durum: taslak
 
 # algo-docs
 
+**Ürün MTrader, şirket MeeApps.** MTrader aracı kurumlar için geliştirilen algoritmik işlem botudur. Müşteri kullanımı ve şirketin geliştirme/test süreci: [ürün bağlamı](00-genel/urun-ve-gelistirme-sureci.md).
+
 MeeApps BIST algo/HFT stack'inin bilgi tabanı. Birincil okuyucu AI agent'lardır; giriş noktası [`AGENTS.md`](AGENTS.md).
 
 **İlk aşama tamamlandı (24 Ekim 2026):** planlanan doküman yazımı, derinleştirme ve development–master/main kod karşılaştırması kapatıldı. Aktif devam işi yok. Açık sorun araştırmaları, bug düzeltmeleri ve canlı ortam doğrulamaları kullanıcı yeniden istediğinde ayrı kapsamda ele alınacak. İçerik etiketleri `taslak` kalır; aşamanın tamamlanması bütün belgelerin içerik onayı değildir. [Kapsam ve kapanış](_surec/ikinci-tur-sonuc-2026-10-24.md).

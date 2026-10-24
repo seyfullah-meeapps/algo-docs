@@ -4,11 +4,11 @@ dogrulama: 2026-10-24
 durum: taslak
 ---
 
-# MeeApps uygulama ve sistem rehberi
+# MTrader uygulama ve sistem rehberi
 
 Bu rehber uygulamanın amacından başlayıp borsa ve teknik temellere, sistem mimarisine ve stratejilere ilerler. Okuyucu frontend bilgisi olan bir PM veya projeye yeni gelen biri olabilir. Hedef; uygulamayı anlamak, davranışı açıklamak, test tasarlamak ve kanıtıyla issue/görev yönetmektir.
 
-**İlk bölüm taslak olarak tamamlandı:** [Ne yapıyoruz ve neyi amaçlıyoruz?](01-uygulama/01-ne-yapiyoruz.md) ve [Kullanıcılar ve örnek iş günü](01-uygulama/02-kullanicilar-ve-is-gunu.md) kitapta yer alıyor. Kullanıcı bu bölümü okuyup revizyon verecek; şimdilik borsa temellerine geçilmiyor. Diğer 46 konu iskelet durumunda. Eski ders numaraları yeni rotayı belirlemez. Klasör adı bağlantıların devamlılığı için `dersler/` kaldı; yapı artık konu bazlı rehberdir.
+**İlk bölüm taslak olarak tamamlandı:** [Ne yapıyoruz ve neyi amaçlıyoruz?](01-uygulama/01-ne-yapiyoruz.md) ve [Kullanıcılar ve geliştirme süreci](01-uygulama/02-kullanicilar-ve-is-gunu.md) kitapta yer alıyor. Kullanıcı bu bölümü okuyup revizyon verecek; şimdilik borsa temellerine geçilmiyor. Diğer 46 konu iskelet durumunda. Eski ders numaraları yeni rotayı belirlemez. Klasör adı bağlantıların devamlılığı için `dersler/` kaldı; yapı artık konu bazlı rehberdir.
 
 ## Devam edecek agent için
 
@@ -25,7 +25,7 @@ Repo kökündeki [oturum notları](../OTURUM-NOTLARI.md), ardından [rehber tali
 | No | Konu dosyası | İçerik sınırı |
 |---|---|---|
 | 1.01 | [Ne yapıyoruz ve neyi amaçlıyoruz?](01-uygulama/01-ne-yapiyoruz.md) | Ürünün amacı, kullanıcı ihtiyacı, piyasa verisi, otomatik karar ve emir; kapsam ve sınırlar |
-| 1.02 | [Kullanıcılar ve örnek iş günü](01-uygulama/02-kullanicilar-ve-is-gunu.md) | Operatör, geliştirici, PM ve operasyon rolleri; hazırlık, çalışma, izleme ve kapanış |
+| 1.02 | [Kullanıcılar ve geliştirme süreci](01-uygulama/02-kullanicilar-ve-is-gunu.md) | Müşteri kullanıcıları; MeeApps geliştirme, test, preprod ve dağıtım süreci |
 
 ### 2. Borsa temelleri
 

@@ -11,7 +11,6 @@ import shutil
 import subprocess
 import time
 import threading
-from datetime import datetime, timedelta, timezone
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
@@ -48,7 +47,9 @@ def prepare() -> None:
         source = (LESSONS / relative).resolve()
         if not source.is_relative_to(LESSONS.resolve()):
             raise ValueError('Konu yolu dersler disina cikamaz')
-        included[source] = f'bolum-{number:02}.qmd'
+        included[source] = 'index.qmd' if number == 1 else f'bolum-{number:02}.qmd'
+    if not included:
+        raise ValueError('Kitap en az bir konu icermeli')
     generated = []
     for source, name in included.items():
         text = source.read_text(encoding='utf-8-sig')
@@ -98,20 +99,9 @@ def prepare() -> None:
         body = re.sub(r'!\[([^\]]*)\]\(([^)]+)\)(\{[^}]*\})?', picture, body)
         save(BUILD / name, body + '\n')
         generated.append(name)
-    intro = f'''# Okumaya başlamadan {{.unnumbered}}
-
-Bu çalışma taslağı, MeeApps uygulamasını ve sistemini temelden açıklamak için hazırlanıyor. Yalnız yazılmış ve kitap listesine eklenmiş konuları içerir; ilerledikçe yeni bölümler eklenecektir.
-
-**Sürüm:** {settings['version']} · **Güncelleme:** {datetime.now(timezone(timedelta(hours=3))).strftime('%d.%m.%Y')} · **Kapsam:** {len(generated)} konu
-
-PDF A4 sayfa düzeniyle hazırlanır. EPUB'da metin ekran ve yazı boyutuna göre yeniden akar; PDF ile aynı sayfa numaraları beklenmez.
-
-Kaynak Markdown dosyaları düzenlenir; üretilen PDF, EPUB veya HTML üzerinde yapılan değişiklikler sonraki üretimde korunmaz.
-'''
-    save(BUILD / 'index.qmd', intro)
     config = (HERE / '_quarto.yml').read_text(encoding='utf-8')
-    config = config.replace('    - index.qmd', '    - index.qmd\n' + '\n'.join('    - ' + n for n in generated))
-    config = config.replace('title: "MeeApps Uygulama ve Sistem Rehberi"', 'title: ' + json.dumps(settings['title'], ensure_ascii=False))
+    config = config.replace('    - index.qmd', '\n'.join('    - ' + n for n in generated))
+    config = config.replace('title: "MTrader"', 'title: ' + json.dumps(settings['title'], ensure_ascii=False))
     config = config.replace('subtitle: "Şirket içi bilgi aktarımı"', 'subtitle: ' + json.dumps(settings['subtitle'], ensure_ascii=False))
     save(BUILD / '_quarto.yml', config)
     for asset in ['styles.css', 'epub.css', 'akisin-ozeti.svg', 'typst-show.typ', 'brand-logo.png']:
@@ -125,6 +115,11 @@ def run(quarto: str, fmt: str) -> None:
         # Sonraki format Quarto'nun gecici cikti klasorunu temizleyebilir.
         OUTPUT.mkdir(parents=True, exist_ok=True)
         shutil.copytree(BUILD / '_book', OUTPUT, dirs_exist_ok=True)
+        if output_format == 'html':
+            active_pages = {p.name for p in (BUILD / '_book').glob('*.html')}
+            for old_page in OUTPUT.glob('bolum-*.html'):
+                if old_page.name not in active_pages and old_page.resolve().parent == OUTPUT.resolve():
+                    old_page.unlink()
         if output_format == 'typst':
             pdf = BUILD / '_book' / 'meeapps-rehber.pdf'
             pdf_output = ROOT / 'output' / 'pdf'

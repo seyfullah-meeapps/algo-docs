@@ -2,6 +2,13 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-24 — MTrader kimliği ve müşteri/test süreci düzeltmesi
+
+- Kullanıcı beyanıyla ürün MTrader (algoritmik işlem botu), şirket MeeApps ve müşteriler aracı kurumlar olarak netleşti. MeeApps'in geliştirme/test kullanımı ile müşteri trader/fon yöneticisinin günlük kullanımı ayrıldı.
+- İkinci rehber konusu “Kullanıcılar ve geliştirme süreci” olarak yeniden yazıldı: özellik/senaryo/etki ve görev dağılımı, geliştirici ön testi, test ortamı, düşük lotlu trader preprod testleri, kararlılık sonrası yüksek lot ve bütün müşterilere aktarım. Süre/sayısal eşik uydurulmadı; yeni test/deploy yapılmadı.
+- Ana KB'de tek kullanıcı-beyanı kaynağı `00-genel/urun-ve-gelistirme-sureci.md` oluşturuldu; sistem haritası, branch/ortamlar, GUI girişi, operasyon ve agent talimatları buna bağlandı. Kod literal'leri/teknik repo adları korunarak ürün adı düzeltildi.
+- “Okumaya başlamadan” çıktısı kaldırıldı; HTML index ilk konuya geçti. Kitap başlığı ve ana bölüm başlık tasarımı güncellendi; PDF/HTML/EPUB sürüm 0.3 üretildi. Güncel PDF 7 A4 sayfa; görsel ve metinsel kontroller yapıldı.
+
 ## 2026-10-24 — İlk rehber bölümü okumaya hazır
 
 - “Kullanıcılar ve örnek iş günü” taslağı yazıldı: sorumluluk rolleri, kullanıcı/hesap/ürün ayrımı, hazırlıktan kapanışa örnek gün ve kısmi dolum/iptal takip örneği. Mevcut KB'den derlendi; yeni kod/internet/canlı doğrulama yok.

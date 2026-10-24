@@ -13,6 +13,8 @@ durum: taslak
 
 # mtrader-trade-ui
 
+**MTrader**, MeeApps'in geliştirdiği algoritmik işlem botunun ürün adıdır; bu repo onun kullanıcı arayüzüdür. Düzenli kullanıcıları müşteri aracı kurumların çalışanlarıdır; MeeApps ekibi geliştirme/test için kullanır. [Ürün ve geliştirme süreci](../../00-genel/urun-ve-gelistirme-sureci.md).
+
 Operatör arayüzü. **Aynı repoda iki ayrı uygulama var**, ikisi de prod'da (parçalı geçiş). Hangi müşterinin hangisini kullandığı: [`00-genel/branch-ve-ortamlar.md`](../../00-genel/branch-ve-ortamlar.md#eski-gui--yeni-gui-parçalı-geçiş). Bir GUI sorusunda önce müşterinin hangi GUI'de olduğunu belirle.
 
 | | Yeni GUI | Eski GUI |

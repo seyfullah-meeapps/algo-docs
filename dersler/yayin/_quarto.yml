@@ -3,7 +3,7 @@ project:
   output-dir: _book
 
 book:
-  title: "MeeApps Uygulama ve Sistem Rehberi"
+  title: "MTrader"
   subtitle: "Şirket içi bilgi aktarımı"
   author: "MeeApps"
   output-file: meeapps-rehber

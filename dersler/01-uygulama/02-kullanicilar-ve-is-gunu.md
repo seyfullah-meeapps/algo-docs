@@ -1,5 +1,5 @@
 ---
-kapsam: Operatör, geliştirici, PM ve operasyon rolleri; hazırlık, çalışma, izleme ve kapanış
+kapsam: Müşteri kullanıcıları ile MeeApps ekibinin ayrımı; özellik geliştirme, test, preprod ve dağıtım
 kaynak:
   - repo: HftSrvProd
     branch: development
@@ -15,103 +15,110 @@ kaynak:
     commit: b0474c3
 dogrulama: 2026-10-24
 durum: taslak
+kullanici_beyani:
+  tarih: 2026-10-24
+  baglam: Ürün kullanıcıları ve şirketin özellik geliştirme/test akışı
 ---
 
-# Kullanıcılar ve örnek iş günü
+# Kullanıcılar ve geliştirme süreci
 
-Bir önceki konuda sistemin piyasa verisini kurallarla değerlendirip emir ürettiğini gördük. Şimdi bu sistemin etrafındaki insanları ve bir işlem gününde nelerin takip edildiğini ele alalım.
+MTrader'ın müşterileri **aracı kurumlardır**. Günlük işlem kullanıcıları bu kurumların çalışanlarıdır; traderlar ve fon yöneticileri bunlara örnektir. Kullanıcılar yetkili oldukları hesap ve ürünlerde stratejileri çalıştırır, ayarları yönetir, emirleri ve pozisyonları takip eder.
 
-Uygulamayı kullanan kişi ile uygulamayı geliştiren ve işleten ekip farklı sorumluluklar taşır. Bir stratejinin ayarını seçmek, sunucunun hazır olduğunu kontrol etmek ve beklenen davranış için test hazırlamak aynı iş değildir. Bunlar birlikte yürütülür; birinin tamamlanması diğerlerinin de tamamlandığı anlamına gelmez.
+**MeeApps ise MTrader'ı geliştiren ve müşterilere sunan şirkettir.** Biz uygulamayı her gün kendi adımıza düzenli trade yapmak için kullanmayız. Yeni özellikleri, değişiklikleri ve beklenen davranışları test senaryolarında sınamak için kullanırız. Bu nedenle müşterinin işlem günü ile bizim geliştirme ve test sürecimizi ayrı düşünmeliyiz.
 
-## Sistemin etrafında kimler var?
+## Müşteri tarafında kim kullanır?
 
-Aşağıdaki roller, rehberde işleri ayırt etmek için kullandığımız sorumluluk başlıklarıdır. Şirketteki kesin unvan veya kişi ataması değildir; bir kişi birden fazla sorumluluğu üstlenebilir.
+Trader veya fon yöneticisi, kendi kurumunun yetkileri ve çalışma yaklaşımı doğrultusunda MTrader'ı kullanır. Gün içinde hangi hesapta, hangi ürün için, hangi stratejinin çalıştığını; açık emirleri, gerçekleşmeleri ve elde kalan pozisyonu izler. Buradaki **pozisyon**, yapılan işlemler sonucunda ilgili üründe elde tutulan net miktardır.
 
-| Rol | Temel sorumluluk | Sorduğu örnek soru |
-|---|---|---|
-| İşlem kullanıcısı / operatör | Yetkili hesaplarda strateji seçmek, ayarları yönetmek, emir ve pozisyonları izlemek | Hangi hesapta, hangi ürün için, hangi ayarlarla çalışıyorum? |
-| Operasyon sorumlusu | Uygulamaların, bağlantıların ve gerekli verilerin çalışma hazırlığını takip etmek | Program açılmış mı; gerekli bağlantı ve veriler de hazır mı? |
-| Geliştirici | Arayüz, servis veya strateji kodunu geliştirmek ve değişikliğin teknik doğrulamasını yapmak | Bu komut hangi kod yoluna gidiyor, üretilen sonuç neden böyle? |
-| PM / test sorumlusu | Beklenen davranışı netleştirmek, senaryo ve kabul kriteri hazırlamak, kanıt toplamak ve işi takip etmek | Hangi koşulda ne bekliyoruz; bunu nasıl sınayıp tamamlandı diyeceğiz? |
+Günün başında mevcut durum ve ayarlar değerlendirilir, işlem sırasında sonuçlar takip edilir, günün sonunda açık emir ve pozisyonlar kurumun kendi sürecine göre ele alınır. Bu, MeeApps çalışanlarının günlük trade rutini olarak anlaşılmamalıdır. Müşteriye ait işlem kararları ile bizim ürünün beklenen davranışını sınamamız farklı sorumluluklardır.
 
-Örneğin kullanıcı bir stratejinin miktarını değiştirirken PM bu değişikliğin açık emirler üzerindeki beklenen etkisini tarif eder; geliştirici uygulayan kodu inceler; operasyon ise testin veya çalışmanın hangi ortam ve sürümde yapıldığını netleştirmeye yardımcı olur. Bu iş bölümü, hem aynı dili konuşmayı hem de sonucu doğru kişiye yönlendirmeyi kolaylaştırır.
+## MeeApps tarafında kim ne yapar?
 
-## Birbirine benzeyen üç farklı kimlik
+Bizim taraftaki çalışma, bir özellik ihtiyacının anlaşılmasıyla başlar; geliştirme, test ve müşteriye aktarım boyunca sürer. Aşağıdaki tablo sorumlulukları açıklar; değişmez kişi veya unvan ataması değildir.
 
-Arayüzde oturum açan **kullanıcı**, alım-satımın adına yapıldığı **hesap** ve işlem yapılan **ürün** farklı kavramlardır. Kullanıcının sisteme girebilmesi her hesabı veya stratejiyi kullanabileceği anlamına gelmez; yetkili olduğu alanlar ayrıca belirlenir.
+| Sorumluluk | Ürün geliştirme sürecindeki karşılığı |
+|---|---|
+| PM / test sorumluluğu | Özellik detaylarını ve olası senaryoları netleştirmek, etkilenen alanlara göre işleri düzenlemek, test ve kabul sonuçlarını takip etmek |
+| Yazılım geliştirme | Verilen görevleri tamamlamak, arayüz/servis/motor üzerindeki değişiklikleri yapmak ve geliştirici ön testlerini gerçekleştirmek |
+| Ortam ve dağıtım sorumluluğu | Geliştirmenin uygun ortama alınmasını, kullanılan sürüm ve ayarların bilinmesini, test sırasında gerekli çalışma hazırlığını sağlamak |
+| Anlaşılmış traderların katılımı | Preprod aşamasında özelliği gerçek kullanıcı bakışıyla sınamak ve kullanım sonuçlarını paylaşmak |
 
-Bu ayrım günlük iletişimde de önemlidir. “HFT çalışıyor” ifadesi tek başına yeterli bağlam vermez. Hangi ortamda, hangi kullanıcı yetkisiyle, hangi hesap ve ürün üzerinde, hangi ayarlarla çalıştığını bilmek gerekir. **Ortam**, örneğin test için ayrılan sistem ile gerçek işlemlerin yürütüldüğü sistem arasındaki ayrımdır.
+Bir özellik yalnız arayüzdeki bir alanı etkileyebilir; başka bir özellik arayüzü, merkez servisi ve strateji motorunu birlikte değiştirebilir. Görev dağılımı da bu etkiye göre yapılır. Ekran değişikliğinin tamamlanması bütün özelliğin tamamlandığı anlamına gelmez; diğer parçalar ve birlikte çalışma senaryoları da ele alınır.
 
-## Örnek iş gününün akışı
+## Bir özellik müşteriye nasıl ulaşır?
 
-Bu anlatım, günün mantıksal aşamalarını gösterir. Sabit borsa saatleri veya bütün müşterilere uygulanacak bir operasyon talimatı değildir. Gerçek çalışma saatleri, hesap izinleri ve servis ayarları ilgili ortamdan belirlenir.
+MeeApps'teki akış, yalnız kodun yazılıp dağıtılması değildir. Farklı kişilerin ve ortamların katıldığı aşamalardan oluşur. **Ortam**, bir geliştirmenin hangi sistem ve sürüm üzerinde çalıştırılıp izlendiğini belirtir; test ve preprod bu akışta farklı amaçlarla kullanılır.
 
-### Hazırlık: çalışmaya hazır mıyız?
+### Özellik detayları, senaryolar ve görevler
 
-Günün başında yalnız giriş ekranının açılmasıyla yetinilmez. İşlem yapılacak sistemin doğru ortam ve sürümde olduğu; gerekli uygulamaların, piyasa verisinin ve emir bağlantılarının hazır olduğu kontrol edilir. Arayüzden veri görebilmek ile stratejinin emir göndermeye hazır olması ayrı koşullardır.
+Önce özelliğin ne yapacağı konuşulur. Olası kullanım senaryoları, karşılaşılabilecek durumlar ve problemler değerlendirilir. Hangi ekranların, servislerin veya strateji davranışlarının etkileneceği belirlenir; görevler bu alanlara göre dağıtılır.
 
-Kullanıcı tarafında hangi hesap ve ürünlerde, hangi stratejilerin kullanılacağı netleşir. Başlangıçta görülen pozisyon ve bekleyen emirler de değerlendirilir. Önceki bir durumu bilmeden yeni işlem sonucunu yorumlamak, aynı miktarın nereden geldiğini karıştırmaya neden olabilir.
+Bu aşamanın amacı, geliştirmenin sonunda ne beklediğimizi ortaklaştırmaktır. Örneğin bir miktar alanı eklenecekse yalnız alanın ekranda görünmesi değil, gönderilen değerin hangi davranışı değiştireceği ve mevcut emirlerle nasıl etkileşeceği de ele alınır.
 
-### Ayarlama: ne yapmasını istiyoruz?
+### Geliştirme ve geliştiricinin ön testleri
 
-İşlem kullanıcısı stratejiyi ve ilgili hesabı seçer; stratejiye özgü miktar, eşik ve fiyat koşullarını düzenler. Başlatma öncesinde amaçlanan ayar seti net olmalıdır. Bir alanın boş, sıfır veya kapalı olması aynı anlama gelmeyebilir; bunların karşılığını strateji konularında ayrı ayrı açıklayacağız.
+Yazılımcılar görevlerini tamamlar ve kendi ön testlerini gerçekleştirir. Değiştirdikleri alanın beklenen şekilde çalıştığını kontrol ederler. Bu çalışma daha sonra test ortamında yapılacak izleme ve senaryo testlerinden ayrı bir aşamadır.
 
-Bazı emir akışlarında önceden hazırlanmış emirler belirlenen zamanda gönderilir. Bu nedenle arayüzde bir emrin kaydedilmiş olması ile o emrin borsaya iletilmiş olması ayrı aşamalardır. Toplu Emirler konusunu işlerken bu zamanlama ilişkisine döneceğiz.
+### Test ortamında izleme
 
-### Çalışma: hangi olay ne doğurdu?
+Geliştirme test ortamına alınır; bir süre test edilir ve takip edilir. Bu aşamada çıkan hatalara müdahale edilir, düzeltmelerden sonra ilgili senaryolar yeniden değerlendirilir. MeeApps'in uygulamayı kullanmasının temel bağlamı budur: ürün davranışını sınamak ve müşteriye geçmeden önce geliştirmeyi değerlendirmek.
 
-Strateji çalışırken piyasa verisi değiştikçe kurallar değerlendirilir. Koşullar uygun olduğunda emir üretilebilir. İzlerken üç şeyi ayrı tutarız: stratejinin çalışma durumu, emrin durumu ve gerçekleşmelerden oluşan pozisyon.
+Önceki aşamalarda ve preprod'un başlangıcında düşük lot miktarlarıyla test edilir. Lot, işlem miktarının birimidir; bu bölümde “düşük” veya “yüksek” için sabit sayılar vermiyoruz. Miktarlar ilgili testin koşullarına göre değerlendirilir.
 
-Örneğin “strateji çalışıyor” bilgisi her an emir göndermesi gerektiğini söylemez; koşulları bekliyor olabilir. “Emir kabul edildi” bilgisi de miktarın alınıp satıldığını göstermez. Bunu gerçekleşme olaylarıyla takip ederiz. Aynı emir kısmen gerçekleşebilir; kalan miktar ayrıca izlenir.
+### Preprod'da traderlarla düşük lot testleri
 
-### Değişiklik ve değerlendirme: neyi değiştirdik?
+Test ortamındaki çalışmalardan sonra geliştirme **preprod** ortamına alınır. Burada önceden anlaşılmış gerçek traderlar testlere katılır. Böylece özellik, geliştirme ekibinin senaryolarının yanında gerçek kullanıcıların kullanımından da geçer.
 
-Gün içinde bir ayar güncellendiğinde eski değer, yeni değer ve değişiklik anındaki emir/pozisyon durumu birlikte anlam taşır. Sıfır pozisyonda miktar değiştirmek ile kısmi gerçekleşme sonrasında miktar değiştirmek aynı başlangıç koşulu değildir.
+İlk preprod testleri düşük lotla sürer. “Gerçek trader” ifadesi burada testi yapan kişiyi anlatır; tek başına ortamın teknik bağlantısını veya bütün müşterilerin özelliği kullanmaya başladığını söylemez.
 
-PM veya test sorumlusu açısından yararlı kayıt; ortam ve sürüm, hesap/ürün bağlamı, ayarlar, olay sırası ve gözlenen sonuçtur. Böylece “aynı ayarlarla farklı sonuç çıktı” denildiğinde gerçekten aynı başlangıç durumundan söz edilip edilmediği kontrol edilebilir. Gerçek hesap ve erişim bilgileri paylaşılacak kayıtlarda maskelenir.
+### Kararlılık sonrası yüksek lot testleri
 
-### Gün sonu: hangi durum kaldı?
+İlk preprod testlerinde sorun çıkmaz ve ürünün kararlılığı doğrulanırsa yüksek lot miktarlarıyla testlere geçilir. Bu ölçekte de bir süre test ve izleme sürer. Dolayısıyla düşük lotta ilk testin geçmesi, bütün doğrulama sürecinin sona erdiği anlamına gelmez.
 
-İşlem dönemi biterken çalışan stratejiler, bekleyen emirler, gerçekleşmiş işlemler ve kalan pozisyon birlikte değerlendirilir. Durdurma komutu, emir iptali ve pozisyon kapatma ayrı eylemlerdir; bunların etkisi ilgili strateji ve komut akışına göre izlenir. Bir durdurma isteği gönderildi diye bütün işlemlerin tamamlandığı varsayılmaz.
+### Bütün müşterilere aktarım
 
-Operasyon tarafında günün kayıtları ve kapanış durumu takip edilir. PM tarafında ise test sonuçları, açık görevler, alınan kararlar ve sonraki çalışma için gereken bilgiler kayda geçirilir. Bu rehberde ilerledikçe hem uygulamanın durumunu hem de o durumu açıklayan kanıtı okumayı öğreneceğiz.
+Yüksek lotlu preprod testlerinde de sorun görülmezse özelliğin bütün müşterilere aktarımı sağlanır. Ürünü geliştiren MeeApps ekibi ile onu düzenli kullanan müşteri kurumların buluştuğu nokta, bu aşamalardan geçmiş özelliğin sunulmasıdır.
+
+Bu akıştaki test süreleri ve lot sınırları burada sabitlenmez. Ayrıca bir kod branch'inin adı, testlerin tamamlandığı veya özelliğin müşterilere açıldığı bilgisinin yerine geçmez. Branch, sürüm ve dağıtımın teknik ayrıntılarını sistem mimarisi bölümünde ayrıca inceleyeceğiz.
 
 {{< pagebreak >}}
 
-## Küçük bir takip örneği
+## Testte neyi takip ederiz?
 
-Bir test ortamında, belirli bir ürün için 100 lotluk alış beklediğimiz basitleştirilmiş bir senaryo düşünelim. Bu sayılar eğitim örneğidir; belirli bir stratejinin hazır ayar seti değildir.
+MeeApps ekibinin yaptığı bir testte başlangıç ayarlarını, başlangıç pozisyonunu ve gelen olayları birlikte kaydetmesi gerekir. Örneğin belirli bir ürün için 100 lot alış beklenen basitleştirilmiş bir senaryo düşünelim. Bu sayılar yalnız anlatım örneğidir; düşük/yüksek lot sınırı veya hazır strateji ayarı değildir.
 
-| Gözlenen olay | Ne söyleyebiliriz? |
+| Gözlenen olay | Nasıl yorumlarız? |
 |---|---|
-| Kullanıcı stratejiyi başlattı | Başlatma isteği verildi; motorun dönen durumu ayrıca izlenir |
+| Testi yapan kişi stratejiyi başlattı | Başlatma isteği verildi; motorun dönen durumu ayrıca izlenir |
 | Motor stratejinin çalıştığını bildirdi | Çalışma durumu alındı; işlem koşulunun oluştuğu henüz söylenemez |
 | Koşul oluştu ve 100 lot emir üretildi | Emir kararı oluştu; kabul ve gerçekleşme sonucu takip edilir |
-| Emirden 40 lot gerçekleşti | Bu olay 40 lotluk gerçekleşme yarattı; 100 lotun tamamı gerçekleşmedi |
-| Kalan 60 lotun iptali onaylandı | O emirden bekleyen miktar kalmadı; gerçekleşmiş 40 lot kendiliğinden geri alınmadı |
+| Emirden 40 lot gerçekleşti | 40 lot gerçekleşti; emrin tamamı gerçekleşmedi |
+| Kalan 60 lotun iptali onaylandı | Bekleyen miktar kalmadı; gerçekleşmiş 40 lot geri alınmadı |
 
-Başlangıç pozisyonu sıfırsa ve başka işlem yoksa sonuç +40 lot pozisyondur. “Emir iptal edildi” ile “pozisyon sıfır” arasındaki fark burada görünür. Günün her aşamasında olayları bu ayrımla okumak, hem ekranı anlamayı hem de doğru test beklentisi yazmayı kolaylaştırır.
+Başlangıç pozisyonu sıfırsa ve başka işlem yoksa sonuç +40 lot pozisyondur. “Emir iptal edildi” ile “pozisyon sıfır” arasındaki farkı görmek, doğru test beklentisi yazmanın bir parçasıdır.
 
-## Bizim sistemdeki karşılığı
+Arayüzde oturum açan **kullanıcı**, işlemin adına yapıldığı **hesap** ve işlem yapılan **ürün** de ayrı bilgilerdir. Testi açıklarken bunlara ortam, sürüm, ayarlar ve olay sırası eklenir. Böylece aynı senaryoyu tekrar çalıştırıp sonucu karşılaştırabiliriz. Paylaşılacak kayıtlarda gerçek hesap ve erişim bilgileri maskelenir.
 
-mTrader işlem kullanıcısının ayar ve izleme ekranlarını sunar. Admin paneli kullanıcı, hesap ve ilgili yönetim ayarları için ayrı bir arayüzdür. Strateji kararları motorlarda, emir iletimi ilgili emir yolunda, arayüzün servislerle iletişimi merkez serviste yürütülür. Operasyon bu parçaların çalışma hazırlığını, geliştirici kod davranışını, PM ise beklenen sonuç ve doğrulama kaydını birlikte değerlendirir.
+## Bu ayrım sistem bilgisiyle nasıl birleşir?
 
-Bu ilk bölümün iki konusu artık birbirini tamamlıyor: sistemin hangi ihtiyacı karşıladığını ve insanların onu gün içinde hangi sorumluluklarla yönettiğini gördük. Sıradaki bölümde bu anlatımda geçen ürün, lot, emir defteri ve eşleşme gibi borsa kavramlarını temelden açacağız.
+MTrader arayüzü kullanıcı eylemlerini ve sonuçları gösterir; strateji motorları kuralları değerlendirir, ilgili emir katmanı emir iletimini ve dönüşlerini işler. Müşteri bunları işlem yapmak için kullanır. MeeApps ekibi ise yeni özelliğin bu parçalar üzerindeki etkisini geliştirmek ve doğrulamak için inceler.
+
+İlk bölümün amacı bu çerçeveyi kurmaktır: ürünümüz MTrader, geliştirici şirketimiz MeeApps, müşterilerimiz aracı kurumlar ve geliştirmeyi müşteriye ulaştıran aşamalı bir test sürecimiz var. Sıradaki bölümde ürün, lot, emir defteri ve eşleşme gibi borsa kavramlarını temelden açacağız.
 
 ## Sorularımız ve netleşen noktalar
 
-**24 Ekim 2026 — Kullanıcının talebi, anlamı korunmuş özet:** İlk bölümün kalan konusunu da yazalım; bölüm tamamlanınca okuyup revizyon vereceğim.
+**24 Ekim 2026 — Kullanıcı düzeltmesi, anlamı korunmuş özet:** MTrader algoritmik işlem botunun adı, MeeApps şirketin adı. Günlük kullanıcılar müşteri aracı kurumların traderları/fon yöneticileri; MeeApps günlük trade yapmıyor. Şirket, özellik detayları/senaryolar → görev dağılımı → geliştirici ön testi → test ortamı → anlaşılmış traderlarla preprod düşük lot → kararlılık sonrası yüksek lot → bütün müşterilere dağıtım akışıyla ilerliyor.
 
-**Metne yansıması:** Roller, kullanıcı/hesap/ürün ayrımı, beş aşamalı örnek gün ve emir–pozisyon takip örneği eklendi. Buradaki roller bir şirket organizasyon şeması olarak sunulmadı. Kullanıcı bu içerikleri henüz okuduğunu veya onayladığını belirtmedi.
+**Metne yansıması:** Önceki birleşik günlük kullanım anlatımı kaldırıldı. Müşterinin işlem günü ile MeeApps'in geliştirme/test sorumlulukları ayrıldı; preprod katılımı ve miktar artırma koşulu açıklandı. Sayısal lot sınırı, test süresi ve son onay yetkisi belirtilmediği için eklenmedi.
 
 ## Kaynaklar ve doğrulama
 
-Sistem karşılıkları mevcut [sistem haritası](../../00-genel/sistem-haritasi.md), [arayüz özeti](../../10-servisler/mtrader-trade-ui/README.md), [admin paneli](../../10-servisler/mtrader-frontend-apps/README.md), [sabah kontrolleri](../../40-operasyon/sabah-kontrolleri.md), [emir dönüşü](../../30-akislar/emir-donusu.md) ve [sabah emri/handoff akışından](../../30-akislar/sabah-emri-ve-handoff.md) derlendi. PM sorumluluğu kullanıcının verdiği bağlamdan; diğer rol başlıkları öğretici sorumluluk ayrımından gelir. Bunlar gerçek kişi ataması değildir.
+Ürün kimliği ve iş sürecinin tek kaynak kaydı [ürün ve geliştirme süreci](../../00-genel/urun-ve-gelistirme-sureci.md) dosyasıdır; kullanıcı beyanına dayanır. Sistem karşılıkları [sistem haritası](../../00-genel/sistem-haritasi.md), [arayüz özeti](../../10-servisler/mtrader-trade-ui/README.md) ve [emir dönüşü](../../30-akislar/emir-donusu.md) belgelerinden derlendi.
 
-Frontmatter commit'leri referans belgelerin kaynak sürümleridir; bu tur kod yeniden incelenmedi. Örnek iş günü operasyon komutları veya güncel seans kuralları belirlemez. İnternet araştırması, canlı emir veya uygulama testi yapılmadı. Metin kullanıcı incelemesini bekleyen taslaktır.
+Bu tur kod yeniden incelenmedi, canlı test veya dağıtım yapılmadı. Kullanıcıdan alınan süreç bilgisi teknik ortam kanıtı olarak sunulmaz. Metin revizyon incelemesini bekleyen taslaktır.
 
 ## Devam notu
 
-Birinci bölümün iki konu taslağı tamamlandı ve yayın listesine alındı. Kullanıcı ilk bölümü okuyup revizyon verecek; şimdilik ikinci bölüme geçilmeyecek. Gelen sorular ve değişiklikler ilgili konu dosyasında işlenecek.
+İlk bölüm kullanıcının ürün/şirket ve test süreci düzeltmeleriyle revize edildi. Okuma geri bildirimleri bekleniyor; şimdilik ikinci bölüme geçilmeyecek.
 
 [Bölüm indeksi](README.md) · [Ana indeks](../README.md)

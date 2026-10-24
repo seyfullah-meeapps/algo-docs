@@ -16,6 +16,8 @@ durum: taslak
 
 # Branch'ler ve ortamlar
 
+Özelliğin geliştirici testinden test ortamına, düşük/yüksek lotlu trader preprod testlerine ve müşterilere geçişi [ürün ve geliştirme sürecinde](urun-ve-gelistirme-sureci.md) tanımlıdır (kullanıcı beyanı, 2026-10-24). Aşağıdaki branch/CI envanteri bu iş kabul sürecinden ayrıdır; branch adı testin veya kullanıcı kabulünün tamamlandığını kanıtlamaz.
+
 ## Branch akışı
 
 `development → preprod → master` (bazı repolarda `master` yerine `main`).

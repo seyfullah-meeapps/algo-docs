@@ -8,11 +8,11 @@ durum: taslak
 
 ## Şu an
 
-**İlk bölümün yazımı tamamlandı; kullanıcı okuması ve revizyonları bekleniyor.** “Uygulamanın amacı” bölümündeki iki konu taslak olarak kitapta. Kullanıcı önce bu bölümü okuyup geri bildirim vereceğini belirtti. Şimdilik borsa temellerine geçilmeyecek. İçeriklerin onaylandığı varsayılmaz.
+**İlk bölüm yazıldı; kullanıcının ilk içerik revizyonları işlendi, yeniden okuma bekleniyor.** “Uygulamanın amacı” bölümündeki iki konu taslak olarak kitapta. Kullanıcı ilk bölümde ürün/şirket ve test süreci düzeltmeleri verdi; bunlar uygulandı. Şimdilik borsa temellerine geçilmeyecek. İçeriklerin onaylandığı varsayılmaz.
 
 | Bölüm | Konu sayısı | Yazım durumu | Kullanıcı okuma durumu |
 |---|---|---|---|
-| Uygulamanın amacı | 2 | İki konu da taslak yazıldı; kitapta | Okuma ve revizyon bekleniyor |
+| Uygulamanın amacı | 2 | İki konu da taslak yazıldı; kitapta | İlk revizyon işlendi; yeniden okuma bekleniyor |
 | Borsa temelleri | 12 | İskelet | Henüz bildirilmedi |
 | Teknik temeller | 10 | İskelet | Henüz bildirilmedi |
 | Bizim sistemimiz | 11 | İskelet | Henüz bildirilmedi |
@@ -21,9 +21,9 @@ durum: taslak
 
 ## Son tamamlanan iş
 
-24 Ekim 2026: “Kullanıcılar ve örnek iş günü” yazıldı. Roller, kullanıcı/hesap/ürün ayrımı, beş aşamalı örnek gün ve 100 lot emrin 40 lot gerçekleşip 60 lot iptal edildiği takip örneği eklendi. Roller kesin şirket unvanı olarak sunulmadı; müşteri/seans saatleri uydurulmadı. Metin mevcut KB ve kullanıcının PM bağlamından derlendi; yeni kod incelemesi, internetten kural doğrulaması veya uygulama testi yok.
+24 Ekim 2026, ilk okuma revizyonu: ürün **MTrader**, şirket **MeeApps**. Müşteriler aracı kurumlar; günlük kullanıcılar onların traderları/fon yöneticileri. MeeApps'in kullanımı geliştirme/test içindir. Önceki birleşik günlük kullanım anlatımı yerine “Kullanıcılar ve geliştirme süreci” yazıldı. Özellik/senaryo/görev → geliştirici ön testi → test ortamı → anlaşılmış traderlarla preprod düşük lot → kararlılık sonrası yüksek lot → bütün müşterilere aktarım açıklandı. Sayısal lot/süre/onay yetkisi uydurulmadı. Ana KB tek referansı `00-genel/urun-ve-gelistirme-sureci.md` ve ilgili giriş bağlantıları güncellendi.
 
-Kitap sürümü 0.2: iki konu, kapak ve ön sayfalarla **8 A4 sayfa**. PDF/HTML/EPUB yenilendi; yeni sayfalar ve içindekiler görsel kontrol edildi. Takip örneğinin tablosu tek sayfada tutuldu. Önceki beyaz kapak, siyah metin, primary yeşil logo alanı ve küçük ok uçları korundu. Kullanıcının son mesajı görsel tasarımı olumlu bulduğunu gösterir; içerik onayı değildir.
+Yayın sürümü 0.3: **7 A4 sayfa**, iki konu. “Okumaya başlamadan” sayfası kaldırıldı; HTML giriş sayfası ilk konudur. Kitap başlığı MTrader — Algoritmik İşlem Botu; ana başlıklar bölüm rozeti ve marka şeridiyle zenginleştirildi. PDF/HTML/EPUB yenilendi; PDF sayfaları, metin ve HTML görünümü kontrol edildi. Eski küçük harfli ürün adı ve kaldırılan önsöz PDF/EPUB'da yok. Güncel dosyalar aynı çıktı adlarını kullanır.
 
 ## Sıradaki tek başlangıç noktası
 
@@ -37,4 +37,4 @@ Yayın kullanımı `yayin/README.md`, tasarım kaynakları `yayin/marka.md`, yay
 
 ## Doğrulama ve Git
 
-İki konu `taslak`, kalan 46 konu `bos`. Yapısal kontrol: 167 Markdown, 1.863 bağlantı, 0 hata; `git diff --check` temiz. Çıktılar ve araçlar Git dışında. Önceki push otomatik onay incelemesince reddedildi; kullanıcı uzak depoya gönderim onayı vermedi. Push tekrar denenmez; çalışmalar yerelde saklanır.
+İki konu `taslak`, kalan 46 konu `bos`. Yapısal kontrol: 168 Markdown, 1.871 bağlantı, 0 hata; `git diff --check` temiz. Çıktılar ve araçlar Git dışında. Önceki push otomatik onay incelemesince reddedildi; kullanıcı uzak depoya gönderim onayı vermedi. Push tekrar denenmez; çalışmalar yerelde saklanır.

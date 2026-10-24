@@ -19,7 +19,9 @@ durum: taslak
 
 # Ne yapıyoruz ve neyi amaçlıyoruz?
 
-MeeApps'in bu projedeki işi, Borsa İstanbul'daki piyasa verisini takip eden, kullanıcı tarafından belirlenen kurallarla alım-satım emirleri üreten ve bu emirlerin sonuçlarını kullanıcıya gösteren bir işlem sistemi geliştirmektir. Kullanıcının gördüğü mTrader arayüzü, bu sistemi yönetmenin ve izlemenin yoludur.
+**MTrader**, MeeApps'in aracı kurumlar için geliştirdiği **algoritmik işlem botudur**. Borsa İstanbul'daki piyasa verisini takip eder, kullanıcı tarafından belirlenen kurallarla alım-satım emirleri üretir ve sonuçlarını kullanıcıya gösterir. MTrader arayüzü, bu sistemi yönetmenin ve izlemenin yoludur.
+
+**MeeApps şirketin, MTrader ürünün adıdır.** Ürünü günlük işlemlerinde kullananlar müşteri aracı kurumların çalışanlarıdır; traderlar ve fon yöneticileri bunlara örnektir. Biz MeeApps olarak ürünü geliştirir, test eder ve müşterilere sunarız. Uygulamayı kullanımımız özellikleri ve test senaryolarını sınamaya yöneliktir.
 
 Buradaki **emir**, belirli bir üründen belirli miktarda almak veya satmak için verilen talimattır. **Strateji** ise hangi koşulda, hangi fiyat ve miktarla emir verileceğini belirleyen kurallar bütünüdür. Kullanıcı bu kuralların ayarlarını seçer; çalışan yazılım, piyasa olaylarını bu ayarlara göre değerlendirir.
 
@@ -71,19 +73,17 @@ Bu işi birden fazla uygulama ve kütüphane birlikte yapar. Şimdilik isimleri 
 
 | Parça | Bu anlatımdaki görevi |
 |---|---|
-| **mTrader arayüzü** (`mtrader-trade-ui`) | Kullanıcının ayarları girdiği ve sonuçları izlediği ekranlar |
+| **MTrader arayüzü** (`mtrader-trade-ui`) | Kullanıcının ayarları girdiği ve sonuçları izlediği ekranlar |
 | **Merkez servis** (`trade-data-app`) | Arayüz ile diğer uygulamalar arasında veri ve komut iletişimi; veritabanı işlemleri |
 | **Strateji motorları** (`HftSrvProd`, `AlgorithmicTrading` / AlgoProd) | Strateji kurallarını değerlendiren ve emir kararını üreten uygulamalar |
 | **Emir iletim katmanı** (`order-service` ve emir SDK'ları) | İlgili akışa göre emirlerin borsaya iletilmesi ve yanıtlarının işlenmesi |
 | **Piyasa verisi katmanı** (`itch-sdk`) | Borsanın veri akışından uygulamaların kullanacağı piyasa bilgisinin oluşturulması |
 
-**SDK**, başka bir uygulamanın kullandığı hazır yazılım kütüphanesidir. Bu tabloda uygulamalarla kütüphaneler birlikte görev özeti olarak gösteriliyor; hepsi ayrı çalışan servis değildir. Bir emrin hangi parçalar üzerinden geçtiği stratejiye ve çalışma aşamasına bağlıdır. Burada bütün emirlerin aynı yolu izlediğini varsaymıyoruz.
+**SDK**, başka uygulamaların kullandığı yazılım kütüphanesidir. Tablodaki her parça ayrı çalışan servis değildir. Emirlerin izlediği gerçek yolları mimari bölümünde inceleyeceğiz.
 
 ## Bu rehberi okuyunca neyi yapabilmeliyiz?
 
-Bir ekran alanının hangi işlem kuralını değiştirdiğini açıklayabilmek, verilen ayar ve piyasa koşulunda beklenen sonucu tarif etmek ve bunu bir test senaryosuna dönüştürebilmek hedefleniyor. Böylece “ekranda bir şey olmadı” gibi bir bildirim geldiğinde hangi komutun, piyasa olayının veya emir sonucunun inceleneceğini seçebiliriz.
-
-Bunun için önce borsa dilini, sonra teknik kavramları öğreneceğiz. Ardından gerçek sistem bağlantılarını ve her stratejinin GUI ile motor tarafındaki çalışma prensiplerini birleştireceğiz. Bu girişte parametre listeleri ve kod ayrıntıları yerine sistemin ne için var olduğunu netleştiriyoruz.
+Hedefimiz, bir ayarın hangi davranışı değiştirdiğini açıklayabilmek ve beklenen sonucu test senaryosuna dönüştürebilmektir. Bunun için önce borsa ve teknik temelleri, ardından sistem bağlantılarını ve stratejilerin arayüz/motor ilişkisini inceleyeceğiz.
 
 ## Sorularımız ve netleşen noktalar
 
@@ -93,12 +93,14 @@ Bunun için önce borsa dilini, sonra teknik kavramları öğreneceğiz. Ardınd
 
 ## Kaynaklar ve doğrulama
 
+Ürün/şirket ayrımı ve müşteri kullanım bağlamı, kullanıcının 24 Ekim 2026 açıklamasından alınan [ürün ve geliştirme sürecine](../../00-genel/urun-ve-gelistirme-sureci.md) dayanır.
+
 Bu giriş, mevcut bilgi tabanındaki [sistem haritası](../../00-genel/sistem-haritasi.md), [strateji kataloğu](../../20-stratejiler/README.md), [arayüz özeti](../../10-servisler/mtrader-trade-ui/README.md) ve [strateji başlatma akışından](../../30-akislar/strateji-baslatma.md) derlendi. Frontmatter'daki commit'ler bu kaynak belgelerin referanslarıdır; bu tur kaynak kod yeniden incelenmedi. İçerik kullanıcı incelemesini bekleyen taslaktır.
 
 Bu bölüm güncel seans saati, takas süresi veya belirli bir stratejinin emir/risk garantisi hakkında hüküm içermez. İnternet araştırması, uygulama testi ve canlı ortam doğrulaması yapılmadı.
 
 ## Devam notu
 
-İlk anlatım taslağı yazıldı; henüz kullanıcı tarafından okundu/onaylandı sayılmıyor. [Kullanıcılar ve örnek iş günü](02-kullanicilar-ve-is-gunu.md) de yazıldı; ilk bölümün iki taslağı okuma ve revizyon bekliyor. Kullanıcı bu metinle ilgili soru getirirse önce ilgili açıklama ve bu dosyadaki soru kaydı güncellenecek.
+İlk anlatım taslağı yazıldı; henüz kullanıcı tarafından okundu/onaylandı sayılmıyor. [Kullanıcılar ve geliştirme süreci](02-kullanicilar-ve-is-gunu.md) de yazıldı; ilk bölümün iki taslağı okuma ve revizyon bekliyor. Kullanıcı bu metinle ilgili soru getirirse önce ilgili açıklama ve bu dosyadaki soru kaydı güncellenecek.
 
 [Bölüm indeksi](README.md) · [Ana indeks](../README.md)

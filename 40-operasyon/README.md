@@ -28,6 +28,8 @@ Sunucu adresleri, kullanıcılar ve şifreler bu klasörde **yer almaz**.
 
 ## Repolar
 
+MeeApps'in özelliği test ve preprod'dan müşterilere taşıma iş süreci [ürün ve geliştirme sürecinde](../00-genel/urun-ve-gelistirme-sureci.md) bulunur. Buradaki teknik dağıtım/servis hazırlığı, MeeApps'in her gün kendi adına trade yaptığı anlamına gelmez.
+
 | Repo | Ne içerir |
 |------|-----------|
 | **Algo-Setup** | Müşteri sunucusuna kurulan her şey. Servis klasörleri (`HFT/`, `OrderService/`, `MADatabaseService/`, `MAAlgoProd/`, `MAAdminUI/`), her birinde Dockerfile, compose ve `scripts/run*.sh`. Derlenmiş binary'ler (CI commit'leri), `MAProdEnv/` (SDK `.so` dosyaları, Onload ve Mellanox kütüphaneleri), müşteri bazlı `Configs/<Müşteri>/` (servis config'leri, MySQL, nginx-proxy, DB scriptleri). **Branch = ortam:** `development`, `preprod`, `main` (prod). |
@@ -36,8 +38,8 @@ Sunucu adresleri, kullanıcılar ve şifreler bu klasörde **yer almaz**.
 ### algo-configs `doc/` (insan için yazılmış kaynaklar)
 
 - **`BIST-Dökümanlar/`**: BISTECH ITCH, Glimpse, MoldUDP64 ve SoupBinTCP protokol spesifikasyonları (PDF), bağlantı bilgisi, test ortamı.
-- **`Business/`**: HFT, Tavan, Warrant ve Arbitraj iş dokümanları; risk kontrol; mTrader admin; AKD.
-- **`Development/`**: onboarding, dev ortamı, config'ler, sabah kontrolleri (`Sabah_Kontrolleri.docx` → [sabah-kontrolleri.md](sabah-kontrolleri.md)), temel terimler, DataStore API, AKD, mTrader test rehberi. CI'ın ürettiği Doxygen dokümanları (ouch-sdk, HFT, AlgorithmicTrading).
+- **`Business/`**: HFT, Tavan, Warrant ve Arbitraj iş dokümanları; risk kontrol; MTrader admin; AKD.
+- **`Development/`**: onboarding, dev ortamı, config'ler, sabah kontrolleri (`Sabah_Kontrolleri.docx` → [sabah-kontrolleri.md](sabah-kontrolleri.md)), temel terimler, DataStore API, AKD, MTrader test rehberi. CI'ın ürettiği Doxygen dokümanları (ouch-sdk, HFT, AlgorithmicTrading).
 - **`Network/`**: ağ topolojisi. Hassas bilgi içerir.
 
 Bu bilgi tabanı kodu esas alır. İş tanımıyla çelişki görürsen ikisini de belirt.

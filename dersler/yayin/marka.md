@@ -35,6 +35,10 @@ HTML ana metni 15 px, satır yüksekliği 1,85; başlık/paragraf boşlukları a
 
 PDF'nin beş sayfası ve HTML bölüm görünümü görsel olarak kontrol edildi. EPUB paket kontrolü yapıldı; ayrı e-kitap okuyucusundaki görünüm henüz denenmedi. Yeni tasarım kullanıcı tarafından onaylanmış sayılmaz.
 
+## Ürün kimliği ve başlık revizyonu
+
+24 Ekim 2026: kullanıcı ürün adını **MTrader**, şirketi **MeeApps** olarak düzeltti; kitap başlığı “MTrader — Algoritmik İşlem Botu” oldu. Ana bölüm başlıklarına açık yeşil zemin, sol marka çizgisi ve ayrı “BÖLÜM N” etiketi eklendi. İçindekiler aynı başlıkların izini tutar. Genel okuma önsözü kaldırıldı. Bu revizyonun ilk bölümü 7 sayfadır; önceki sayfa sayıları tarihsel tasarım kayıtlarıdır.
+
 ## Kapak ve ok ucu revizyonu
 
 24 Ekim 2026: kullanıcı koyu kapağı beyaz, kapak metinlerini siyah istedi. Beyaz logo marka primary rengi `#94c04e` zeminli bir alana yerleştirildi; HTML logo alanı da aynı yeşile alındı. SVG ok uçları `markerUnits=userSpaceOnUse` ile çizgi kalınlığından bağımsız 8 birimlik alana indirildi; önceki örtük strokeWidth ölçeklemesi kaldırıldı. Çıktılar yeniden üretildi, kapak ve şema PDF üzerinden görsel kontrol edildi.

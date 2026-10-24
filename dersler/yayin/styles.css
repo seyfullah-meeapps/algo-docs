@@ -39,3 +39,8 @@ pre { white-space: pre-wrap; overflow-wrap: anywhere; font-size: .85em; }
   h1, h2, h3 { break-after: avoid; }
   img, tr { break-inside: avoid; }
 }
+
+/* Ana bölüm başlığı: yeşil kimlik şeridi ve ayrı bölüm rozeti. */
+.quarto-title-block h1 { padding: 1rem 1.2rem; background: #f4f7ef; border-left: 4px solid var(--guide-primary); border-radius: 4px; }
+h1 .header-section-number { display: block; width: fit-content; margin-bottom: .65rem; font-size: .7rem; font-weight: 700; letter-spacing: .08em; color: #486422; }
+h1 .header-section-number::before { content: "BÖLÜM "; }

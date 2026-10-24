@@ -12,7 +12,7 @@ Bu bilgisayarda Python ve proje içine taşınabilir kurulmuş Quarto 1.10.18 ha
 
 1. VS Code'da repo klasörünü aç.
 2. **Ctrl+Shift+B**: “Rehber: PDF + HTML + EPUB üret” görevini çalıştırır.
-3. `output/pdf/meeapps-rehber.pdf` dosyasını bir PDF okuyucuda aç. Gerçek A4 sayfaları ve içindekiler burada görünür.
+3. `output/pdf/meeapps-rehber.pdf` dosyasını bir PDF okuyucuda aç. Kitabın adı **MTrader — Algoritmik İşlem Botu**; dosya adı mevcut okuma bağlantılarını korumak için aynı kaldı. Gerçek A4 sayfaları ve içindekiler burada görünür.
 4. Değişiklikleri kaynak konu `.md` dosyasında yap veya değiştirmek istediğin yeri sohbette belirt.
 5. Yeniden **Ctrl+Shift+B** yap. Aynı dosya adlarıyla güncel çıktılar üretilir.
 
@@ -49,7 +49,7 @@ python dersler/yayin/uret.py --format epub
 - `output/rehber/index.html`: yerel HTML kitabının giriş sayfası. Diğer HTML dosyaları ve `site_libs` klasörüyle birlikte kullanılır.
 - `output/rehber/meeapps-rehber.epub`: ekran/yazı boyutuna göre akan e-kitap. PDF ile aynı sayfa sayısı beklenmez. EPUB uyumlu bir okuyucu gerekir; PDF okurken gerekli değildir.
 
-PDF'nin ilk örneği 5 A4 sayfadır; bu sabit hedef değildir. Bölüm/metin değişince sayfa sayısı ve içindekiler yeniden hesaplanır. Kapak ve ön sayfalar da toplam sayfaya dahildir.
+Güncel ilk bölüm revizyonu 7 A4 sayfadır; bu sabit hedef değildir. Bölüm/metin değişince sayfa sayısı ve içindekiler yeniden hesaplanır. Kapak ve içindekiler toplam sayfaya dahildir. Kullanıcının kaldırdığı “Okumaya başlamadan” sayfası artık üretilmez; HTML'nin giriş sayfası ilk konunun kendisidir.
 
 ## Neyi nerede düzenleyeceğiz?
 

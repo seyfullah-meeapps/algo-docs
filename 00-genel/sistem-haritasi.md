@@ -19,6 +19,8 @@ durum: taslak
 
 # Sistem haritası
 
+**Ürün bağlamı:** MTrader, MeeApps'in aracı kurumlar için geliştirdiği algoritmik işlem botudur. Günlük kullanıcıları müşteri kurumların traderları/fon yöneticileridir; MeeApps'in kullanımı geliştirme ve test senaryolarına yöneliktir. Ayrım ve kabul aşamaları [ürün ve geliştirme sürecinde](urun-ve-gelistirme-sureci.md).
+
 ## Bileşenler
 
 | Bileşen | Repo | Dil | Rolü |

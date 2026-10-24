@@ -4,6 +4,8 @@ Bu repo, MeeApps'in BIST algo/HFT stack'inin **AI agent'lar için yazılmış** 
 
 ## Önce bunu bil
 
+- **Ürün ve şirket:** Ürün `MTrader`, şirket `MeeApps`. Müşteriler aracı kurumlar; günlük kullanıcılar onların traderları/fon yöneticileridir. MeeApps geliştirme/test için kullanır. Kullanıcı beyanıyla netleşen özellik → test → preprod düşük/yüksek lot → müşteriler sürecinin tek kaydı `00-genel/urun-ve-gelistirme-sureci.md`; bunu branch/CI akışıyla karıştırma.
+
 - **Dil:** Metin Türkçe; teknik terimler, kod isimleri, wire alan adları İngilizce. Kullanıcıya hangi dilde sorulduysa o dilde cevap ver.
 - **Doğruluk kaynağı kod.** Bu dokümanlar koddan damıtılmıştır ve belirli bir commit'e karşı doğrulanmıştır. Her dosyanın frontmatter'ında `kaynak` (repo, branch, commit) ve `dogrulama` (tarih) vardır. Cevabın kritikse (emir, fiyat ölçeği, risk, prod davranışı) ve repo erişimin varsa, ilgili koda bakıp teyit et.
 - **Tazelik.** Repolar canlı; her gün commit alıyorlar. Bir bilginin güncel olup olmadığını sorarsan önce `manifest.yaml`'daki doğrulama commit'ine bak. Cevabında "şu commit itibarıyla" demekten çekinme.
