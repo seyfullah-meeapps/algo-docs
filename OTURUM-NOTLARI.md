@@ -11,7 +11,7 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Şu an (2026-10-24)
 
-**Rehber ana çalışma konusu.** Yazım öncesi tercihler tek tek netleştiriliyor. Ana okuyucu kullanıcının kendisi; sonrasında görevi devralan/yeni katılan kişiler için şirket içi bilgi aktarım kaynağı olacak. Karar ve yanıt `dersler/kararlar.md` içinde. Sıradaki açık tercih teknik/kod anlatım derinliği; henüz cevaplanmadı. İçerik yazımına başlanmadı.
+**Rehber ana çalışma konusu.** Yazım öncesi tercihler tek tek netleştiriliyor. Ana okuyucu kullanıcının kendisi; sonrasında görevi devralan/yeni katılan kişiler için şirket içi bilgi aktarım kaynağı olacak. Teknik derinlik netleşti: mantık ve davranış ana metinde, gerektiğinde kısa kod; derin ayrıntılar ayrı bölümde. Karar ve yanıt `dersler/kararlar.md` içinde. Sıradaki açık tercih bilinen uygulama sorunlarının anlatımda gösterimi; henüz cevaplanmadı. İçerik yazımına başlanmadı.
 
 **Aktif kapsam: konu bazlı insan rehberinin indeksi.** Kullanıcı önceki ders düzeninden vazgeçip gelecekte yazılı dokümana dönüştürülebilecek bir rehber istedi. Yeni sıra ve kararlar `dersler/kararlar.md`, ayrıntılı indeks `dersler/README.md`, devam noktası `dersler/ilerleme.md` içinde. Altı bölüm ve 48 ayrı konu iskeleti oluşturuldu; anlatımlar henüz yazılmadı. Eski 11 dosya `dersler/arsiv/` altında tarihsel olarak korundu. Konu bazlı soru/yanıt kaydı, kaynak ve görsel kuralları `dersler/calisma-duzeni.md`, agent talimatları `dersler/AGENTS.md` içinde. Bu tur internet/kod araştırması veya uygulama testi yok.
 

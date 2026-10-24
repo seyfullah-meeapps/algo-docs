@@ -30,6 +30,7 @@ Kullanıcı frontend'i yazdı; diğer katmanlardaki bilgisi sınırlı. PM rolü
 | R-12 | Kullanıcı okudukça sorularla metni geliştireceğiz; yazılanı okunmuş/onaylanmış saymayacağız | Kullanıcının “sen yazdıkça okurum” talebi |
 | R-13 | İlk ve ana okuyucu kullanıcıdır; rehber sonrasında görevi devralacak ve ekibe katılacak kişiler için kritik şirket içi bilgi aktarım kaynağı olacak | Kullanıcının okuyucu sorusuna açık yanıtı |
 | R-14 | Rehber bir süre ana çalışma konusu; yazıma başlamadan açık tercihler tek tek netleştirilecek | Kullanıcının önceki talebi; henüz cevaplanmamış tercihler kararlaştırılmış sayılmaz |
+| R-15 | Ana metin çalışma mantığı, parametreler ve beklenen davranışa odaklanır; gerektiğinde kısa açıklamalı kod örnekleri verilir. Dosya/fonksiyon referansları ve daha derin C++ ayrıntıları ayrı teknik ayrıntı bölümünde tutulur; satır satır kod anlatımı hedeflenmez | Kullanıcı önerilen derinliği kabul etti: “çok ayrıntı olmasın” |
 
 ## Konuşmada netleşen sorular — 24 Ekim 2026
 
@@ -47,9 +48,15 @@ Kullanıcı frontend'i yazdı; diğer katmanlardaki bilgisi sınırlı. PM rolü
 
 **Kullanıcı yanıtı, anlamı korunmuş özet:** İlk ve ana okuyucu kendisi olacak. Sonrasında yerine gelecek veya ekibe katılacak arkadaşlar da kullanacak; şirket içi bilgi aktarımı için kritik bir doküman olacak.
 
-**Yazıma etkisi:** Önce kullanıcının öğrenmesini destekleyen açıklamalar verilir. Metin yalnız mevcut sohbeti bilen kişiye hitap etmez; ürün, roller ve varsayımlar sonraki okuyucuya da yeterli bağlam sağlar. Kod ayrıntısının seviyesi henüz ayrıca netleştirilmedi.
+**Yazıma etkisi:** Önce kullanıcının öğrenmesini destekleyen açıklamalar verilir. Metin yalnız mevcut sohbeti bilen kişiye hitap etmez; ürün, roller ve varsayımlar sonraki okuyucuya da yeterli bağlam sağlar.
 
-**Sıradaki açık tercih:** Teknik anlatımda kod okuma ayrıntısının düzeyi. Henüz yanıtlanmadı.
+**Soru 2 — Teknik derinlik:** Ana anlatımda mantık ve davranış, gerektiğinde kısa açıklamalı kod; derin ayrıntılar ayrı bölümde olsun mu?
+
+**Kullanıcı yanıtı:** “çok ayrıntı olmasın ya önerdiğin gibi olsun”
+
+**Sonuç:** R-15 kabul edildi. Bu tercih, iddiaları koddan doğrulama gereğini azaltmaz; okuyucuya sunulan ayrıntı seviyesini belirler.
+
+**Sıradaki açık tercih:** Bilinen uygulama sorunlarının ana anlatımda nasıl gösterileceği. Henüz yanıtlanmadı; bug araştırması başlatılmadı.
 
 ## Önceki planın değişimi
 

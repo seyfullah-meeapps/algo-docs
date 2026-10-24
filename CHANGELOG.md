@@ -2,6 +2,11 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-24 — Rehberin teknik derinliği
+
+- Kullanıcı mantık/davranış odaklı ana metni, gerektiğinde kısa açıklamalı kodu ve derin ayrıntıların ayrı bölümde tutulmasını kabul etti. Karar, yazım düzeni ve devam kayıtları güncellendi.
+- Sıradaki netleştirme bilinen uygulama sorunlarının anlatımda gösterimi; sorun incelemesi veya konu yazımı başlatılmadı.
+
 ## 2026-10-24 — Rehberin okuyucusu netleşti
 
 - Ana okuyucunun kullanıcı, sonraki okuyucuların görevi devralan ve ekibe katılan kişiler olduğu kaydedildi. Şirket içi bilgi aktarımı amacı ve rehberin ana çalışma konusu olması karar/ilerleme/oturum kayıtlarına işlendi.
