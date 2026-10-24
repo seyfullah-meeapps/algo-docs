@@ -2,6 +2,12 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-24 — Borsa temellerinin toplu tamamlanması
+
+- Kullanıcının bölüm bazlı teslim talebiyle kalan yedi konu yazıldı: seans/müzayede, pozisyon-bakiye/kredili işlemler, takas/tedbirler, açığa satış/uptick, protokoller, veri kurtarma ve strateji fikirleri.
+- Resmi BIST/SPK/MKK/KAP ve protokol belgeleri okundu; tarihli kurallar ile kavramlar ayrıldı. T+1 hazırlığı canlı geçiş sayılmadı; kurum bakiyeleri ve prod davranışı uydurulmadı. ITCH PDF doğrudan açılamadığı kaynak notunda belirtildi. Yeni kod veya canlı emir testi yok.
+- 12 borsa konusu ve iki giriş konusu yayın listesinde. Sürüm 0.9 PDF/HTML/EPUB üretildi; bölüm toplu kullanıcı revizyonuna bırakıldı. Teknik temellere geçilmedi. İndeks/karar/agent ve devam kayıtları güncellendi.
+
 ## 2026-10-24 — Emir yaşam döngüsü
 
 - Gönderim/kabul/ret, kısmi/tam gerçekleşme, iptal/değişiklik ve belirsiz sonuç ayrıldı. İptal beklerken gerçekleşme örneği ile kalan/gerçekleşen/pozisyon farkı açıklandı. Resmi OUCH ve Pay SSS okundu; yeni kod/canlı test yok.

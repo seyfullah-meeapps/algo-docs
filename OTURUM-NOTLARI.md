@@ -11,6 +11,8 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Şu an (2026-10-24)
 
+**Aktif devam noktası: borsa bölümünün toplu revizyonu.** Kullanıcı tek konu teslimi yerine kalan borsa başlıklarının bitirilmesini istedi. 12 borsa konusu tamamlandı; iki giriş konusu ile 14 konu kitapta, 34 iskelet kaldı. Yayın 0.9; teknik temellere geçilmedi. Güncel durum `dersler/ilerleme.md`; aşağıdaki tek-konu sıra notları tarihseldir.
+
 **Güncel:** Emir yaşam döngüsü yazıldı; yayın 0.8, yedi konu ve 41 iskelet. İstek/sonuç, iptal sırasında gerçekleşme ve replace belirsizliği örneklerle açıklandı. Sıradaki seanslar/müzayede/denge fiyatı; yeni konu okuma bekliyor. Eski sıra ve sayılar aşağıda tarihseldir.
 
 **Son tamamlanan:** Emir tipleri/geçerlilik süreleri yazıldı, yayın 0.7; altı konu kitapta, 42 iskelet. Resmi Pay Prosedürü 3.34 ve VİOP emir sayfası okundu. Sıradaki emir yaşam döngüsü; yeni konu okuma bekliyor. Aşağıdaki eski sıra/sayılar tarihsel.

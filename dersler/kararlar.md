@@ -18,6 +18,7 @@ Kullanıcı frontend'i yazdı; diğer katmanlardaki bilgisi sınırlı. PM rolü
 
 | Kimlik | Karar | Dayanak |
 |---|---|---|
+| R-25 | Borsa temellerinin kalan konuları tek turda tamamlanır; bölüm toplu okunup revize edilir, tek konu teslimi için durulmaz | Kullanıcının 24 Ekim 2026 açık yönlendirmesi; teknik bölüme geçiş talebi değildir |
 | R-01 | Ders dizisi yerine konu bazlı, ileride yazılı dokümana dönüşebilecek rehber | Kullanıcının son talebi |
 | R-02 | Sıra: kısa uygulama açıklaması → borsa temelleri → teknik temeller → bizim sistemimiz → stratejiler; sonunda test/PM uygulaması | Kullanıcının önerdiği akış; test/PM bölümü önceki amacı tamamlayan düzenleme |
 | R-03 | Önce ayrıntılı indeks; sonra içerikleri sırayla doldurma | Kullanıcının açık talebi; bu tur anlatım yazımı değil yapı turu |

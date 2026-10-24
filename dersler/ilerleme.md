@@ -8,15 +8,15 @@ durum: taslak
 
 ## Şu an
 
-Emir yaşam döngüsü taslak yazıldı. Yedi konu kitapta, 41 konu iskelet; yeni konu henüz kullanıcı okumasından geçmedi. Kredili işlemler bakiye konusunda ayrı başlıkta planlı.
+**Borsa temellerinin 12 konusu da taslak yazıldı ve kitaba eklendi.** Kullanıcı kalan başlıkların tek turda tamamlanmasını istedi; bölüm artık toplu okuma/revizyon bekliyor. İlk uygulama bölümünün iki konusu ile kitap toplam 14 konu içeriyor. Diğer 34 konu iskelet. Teknik temellere henüz geçilmiyor.
 
 ## Son tamamlanan iş
 
-Gönderim/kabul/ret/gerçekleşme/iptal/değişiklik ayrımı yazıldı; 100 adetlik örnekte iptal beklerken ek gerçekleşme ve pozisyon sonucu açıklandı. Resmi OUCH 6 Şubat 2025 belgesi ve Pay SSS okundu; mevcut KB motor/GUI ayrımı için kullanıldı. Yeni kod/canlı test yok. Yayın 0.8 PDF/HTML/EPUB yenilendi. PDF 19 A4 sayfa; yeni sayfalar görsel kontrol edildi, örnek tablo bölünmeden yerleştirildi. EPUB bütünlüğü ve 1.869 bağlantı kontrolü geçti.
+Seanslar/denge fiyatı, pozisyon-bakiye-kâr/zarar ve ayrı kredili işlemler başlığı, T+2/brüt takas/T+1 hazırlıkları, açığa satış/uptick, ITCH/OUCH/FIX, Glimpse/Rewinder/replay ve strateji fikirleri tamamlandı. Tarihli resmi BIST/SPK/MKK/KAP ve protokol kaynakları kullanıldı. T+1 testleri canlı geçiş sayılmadı; 22 Eylül 2026 uptick duyurusu kalıcı izin listesi olarak sunulmadı. ITCH PDF doğrudan açılamadı; erişilebilen Appendix E arama metni ve resmi tanıtımla temel kurtarma kavramları anlatıldı. Yeni kod/canlı test yok. Yayın 0.9 PDF/HTML/EPUB üretildi. PDF toplam 34 A4 sayfa; borsa bölümü 9–34. sayfalarda. Yeni sayfalar ve iki sayfalık içindekiler görsel kontrol edildi; seans tablosu bölünmeden yerleştirildi. EPUB bütünlük kontrolü geçti.
 
 ## Sıradaki tek başlangıç noktası
 
-`02-borsa-temelleri/06-seanslar-ve-muzayede.md`: sürekli işlem, emir toplama/eşleştirme, denge fiyatı, kapanış ve devre kesici. Saatler ürün/pazar ve güncel resmi kaynakla doğrulanır.
+Kullanıcının **borsa bölümüne toplu revizyonları** işlenir. Yeni konuya geçmeden bu geri bildirimler beklenir. Kullanıcı teknik bölüme devam istediğinde ilk dosya `03-teknik-temeller/01-program-servis-container-sdk.md`. Kullanıcı adım adım tek konu tesliminden vazgeçti; bundan sonraki bölüm boyutu mevcut yönlendirmesiyle belirlenir.
 
 ## Kalıcı çalışma düzeni
 
@@ -26,4 +26,4 @@ Yayın kullanımı `yayin/README.md`, tasarım kaynakları `yayin/marka.md`, yay
 
 ## Doğrulama ve Git
 
-Yedi konu `taslak`, kalan 41 konu `bos`. Yapısal kontrol: 168 Markdown, 1.869 bağlantı, 0 hata; `git diff --check` temiz. Çıktılar ve araçlar Git dışında. Önceki push otomatik onay incelemesince reddedildi; kullanıcı uzak depoya gönderim onayı vermedi. Push tekrar denenmez; çalışmalar yerelde saklanır.
+14 konu `taslak`, kalan 34 konu `bos`. Yapısal kontrol: 168 Markdown, 1.860 bağlantı, 0 hata; `git diff --check` temiz. Çıktılar ve araçlar Git dışında. Önceki push otomatik onay incelemesince reddedildi; kullanıcı uzak depoya gönderim onayı vermedi. Push tekrar denenmez; çalışmalar yerelde saklanır.

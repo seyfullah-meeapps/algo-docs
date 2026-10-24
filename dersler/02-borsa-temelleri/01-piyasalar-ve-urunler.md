@@ -135,6 +135,6 @@ Web sayfalarında kullanılan tanımlar için ayrı sürüm/yürürlük tarihi b
 
 ## Devam notu
 
-Konu taslak yazıldı ve kitaba eklendi; henüz kullanıcı okumasından geçmedi. Sıradaki konu [Emir defteri ve eşleşme](02-emir-defteri.md).
+Konu kullanıcı sorularıyla revize edildi; BYF ayrımı ve sade vadeli/teminat anlatımı eklendi. Borsa bölümünün tamamıyla birlikte toplu revizyon bekleniyor.
 
 [Bölüm indeksi](README.md) · [Ana indeks](../README.md)
