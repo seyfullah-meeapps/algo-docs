@@ -15,6 +15,7 @@ kaynak:
     commit: b0474c3
 dogrulama: 2026-10-24
 durum: taslak
+kullanici_incelemesi: 2026-10-25
 ---
 
 # Ne yapıyoruz ve neyi amaçlıyoruz?
@@ -99,6 +100,6 @@ Bu bölüm güncel seans saati, takas süresi veya belirli bir stratejinin emir/
 
 ## Devam notu
 
-İlk anlatım taslağı yazıldı; henüz kullanıcı tarafından okundu/onaylandı sayılmıyor. [Kullanıcılar ve geliştirme süreci](02-kullanicilar-ve-is-gunu.md) de yazıldı; ilk bölümün iki taslağı okuma ve revizyon bekliyor. Kullanıcı bu metinle ilgili soru getirirse önce ilgili açıklama ve bu dosyadaki soru kaydı güncellenecek.
+Kullanıcı 25 Ekim 2026 tarihinde buraya kadarki bütün içeriği okuduğunu ve ek değişiklik gerekmediğini belirtti. İçerik incelemesi tamamlandı; bu beyan yeni kod/canlı sistem doğrulaması değildir. Teknik Temeller bölümüne geçiş onayı verildi.
 
 [Bölüm indeksi](README.md) · [Ana indeks](../README.md)

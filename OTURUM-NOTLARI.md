@@ -9,7 +9,13 @@ durum: taslak
 Yeni oturuma başlayan agent **önce bunu okur**. Her oturumda karar alındıkça ve iş bittikçe güncellenir; oturum bitmeden "Şu an" ve "Sıradaki" bölümleri mutlaka güncel bırakılır.
 Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `ACIK-KONULAR.md`'de; burada tekrarlanmaz.
 
-## Şu an (2026-10-24)
+## Şu an (2026-10-25)
+
+**Güncel devam noktası:** Kullanıcı önceki 14 konuyu okudu, ek değişiklik gerekmiyor dedi ve sıradaki bölümün tamamını istedi. Teknik Temeller'in 10 konusu taslak yazıldı; toplam 24 konu kitapta, 24 iskelet kaldı. Yayın 0.12 PDF/HTML/EPUB üretildi; 56 A4 sayfa, yeni teknik bölüm 37–56. sayfalarda. Görsel/yapısal ve EPUB bütünlük kontrolleri geçti. Önceki bölümlere kullanıcı inceleme tarihi eklendi; kod doğrulama etiketleri değiştirilmedi. Sıradaki: yeni teknik bölümün toplu kullanıcı revizyonları. Bizim Sistemimiz'e otomatik geçilmez. Tek güncel ayrıntı `dersler/ilerleme.md`; aşağıdaki önceki sıra/sürüm notları tarihseldir.
+
+**25 Ekim — Uptick revizyonu:** Son iki işlem, düşüş/yükseliş/aynı fiyat ve alıcı bekleme örnekleriyle anlatım sadeleştirildi. Ayrıntı `dersler/02-borsa-temelleri/09-aciga-satis-ve-uptick.md`. Yayın 0.11. Sıradaki: kullanıcının borsa revizyonları; yeni konuya geçilmez.
+
+**25 Ekim revizyonu:** Denge fiyatında kademe/birikimli toplam ayrımı açıklandı. Ayrıntı `dersler/02-borsa-temelleri/06-seanslar-ve-muzayede.md` içinde. Sıradaki: kullanıcı borsa revizyonları; teknik bölüme geçilmez.
 
 **Aktif devam noktası: borsa bölümünün toplu revizyonu.** Kullanıcı tek konu teslimi yerine kalan borsa başlıklarının bitirilmesini istedi. 12 borsa konusu tamamlandı; iki giriş konusu ile 14 konu kitapta, 34 iskelet kaldı. Yayın 0.9; teknik temellere geçilmedi. Güncel durum `dersler/ilerleme.md`; aşağıdaki tek-konu sıra notları tarihseldir.
 

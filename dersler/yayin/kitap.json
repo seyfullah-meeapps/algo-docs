@@ -1,7 +1,7 @@
 {
   "title": "MTrader — Algoritmik İşlem Botu",
   "subtitle": "Uygulama ve Sistem Rehberi · MeeApps",
-  "version": "0.9",
+  "version": "0.12",
   "chapters": [
     "01-uygulama/01-ne-yapiyoruz.md",
     "01-uygulama/02-kullanicilar-ve-is-gunu.md",
@@ -16,6 +16,16 @@
     "02-borsa-temelleri/09-aciga-satis-ve-uptick.md",
     "02-borsa-temelleri/10-itch-ouch-fix.md",
     "02-borsa-temelleri/11-glimpse-rewinder-replay.md",
-    "02-borsa-temelleri/12-strateji-fikirleri.md"
+    "02-borsa-temelleri/12-strateji-fikirleri.md",
+    "03-teknik-temeller/01-program-servis-container-sdk.md",
+    "03-teknik-temeller/02-ag-tcp-udp-multicast.md",
+    "03-teknik-temeller/03-rest-websocket.md",
+    "03-teknik-temeller/04-grpc-protobuf-marpc.md",
+    "03-teknik-temeller/05-binary-fiyat-ve-zaman.md",
+    "03-teknik-temeller/06-cpp-bellek-ve-yasam-suresi.md",
+    "03-teknik-temeller/07-thread-kuyruk-ve-kilit.md",
+    "03-teknik-temeller/08-gecikme-ve-colocation.md",
+    "03-teknik-temeller/09-baglanti-ve-kurtarma.md",
+    "03-teknik-temeller/10-log-test-ve-surum.md"
   ]
 }

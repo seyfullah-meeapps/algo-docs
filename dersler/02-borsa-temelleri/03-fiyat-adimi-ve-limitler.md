@@ -9,6 +9,7 @@ dis_kaynak:
     erisim: 2026-10-24
 dogrulama: 2026-10-24
 durum: taslak
+kullanici_incelemesi: 2026-10-25
 ---
 
 # Fiyat adımı ve fiyat sınırları
@@ -74,6 +75,6 @@ Borsa İstanbul'un [Pay Piyasası SSS](https://www.borsaistanbul.com/sss/pay-piy
 
 ## Devam notu
 
-Taslak yazıldı ve kitaba eklendi; kullanıcı okuması bekleniyor. Sıradaki konu [Emir tipleri ve geçerlilik süreleri](04-emir-tipleri-ve-sureleri.md).
+Kullanıcı 25 Ekim 2026 tarihinde buraya kadarki bütün içeriği okuduğunu ve ek değişiklik gerekmediğini belirtti. İçerik incelemesi tamamlandı; bu beyan yeni kod/canlı sistem doğrulaması değildir. Teknik Temeller bölümüne geçiş onayı verildi.
 
 [Bölüm indeksi](README.md) · [Ana indeks](../README.md)

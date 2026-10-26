@@ -8,7 +8,7 @@ durum: taslak
 
 Bu rehber uygulamanın amacından başlayıp borsa ve teknik temellere, sistem mimarisine ve stratejilere ilerler. Okuyucu frontend bilgisi olan bir PM veya projeye yeni gelen biri olabilir. Hedef; uygulamayı anlamak, davranışı açıklamak, test tasarlamak ve kanıtıyla issue/görev yönetmektir.
 
-**Borsa temellerinin 12 konusu da yazıldı.** Kitapta uygulama girişinin iki konusuyla toplam 14 konu bulunuyor. Borsa bölümü kullanıcı tarafından topluca okunup revize edilecek; teknik temellere henüz geçilmiyor. Kalan 34 konu iskelet. Klasör adı bağlantıların devamlılığı için `dersler/` kaldı; yapı konu bazlı rehberdir.
+**Uygulama ve Borsa Temelleri kullanıcı tarafından okundu ve uygun bulundu (25 Ekim 2026). Teknik Temeller’in 10 konusu da taslak yazıldı ve toplu incelemeye hazırlandı.** Kitap toplam 24 konu içeriyor; sonraki bölümlerde 24 konu iskelet. Teknik bölümün yeni içeriği için kullanıcı incelemesi bekleniyor. Klasör adı bağlantıların devamlılığı için `dersler/` kaldı; yapı konu bazlı rehberdir.
 
 ## Devam edecek agent için
 

@@ -9,6 +9,7 @@ dis_kaynak:
     erisim: 2026-10-24
 dogrulama: 2026-10-24
 durum: taslak
+kullanici_incelemesi: 2026-10-25
 ---
 
 # Glimpse, Rewinder ve replay
@@ -78,6 +79,6 @@ Bu tur MTrader kaynak kodu veya canlı sistem test edilmedi. Proje karşılıkla
 
 ## Devam notu
 
-Borsa bölümünün tamamıyla birlikte toplu kullanıcı revizyonu bekleniyor; teknik temellere henüz geçilmedi.
+Kullanıcı 25 Ekim 2026 tarihinde buraya kadarki bütün içeriği okuduğunu ve ek değişiklik gerekmediğini belirtti. İçerik incelemesi tamamlandı; bu beyan yeni kod/canlı sistem doğrulaması değildir. Teknik Temeller bölümüne geçiş onayı verildi.
 
 [Bölüm indeksi](README.md) · [Ana indeks](../README.md)

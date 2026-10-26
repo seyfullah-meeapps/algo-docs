@@ -8,15 +8,17 @@ durum: taslak
 
 ## Şu an
 
-**Borsa temellerinin 12 konusu da taslak yazıldı ve kitaba eklendi.** Kullanıcı kalan başlıkların tek turda tamamlanmasını istedi; bölüm artık toplu okuma/revizyon bekliyor. İlk uygulama bölümünün iki konusu ile kitap toplam 14 konu içeriyor. Diğer 34 konu iskelet. Teknik temellere henüz geçilmiyor.
+**Teknik Temeller'in 10 konusu da taslak yazıldı; yeni bölüm toplu kullanıcı incelemesi bekliyor.** Önceki Uygulama ve Borsa Temelleri'nin toplam 14 konusu kullanıcı tarafından 25 Ekim 2026 tarihinde okundu ve uygun bulundu. Okuma onayı, yeni kod/canlı doğrulaması olarak kaydedilmedi; kaynak dosyaların teknik `durum` etiketleri bu nedenle otomatik değiştirilmedi.
+
+Kitap toplam 24 konu içeriyor; kalan 24 konu iskelet. Yayın 0.12 PDF/HTML/EPUB üretildi. PDF 56 A4 sayfa; Teknik Temeller 37–56. sayfalarda. Yeni 20 sayfa, içindekiler ve düzeltilen sahiplik tablosu görsel kontrol edildi; EPUB paket/XML bütünlüğü ve HTML konu sayısı kontrolü geçti. Sonraki bölüm Bizim Sistemimiz'e henüz geçilmiyor.
 
 ## Son tamamlanan iş
 
-Seanslar/denge fiyatı, pozisyon-bakiye-kâr/zarar ve ayrı kredili işlemler başlığı, T+2/brüt takas/T+1 hazırlıkları, açığa satış/uptick, ITCH/OUCH/FIX, Glimpse/Rewinder/replay ve strateji fikirleri tamamlandı. Tarihli resmi BIST/SPK/MKK/KAP ve protokol kaynakları kullanıldı. T+1 testleri canlı geçiş sayılmadı; 22 Eylül 2026 uptick duyurusu kalıcı izin listesi olarak sunulmadı. ITCH PDF doğrudan açılamadı; erişilebilen Appendix E arama metni ve resmi tanıtımla temel kurtarma kavramları anlatıldı. Yeni kod/canlı test yok. Yayın 0.9 PDF/HTML/EPUB üretildi. PDF toplam 34 A4 sayfa; borsa bölümü 9–34. sayfalarda. Yeni sayfalar ve iki sayfalık içindekiler görsel kontrol edildi; seans tablosu bölünmeden yerleştirildi. EPUB bütünlük kontrolü geçti.
+Program/servis/container/SDK, ağ/TCP/UDP/multicast, HTTP/REST/WS, gRPC/Protobuf/MARpc, binary/fiyat/zaman, C++ bellek/ömür, thread/kuyruk/kilit, gecikme/colocation, kurtarma ve log/test/sürüm konuları yazıldı. Benzetmeler, sayısal örnekler ve ilgili KB bağlantıları eklendi. Resmi protokol/ürün belgeleri okundu. HFT development `4275ccc` ve hub development `1cca9a8` referanslarında sınırlı salt okunur kod kontrolleri yapıldı; yerel branch uçlarının daha ileride olduğu açık kaydedildi. SDK özeti aktarımı yeni kod doğrulaması sayılmadı. Yeni uygulama build'i, canlı emir, benchmark veya deploy testi yok.
 
 ## Sıradaki tek başlangıç noktası
 
-Kullanıcının **borsa bölümüne toplu revizyonları** işlenir. Yeni konuya geçmeden bu geri bildirimler beklenir. Kullanıcı teknik bölüme devam istediğinde ilk dosya `03-teknik-temeller/01-program-servis-container-sdk.md`. Kullanıcı adım adım tek konu tesliminden vazgeçti; bundan sonraki bölüm boyutu mevcut yönlendirmesiyle belirlenir.
+Kullanıcının **Teknik Temeller bölümüne toplu revizyonları** işlenir. Yeni bölüm okunmuş/onaylanmış sayılmaz. Kullanıcı bir sonraki bölüme geçiş istediğinde başlangıç `04-sistem-mimarisi/01-repolar-ve-bilesenler.md`; kapsam mevcut toplu bölüm inceleme tercihiyle belirlenir.
 
 ## Kalıcı çalışma düzeni
 
@@ -26,4 +28,4 @@ Yayın kullanımı `yayin/README.md`, tasarım kaynakları `yayin/marka.md`, yay
 
 ## Doğrulama ve Git
 
-14 konu `taslak`, kalan 34 konu `bos`. Yapısal kontrol: 168 Markdown, 1.860 bağlantı, 0 hata; `git diff --check` temiz. Çıktılar ve araçlar Git dışında. Önceki push otomatik onay incelemesince reddedildi; kullanıcı uzak depoya gönderim onayı vermedi. Push tekrar denenmez; çalışmalar yerelde saklanır.
+24 konu `taslak`, kalan 24 konu `bos`. Yapısal kontrol: 168 Markdown, 1.868 bağlantı, 0 hata; `git diff --check` temiz. Çıktılar ve araçlar Git dışında. Önceki push otomatik onay incelemesince reddedildi; kullanıcı uzak depoya gönderim onayı vermedi. Push tekrar denenmez; çalışmalar yerelde saklanır.

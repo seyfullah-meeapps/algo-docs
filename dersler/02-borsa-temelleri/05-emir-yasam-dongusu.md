@@ -8,6 +8,7 @@ dis_kaynak:
     erisim: 2026-10-24
 dogrulama: 2026-10-24
 durum: taslak
+kullanici_incelemesi: 2026-10-25
 ---
 
 # Emir yaşam döngüsü
@@ -95,6 +96,6 @@ Yeni/kısmi/tam gerçekleşme ve iptal miktarları öğretici modeldir; ham prot
 
 ## Devam notu
 
-Taslak yazıldı, kitaba eklendi; kullanıcı okuması bekleniyor. Sıradaki konu [Seanslar, müzayede ve denge fiyatı](06-seanslar-ve-muzayede.md).
+Kullanıcı 25 Ekim 2026 tarihinde buraya kadarki bütün içeriği okuduğunu ve ek değişiklik gerekmediğini belirtti. İçerik incelemesi tamamlandı; bu beyan yeni kod/canlı sistem doğrulaması değildir. Teknik Temeller bölümüne geçiş onayı verildi.
 
 [Bölüm indeksi](README.md) · [Ana indeks](../README.md)

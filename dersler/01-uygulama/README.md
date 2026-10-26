@@ -6,7 +6,7 @@ durum: taslak
 
 # Uygulamanın amacı — bölüm indeksi
 
-İki konu taslağı tamamlandı ve PDF/HTML/EPUB kitabına eklendi. Kullanıcı revizyonlar sonrasında ilk bölümü uygun buldu ve borsa temellerine geçilmesini istedi.
+İki konu yazıldı ve kitaba eklendi. Kullanıcı 25 Ekim 2026 tarihinde önceki bölümlerin tamamını okuduğunu, ek değişiklik gerekmediğini bildirdi. İçerik incelemesi tamamlandı; kod doğrulama durumu bundan ayrıdır.
 
 İlk okuma revizyonu işlendi: MTrader/MeeApps kimlikleri, müşteri kullanıcıları ve şirketin özellik geliştirme/test akışı ayrıldı. Süreç kaynağı [ürün bağlamıdır](../../00-genel/urun-ve-gelistirme-sureci.md).
 

@@ -2,6 +2,22 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-25 — Teknik Temeller bölümünün tamamlanması
+
+- Kullanıcının önceki 14 konuyu okuyup uygun bulduğu kaydedildi; okuma tarihi ile teknik kod doğrulama durumu ayrı tutuldu.
+- Teknik Temeller'in 10 konusu benzetmeler, sayısal örnekler ve KB bağlantılarıyla yazıldı. Resmi protokol/ürün kaynakları okundu; HFT `4275ccc` ve hub `1cca9a8` referanslarında sınırlı salt okunur kod kontrolü yapıldı. Genel kavram, mevcut KB aktarımı ve yeni kod incelemesi ayrıldı; canlı test/deploy/benchmark yok.
+- Yayın listesi 24 konuya, sürüm 0.12'ye çıkarıldı. PDF/HTML/EPUB toplu incelemeye hazır: 56 A4 sayfa, yeni bölüm 37–56. sayfalarda. Yeni sayfalar/içindekiler görsel, EPUB paket/XML ve HTML konu sayısı kontrol edildi; yapısal kontrol 168 Markdown/1.868 bağlantı/0 hata. 24 konu iskelet kaldı. İndeks/agent/karar/ilerleme/oturum kayıtları güncellendi; sonraki bölüme geçilmedi.
+
+## 2026-10-25 — Uptick anlatımının sadeleştirilmesi
+
+- 11.3 son iki satış fişi benzetmesi, düşen/yükselen/aynı kalan fiyat ve karşı alıcı örnekleriyle yeniden yazıldı. KAP duyurusu yeniden okundu; tarihli kapsam korundu. Kullanıcının sorusu ilgili dosyada kaydedildi.
+- Yayın 0.11 PDF/HTML/EPUB yenilendi; teknik bölüme geçilmedi.
+
+## 2026-10-25 — Denge fiyatı örneği
+
+- Ham kademe miktarı/birikimli toplam ayrıldı; yeni örnekte 10,01 TL’de 500 alış, 400 satış ve 400 lot işlem açıklandı. Eski tablonun birikimli tanımı altında tutarlı olduğu soru kaydında belirtildi.
+- Yayın 0.10; PDF/HTML/EPUB yenilendi. Yeni konuya geçilmedi.
+
 ## 2026-10-24 — Borsa temellerinin toplu tamamlanması
 
 - Kullanıcının bölüm bazlı teslim talebiyle kalan yedi konu yazıldı: seans/müzayede, pozisyon-bakiye/kredili işlemler, takas/tedbirler, açığa satış/uptick, protokoller, veri kurtarma ve strateji fikirleri.

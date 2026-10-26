@@ -16,7 +16,7 @@ Bu klasör insan için konu bazlı rehberdir; repo kökündeki AI bilgi tabanın
 
 ## Çalışırken
 
-- Kullanıcı borsa konularında tek tek teslim yerine bölümün kalanını toplu tamamlama istedi. Borsa bölümünün 12 konusu yazıldı; şu an toplu kullanıcı revizyonu bekleniyor. Teknik bölüme otomatik geçme.
+- Kullanıcı 25 Ekim 2026 tarihinde önceki 14 konuyu okuduğunu ve ek değişiklik gerekmediğini belirterek Teknik Temeller bölümünün tamamının tek turda yazılmasını istedi. Teknik bölümün 10 konusu yazıldı; şimdi yeni bölümün toplu kullanıcı incelemesi bekleniyor. Bizim Sistemimiz bölümüne otomatik geçme. Kullanıcı okuma onayı ile kod/canlı doğrulama durumu ayrı tutulur.
 
 - Rehber yalnız MTrader kapsamındadır; şirketin diğer ürünlerini veya şirket genelini anlatmaz. Şirket/kullanıcı ayrımını tekrarlayan açıklamalar ekleme. Strateji testlerini her stratejinin kendi parametreleri, koşulları ve beklenen davranışı üzerinden anlat.
 

@@ -7,6 +7,7 @@ dis_kaynak:
     erisim: 2026-10-24
 dogrulama: 2026-10-24
 durum: taslak
+kullanici_incelemesi: 2026-10-25
 ---
 
 # Pozisyon, bakiye ve kâr/zarar
@@ -89,6 +90,6 @@ Bu tur MTrader kaynak kodu, canlı binary/config veya gerçek işlem testi yapı
 
 ## Devam notu
 
-Bölüm topluca okunacak; kurum bakiyeleri için teknik/kurumsal veri gerektiğinde ayrıca sorulacak.
+Kullanıcı 25 Ekim 2026 tarihinde buraya kadarki bütün içeriği okuduğunu ve ek değişiklik gerekmediğini belirtti. İçerik incelemesi tamamlandı; bu beyan yeni kod/canlı sistem doğrulaması değildir. Teknik Temeller bölümüne geçiş onayı verildi.
 
 [Bölüm indeksi](README.md) · [Ana indeks](../README.md)
