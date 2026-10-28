@@ -63,7 +63,7 @@ Bu durum yavaş çalışmaktan farklıdır. Çok beklenen bir ağ yanıtı, uzun
 
 ## MTrader'da göreceğimiz karşılık
 
-HFT referans `AlgoWorker` kodunda ayrı worker thread'i, olay kuyruğuna sahiplik devri ve kuyruktan olay çekme vardır. Bunlar bu konudaki “alım” ile “işleme” ayrımına somut örnektir. Hangi stratejinin hangi thread yolunu kullandığı [strateji çekirdeği belgesinde](../../10-servisler/hftsrvprod/strateji-cekirdegi.md) anlatılır; bütün stratejilerin tek thread'de olduğu varsayılmaz.
+HFT referans `AlgoWorker` kodunda ayrı worker thread'i, olay kuyruğuna sahiplik devri ve kuyruktan olay çekme vardır. Bunlar bu konudaki “alım” ile “işleme” ayrımına somut örnektir. Hangi stratejinin hangi thread yolunu kullandığı [strateji çekirdeği belgesinde](../../bilgi-tabani/10-servisler/hftsrvprod/strateji-cekirdegi.md) anlatılır; bütün stratejilerin tek thread'de olduğu varsayılmaz.
 
 Bir test kaydına olayların sırasını, strateji kimliğini, start/stop anını ve yük koşulunu eklemek işe yarar. Eşzamanlılıkla ilgili davranışın düşük yükte görülmeyip yoğunlukta ortaya çıkabilmesi, yalnız test süresini uzatmanın neden her zaman yeterli olmadığını gösterir.
 

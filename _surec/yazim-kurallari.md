@@ -24,6 +24,8 @@ Kaynağı kod olmayan dosyalarda (ör. borsa kuralları) `kaynak` yerine `dis_ka
 
 ## İçerik
 
+Bu bölümdeki teknik yazım kuralları `bilgi-tabani/` içindir. İnsan rehberi `dersler/AGENTS.md` talimatlarını izler. Kullanıcı sanity Excel'leri kod/repo referansı içermez; teknik dayanaklar `bilgi-tabani/test-incelemeleri/` içinde saklanır. Dizin yerleşiminin giriş noktası kök `README.md` dosyasıdır.
+
 - **Agent için yaz.** Süsleme, motivasyon cümlesi, "bu bölümde şunu öğreneceksiniz" yok. Olgu, isim, yer.
 - **Tek konu, tek dosya.** Bir dosya bir soruyu cevaplar. 400 satırı geçiyorsa bölünmeli.
 - **Tekrar yok.** Bilgi tek yerde yazılır; başka yerde gerekiyorsa link verilir. Kısa bir tekrar kaçınılmazsa (ör. tablo özeti) kaynağı linklenir.

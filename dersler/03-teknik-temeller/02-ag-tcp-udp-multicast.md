@@ -51,7 +51,7 @@ Multicast güvenilirlik garantisi değildir. Bir dinleyici mesajı alırken diğ
 | UDP unicast | Tek adrese numaralı duyuru | Kayıp, sıra ve tekrar |
 | UDP multicast | Gruba ortak duyuru | Her alıcının eksiksizliği |
 
-MTrader'daki kavramların teknik adresi [ITCH alım yolu](../../10-servisler/itch-sdk/alim-yolu.md); kayıp kurtarmanın borsa bağlamı [Glimpse ve Rewinder](../02-borsa-temelleri/11-glimpse-rewinder-replay.md) konusudur. Burada taşımanın mantığını öğreniyoruz; gerçek kanal ve portları ezberlemiyoruz.
+MTrader'daki kavramların teknik adresi [ITCH alım yolu](../../bilgi-tabani/10-servisler/itch-sdk/alim-yolu.md); kayıp kurtarmanın borsa bağlamı [Glimpse ve Rewinder](../02-borsa-temelleri/11-glimpse-rewinder-replay.md) konusudur. Burada taşımanın mantığını öğreniyoruz; gerçek kanal ve portları ezberlemiyoruz.
 
 ## Gecikmeyi tek bir “ağ sorunu” diye adlandırmayalım
 

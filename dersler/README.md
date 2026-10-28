@@ -120,4 +120,4 @@ GUI için frontend kodu ve çalıştırılabilirlik incelenir. Gerçek ekran gö
 
 ## Önceki kayıtlar
 
-[Eski dersler](arsiv/README.md) tarihsel arşivdir; oradaki eski sıra ve Ders 06 önerisi güncel plan değildir. İçerik kaynak adayıdır, yeni rehberde tamamlandı sayılmaz. Asıl teknik bilgi tabanı mevcut yerinde kalır: [manifest](../manifest.yaml), [sistem haritası](../00-genel/sistem-haritasi.md), [strateji kataloğu](../20-stratejiler/README.md).
+[Eski dersler](../arsiv/eski-dersler/README.md) tarihsel arşivdir; oradaki eski sıra ve Ders 06 önerisi güncel plan değildir. İçerik kaynak adayıdır, yeni rehberde tamamlandı sayılmaz. Asıl teknik bilgi tabanı mevcut yerinde kalır: [manifest](../manifest.yaml), [sistem haritası](../bilgi-tabani/00-genel/sistem-haritasi.md), [strateji kataloğu](../bilgi-tabani/20-stratejiler/README.md).

@@ -8,7 +8,7 @@ durum: taslak
 
 İki konu yazıldı ve kitaba eklendi. Kullanıcı 25 Ekim 2026 tarihinde önceki bölümlerin tamamını okuduğunu, ek değişiklik gerekmediğini bildirdi. İçerik incelemesi tamamlandı; kod doğrulama durumu bundan ayrıdır.
 
-İlk okuma revizyonu işlendi: MTrader/MeeApps kimlikleri, müşteri kullanıcıları ve şirketin özellik geliştirme/test akışı ayrıldı. Süreç kaynağı [ürün bağlamıdır](../../00-genel/urun-ve-gelistirme-sureci.md).
+İlk okuma revizyonu işlendi: MTrader/MeeApps kimlikleri, müşteri kullanıcıları ve şirketin özellik geliştirme/test akışı ayrıldı. Süreç kaynağı [ürün bağlamıdır](../../bilgi-tabani/00-genel/urun-ve-gelistirme-sureci.md).
 
 | Konu | Kapsam | Durum |
 |---|---|---|

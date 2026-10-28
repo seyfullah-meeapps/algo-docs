@@ -6,7 +6,7 @@ durum: taslak
 
 # Rehber üzerinde çalışacak agent için
 
-Bu klasör insan için konu bazlı rehberdir; repo kökündeki AI bilgi tabanının okuyucu biçimini burada aynen uygulama. Açıklamalar temelden ilerler; anlaşılır örnek ve görseller kullanılır. Kök AGENTS.md'nin doğruluk, gizlilik, branch ve tek kaynak kuralları geçerlidir.
+Bu klasör insan için konu bazlı rehberdir; `bilgi-tabani/` altındaki AI belgelerinin okuyucu biçimini burada aynen uygulama. Açıklamalar temelden ilerler; anlaşılır örnek ve görseller kullanılır. Kök AGENTS.md'nin doğruluk, gizlilik, branch ve tek kaynak kuralları geçerlidir.
 
 ## Her oturumun başı
 
@@ -20,7 +20,7 @@ Bu klasör insan için konu bazlı rehberdir; repo kökündeki AI bilgi tabanın
 
 - Rehber yalnız MTrader kapsamındadır; şirketin diğer ürünlerini veya şirket genelini anlatmaz. Şirket/kullanıcı ayrımını tekrarlayan açıklamalar ekleme. Strateji testlerini her stratejinin kendi parametreleri, koşulları ve beklenen davranışı üzerinden anlat.
 
-- Ürün adı **MTrader**, şirket **MeeApps**. MTrader aracı kurumların günlük kullandığı algoritmik işlem botudur; MeeApps'in kullanımı geliştirme/test içindir. Tek süreç referansı kök `00-genel/urun-ve-gelistirme-sureci.md`. Müşteri gününü şirket ekibinin günlük trade rutini olarak yazma. Ön test → test ortamı → preprod düşük lot → kararlılık sonrası yüksek lot → müşteriler akışını branch/CI bilgisiyle eşitleme.
+- Ürün adı **MTrader**, şirket **MeeApps**. MTrader aracı kurumların günlük kullandığı algoritmik işlem botudur; MeeApps'in kullanımı geliştirme/test içindir. Tek süreç referansı kök `bilgi-tabani/00-genel/urun-ve-gelistirme-sureci.md`. Müşteri gününü şirket ekibinin günlük trade rutini olarak yazma. Ön test → test ortamı → preprod düşük lot → kararlılık sonrası yüksek lot → müşteriler akışını branch/CI bilgisiyle eşitleme.
 - Kullanıcı okuma çıktısındaki “Okumaya başlamadan” sayfasını kaldırdı. Kitap doğrudan ilk konuyla başlar; bu sayfayı yeniden ekleme. Ana başlıklar bölüm rozeti ve marka şeridiyle biçimlenir.
 
 - Bir konu bir Markdown dosyasıdır; büyüyünce alt konulara böl ve indeksleri güncelle. Kullanıcı artık A4 PDF, HTML önizleme ve EPUB çıktısı istedi; yayın düzeni `yayin/README.md` içindedir. Kaynak MD düzenlenir, çıktılar yeniden üretilir.
@@ -29,7 +29,7 @@ Bu klasör insan için konu bazlı rehberdir; repo kökündeki AI bilgi tabanın
 - “Planlandı”, “yazıldı”, “kullanıcıyla konuşuldu/okundu” ayrı durumlardır. Sessizlik veya dosyanın açık olması içerik onayı değildir.
 - Güncel borsa kuralı, seans, T+N, tedbir veya değişebilir teknik bilgi yazılırken resmi/birincil kaynakları internetten doğrula. URL, erişim, belge sürümü ve yürürlük kapsamını yaz. İnternetten bilgi doğrulamayı uygulama testi olarak sunma.
 - Projenin davranışında kod esas: kaynak repo/branch/commit, GUI ve backend alan eşleşmesi, ölçek ve prod farkı belirtilir. Canlı binary/config doğrulanmadıysa bunu söyle.
-- Teknik ayrıntının aslı kök bilgi tabanında kalır. Burada açıklama, öğretici örnek ve kaynak bağlantısı bulunur; çelişkili ikinci bir parametre sözleşmesi üretilmez.
+- Teknik ayrıntının aslı `bilgi-tabani/` içinde kalır. Burada açıklama, öğretici örnek ve kaynak bağlantısı bulunur; çelişkili ikinci bir parametre sözleşmesi üretilmez.
 - Frontend kaynaklarından çizilen SVG temsili şemadır; gerçek ekran görüntüsü diye sunulmaz. Ekrana erişilemiyorsa gerekli çekim tarifiyle yer tutucu bırakılır.
 - Öğrenme/rehber çalışması açık bug kuyruğunu otomatik yeniden açmaz. Gerçek yeni teknik bulgu kök açık konu düzenine göre kaydedilir.
 - Mevcut hataları rehberin okuyucu anlatımına ve dikkat kutularına ekleme. Hata takibi teknik bilgi tabanı/issue tarafında kalır. Düzeltme doğrulanınca etkilenen rehber dosyaları ve örnek/görsel/test beklentileri güncellenir; bu kontrolü düzeltme kapanışının parçası yap. Düzelmemiş hedef davranışı çalışıyormuş gibi yazma. Ayrıntılı bakım düzeni `calisma-duzeni.md` içindedir.

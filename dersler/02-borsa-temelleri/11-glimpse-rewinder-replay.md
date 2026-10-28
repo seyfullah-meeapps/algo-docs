@@ -73,7 +73,7 @@ Testte yalnız ekranın yeniden hareket ettiğine bakmayız. Hangi akışta boş
 
 ## Kaynaklar ve doğrulama
 
-Resmi BIST ITCH tanıtımı ve ITCH SR 3.12 belgesinin arama motorunda erişilebilen Appendix E metni kullanıldı; PDF’nin doğrudan web açılması bu tur başarısız oldu. Bu nedenle byte/transport ayrıntıları veya en güncel sürüm iddiası verilmedi. SoupBinTCP Nasdaq 3.00 belgesi doğrudan okundu. Erişim 24 Ekim 2026. Uygulama bağlamı [itch-sdk alım yolu](../../10-servisler/itch-sdk/alim-yolu.md) ve [emir dönüşü](../../30-akislar/emir-donusu.md) mevcut taslaklarından alındı; kurtarma testi yapılmadı.
+Resmi BIST ITCH tanıtımı ve ITCH SR 3.12 belgesinin arama motorunda erişilebilen Appendix E metni kullanıldı; PDF’nin doğrudan web açılması bu tur başarısız oldu. Bu nedenle byte/transport ayrıntıları veya en güncel sürüm iddiası verilmedi. SoupBinTCP Nasdaq 3.00 belgesi doğrudan okundu. Erişim 24 Ekim 2026. Uygulama bağlamı [itch-sdk alım yolu](../../bilgi-tabani/10-servisler/itch-sdk/alim-yolu.md) ve [emir dönüşü](../../bilgi-tabani/30-akislar/emir-donusu.md) mevcut taslaklarından alındı; kurtarma testi yapılmadı.
 
 Bu tur MTrader kaynak kodu veya canlı sistem test edilmedi. Proje karşılıkları mevcut KB taslaklarının kavramsal özetidir; güncel prod davranışı olarak sunulmaz.
 

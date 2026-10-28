@@ -66,7 +66,7 @@ Burada “motor bozuk” sonucunu peşinen yazmıyoruz. Gözlem, talebin kabulü
 
 Pratik bir kanıt kaydı şu bilgileri birbirine bağlar: **ortam + bileşen + kaynak commit/build kimliği + SDK bağımlılıkları + ilgili config + test zamanı**. Image tag'i yeniden kullanılabiliyorsa içerik kimliği/digest daha belirli olabilir. Ancak digest bile tek başına çalışan sürecin o image'dan başlatıldığını kanıtlamaz; çalışma bilgisiyle eşlenir.
 
-MTrader'ın referans branch/ortam akışı ve istisnaları [branch ve ortamlar](../../00-genel/branch-ve-ortamlar.md) belgesindedir. Müşteriye kabul süreci ise [ürün ve geliştirme sürecinde](../../00-genel/urun-ve-gelistirme-sureci.md) kalır. “development'ta var”, “testten geçti” ve “müşteride çalışıyor” farklı beyanlardır.
+MTrader'ın referans branch/ortam akışı ve istisnaları [branch ve ortamlar](../../bilgi-tabani/00-genel/branch-ve-ortamlar.md) belgesindedir. Müşteriye kabul süreci ise [ürün ve geliştirme sürecinde](../../bilgi-tabani/00-genel/urun-ve-gelistirme-sureci.md) kalır. “development'ta var”, “testten geçti” ve “müşteride çalışıyor” farklı beyanlardır.
 
 ## Kayıt toplamak da ölçümü etkileyebilir
 

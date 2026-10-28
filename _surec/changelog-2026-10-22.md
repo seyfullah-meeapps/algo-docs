@@ -29,13 +29,13 @@ Kaynak: Borsa İstanbul **Pay Piyasası Prosedürü** (02.PRO.01, sürüm 3.34, 
 
 Kaynak: Algo-Setup `development` `2a3c5d5` (`main` `2907757` ve `preprod` `346306a` farkları `git show` ile), algo-configs `master` `ab35dde` (`Sabah_Kontrolleri.docx` dahil); servis repoları manifest'teki commit'lerde.
 
-- `40-operasyon/` alt dosyalara bölündü:
+- `bilgi-tabani/40-operasyon/` alt dosyalara bölündü:
   - `kurulum-ve-dagitim.md`
   - `config-referansi.md`: servisler arası indeks; anahtar açıklaması yok
   - `log-imzalari.md`
   - `sabah-kontrolleri.md`: docx güncel koda göre yeniden yazıldı
   - README artık indeks.
-- **Yeni:** `10-servisler/algorithmic-trading/config.md` (AlgoProd config referansı). AlgoProd README'deki config tablosu kaldırıldı; tablo yanlıştı (`akd*` okunmuyor, `triggerWorkerCount` ve `volatilityFile` etkisiz).
+- **Yeni:** `bilgi-tabani/10-servisler/algorithmic-trading/config.md` (AlgoProd config referansı). AlgoProd README'deki config tablosu kaldırıldı; tablo yanlıştı (`akd*` okunmuyor, `triggerWorkerCount` ve `volatilityFile` etkisiz).
 - **Eski README'de yanlış çıkanlar:**
   - "Hepsi `network_mode: host`": MySQL ve MAAdminUI bridge ağında.
   - S3'e log yalnız HFT'den gidiyor.
@@ -72,7 +72,7 @@ Kaynak: Algo-Setup `development` `2a3c5d5` (`main` `2907757` ve `preprod` `34630
 
 Kaynak: mtrader-trade-ui `development` `b0474c3` (yeni GUI) ve `main` `6715182` (eski GUI; salt okunur export), trade-data-app `1cca9a8`.
 
-- `10-servisler/mtrader-trade-ui/` alt dosyalara bölündü: `backend-sozlesmesi.md` (iki GUI ortak), `yeni-gui.md`, `eski-gui.md`. README artık giriş, karşılaştırma tablosu ve indeks.
+- `bilgi-tabani/10-servisler/mtrader-trade-ui/` alt dosyalara bölündü: `backend-sozlesmesi.md` (iki GUI ortak), `yeni-gui.md`, `eski-gui.md`. README artık giriş, karşılaştırma tablosu ve indeks.
 - **README düzeltmeleri:**
   - Eski GUI'de toplu emirler tek "Sabah Emri" ekranı (`OrderForm`, `COLLECTIVE_ORDERS` izni), YİP yok.
   - İki GUI de bazı uçları kullanmıyor (`getSelectedAccountStrategies`, `getStrategyKeys`, `subscribeToArbitrage(s)`).
@@ -81,7 +81,7 @@ Kaynak: mtrader-trade-ui `development` `b0474c3` (yeni GUI) ve `main` `6715182` 
 - **Diğer dosyalarda:**
   - `fon-takibi`: UI bölümü düzeltildi.
   - `taban`: eski GUI'nin `maxAskLot` okuduğu işaretlendi.
-  - `20-stratejiler/README`: Toplu Emirler görünürlüğü `COLLECTIVE_ORDERS` iznine bağlı.
+  - `bilgi-tabani/20-stratejiler/README`: Toplu Emirler görünürlüğü `COLLECTIVE_ORDERS` iznine bağlı.
   - `trade-data-app/veri-akisi`: yeni GUI'nin `CommandType 8`'i eklendi.
 - **Repo dışı not:** mtrader-trade-ui `AGENTS.md` "15 için trade-data-app case'i development'ta yok" diyor; `1cca9a8`'de var. Repoya dokunulmadı.
 - **Yeni konular K-163 – K-178** (ACIK-KONULAR § mtrader-trade-ui). Öne çıkanlar (eski GUI, prod):
@@ -93,8 +93,8 @@ Kaynak: mtrader-trade-ui `development` `b0474c3` (yeni GUI) ve `main` `6715182` 
 
 Kaynak: ouch-sdk `0c3589e`, network-sdk `3c1b42f` (değişmedi). Host tarafı için HftSrvProd, AlgorithmicTrading ve order-service; eski notlar için `meeapps-ai` (salt okunur) okundu.
 
-- `10-servisler/ouch-sdk/README.md` tek dosya olarak yeniden yazıldı: public API, model alan tabloları, callback thread'i, bağlantı yaşam döngüsü, enum farkları, sabah emri API'leri.
-- `10-servisler/network-sdk/` alt dosyalara bölündü: `wire-protokolu.md` (çerçeve, FlatBuffers şemaları, enum'lar, pointer ömrü) ve `baglanti-ve-threadler.md` (istemci/sunucu yaşam döngüsü, heartbeat, kopma, thread modeli, kapanış). README artık giriş ve indeks.
+- `bilgi-tabani/10-servisler/ouch-sdk/README.md` tek dosya olarak yeniden yazıldı: public API, model alan tabloları, callback thread'i, bağlantı yaşam döngüsü, enum farkları, sabah emri API'leri.
+- `bilgi-tabani/10-servisler/network-sdk/` alt dosyalara bölündü: `wire-protokolu.md` (çerçeve, FlatBuffers şemaları, enum'lar, pointer ömrü) ve `baglanti-ve-threadler.md` (istemci/sunucu yaşam döngüsü, heartbeat, kopma, thread modeli, kapanış). README artık giriş ve indeks.
 - **K-07 kapandı:** Eski `wire-protocol.md`, `connection-management.md`, `bugs-and-quirks.md` maddeleri tek tek kontrol edildi; tablo network-sdk README § Eski bilgi tabanı'nda. Eski bilgilerden yanlış çıkanlar:
   - Decode derin kopya değil.
   - `SO_REUSEADDR` bind'dan önce değil, sonra.
@@ -121,7 +121,7 @@ Kaynak: ouch-sdk `0c3589e`, network-sdk `3c1b42f` (değişmedi). Host tarafı i�
 
 Kaynak: itch-sdk `35a3b5c` (değişmedi). Tüketici tarafı için HftSrvProd, AlgorithmicTrading ve trade-data-app; eski bug listesi için `meeapps-ai` (salt okunur) okundu.
 
-- `10-servisler/itch-sdk/` alt dosyalara bölündü: `alim-yolu.md`, `mesajlar-ve-emir-defteri.md`, `abonelik-api.md`. README artık giriş ve indeks.
+- `bilgi-tabani/10-servisler/itch-sdk/` alt dosyalara bölündü: `alim-yolu.md`, `mesajlar-ve-emir-defteri.md`, `abonelik-api.md`. README artık giriş ve indeks.
 - **README düzeltmeleri:**
   - `header_changed` yalnız fiyat değişiminde tetikleniyor (miktar değil).
   - `isMaxSizeExecution` seviye bazlı: eşik geçilince gruptaki her fill'de 1, yalnız yükselen kenarda bir kez değil.
@@ -143,7 +143,7 @@ Kaynak: itch-sdk `35a3b5c` (değişmedi). Tüketici tarafı için HftSrvProd, Al
 
 Kaynak: MAOrderSDK `a788782` (değişmedi). Host tarafı için HftSrvProd ve order-service, FIX config'leri için Algo-Setup/algo-configs de okundu.
 
-- `10-servisler/maordersdk/` alt dosyalara bölündü: `api-ve-yasam-dongusu.md`, `emir-akisi.md`, `ouch-protokolu.md`, `fix.md`. README artık giriş ve indeks.
+- `bilgi-tabani/10-servisler/maordersdk/` alt dosyalara bölündü: `api-ve-yasam-dongusu.md`, `emir-akisi.md`, `ouch-protokolu.md`, `fix.md`. README artık giriş ve indeks.
 - **README düzeltmeleri:**
   - Bölünen emrin parçaları yalnız host `client_order_id` verirse ana emre bağlanıyor; HFT ve order-service vermediği için iptal yayılmıyor.
   - Yerel ret tablosu tamamlandı (1005, 1006, sentetik 1/4/5/6/15). Hard cap yalnız limit tablosu doluysa ve `price > 0` ise.
@@ -159,7 +159,7 @@ Kaynak: MAOrderSDK `a788782` (değişmedi). Host tarafı için HftSrvProd ve ord
 
 Kaynak: order-service `b86c0cf` (değişmedi). Karşı taraf için MAOrderSDK, ouch-sdk, network-sdk, trade-data-app ve Algo-Setup müşteri config'leri de okundu.
 
-- `10-servisler/order-service/` alt dosyalara bölündü: `arayuzler.md`, `sdk-ve-oturumlar.md`, `toplu-emirler.md`, `risk.md`, `kalicilik-ve-config.md`. README artık giriş ve indeks.
+- `bilgi-tabani/10-servisler/order-service/` alt dosyalara bölündü: `arayuzler.md`, `sdk-ve-oturumlar.md`, `toplu-emirler.md`, `risk.md`, `kalicilik-ve-config.md`. README artık giriş ve indeks.
 - **README düzeltmeleri:**
   - `-110023` yeniden gönderimi yalnız son atışta, `repeatLastShot: true` iken, en çok 900 ms. Fazla kopya iptali thread'ler bittikten 2 sn sonra.
   - `OffHours` bayrağı yalnız `SendOrderAsync` yolunda; toplu/açılış gönderimleri normal seans bayrağıyla gidiyor.
@@ -171,7 +171,7 @@ Kaynak: order-service `b86c0cf` (değişmedi). Karşı taraf için MAOrderSDK, o
 - **Diğer dosyalarda düzeltmeler (kodla doğrulandı):**
   - `sistem-haritasi.md`: handoff'ta logout gönderilmiyor, yalnız soket kapanıyor; tetik koşulları.
   - `hftsrvprod/emir-yasam-dongusu.md`: OS yolunda HFT token'ı wire'a çıkmıyor; iki ❓ cevaplandı (cancel → `onSdkError(10)`, bağlantısız hesap → `onSdkError(1)`, sessiz kayıp).
-  - `sozluk.md` "Son atış" anlamı ters yazılmıştı; `borsa-kurallari.md` açığa satış kısıtı kısmen uygulanıyor; `30-akislar/README.md` sabah akışı adımları.
+  - `sozluk.md` "Son atış" anlamı ters yazılmıştı; `borsa-kurallari.md` açığa satış kısıtı kısmen uygulanıyor; `bilgi-tabani/30-akislar/README.md` sabah akışı adımları.
   - `network-sdk/README.md`: sabah/açılış isteği yok. `ouch-sdk/README.md`: `addMorningOrder` vb. kodda yok.
   - trade-data-app: `veri-akisi.md` side biçimi ve health servisi ❓'leri cevaplandı; `entegrasyonlar.md` `LimitControlService` order-service tarafından çağrılmıyor, RPC adı `LimitLogin`; `api.md` iki RPC kullanılmıyor; `sema.md` `Orders.type` enum'u.
 - **Yeni açık konular:** K-69–K-99; K-43 güncellendi.
@@ -180,7 +180,7 @@ Kaynak: order-service `b86c0cf` (değişmedi). Karşı taraf için MAOrderSDK, o
 
 Kaynak: HftSrvProd `4275ccc` (değişmedi). Karşı taraf için MAOrderSDK, ouch-sdk ve order-service de okundu.
 
-- `10-servisler/hftsrvprod/` alt dosyalara bölündü: `komutlar-ve-grpc.md`, `strateji-cekirdegi.md`, `emir-yasam-dongusu.md`, `itch-entegrasyonu.md`, `config.md`. README artık giriş ve indeks.
+- `bilgi-tabani/10-servisler/hftsrvprod/` alt dosyalara bölündü: `komutlar-ve-grpc.md`, `strateji-cekirdegi.md`, `emir-yasam-dongusu.md`, `itch-entegrasyonu.md`, `config.md`. README artık giriş ve indeks.
 - **README düzeltmeleri:**
   - Kuyruk dolunca eski değil, **yeni** olay düşüyor.
   - `FetchAllUniqueKeys` ve `UpdateExtSettings` HFT'de UNIMPLEMENTED. `SubscribeToCommands` abonelik tutmuyor, yalnız anlık durum yolluyor.
@@ -193,14 +193,14 @@ Kaynak: HftSrvProd `4275ccc` (değişmedi). Karşı taraf için MAOrderSDK, ouch
 - **`[[ouch_users]]`:** `isActive=true` girişler açılışta SDK'ya kaydediliyor; handoff'ta handoff verisi yerine config verisi kullanılıyor. Müşteri config'lerinde giriş yok. Kodla doğrulandı; sistem haritası düzeltildi.
 - **`StrType`:** `StrategyService`'in iki mesajı ayrı strateji numaralandırması kullanıyor (sözlük ve strateji kataloğu düzeltildi).
 - **Varant Toplu olayları:** HFT'de istemci başına yönlendirme yok (`varant-toplu.md` düzeltildi).
-- **Restart:** HFT stratejileri durmuş ve bakiye 0 olarak geliyor (`30-akislar/README.md` düzeltildi).
+- **Restart:** HFT stratejileri durmuş ve bakiye 0 olarak geliyor (`bilgi-tabani/30-akislar/README.md` düzeltildi).
 - **Yeni açık konular:** K-44–K-68.
 
 ## 2026-10-22 — trade-data-app derinleştirme
 
 Kaynak: trade-data-app `1cca9a8` (değişmedi).
 
-- `10-servisler/trade-data-app/` alt dosyalara bölündü. README artık giriş ve indeks; ayrıntılar: `api.md`, `veri-akisi.md`, `sema.md`, `entegrasyonlar.md`, `config.md`.
+- `bilgi-tabani/10-servisler/trade-data-app/` alt dosyalara bölündü. README artık giriş ve indeks; ayrıntılar: `api.md`, `veri-akisi.md`, `sema.md`, `entegrasyonlar.md`, `config.md`.
 - **README'deki düzeltmeler:**
   - WS ve REST'te process içi TLS yok; sertifika anahtarları okunmuyor.
   - TradeVerifier her snapshot'ta değil, bootstrap bildirimiyle yalnızca bir kez tekrar uygulanıyor.
@@ -209,7 +209,7 @@ Kaynak: trade-data-app `1cca9a8` (değişmedi).
   - AlgoProd `FetchOrders` kullanmıyor; onun yerine `FetchAllUniqueKeys` ve `UpdateExtSettings` kullanıyor.
   - `logLevel` üst seviyede etkisiz.
 - **Tablo listesi:** `Instrument_Futures` ve `Volatility` eklendi. Şema yönetimi: migration yok; `scripts/sql/` elle çalıştırılıyor. K-08 kapandı (kolonlar koddan `sema.md`'de; tipler ve unique key'ler K-39).
-- **`getApplicationFromStrategyType`:** Varant Toplu eksik değil. Gerçek fark iki kopyanın tip 1 ve 12'de ayrışması (`20-stratejiler/README.md` düzeltildi).
+- **`getApplicationFromStrategyType`:** Varant Toplu eksik değil. Gerçek fark iki kopyanın tip 1 ve 12'de ayrışması (`bilgi-tabani/20-stratejiler/README.md` düzeltildi).
 - **`fon-takibi.md`:** BYF sepeti DB'ye değil belleğe yazılıyor.
 - **K-02:** ITCH config'i `Part` 5–6'yı Partition1'e düşürüyor.
 - **Yeni açık konular:** K-16–K-43.
@@ -238,7 +238,7 @@ Commit'ler değişmedi; hepsi manifest'teki doğrulama commit'lerine karşı.
 - **itch-sdk:**
   - Hat seçimi açılışta ve process genelinde yapılıyor; Glimpse bağlantısı başarısız olursa ikincile tek yönlü geçiliyor.
   - `partId` VİOP için 5–8 aralığını varsayıyor. HFT'nin 6 VİOP partition'ıyla olası çakışma, ertelenen VİOP konusuna eklendi.
-- `00-genel/sozluk.md` yazıldı (`bos` → `taslak`). Yalnızca mevcut dokümanlardan derlendi, terimler kaynaklarına linkli.
+- `bilgi-tabani/00-genel/sozluk.md` yazıldı (`bos` → `taslak`). Yalnızca mevcut dokümanlardan derlendi, terimler kaynaklarına linkli.
 - `manifest.yaml`: 15 reponun `durum: bos` alanı `taslak` yapıldı (dokümanların frontmatter'ıyla uyumlu).
 
 ## 2026-10-22 — Çelişki doğrulaması ve borsa kuralları
@@ -258,7 +258,7 @@ Kaynak repoların HEAD'leri manifest'teki doğrulama commit'leriyle aynı (deği
 - **Uptick'in çalışma anında açılma yolu yok:** Bütün müşteri config'lerinde `uptickRule = false`. İlan günlerinde genelde strateji çalıştırılmıyor; uptick geliştirmesi planlanıyor (kullanıcı beyanı).
 - **A1 / Alnus-Algo VİOP 4 partition:** İncelemesi ertelendi.
 - **Kullanıcı beyanları:** Sepet arbitraj henüz kullanılmıyor; Warrant-Selector Varant Toplu'ya yüklenen CSV'yi üretiyor; Global ve Marbas eski GUI'de.
-- `00-genel/borsa-kurallari.md` yazıldı (`bos` → `taslak`): fiyat adımı, limitler, seanslar, uptick, ret kodları. Her bölümde "kodda" ve "borsada (referans)" ayrımı var. Borsa sitesine bu ortamdan erişilemedi; dış bilgiler arama sonuçlarından derlendi, kesinleşmeyenler ❓.
+- `bilgi-tabani/00-genel/borsa-kurallari.md` yazıldı (`bos` → `taslak`): fiyat adımı, limitler, seanslar, uptick, ret kodları. Her bölümde "kodda" ve "borsada (referans)" ayrımı var. Borsa sitesine bu ortamdan erişilemedi; dış bilgiler arama sonuçlarından derlendi, kesinleşmeyenler ❓.
 
 ## 2026-10-22 — İlk sürüm (devam ediyor)
 

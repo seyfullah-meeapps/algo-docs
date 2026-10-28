@@ -117,7 +117,7 @@ MTrader arayüzü kullanıcı eylemlerini ve sonuçları gösterir; strateji mot
 
 ## Kaynaklar ve doğrulama
 
-Ürün kimliği ve iş sürecinin tek kaynak kaydı [ürün ve geliştirme süreci](../../00-genel/urun-ve-gelistirme-sureci.md) dosyasıdır; kullanıcı beyanına dayanır. Sistem karşılıkları [sistem haritası](../../00-genel/sistem-haritasi.md), [arayüz özeti](../../10-servisler/mtrader-trade-ui/README.md) ve [emir dönüşü](../../30-akislar/emir-donusu.md) belgelerinden derlendi.
+Ürün kimliği ve iş sürecinin tek kaynak kaydı [ürün ve geliştirme süreci](../../bilgi-tabani/00-genel/urun-ve-gelistirme-sureci.md) dosyasıdır; kullanıcı beyanına dayanır. Sistem karşılıkları [sistem haritası](../../bilgi-tabani/00-genel/sistem-haritasi.md), [arayüz özeti](../../bilgi-tabani/10-servisler/mtrader-trade-ui/README.md) ve [emir dönüşü](../../bilgi-tabani/30-akislar/emir-donusu.md) belgelerinden derlendi.
 
 Bu tur kod yeniden incelenmedi, canlı test veya dağıtım yapılmadı. Kullanıcıdan alınan süreç bilgisi teknik ortam kanıtı olarak sunulmaz. Metin revizyon incelemesini bekleyen taslaktır.
 

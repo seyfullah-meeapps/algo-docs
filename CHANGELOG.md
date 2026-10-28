@@ -2,6 +2,61 @@
 
 Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
+## 2026-10-27 — Belge alanları ve arşiv düzeni
+
+- Teknik bilgi tabanı, kullanıcı testleri, yayınlar, issue'lar ve arşiv ayrıldı; bağlantılar/manifest/agent talimatları güncellendi. 39 taşıma ile 407 dosya toparlandı; Excel içerikleri korundu. Açık Arbitraj teslim dosyası kullanıcı isteğiyle yerinde kaldı.
+- Yayınlar yeni konumda üç biçimde üretildi; kontrol aracı yeni dizinlere uyarlandı ve dış junction taraması düzeltildi. Doğrulama ve kapsam: [klasör düzeni kaydı](_surec/klasor-duzeni-2026-10-27.md).
+
+## 2026-10-27 — Arbitraj kullanıcı sanity pilotu
+
+- Arbitraj Excel 1.3: Mate yaklaşımıyla 5 ön koşul, 37 ana sanity, 27 genişletilmiş ve 11 karar bekleyen kontrol. Teknik/kod/repo referansları kaldırıldı; aynı tasarımda kullanıcı ayar rehberi oluşturuldu. Önceki sonuçlar ve orijinal yedek korundu; R18 kullanıcı kapsamından çıkarıldı.
+- Dosya/özet/görsel ve biçim koruma kontrolleri tamamlandı; yeni uygulama testi, kaynak doğrulaması veya diğer stratejilerde değişiklik yok. Kararlar ve doğrulama sınırı [sanity README](testler/sanity/README.md) içinde.
+
+## 2026-10-27 — Arbitraj 30 günlük temizlik issue incelemesi
+
+- Üç kaynak repo fetch edildi; yaş koşulu, timestamp, paket cascade ve restore davranışı incelendi. K-263 eklendi.
+- [Issue taslağı](issues/arbitraj-30-gunluk-temizlik-veri-kaybi.md): kök neden, kanıt sınırı, yeniden üretim, DB teyitleri, çözüm seçenekleri ve kabul ölçütleri.
+- BIST pay vadeli vade kuralı resmi kaynaktan kontrol edildi. Canlı DB/build testi, uygulama değişikliği, uzak issue veya push yok.
+
+## 2026-10-26 — Taban için ilk sanity Excel
+
+- Yeni GUI development ve HftMinPrice kaynaklarıyla v1.0 oluşturuldu: 8 ön koşul,52 senaryo,20 regresyon,26 parametre; 80 Test Edilmedi. Önceki Excel dosyaları değişmedi.
+- Kaynak/inceleme ve tek yerel issue taslağı eklendi; K-259–K-262 indekslendi. Mevcut ürün/branch konuları tekrar numaralanmadı. Paket/formül/girdi/görsel ve native Excel salt okunur tam hesaplama geçti; canlı test/build/uzak issue/push yok. Ayrıntı sanity README'de.
+- CHANGELOG 400 satır sınırı için en eski 23 Ekim AlgoProd bölümü bağlantılı arşive taşındı; içerik korundu.
+
+## 2026-10-26 — Tavan için ilk sanity Excel
+
+- Yeni GUI development ve HftMaxPrice kodundan ilk Tavan dosyası oluşturuldu: sürüm1.0, 8 ön koşul,60 senaryo,20 regresyon,36 parametre. 88 test Test Edilmedi; kullanıcı sonuç/kanıt alanları boş. HFT/Arbitraj dosyaları değişmedi.
+- Beş kaynak repoda fetch başarılı, referans uçlar aynı. İnceleme/toplu bulgu kaydı, K-254–K-258 ve Tavan KB düzeltmeleri eklendi. Özet/girdi/formül, yedi görsel aralık, paket/kimlik/liste kontrolleri ile native Excel salt okunur tam hesaplama geçti. Ayrıntı sanity README'de; build/canlı uygulama testi/uzak issue/push yok.
+
+## 2026-10-26 — Yarım kalan HFT sanity revizyonunun tamamlanması
+
+- HFT Excel 1.2: yeni GUI kaynakları, altı kapsam dışı eski iddia, ürün/ortam teyitleri, durum özetleri ve filtreler tamamlandı. 98 Test Edilmedi sonucu ve kullanıcı kayıtları korundu; yeni test sonucu üretilmedi. Önceki dosya yedeklendi.
+- HFT inceleme kaydı ve tek toplu issue taslağı eklendi. K-252 kâr al alan sözleşmesi, K-253 miktar hesabı adayı; mevcut stop-loss/tek işlem kayıtları tekrar numaralanmadı. R18 watchdog koşulları, R20/R23 risk kapsamı ve R33 bağımsız teyitleri daraltıldı.
+- ZIP/XML, kayıt/liste koruması, formül hata taraması, özet hesapları, geçici girdi değişimi ve beş sayfanın altı aralığında görsel kontrol geçti. Native Excel/canlı uygulama/build testi yok. Arbitraj dosyası değişmedi; uzak issue/push yapılmadı.
+
+## 2026-10-26 — Ürün kararı ve toplu Arbitraj bulgularının eşlenmesi
+
+- Kullanıcı, replace geçmişinin yenilemede yüklenmemesinin hacim/yük nedeniyle ürün kararı olduğunu belirtti. Excel 1.2'de R20 kaldırıldı, A02 notu düzeltildi; K-250 kapatıldı. Test sonuçları değişmedi, regresyon sayısı 19'a döndü; numaralar yeniden kullanılmayacak.
+- Tek issue Markdown'ı F10 kullanıcı gözlemi ve kalan açık Excel kaynak/operasyon kayıtlarıyla genişletildi. Bulguların dayanak/olasılık/ürün kapsamı ayrımı korundu; yeni test veya kök neden kanıtı üretilmedi. F10 için K-251 eklendi. Karar ve birlikte bakım düzeni sanity README'de kayıtlı. Uzak issue açılmadı/düzenlenmedi.
+- Excel ZIP/XML, 81 test kimliği, özet yeniden hesaplama ve sonuç/liste koruması doğrulandı; iki aralık görsel incelendi. Repo yapısal kontrolü 171 Markdown/1.888 bağlantı/0 hata; diff boşluk kontrolü temiz.
+
+## 2026-10-26 — Arbitraj Excel temizliği
+
+- Arbitraj dosyası 1.1: Genel/Senaryolar yeni GUI kaynaklarına uyarlandı; eski GUI iddiaları ve piyasa emri başlıkları temizlendi. A02 gözlemi R20'ye ayrıldı; beş eksik kapsamlı Başarılı kayıt Kısmen olarak sınıflandırıldı. Kullanıcı gözlemleri ve önceki etiketlerin kaydı korundu; yeni test sonucu üretilmedi.
+- Özetlere tüm durumlar eklendi, önbellek ve hesap zinciri düzeltildi; liste/filtre/okunabilirlik ve sürüm/kanıt kayıt yönergeleri tamamlandı. Temizlik öncesi yedek alındı. ZIP/XML ve sayılar doğrulandı; yedi aralık görsel kontrol, gerçek Excel'de salt okunur açılış ve tam yeniden hesaplama geçti. Ayrıntı [sanity girişinde](testler/sanity/README.md). HFT/uygulama kodu/issue metni değişmedi.
+
+## 2026-10-26 — Arbitraj için tek issue açıklaması
+
+- Kullanıcının issue olarak açabilmesi için `issues/sanity/arbitraj-toplu-issue.md` hazırlandı. Mevcut inceleme bulguları neden/olası etki/kod noktası ve Excel P/R karşılıklarıyla birleştirildi; çözüm ve beklenen davranış eklenmedi. Koşullu/ürün kararı gerektiren kayıtlar açıkça ayrıldı.
+- Yeni kod incelemesi veya uygulama testi yapılmadı; Excel ve uygulama kodu değişmedi, uzak serviste issue açılmadı.
+
+## 2026-10-26 — Arbitraj sanity açıklıklarının yeni GUI için incelenmesi
+
+- Kullanıcı test kapsamını yeni GUI development olarak netleştirdi. Beş kaynak repo fetch edildi; kaynak çalışma dosyaları değiştirilmeden referans/prod branch'leri karşılaştırıldı.
+- Arbitraj Excel'inde 14 belirsiz parametre ve ilgili 12 regresyon kaydı revize edildi. Eski GUI toplu ayar iddiaları ayrıldı; otomatik yön, sayı tipi, dayanak/miktar, saat, temettü, doğrulama ve operasyon kapsamı netleştirildi. Ayrıntı ve kapanış kanıtları [inceleme kaydında](bilgi-tabani/test-incelemeleri/arbitraj-inceleme-2026-10-26.md). Mevcut K-205 konuları yeniden numaralandırılmadı.
+- 65 hücre değişikliği, orijinal paket/format/formül/açılır liste koruması ve ZIP/XML kontrolü tamamlandı. Test sonuçları korunarak dosya öncesi yedek alındı. Uygulama kodu değişikliği, build, canlı test veya deploy yok; Excel görsel kontrolü araç hatası nedeniyle yapılamadı. HFT Excel'i ve rehber çıktıları değişmedi.
+
 ## 2026-10-25 — Teknik Temeller bölümünün tamamlanması
 
 - Kullanıcının önceki 14 konuyu okuyup uygun bulduğu kaydedildi; okuma tarihi ile teknik kod doğrulama durumu ayrı tutuldu.
@@ -69,7 +124,7 @@ Her güncelleme oturumu bir kayıt. En yeni en üstte.
 
 - Kullanıcı beyanıyla ürün MTrader (algoritmik işlem botu), şirket MeeApps ve müşteriler aracı kurumlar olarak netleşti. MeeApps'in geliştirme/test kullanımı ile müşteri trader/fon yöneticisinin günlük kullanımı ayrıldı.
 - İkinci rehber konusu “Kullanıcılar ve geliştirme süreci” olarak yeniden yazıldı: özellik/senaryo/etki ve görev dağılımı, geliştirici ön testi, test ortamı, düşük lotlu trader preprod testleri, kararlılık sonrası yüksek lot ve bütün müşterilere aktarım. Süre/sayısal eşik uydurulmadı; yeni test/deploy yapılmadı.
-- Ana KB'de tek kullanıcı-beyanı kaynağı `00-genel/urun-ve-gelistirme-sureci.md` oluşturuldu; sistem haritası, branch/ortamlar, GUI girişi, operasyon ve agent talimatları buna bağlandı. Kod literal'leri/teknik repo adları korunarak ürün adı düzeltildi.
+- Ana KB'de tek kullanıcı-beyanı kaynağı `bilgi-tabani/00-genel/urun-ve-gelistirme-sureci.md` oluşturuldu; sistem haritası, branch/ortamlar, GUI girişi, operasyon ve agent talimatları buna bağlandı. Kod literal'leri/teknik repo adları korunarak ürün adı düzeltildi.
 - “Okumaya başlamadan” çıktısı kaldırıldı; HTML index ilk konuya geçti. Kitap başlığı ve ana bölüm başlık tasarımı güncellendi; PDF/HTML/EPUB sürüm 0.3 üretildi. Güncel PDF 7 A4 sayfa; görsel ve metinsel kontroller yapıldı.
 
 ## 2026-10-24 — İlk rehber bölümü okumaya hazır
@@ -120,7 +175,7 @@ Her güncelleme oturumu bir kayıt. En yeni en üstte.
 ## 2026-10-24 — Derslerden konu bazlı rehbere geçiş
 
 - Kullanıcının isteğiyle önce ayrıntılı indeks yaklaşımına geçildi: uygulama amacı, borsa, teknik temel, mimari, stratejiler ve test/PM için altı bölüm, 48 ayrı konu iskeleti. İçerikler henüz yazılmadı; iskeletler `bos`.
-- Eski 11 ders/yönetim dosyası `dersler/arsiv/` altında korundu, göreli bağlantılar düzeltildi; eski sıra geçersiz olarak işaretlendi.
+- Eski 11 ders/yönetim dosyası `arsiv/eski-dersler/` altında korundu, göreli bağlantılar düzeltildi; eski sıra geçersiz olarak işaretlendi.
 - Rehbere özel AGENTS, kararlar, ilerleme, yazım/soru/kaynak/görsel düzeni ve strateji şablonu oluşturuldu. Kullanıcının bağlamı ve gerçek yapı soruları kaydedildi.
 - Kök talimatlar, giriş ve oturum devam noktası yeni yapıya bağlandı. Bu tur internet/kod doğrulaması, uygulama testi veya görsel üretimi yok; ilk içerik uygulamanın amacı olacak. Önceki push reddi nedeniyle gönderim tekrar denenmedi.
 
@@ -312,56 +367,13 @@ Kaynak: mtrader-frontend-apps main `db10c12`, trade-data-app development `1cca9a
 
 Kaynak: mevcut yerel klonlar; HftSrvProd `4275ccc` / master `052dd96`, AlgorithmicTrading `0dc32a7` / master `aa150ee`, order-service `b86c0cf` / master `298403b`, trade-data-app `1cca9a8` / master `4a43e19`; diğer kaynaklar akışların frontmatter'ında. Remote fetch ve canlı sunucu incelemesi yapılmadı.
 
-- Önceki oturumdan kalan beş commit edilmemiş taslak incelendi; `emir-donusu.md` ve `algoprod-emri.md` yazıldı. `30-akislar/README.md` yedi akışın indeksine çevrildi.
+- Önceki oturumdan kalan beş commit edilmemiş taslak incelendi; `emir-donusu.md` ve `algoprod-emri.md` yazıldı. `bilgi-tabani/30-akislar/README.md` yedi akışın indeksine çevrildi.
 - Kritik kod yolları kontrol edildi: HFT callback/registry/FetchOrders, GUI emir ve komut yönlendirmesi, AlgoProd userbook/kanal/timeout, handoff ve gün içi restart bağımlılıkları.
 - Eski README'nin HFT OUCH otomatik reconnect iddiası kaldırıldı. Uygulama iptali ile BIST cancel-on-disconnect belirsizliği ayrıldı; SetBalance'ın bağlantı kurtarmadığı belirtildi.
 - Çapraz düzeltmeler: `duration` ms; HFT health servisi mevcut; motor gRPC hata kodları her zaman HTTP 500 değil; HFT handoff master'da da var; AlgoProd referans sürüm handoff callback'i boş. Sabah kontrolü restart bölümü bağımlı servis akışına bağlandı.
 - Yeni konular K-208–K-220. Mevcut K-16/K-24/K-57/K-151/K-152 ile ilişkiler akışlarda belirtildi; canlı gözlem gerektiren sonuçlar kesinleştirilmedi.
 - Taslakların kullanıcı incelemesi bekleniyor; kaynak uygulamalarda veya canlı sistemde değişiklik yapılmadı.
 
-## 2026-10-23 — AlgoProd derinleştirme (madde 11)
-
-Kaynak: AlgorithmicTrading `development` `0dc32a7`, `master` `aa150ee` (prod; 31 commit geride, 12 master-only commit), `add-order-sdk` `7d7f705`. Karşılaştırma için HftSrvProd `4275ccc`, order-service `b86c0cf`, trade-data-app `1cca9a8`, ouch-sdk `0c3589e`, mtrader-trade-ui `b0474c3` / `main` `6715182`.
-
-- `10-servisler/algorithmic-trading/` alt dosyalara bölündü:
-  - `uygulama-ve-threadler.md`
-  - `emir-yolu.md`
-  - `grpc-ve-veri.md`
-  - README artık indeks ve "önce bil" özeti.
-- `20-stratejiler/arbitraj.md`, `vwap.md`, `fon-takibi.md` koda karşı yeniden doğrulandı ve genişletildi. master farkları işaretlendi.
-- **Eski README'de yanlış çıkanlar:**
-  - Gün sonu `EndOfMessages` kapanışı ölü kod.
-  - "Yeni emir 10 sn içinde dönmezse strateji durur" yanlış: yeni emirde bekleme yok.
-  - "Bütün emirler `send`" yanlış: iptal ve replace çoğu yerde takibi atlıyor.
-  - `Channel_Enum` her stratejide okunmuyor.
-  - Stratejilerin olay kuyrukları TBB değil, moodycamel.
-  - Açılışta `SettingsManager` ve gRPC'nin restore'dan önce açılması eksikti.
-  - `UpdateArbitragePackage` hiç çağrılmıyor.
-  - `FetchAkd` yalnız kullanılmayan stratejide.
-- **Strateji dosyalarında yanlış çıkanlar:**
-  - **Arbitraj:**
-    - "Aktif stop → piyasa emri" yanlış: DAY limit gidiyor.
-    - `Passive_Barrier` okunmuyor.
-    - Paket tutarlılık kontrolü yalnız development'ta var.
-  - **VWAP:** AKD filtresi pratikte kapalı; Overall işlevsiz.
-  - **Fon Takibi:**
-    - `Byf_Start/Stop_Time` kullanılmıyor.
-    - Eşlenemeyen sembolde strateji durmuyor.
-    - Lot eşiği BIST minimum birimi değil, sepet değeri / fon fiyatı.
-- **Diğer dosyalarda:**
-  - `log-imzalari` § 5: AlgoProd gün sonunda kendiliğinden kapanmaz.
-  - `algorithmic-trading/config`: timeout satırı düzeltildi.
-  - `trade-data-app/entegrasyonlar`: `FetchAkd` VWAP'ta yok.
-  - `trade-data-app/veri-akisi`: AlgoProd health sunuyor.
-  - `mtrader-trade-ui/backend-sozlesmesi`: `subscribeToOrderbook` AlgoProd'da boş.
-  - `sozluk`: VWAP PTRM durması düzeltildi.
-  - Katalog: `TradeByVolumeOverall` işlevsiz.
-- **Yeni konular K-194 – K-207** (ACIK-KONULAR § AlgorithmicTrading). Kodla doğrulananlar:
-  - **K-194, prod:** Fon Takibi lot düzeltmesi (2025-08) master'da yok.
-  - **K-195, prod:** Arbitraj faiz `/100` düzeltmesi master'da yok.
-  - **K-196:** Kanal 0'lı emir yanıtsız düşüyor.
-  - **K-200:** Gün sonu kapanışı ölü kod.
-  - **K-204:** `SubscribeToOrderbook` `return`'süz.
-  - **K-206:** AKD kurum listesi hiç doldurulmuyor.
+[2026-10-23 AlgoProd derinleştirme](_surec/changelog-2026-10-23-algoprod.md)
 
 [2026-10-22](_surec/changelog-2026-10-22.md)

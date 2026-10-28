@@ -17,18 +17,18 @@ durum: taslak
 
 ## İncelenen yollar
 
-- [VWAP](../20-stratejiler/vwap.md#24-ekim-kontrolü-akdoverall-ve-stop-loss): TradeByVolume setCommand/AKD aboneliği, Overall alanları ve periyodik döngüsü, checkStopLoss/runStrategy/exitProperly. TradeByVolume dizininde master/development farkı yok. Mevcut K-206 sürüyor; stop sonrasında aynı fonksiyon turunun devamı ayrıca açıklandı.
-- [Arbitraj](../20-stratejiler/arbitraj.md#24-ekim-kontrolü-paket-ve-hedge): arePackagesConsistent ve checkPassiveUndOrders. Development paket tutarlılığı başlangıç denetimi hedge başarısı değildir. K-205 eksik order kaydı sonrası iterator okuma ve ret izleme sınırları açık kaldı.
+- [VWAP](../bilgi-tabani/20-stratejiler/vwap.md#24-ekim-kontrolü-akdoverall-ve-stop-loss): TradeByVolume setCommand/AKD aboneliği, Overall alanları ve periyodik döngüsü, checkStopLoss/runStrategy/exitProperly. TradeByVolume dizininde master/development farkı yok. Mevcut K-206 sürüyor; stop sonrasında aynı fonksiyon turunun devamı ayrıca açıklandı.
+- [Arbitraj](../bilgi-tabani/20-stratejiler/arbitraj.md#24-ekim-kontrolü-paket-ve-hedge): arePackagesConsistent ve checkPassiveUndOrders. Development paket tutarlılığı başlangıç denetimi hedge başarısı değildir. K-205 eksik order kaydı sonrası iterator okuma ve ret izleme sınırları açık kaldı.
 
 Yeni sorun numarası açılmadı; mevcut adaylar koddan kontrol edildi. Kaynak uygulama dosyaları değiştirilmedi; build, canlı emir, AKD servis bağlantısı ve thread testi yapılmadı. Belge durumları taslak kaldı. Bugünkü kapsam tüm stratejilerin/UI/operasyonun yeniden doğrulanması değildir.
 
 ## GUI devamı — payload/snapshot
 
-GUI development b0474c3/main 6715182 ve HFT development 4275ccc/master 052dd96 referansları değişmedi. [Sözleşme kontrolü](../10-servisler/mtrader-trade-ui/backend-sozlesmesi.md#24-ekim--strateji-snapshotpayload-kontrolü) saat alias'ı, süre/delta birimleri, Taban Finish_With_Sell ve Classic stop-loss sınırını kaydeder. Yeni sorun numarası yok. Fetch, Teorik feature ucunu bfe65e2→26ce9b2 güncelledi; yeni uç bu alt turda incelenmedi, önceki feature incelemesi yalnız eski commit'e aittir.
+GUI development b0474c3/main 6715182 ve HFT development 4275ccc/master 052dd96 referansları değişmedi. [Sözleşme kontrolü](../bilgi-tabani/10-servisler/mtrader-trade-ui/backend-sozlesmesi.md#24-ekim--strateji-snapshotpayload-kontrolü) saat alias'ı, süre/delta birimleri, Taban Finish_With_Sell ve Classic stop-loss sınırını kaydeder. Yeni sorun numarası yok. Fetch, Teorik feature ucunu bfe65e2→26ce9b2 güncelledi; yeni uç bu alt turda incelenmedi, önceki feature incelemesi yalnız eski commit'e aittir.
 
 ## Admin devamı — alan sözleşmesi
 
-Admin main db10c12 / backend development 1cca9a8 ve master 4a43e19 uçları değişmedi; admin feature 8ba2a67 ayrı kaldı. [24 Ekim alan kontrolü](../10-servisler/mtrader-frontend-apps/dagitim-ve-surum-farklari.md#24-ekim-kaynak-kontrolü) K-221 hesap listesi render sınırını ve K-224 parola update yolunu açıklar. Optional OUCH alanları update'te korunur; parola için bu kural yok. Yeni sorun numarası, browser/DB testi veya gerçek parola işlemi yok.
+Admin main db10c12 / backend development 1cca9a8 ve master 4a43e19 uçları değişmedi; admin feature 8ba2a67 ayrı kaldı. [24 Ekim alan kontrolü](../bilgi-tabani/10-servisler/mtrader-frontend-apps/dagitim-ve-surum-farklari.md#24-ekim-kaynak-kontrolü) K-221 hesap listesi render sınırını ve K-224 parola update yolunu açıklar. Optional OUCH alanları update'te korunur; parola için bu kural yok. Yeni sorun numarası, browser/DB testi veya gerçek parola işlemi yok.
 
 ## Operasyon devamı — paket ve kaynak deltası
 
@@ -38,7 +38,7 @@ Admin main db10c12 / backend development 1cca9a8 ve master 4a43e19 uçları değ
 | MAOrderSDK | a788782 → c2b5060 | preprod a647c9e; main d5adc6f aynı |
 | order-service | b86c0cf → 26e9a02 | preprod 5f23f24; master 298403b aynı |
 
-Setup altı header/binary dosyası değişti; script/workflow değişmedi. SDK EnterOrderOptions.skip_brut_takas ekledi; order-service açılış yolunda true geçiyor. Tekrarsız satır dağıtımı development'a merge edildi; 23 Ekim'deki “ayrı feature” kaydı tarihsel kaldı. [Paket ayrıntısı](../40-operasyon/kurulum-ve-dagitim.md#24-ekim-paket-güncellemesi), [emir farkı](../10-servisler/order-service/toplu-emirler.md#24-ekim-güncel-davranış-farkı). K-92 tekrarsız kopya ifadesi daraltıldı; diğer kısımları açık. Tam binary/prod doğrulaması veya deploy yapılmadı. Eski baseline belgelerini bütünüyle yeni commit'e onaylanmış sayma.
+Setup altı header/binary dosyası değişti; script/workflow değişmedi. SDK EnterOrderOptions.skip_brut_takas ekledi; order-service açılış yolunda true geçiyor. Tekrarsız satır dağıtımı development'a merge edildi; 23 Ekim'deki “ayrı feature” kaydı tarihsel kaldı. [Paket ayrıntısı](../bilgi-tabani/40-operasyon/kurulum-ve-dagitim.md#24-ekim-paket-güncellemesi), [emir farkı](../bilgi-tabani/10-servisler/order-service/toplu-emirler.md#24-ekim-güncel-davranış-farkı). K-92 tekrarsız kopya ifadesi daraltıldı; diğer kısımları açık. Tam binary/prod doğrulaması veya deploy yapılmadı. Eski baseline belgelerini bütünüyle yeni commit'e onaylanmış sayma.
 
 ## Operasyon devamı — CI/config kontrolü
 
@@ -52,8 +52,8 @@ Kapanış kapsam/tutarlılık kontrolü tamamlandı: [sonuç ve kalanlar](ikinci
 
 ## Teknik takip — Teorik feature 26ce9b2
 
-SDK takibinde itch-sdk fetch/development pull sonrası 35a3b5c/master 00c51b1 aynı. `warrant-open-quote-log-pp` e800b3d içinde HFT f20b5f2 ile uyumlu executed_ex API bulundu; aynı adlı SDK hft_warrant_advanced dalında yok. [SDK feature kanıtı](../10-servisler/itch-sdk/quote-executed-feature.md) quote çıkarımı, sıfır miktarlı geç bildirim ve build sınırlarını kaydeder. K-240 artık artifact/header/library ve birlikte dağıtım kanıtı bekliyor; gerçek build/run/link testi yok.
+SDK takibinde itch-sdk fetch/development pull sonrası 35a3b5c/master 00c51b1 aynı. `warrant-open-quote-log-pp` e800b3d içinde HFT f20b5f2 ile uyumlu executed_ex API bulundu; aynı adlı SDK hft_warrant_advanced dalında yok. [SDK feature kanıtı](../bilgi-tabani/10-servisler/itch-sdk/quote-executed-feature.md) quote çıkarımı, sıfır miktarlı geç bildirim ve build sınırlarını kaydeder. K-240 artık artifact/header/library ve birlikte dağıtım kanıtı bekliyor; gerçek build/run/link testi yok.
 
-Sonraki K-240 takibinde HFT/GUI fetch + development pull tekrarlandı; referans uçları aynı. GUI d2c35c7 için motor karşılığı `hft_warrant_advanced` f20b5f2 bulundu. [Kaynak eşleşmesi ve SDK sınırı](../20-stratejiler/varant-toplu.md#24-ekim--motor-feature-eşleşmesi): executed_ex/quote alanları uyumlu SDK gerektiriyor; kaynak sözleşmesi eşleşti, SDK/library/dağıtım kanıtı bekliyor. K-240 açık, build/canlı test yok.
+Sonraki K-240 takibinde HFT/GUI fetch + development pull tekrarlandı; referans uçları aynı. GUI d2c35c7 için motor karşılığı `hft_warrant_advanced` f20b5f2 bulundu. [Kaynak eşleşmesi ve SDK sınırı](../bilgi-tabani/20-stratejiler/varant-toplu.md#24-ekim--motor-feature-eşleşmesi): executed_ex/quote alanları uyumlu SDK gerektiriyor; kaynak sözleşmesi eşleşti, SDK/library/dağıtım kanıtı bekliyor. K-240 açık, build/canlı test yok.
 
-HFT yeniden fetch + development pull sonrası development `4275ccc`, master `052dd96`, feature `26ce9b2` aynı. Remote contains kontrolünde feature commit yalnız kendi dalında. `bfe65e2..26ce9b2` tek commit/beş dosya delta incelendi: [Teorik ayrıntısı](../20-stratejiler/teorik-fiyat.md#24-ekim--feature-26ce9b2-farkı). Açılış yayını, own-state guard, sıfır dengeyi koruma ve reverse Expected_Price farkları development davranışına geçirilmedi. K-04 açık; build/replay/canlı emir yok. Sıradaki K-240 motor feature eşleşmesi.
+HFT yeniden fetch + development pull sonrası development `4275ccc`, master `052dd96`, feature `26ce9b2` aynı. Remote contains kontrolünde feature commit yalnız kendi dalında. `bfe65e2..26ce9b2` tek commit/beş dosya delta incelendi: [Teorik ayrıntısı](../bilgi-tabani/20-stratejiler/teorik-fiyat.md#24-ekim--feature-26ce9b2-farkı). Açılış yayını, own-state guard, sıfır dengeyi koruma ve reverse Expected_Price farkları development davranışına geçirilmedi. K-04 açık; build/replay/canlı emir yok. Sıradaki K-240 motor feature eşleşmesi.

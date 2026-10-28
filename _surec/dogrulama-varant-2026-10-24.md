@@ -30,7 +30,7 @@ Beş senaryo beklendiği gibi sonuçlandı. Bu PASS, hata düzeltildi demek değ
 
 ## Kanıt sınırı
 
-Caller fixture mutex'i tutar; tam `processItchEventTimed` yürütülmez. Araç kaynak caller'da kilit satırının `executeBuyOrders` çağrısından önce bulunduğunu ayrıca kontrol eder; bu kontrol tek başına tüm kontrol akışının analizi değildir. SDK senkron ret callback'i sahtedir. Üretim SDK/host yönlendirmesinin statik zinciri [Varant belgesindedir](../20-stratejiler/varant.md#ikinci-kod-turu--ret-ve-parçalı-satış-sınırları).
+Caller fixture mutex'i tutar; tam `processItchEventTimed` yürütülmez. Araç kaynak caller'da kilit satırının `executeBuyOrders` çağrısından önce bulunduğunu ayrıca kontrol eder; bu kontrol tek başına tüm kontrol akışının analizi değildir. SDK senkron ret callback'i sahtedir. Üretim SDK/host yönlendirmesinin statik zinciri [Varant belgesindedir](../bilgi-tabani/20-stratejiler/varant.md#ikinci-kod-turu--ret-ve-parçalı-satış-sınırları).
 
 MSVC sonucu istisnadır; Linux/prod'da aynı istisna veya kesin kilitlenme gözlendiği söylenmez. Üç saniyelik child-process watchdog, bloklanan varyantı sınırlar; bu çalıştırmada timeout olmadı.
 

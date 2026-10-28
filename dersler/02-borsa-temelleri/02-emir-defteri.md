@@ -83,7 +83,7 @@ Bir test senaryosunda ürün ve işlem aşamasıyla birlikte başlangıç defter
 
 - [Borsa İstanbul — Pay Piyasası SSS](https://www.borsaistanbul.com/sss/pay-piyasasi): sürekli işlem ve fiyat-zaman önceliği. Erişim: 24 Ekim 2026.
 - [Borsa İstanbul — Piyasa işleyişi](https://www.borsaistanbul.com/piyasalar/pay-piyasasi/piyasa-isleyisi): limit emir ve eşleşme çerçevesi. Erişim: 24 Ekim 2026.
-- Projedeki header/erime dilinin bağlamı mevcut [HFT Classic teknik belgesinden](../../20-stratejiler/hft-classic.md) alındı; bu taslak 22 Ekim referanslarına dayanır. Bu tur kod yeniden incelenmedi; stratejinin kesin tetik koşulu burada tanımlanmaz.
+- Projedeki header/erime dilinin bağlamı mevcut [HFT Classic teknik belgesinden](../../bilgi-tabani/20-stratejiler/hft-classic.md) alındı; bu taslak 22 Ekim referanslarına dayanır. Bu tur kod yeniden incelenmedi; stratejinin kesin tetik koşulu burada tanımlanmaz.
 
 Kaynak web sayfalarının kullanılan açıklamalarında ayrı sürüm tarihi verilmedi; erişim tarihi kaydedildi. Örnekler normal görünür emirlerle, sürekli işlem ve değişmeyen defter varsayımıyla sınırlıdır; özel emir öncelikleri ve tek fiyat eşleşmesi genellenmez. İşlem hesabı öğretici örnektir; canlı emir, replay veya uygulama testi yapılmadı.
 

@@ -21,6 +21,7 @@ python _surec/kontrol.py --sources C:/Users/Seyf/algo-workspace
 - Göreli inline Markdown bağlantılarında hedef dosya ve başlık; repo dışına çıkan yollar. Fenced/inline kod örnekleri bağlantı sayılmaz.
 - Dosya başına 400 satır sınırı; ACIK-KONULAR'da tekrarlanan K numaraları.
 - Manifest repo kayıtlarında branch/commit/belge yolu ve hedef README varlığı.
+- Yeni klasör düzeninde teknik kaynak denetimi `bilgi-tabani/` içindeki numaralı bölümlere, konu numarası denetimi `issues/ACIK-KONULAR.md` dosyasına uygulanır. Gizli araç dizinleri, geçici teslim/üretim alanları ve arşivlenmiş çalışma dosyaları taranmaz; junction/symlink hedeflerine girilmez.
 - `--sources` ile beyan edilen commit'lerin ve yerel origin branch ref'lerinin commit nesnesine çözülmesi. Kısa/tam hash aynı nesneye çözülürse resolved_commits sayısında bir kez sayılır.
 
 AGENTS.md ve CLAUDE.md agent talimatlarıdır; CHANGELOG oturum kaydıdır. Bu üç dosyaya otomatik frontmatter zorlanmaz. Sözlük, süreç ve indeks belgeleri kaynak bağlantılı derlemedir; doğrudan bir repo kaydı zorunluluğu teknik bölüm belgelerine uygulanır. Bu istisnalar [`kontrol.py`](kontrol.py)'de açıktır; teknik doğrulama etiketi üretmez.

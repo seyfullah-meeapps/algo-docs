@@ -67,7 +67,7 @@ JavaScript'teki garbage collector deneyimi burada yanıltabilir: C++'ta adresi b
 
 Çözüm sözleşmeye göre seçilir: gereken veriyi kendi nesnemize kopyalamak, tamponun sahipliğini devretmek veya ömrünü paylaşmak. Yalnız pointer değerini kopyalamak, metnin kendisini kopyalamaz. **Asenkron işe devredilen verinin, iş bitene kadar geçerli olması gerekir.**
 
-MTrader'daki ilgili API ömür sözleşmeleri [ITCH abonelik API'si](../../10-servisler/itch-sdk/abonelik-api.md) ve [MARpc wire belgesi](../../10-servisler/network-sdk/wire-protokolu.md) içindedir. Her callback'in aynı sahiplik kuralına sahip olduğunu varsaymayacağız.
+MTrader'daki ilgili API ömür sözleşmeleri [ITCH abonelik API'si](../../bilgi-tabani/10-servisler/itch-sdk/abonelik-api.md) ve [MARpc wire belgesi](../../bilgi-tabani/10-servisler/network-sdk/wire-protokolu.md) içindedir. Her callback'in aynı sahiplik kuralına sahip olduğunu varsaymayacağız.
 
 ## Iterator neden geçersizleşebilir?
 
@@ -77,7 +77,7 @@ Numaralı koltuklara yerleştirilmiş dosyaları başka dolaba taşıyınca eski
 
 ## MTrader kodunu okurken hangi soruları soracağız?
 
-HFT referans `AlgoWorker` arayüzünde stratejiler için `shared_ptr`, kuyruklanan olay için `unique_ptr` kullanımı görülür. Bu isimler sahiplik düzenini okumamıza yardım eder; tek başına tüm programın güvenli olduğunu kanıtlamaz. Detaylı yaşam döngüsü [strateji çekirdeğinde](../../10-servisler/hftsrvprod/strateji-cekirdegi.md) kalır.
+HFT referans `AlgoWorker` arayüzünde stratejiler için `shared_ptr`, kuyruklanan olay için `unique_ptr` kullanımı görülür. Bu isimler sahiplik düzenini okumamıza yardım eder; tek başına tüm programın güvenli olduğunu kanıtlamaz. Detaylı yaşam döngüsü [strateji çekirdeğinde](../../bilgi-tabani/10-servisler/hftsrvprod/strateji-cekirdegi.md) kalır.
 
 PM açısından iyi gözlem; olayın start/stop veya restart sırasında mı olduğu, aynı nesne/strateji kimliğine mi ait olduğu ve tekrar üretim sırasıdır. “Bellek hatasıdır” sonucunu yalnız ekrandaki belirtiyle koymayız.
 

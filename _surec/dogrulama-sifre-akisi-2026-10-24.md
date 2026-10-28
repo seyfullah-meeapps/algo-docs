@@ -13,7 +13,7 @@ durum: taslak
 
 # Şifre akışı yerel doğrulaması
 
-SDK/order-service yeniden fetch/development pull edildi; uçlar değişmedi. [K-233/K-234 ayrıntısı](../10-servisler/order-service/fix-branch-karsilastirmasi.md#k-233--1409suz-logonda-sdk-ve-host-şifre-sonucu-ayrışıyor) artık yalnız statik çağrı okumasına dayanmıyor: aşağıdaki handler senaryoları Windows/MSVC ile çalıştırıldı. Uygulama kodu değiştirilmedi; gerçek şifre, oturum ve DB kullanılmadı.
+SDK/order-service yeniden fetch/development pull edildi; uçlar değişmedi. [K-233/K-234 ayrıntısı](../bilgi-tabani/10-servisler/order-service/fix-branch-karsilastirmasi.md#k-233--1409suz-logonda-sdk-ve-host-şifre-sonucu-ayrışıyor) artık yalnız statik çağrı okumasına dayanmıyor: aşağıdaki handler senaryoları Windows/MSVC ile çalıştırıldı. Uygulama kodu değiştirilmedi; gerçek şifre, oturum ve DB kullanılmadı.
 
 ## Nasıl çalıştırılır?
 

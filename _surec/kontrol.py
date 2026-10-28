@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import os
 from collections import defaultdict
 from datetime import date
 from pathlib import Path
@@ -14,6 +15,23 @@ from urllib.parse import unquote, urlsplit
 
 HEADER_EXCEPTIONS = {"AGENTS.md", "CLAUDE.md", "CHANGELOG.md"}
 STATES = {"dogrulandi", "taslak", "eski", "bos"}
+
+
+def document_files(root: Path):
+    """Skip generated work areas and never follow junctions outside this repo."""
+    excluded = {"tmp", "output", "outputs", "node_modules", "__pycache__"}
+    for folder, dirs, names in os.walk(root, followlinks=False):
+        base = Path(folder)
+        dirs[:] = [name for name in dirs
+                   if not name.startswith(".") and name not in excluded
+                   and not (base / name).is_symlink()
+                   and not getattr(base / name, "is_junction", lambda: False)()
+                   and (base / name).resolve().is_relative_to(root)
+                   and (base / name).relative_to(root).as_posix() not in
+                   {"arsiv/calisma", "arsiv/test-yedekleri", "yayinlar/mtrader-rehberi"}]
+        for name in names:
+            if name.endswith(".md"):
+                yield base / name
 
 
 def frontmatter(text: str) -> tuple[str, str]:
@@ -78,7 +96,7 @@ def source_records(block: str) -> list[dict[str, str]]:
 
 def audit(root: Path, sources: Path | None = None) -> tuple[list[str], dict]:
     errors = []
-    files = sorted(p for p in root.rglob("*.md") if not any(part.startswith(".") for part in p.relative_to(root).parts))
+    files = sorted(document_files(root))
     texts = {p.resolve(): p.read_text(encoding="utf-8-sig") for p in files}
     ids = {p: heading_ids(s) for p, s in texts.items()}
     states: dict[str, int] = defaultdict(int)
@@ -107,7 +125,8 @@ def audit(root: Path, sources: Path | None = None) -> tuple[list[str], dict]:
             if state not in STATES:
                 fail(path, f"gecersiz durum: {state}")
             records = source_records(header)
-            if relative.parts[0] in {"10-servisler", "20-stratejiler", "30-akislar", "40-operasyon"} and not records and not scalar(header, "dis_kaynak"):
+            technical = relative.parts[0] if relative.parts[0] != "bilgi-tabani" else relative.parts[1]
+            if technical in {"10-servisler", "20-stratejiler", "30-akislar", "40-operasyon"} and not records and not scalar(header, "dis_kaynak"):
                 fail(path, "kaynak/dis_kaynak eksik")
             for record in records:
                 if not {"repo", "branch", "commit"} <= record.keys():
@@ -136,7 +155,7 @@ def audit(root: Path, sources: Path | None = None) -> tuple[list[str], dict]:
             elif anchor and destination.suffix == ".md" and unquote(anchor) not in ids.get(destination, heading_ids(destination.read_text(encoding="utf-8-sig"))):
                 fail(path, f"baslik yok: {target}")
 
-    issue_file = root / "ACIK-KONULAR.md"
+    issue_file = root / "issues" / "ACIK-KONULAR.md"
     if issue_file.exists():
         issue_ids = re.findall(r"^\| (K-\d+) \|", issue_file.read_text(encoding="utf-8-sig"), re.MULTILINE)
         if len(issue_ids) != len(set(issue_ids)):

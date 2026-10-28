@@ -90,7 +90,7 @@ Stratejinin olayı işlemesiyle arayüzde görünmesi de ayrı adımlardır. Mev
 
 - [Borsa İstanbul — OUCH Protocol Specification](https://borsaistanbul.com/files/bistech-ouch-protocol-specification.pdf), kapakta 6 Şubat 2025: bölüm 4.1 istekler, 4.2 sonuçlar ve kopma bağlamı. Erişim: 24 Ekim 2026. Tüm protokol alanları veya çalıştırılan MTrader protokol sürümü doğrulanmadı.
 - [Pay Piyasası SSS](https://www.borsaistanbul.com/sss/pay-piyasasi): fiyat adımı kaynaklı ret ve öncelik kavramları. Erişim: 24 Ekim 2026.
-- [Emrin dönüşü](../../30-akislar/emir-donusu.md): mevcut teknik KB taslağından motor/GUI ayrımı. Referanslar ilgili dosyada; bu tur yeni kod kontrolü yapılmadı.
+- [Emrin dönüşü](../../bilgi-tabani/30-akislar/emir-donusu.md): mevcut teknik KB taslağından motor/GUI ayrımı. Referanslar ilgili dosyada; bu tur yeni kod kontrolü yapılmadı.
 
 Yeni/kısmi/tam gerçekleşme ve iptal miktarları öğretici modeldir; ham protokol durumlarının veya GUI etiketlerinin birebir listesi değildir. Kaynak araştırması uygulama testi sayılmaz; canlı emir veya replay çalıştırılmadı.
 

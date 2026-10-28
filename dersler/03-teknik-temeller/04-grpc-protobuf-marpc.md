@@ -59,7 +59,7 @@ Restoran benzetmesiyle unary bir sipariş fişinin sonucunu sormak; stream ise m
 
 ## MARpc ve FlatBuffers nerede duruyor?
 
-MTrader belgelerinde **MARpc**, `network-sdk` tarafından sunulan servisler arası iletişim kütüphanesinin adıdır. Bunu gRPC'nin başka adı olarak okumayacağız. Mevcut KB, bu hattı `ouch-sdk` ile `order-service` arasında, uzunluk önekli TCP/Unix socket ve FlatBuffers mesajları olarak belgeliyor. Ayrıntıların tek adresi [network-sdk](../../10-servisler/network-sdk/README.md).
+MTrader belgelerinde **MARpc**, `network-sdk` tarafından sunulan servisler arası iletişim kütüphanesinin adıdır. Bunu gRPC'nin başka adı olarak okumayacağız. Mevcut KB, bu hattı `ouch-sdk` ile `order-service` arasında, uzunluk önekli TCP/Unix socket ve FlatBuffers mesajları olarak belgeliyor. Ayrıntıların tek adresi [network-sdk](../../bilgi-tabani/10-servisler/network-sdk/README.md).
 
 **FlatBuffers**, şemaya göre ikili veri oluşturma ve okuma biçimidir. Alınan tampon üzerinden alanlara erişebilen yapısı vardır; tamponun ömrü bu yüzden önemlidir. Kendiliğinden bağlantı açmaz, yetki vermez veya bir emrin borsaca kabulünü sağlamaz. [FlatBuffers resmi açıklaması](https://flatbuffers.dev/)
 
@@ -72,7 +72,7 @@ MTrader belgelerinde **MARpc**, `network-sdk` tarafından sunulan servisler aras
 
 ## MTrader'da okuyacağımız ayrım
 
-Referans hub `.proto` dosyasında `GuiService` ve metodları tanımlıdır; HTTP eşlemeleri de bu sözleşmede yer alır. Bu, önceki konudaki GUI isteği ile servis sözleşmesinin bağını görmemizi sağlar. Hub'ın bütün rolü [API belgesinde](../../10-servisler/trade-data-app/api.md), MARpc'nin alanları ise [wire protokolünde](../../10-servisler/network-sdk/wire-protokolu.md) kalır.
+Referans hub `.proto` dosyasında `GuiService` ve metodları tanımlıdır; HTTP eşlemeleri de bu sözleşmede yer alır. Bu, önceki konudaki GUI isteği ile servis sözleşmesinin bağını görmemizi sağlar. Hub'ın bütün rolü [API belgesinde](../../bilgi-tabani/10-servisler/trade-data-app/api.md), MARpc'nin alanları ise [wire protokolünde](../../bilgi-tabani/10-servisler/network-sdk/wire-protokolu.md) kalır.
 
 Bir PM kaydında “RPC hata verdi” yerine hangi tarafın çağırdığı, metot, zaman, taşıma durumu, dönen uygulama sonucu ve ilgili kimlik yazıldığında sorun daha somut hale gelir. HTTP başarısı, gRPC durumu ve borsa emri kabulü farklı katmanlardır.
 

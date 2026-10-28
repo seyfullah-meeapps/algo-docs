@@ -16,7 +16,7 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 LESSONS = HERE.parent
 BUILD = HERE / '.build'
-OUTPUT = ROOT / 'output' / 'rehber'
+OUTPUT = ROOT / 'yayinlar' / 'mtrader-rehberi'
 OMIT = {'Sorularımız ve netleşen noktalar', 'Kaynaklar ve doğrulama', 'Devam notu'}
 
 
@@ -120,11 +120,6 @@ def run(quarto: str, fmt: str) -> None:
             for old_page in OUTPUT.glob('bolum-*.html'):
                 if old_page.name not in active_pages and old_page.resolve().parent == OUTPUT.resolve():
                     old_page.unlink()
-        if output_format == 'typst':
-            pdf = BUILD / '_book' / 'meeapps-rehber.pdf'
-            pdf_output = ROOT / 'output' / 'pdf'
-            pdf_output.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(pdf, pdf_output / pdf.name)
     print(f'Ciktilar: {OUTPUT}')
 
 

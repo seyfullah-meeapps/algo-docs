@@ -6,7 +6,7 @@ durum: taslak
 
 # Strateji anlatım şablonu
 
-Bu şablon içerik planıdır; bir stratejinin doğrulanmış davranışı değildir. Alanları uydurarak doldurma. Teknik sözleşmenin asıl adresi kök `20-stratejiler/` belgeleridir; burada insan için açıklama ve sayısal örnekler kaynakla bağlanır.
+Bu şablon içerik planıdır; bir stratejinin doğrulanmış davranışı değildir. Alanları uydurarak doldurma. Teknik sözleşmenin asıl adresi kök `bilgi-tabani/20-stratejiler/` belgeleridir; burada insan için açıklama ve sayısal örnekler kaynakla bağlanır.
 
 ## Amaç ve kullanım
 

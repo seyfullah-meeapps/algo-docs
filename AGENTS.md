@@ -1,10 +1,14 @@
 # AGENTS.md — algo-docs
 
-Bu repo, MeeApps'in BIST algo/HFT stack'inin **AI agent'lar için yazılmış** bilgi tabanıdır. Okuyucu bir insan değil, bir agent: insanın sorusunu cevaplamak, özet çıkarmak veya kod üzerinde çalışmadan önce bağlam toplamak için buradan okursun.
+Bu repo MTrader'ın teknik bilgi tabanını, insan rehberini, yayınlarını, testlerini ve issue kayıtlarını birlikte tutar. **`bilgi-tabani/` AI agent'lar için yazılmıştır.** İnsan rehberi `dersler/`, okunabilir çıktılar `yayinlar/`, kullanıcı testleri `testler/`, sorun takibi `issues/` içindedir. Hedef okuyucu çalışılan alana göre seçilir.
 
 ## Önce bunu bil
 
-- **Ürün ve şirket:** Ürün `MTrader`, şirket `MeeApps`. Müşteriler aracı kurumlar; günlük kullanıcılar onların traderları/fon yöneticileridir. MeeApps geliştirme/test için kullanır. Kullanıcı beyanıyla netleşen özellik → test → preprod düşük/yüksek lot → müşteriler sürecinin tek kaydı `00-genel/urun-ve-gelistirme-sureci.md`; bunu branch/CI akışıyla karıştırma.
+- **Diğer repolar kesinlikle salt okunur.** Bu çalışma alanından uygulama repolarında kod değişikliği, düzeltme dalı/çalışma ağacı oluşturma, commit, PR, merge veya deploy yapılmaz. Kullanıcının bir sorunu inceletmesi ya da kendi yapacağı geliştirmeyi anlatması kod değişikliği yetkisi değildir. Kod yalnız kanıt toplamak için okunur; değişiklikler bu repodaki belge ve test dosyalarıyla sınırlıdır.
+- **Kaynak repo yolu:** Motor incelemelerinde `C:\Users\Seyf\algo-workspace\AlgorithmicTrading` kullanılır; referans güncel `origin/development` içeriğidir. Masaüstündeki `AlgorithmicTrading` kopyası referans alınmaz. Diğer kaynak repolar da `C:\Users\Seyf\algo-workspace\` altından salt okunur incelenir. Fetch ile uzak referansları güncellemek, checkout dosyalarının da güncellendiği anlamına gelmez.
+- **Güncel durum esastır.** Ürün belgeleri, sanity dosyaları ve açık sorun listeleri projenin güncel halini anlatır. Geçersiz veya kullanıcı tarafından giderilmiş kabul edilen konular silinir; “çözüldü”, tarihli kapanış veya geliştirme takibi olarak tutulmaz. Kullanıcının bildirdiği güncel davranış, kodla yeniden doğrulanmış gibi sunulmaz. Eski kimlikler yeni konulara verilmez. Kullanıcının tamamen çıkardığı konular yeniden açık soru, regresyon, kapanış özeti veya “önceden böyle çözülmüştü” hatırlatması olarak sunulmaz. Oturum notlarından da eski takip anlatısı kaldırılır; arşiv/yedeklerden görev türetilmez.
+
+- **Ürün ve şirket:** Ürün `MTrader`, şirket `MeeApps`. Müşteriler aracı kurumlar; günlük kullanıcılar onların traderları/fon yöneticileridir. MeeApps geliştirme/test için kullanır. Kullanıcı beyanıyla netleşen özellik → test → preprod düşük/yüksek lot → müşteriler sürecinin tek kaydı `bilgi-tabani/00-genel/urun-ve-gelistirme-sureci.md`; bunu branch/CI akışıyla karıştırma.
 
 - **Dil:** Metin Türkçe; teknik terimler, kod isimleri, wire alan adları İngilizce. Kullanıcıya hangi dilde sorulduysa o dilde cevap ver.
 - **Doğruluk kaynağı kod.** Bu dokümanlar koddan damıtılmıştır ve belirli bir commit'e karşı doğrulanmıştır. Her dosyanın frontmatter'ında `kaynak` (repo, branch, commit) ve `dogrulama` (tarih) vardır. Cevabın kritikse (emir, fiyat ölçeği, risk, prod davranışı) ve repo erişimin varsa, ilgili koda bakıp teyit et.
@@ -19,7 +23,7 @@ Bu repo, MeeApps'in BIST algo/HFT stack'inin **AI agent'lar için yazılmış** 
 
 - **Başlarken** `OTURUM-NOTLARI.md`'yi oku: kararlar, mevcut durum, sıradaki işler orada.
 - **Çalışırken** karar alındıkça ve iş bittikçe `OTURUM-NOTLARI.md`'yi güncelle; oturum bitmeden "Şu an" ve "Sıradaki" güncel olsun (context dolarsa sonraki oturum buradan devam eder).
-- Bulunan sorun / şüphe / doğrulanmamış iddia → `ACIK-KONULAR.md`'ye **tek satır** + ayrıntı dosyasına link. Ayrıntı ilgili dosyada yazılır, indekste büyütülmez.
+- Bulunan sorun / şüphe / doğrulanmamış iddia → `issues/ACIK-KONULAR.md`'ye **tek satır** + ayrıntı dosyasına link. Ayrıntı ilgili dosyada yazılır, indekste büyütülmez.
 
 ## Harita — hangi soru, hangi dosya
 
@@ -27,15 +31,15 @@ Bu repo, MeeApps'in BIST algo/HFT stack'inin **AI agent'lar için yazılmış** 
 
 | Soru tipi | Bak |
 |-----------|-----|
-| Sistem nasıl çalışıyor, kim kimle konuşuyor, hot path ne? | `00-genel/sistem-haritasi.md` |
-| Branch'ler, ortamlar (dev/preprod/prod), müşteri hangi sürümde? | `00-genel/branch-ve-ortamlar.md` |
-| Bir terimin anlamı (ITCH, OUCH, tavan, KIE, kademe, unique_key…) | `00-genel/sozluk.md` |
-| BIST kuralı (fiyat adımı, fiyat limitleri, seanslar, açığa satış) | `00-genel/borsa-kurallari.md` |
-| Bir strateji ne yapar, parametreleri ne, hangi motorda, UI'da nerede? | `20-stratejiler/` — önce `20-stratejiler/README.md` (katalog) |
-| Bir servisin/kütüphanenin iç yapısı | `10-servisler/<repo>/README.md` |
-| Bir verinin/emrin uçtan uca yolculuğu | `30-akislar/` |
-| Kurulum, deploy, config, açılış log'ları | `40-operasyon/` |
-| Bilinen sorunlar, şüpheli davranışlar, doğrulanmamış iddialar | `ACIK-KONULAR.md` |
+| Sistem nasıl çalışıyor, kim kimle konuşuyor, hot path ne? | `bilgi-tabani/00-genel/sistem-haritasi.md` |
+| Branch'ler, ortamlar (dev/preprod/prod), müşteri hangi sürümde? | `bilgi-tabani/00-genel/branch-ve-ortamlar.md` |
+| Bir terimin anlamı (ITCH, OUCH, tavan, KIE, kademe, unique_key…) | `bilgi-tabani/00-genel/sozluk.md` |
+| BIST kuralı (fiyat adımı, fiyat limitleri, seanslar, açığa satış) | `bilgi-tabani/00-genel/borsa-kurallari.md` |
+| Bir strateji ne yapar, parametreleri ne, hangi motorda, UI'da nerede? | `bilgi-tabani/20-stratejiler/` — önce `bilgi-tabani/20-stratejiler/README.md` (katalog) |
+| Bir servisin/kütüphanenin iç yapısı | `bilgi-tabani/10-servisler/<repo>/README.md` |
+| Bir verinin/emrin uçtan uca yolculuğu | `bilgi-tabani/30-akislar/` |
+| Kurulum, deploy, config, açılış log'ları | `bilgi-tabani/40-operasyon/` |
+| Bilinen sorunlar, şüpheli davranışlar, doğrulanmamış iddialar | `issues/ACIK-KONULAR.md` |
 | Doküman çalışması nerede kaldı, hangi kararlar alındı? | `OTURUM-NOTLARI.md` |
 | Bu dokümanlar nasıl güncellenir? | `_surec/guncelleme.md` |
 | Dosyalar nasıl yazılır (frontmatter, kurallar)? | `_surec/yazim-kurallari.md` |
@@ -45,20 +49,27 @@ Her repo için tek satırlık görev, referans branch ve doğrulama commit'i: `m
 ## Dizin yapısı
 
 ```
-AGENTS.md            ← buradasın
-manifest.yaml        ← repo → branch → doğrulanan commit → doküman yeri
-CHANGELOG.md         ← her güncelleme oturumunun kaydı
-ACIK-KONULAR.md      ← açık sorunlar; tek satır + link
-OTURUM-NOTLARI.md    ← kararlar, mevcut durum, sıradaki işler
-00-genel/            ← cross-cutting: harita, branch/ortam, sözlük, borsa kuralları
-10-servisler/<repo>/ ← repo başına bir klasör; README.md giriş noktası
-20-stratejiler/      ← strateji başına bir dosya (motor + wire + UI birlikte)
-30-akislar/          ← uçtan uca senaryolar
-40-operasyon/        ← kurulum, deploy, config, log imzaları
-_surec/              ← bu repoyu yazma ve güncelleme kuralları
+README.md           ← bütün alanlara giriş
+AGENTS.md           ← ortak agent talimatları
+manifest.yaml       ← repo, branch, doğrulama commit'i ve teknik doküman yeri
+OTURUM-NOTLARI.md    ← kararlar, mevcut durum ve sıradaki işler
+CHANGELOG.md        ← güncelleme geçmişi
+bilgi-tabani/       ← AI teknik belgeleri; 00/10/20/30/40 ve test-incelemeleri
+dersler/            ← insan rehberinin Markdown kaynakları ve yayın araçları
+yayinlar/           ← güncel PDF, EPUB ve HTML çıktıları
+testler/            ← aktif sanity Excel'leri ve örnek dosyalar
+issues/             ← açık konu indeksi ve issue taslakları
+arsiv/              ← eski dersler, test yedekleri ve bitmiş çalışma dosyaları
+_surec/             ← bakım kuralları, kontroller ve teknik inceleme kayıtları
+tmp/                ← yalnız devam eden geçici işler (Git dışında)
+outputs/            ← geçici teslim kopyaları
+.tools/             ← yayın araçları
 ```
 
-**Tekrar yok kuralı:** Bir bilgi tek bir yerde yazılır, diğer yerler oraya link verir. Strateji mantığı `20-stratejiler/`'de, servisin genel iç yapısı `10-servisler/`'de. İki yerde çelişki görürsen bu bir hatadır — kullanıcıya bildir.
+**Dosya yerleştirme:** Yeni dosya ilgili alanın README'sindeki düzene göre konur; köke Excel/PDF/issue bırakılmaz. Teknik test incelemeleri `bilgi-tabani/test-incelemeleri/`, kullanıcı testleri `testler/sanity/`, test kaynaklı issue taslakları `issues/sanity/` içindedir. Sanity Excel'lerine kod/repo referansı konmaz. İş bitince gerekli çalışma kanıtları `arsiv/calisma/<tarih>/` altında toplanır; arşivden otomatik görev başlatılmaz. Açık teslim dosyası taşınmaz veya üzerine yazılmaz; aktif dosyaya aktarım öncesi kullanıcının değişiklikleri karşılaştırılır.
+
+
+**Tekrar yok kuralı:** Bir bilgi tek bir yerde yazılır, diğer yerler oraya link verir. Strateji mantığı `bilgi-tabani/20-stratejiler/`'de, servisin genel iç yapısı `bilgi-tabani/10-servisler/`'de. İki yerde çelişki görürsen bu bir hatadır — kullanıcıya bildir.
 
 ## Durum etiketleri
 

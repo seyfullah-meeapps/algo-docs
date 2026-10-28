@@ -39,7 +39,7 @@ Bir ekranda 10,01 TL görüyoruz, log'da ise `1001` yazıyor. İkisi farklı fiy
 
 Hesap **TL = raw / 10^ondalık_basamak** biçimindedir. `raw = 1001`, basamak 2 ise 10,01 TL; basamak 3 ise 1,001 TL demektir. “Fiyat alanı 1001” bilgisi ölçek olmadan eksiktir.
 
-MTrader HFT referansında enstrüman başına çarpan, `OuchManager` içinde `10^decimal_count` olarak hazırlanır. Bütün ürünlerde sabit 100 kullanma varsayımı doğru olmaz. Fiyat/miktar sözleşmesinin aslı [emir yaşam döngüsü](../../10-servisler/hftsrvprod/emir-yasam-dongusu.md), veri tarafının ayrıntısı [ITCH mesajları](../../10-servisler/itch-sdk/mesajlar-ve-emir-defteri.md) içindedir.
+MTrader HFT referansında enstrüman başına çarpan, `OuchManager` içinde `10^decimal_count` olarak hazırlanır. Bütün ürünlerde sabit 100 kullanma varsayımı doğru olmaz. Fiyat/miktar sözleşmesinin aslı [emir yaşam döngüsü](../../bilgi-tabani/10-servisler/hftsrvprod/emir-yasam-dongusu.md), veri tarafının ayrıntısı [ITCH mesajları](../../bilgi-tabani/10-servisler/itch-sdk/mesajlar-ve-emir-defteri.md) içindedir.
 
 **Fiyat ölçeği ile fiyat adımı ayrıdır.** İki ondalık basamak, sayıyı nasıl sakladığımızı anlatır; geçerli emir fiyatlarının birer kuruş arayla olmak zorunda olduğunu söylemez. Geçerli kademe aralığı ayrıca ürünün ve fiyat seviyesinin kuralıdır.
 

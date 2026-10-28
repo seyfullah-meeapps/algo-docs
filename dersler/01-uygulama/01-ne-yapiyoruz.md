@@ -92,9 +92,9 @@ Hedefimiz, bir ayarın hangi davranışı değiştirdiğini açıklayabilmek ve 
 
 ## Kaynaklar ve doğrulama
 
-Ürün/şirket ayrımı ve müşteri kullanım bağlamı, kullanıcının 24 Ekim 2026 açıklamasından alınan [ürün ve geliştirme sürecine](../../00-genel/urun-ve-gelistirme-sureci.md) dayanır.
+Ürün/şirket ayrımı ve müşteri kullanım bağlamı, kullanıcının 24 Ekim 2026 açıklamasından alınan [ürün ve geliştirme sürecine](../../bilgi-tabani/00-genel/urun-ve-gelistirme-sureci.md) dayanır.
 
-Bu giriş, mevcut bilgi tabanındaki [sistem haritası](../../00-genel/sistem-haritasi.md), [strateji kataloğu](../../20-stratejiler/README.md), [arayüz özeti](../../10-servisler/mtrader-trade-ui/README.md) ve [strateji başlatma akışından](../../30-akislar/strateji-baslatma.md) derlendi. Frontmatter'daki commit'ler bu kaynak belgelerin referanslarıdır; bu tur kaynak kod yeniden incelenmedi. İçerik kullanıcı incelemesini bekleyen taslaktır.
+Bu giriş, mevcut bilgi tabanındaki [sistem haritası](../../bilgi-tabani/00-genel/sistem-haritasi.md), [strateji kataloğu](../../bilgi-tabani/20-stratejiler/README.md), [arayüz özeti](../../bilgi-tabani/10-servisler/mtrader-trade-ui/README.md) ve [strateji başlatma akışından](../../bilgi-tabani/30-akislar/strateji-baslatma.md) derlendi. Frontmatter'daki commit'ler bu kaynak belgelerin referanslarıdır; bu tur kaynak kod yeniden incelenmedi. İçerik kullanıcı incelemesini bekleyen taslaktır.
 
 Bu bölüm güncel seans saati, takas süresi veya belirli bir stratejinin emir/risk garantisi hakkında hüküm içermez. İnternet araştırması, uygulama testi ve canlı ortam doğrulaması yapılmadı.
 

@@ -65,7 +65,7 @@ Ancak daha nazik aralıklarla tekrar etmek, tekrarın iş açısından güvenli 
 
 ## MTrader testinde sonuç nasıl ifade edilir?
 
-“Bağlantı geri geldi” yerine hazırlığın hangi aşamaya ulaştığını yazarız: oturum kuruldu mu, görüntü geldi mi, eksik olaylar tamamlandı mı, açık emirlerle gerçekleşmeler uzlaştı mı? Ekrandaki miktar ile kaynağın durumu birlikte kontrol edilir. Teknik ayrıntılar [HFT emir yaşam döngüsü](../../10-servisler/hftsrvprod/emir-yasam-dongusu.md) ve [ITCH alım yolu](../../10-servisler/itch-sdk/alim-yolu.md) belgelerinde kalır.
+“Bağlantı geri geldi” yerine hazırlığın hangi aşamaya ulaştığını yazarız: oturum kuruldu mu, görüntü geldi mi, eksik olaylar tamamlandı mı, açık emirlerle gerçekleşmeler uzlaştı mı? Ekrandaki miktar ile kaynağın durumu birlikte kontrol edilir. Teknik ayrıntılar [HFT emir yaşam döngüsü](../../bilgi-tabani/10-servisler/hftsrvprod/emir-yasam-dongusu.md) ve [ITCH alım yolu](../../bilgi-tabani/10-servisler/itch-sdk/alim-yolu.md) belgelerinde kalır.
 
 ## Sorularımız ve netleşen noktalar
 

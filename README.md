@@ -1,27 +1,34 @@
 ---
-kapsam: Bilgi tabanının giriş noktaları, kapsamı ve inceleme araçları
-dogrulama: 2026-10-24
+kapsam: MTrader belgeleri, yayınları, testleri ve sorun kayıtlarının ana dizini
+dogrulama: 2026-10-27
 durum: taslak
 ---
 
-# algo-docs
+# MTrader dokümanları
 
-**Ürün MTrader, şirket MeeApps.** MTrader aracı kurumlar için geliştirilen algoritmik işlem botudur. Müşteri kullanımı ve şirketin geliştirme/test süreci: [ürün bağlamı](00-genel/urun-ve-gelistirme-sureci.md).
+Ürün **MTrader**, şirket **MeeApps**. Teknik bilgi tabanı, insan rehberi, yayınlar, test dosyaları ve issue kayıtları ayrı alanlarda tutulur.
 
-MeeApps BIST algo/HFT stack'inin bilgi tabanı. Birincil okuyucu AI agent'lardır; giriş noktası [`AGENTS.md`](AGENTS.md).
+| Aradığın içerik | Giriş |
+|---|---|
+| AI için sistem, servis, strateji ve akış bilgisi | [Bilgi tabanı](bilgi-tabani/README.md) |
+| Konu konu okunacak yazılı rehber | [Rehber kaynakları](dersler/README.md) |
+| Güncel PDF, EPUB ve HTML kitap | [Yayınlar](yayinlar/README.md) |
+| Kullanıcıların çalıştıracağı sanity testleri | [Testler](testler/README.md) |
+| Açık sorunlar ve issue taslakları | [Issue'lar](issues/README.md) |
+| Eski sürümler ve tamamlanmış çalışmalar | [Arşiv](arsiv/README.md) |
 
-**İlk aşama tamamlandı (24 Ekim 2026):** planlanan doküman yazımı, derinleştirme ve development–master/main kod karşılaştırması kapatıldı. Aktif devam işi yok. Açık sorun araştırmaları, bug düzeltmeleri ve canlı ortam doğrulamaları kullanıcı yeniden istediğinde ayrı kapsamda ele alınacak. İçerik etiketleri `taslak` kalır; aşamanın tamamlanması bütün belgelerin içerik onayı değildir. [Kapsam ve kapanış](_surec/ikinci-tur-sonuc-2026-10-24.md).
+## Güncel çalışma
 
-- Hangi repo, hangi branch, hangi commit'e karşı doğrulandı: [`manifest.yaml`](manifest.yaml)
-- Güncelleme geçmişi: [`CHANGELOG.md`](CHANGELOG.md)
-- Güncelleme süreci: [`_surec/guncelleme.md`](_surec/guncelleme.md)
-- Yapısal kontroller: [`_surec/kontrol.md`](_surec/kontrol.md)
-- İkinci statik tur sonucu ve kapsamı: [24 Ekim kapanışı](_surec/ikinci-tur-sonuc-2026-10-24.md)
-- Kaynak tazeliği: [23 Ekim tam remote kontrolü](_surec/kaynak-karsilastirmasi-2026-10-23.md), [24 Ekim kısmi güncelleme ve devam](_surec/kaynak-karsilastirmasi-2026-10-24.md)
-- Taslak incelemesinin durumu ve öncelikleri: [`_surec/inceleme-durumu.md`](_surec/inceleme-durumu.md)
+Arbitraj sanity incelemesi sürüyor; aktif sürüm ve kapsam [sanity dizininde](testler/sanity/README.md) tutulur. Diğer stratejilere otomatik geçilmez. Rehberde 24 konu yazıldı; ayrıntı [ilerleme kaydında](dersler/ilerleme.md). AI bilgi tabanının ilk kapsamı kapalıdır; yeni araştırma ayrı taleple başlar.
 
-İnsan için konu bazlı uygulama ve sistem rehberi: [dersler/README.md](dersler/README.md). 24 Ekim 2026 kullanıcı talebiyle yeniden düzenlenen bu rehber çalışması, kapanmış teknik inceleme aşamasından ayrıdır.
+## Çalışma kuralları
 
-A4 PDF, EPUB ve canlı HTML önizleme: [okuma ve çıktı yönergesi](dersler/yayin/README.md). VS Code'da `Ctrl+Shift+B` üç çıktıyı üretir; Markdown dosyaları ana kaynak olarak kalır.
+- Agent başlangıcı: [AGENTS.md](AGENTS.md), ardından [oturum notları](OTURUM-NOTLARI.md).
+- Kaynak repo ve doğrulama sürümleri: [manifest.yaml](manifest.yaml). Klasör taşıması kodun yeniden doğrulandığı anlamına gelmez.
+- [Güncelleme süreci](_surec/guncelleme.md), [yazım kuralları](_surec/yazim-kurallari.md), [değişiklik geçmişi](CHANGELOG.md).
+- Yapısal kontrol: `python _surec/kontrol.py`.
+- Kitap üretimi: `python dersler/yayin/uret.py --format all` veya VS Code'da **Ctrl+Shift+B**. Kaynak Markdown düzenlenir.
 
-Kapsam dışı: mate, Backoffice, Kripdome/DTA, Algo-GUI (emekli masaüstü arayüz). Eski bilgi tabanı `MeeApps/meeapps-ai` olduğu gibi duruyor; bu repo onun yerini alır.
+Aktif Excel'lerin tek adresi `testler/sanity/`, güncel kitap çıktılarının tek adresi `yayinlar/mtrader-rehberi/` olur. `outputs/` teslim kopyaları, `tmp/` geçici çalışmalar içindir. Açık Arbitraj teslim dosyası kullanıcı isteğiyle `outputs/` içinde bırakılmıştır; değişiklikleri karşılaştırılmadan silinmez veya aktif dosyanın üzerine aktarılmaz.
+
+Mate dosyaları yalnız test yaklaşımı için [referans örneklerdir](testler/referanslar/mate/README.md). `.tools/` yayın araçlarını, `.vscode/` hazır görevleri içerir.

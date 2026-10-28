@@ -68,7 +68,7 @@ Ayrıntılı çalışma önceliğimiz **HFT → Arbitraj → Toplu Emirler → T
 
 ## Kaynaklar ve doğrulama
 
-Resmi BIST VİOP eğitim belgesinin korunma/baz riski/arbitraj kavramları ve Pay Piyasası piyasa yapıcılık açıklaması okundu; erişim 24 Ekim 2026. VİOP eğitim PDF’si tarihsel (2017) kavram kaynağıdır, güncel ürün/teminat kuralı için kullanılmadı. MTrader adları ve kapsamı mevcut [strateji kataloğu](../../20-stratejiler/README.md) ile kullanıcının önceliklerinden alındı; kesin parametre sözleşmesi oluşturulmadı.
+Resmi BIST VİOP eğitim belgesinin korunma/baz riski/arbitraj kavramları ve Pay Piyasası piyasa yapıcılık açıklaması okundu; erişim 24 Ekim 2026. VİOP eğitim PDF’si tarihsel (2017) kavram kaynağıdır, güncel ürün/teminat kuralı için kullanılmadı. MTrader adları ve kapsamı mevcut [strateji kataloğu](../../bilgi-tabani/20-stratejiler/README.md) ile kullanıcının önceliklerinden alındı; kesin parametre sözleşmesi oluşturulmadı.
 
 Bu tur MTrader kaynak kodu veya canlı sistem test edilmedi. Proje karşılıkları mevcut KB taslaklarının kavramsal özetidir; güncel prod davranışı olarak sunulmaz.
 

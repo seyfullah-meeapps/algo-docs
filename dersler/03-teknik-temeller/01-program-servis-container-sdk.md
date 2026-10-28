@@ -46,13 +46,13 @@ Container bir sanal makineyle aynı şey değildir; olağan Linux container'lar�
 
 Bir SDK'nın ayrı reposu olması, ayrı container olarak çalışacağı anlamına gelmez. Paylaşımlı kütüphane biçimindeki `.so` dosyası, onu kullanan sürecin içine yüklenebilir. SDK kendi thread'lerini başlatsa bile bunlar aynı sürecin thread'leri olabilir.
 
-MTrader'da HFT motoru ile ITCH SDK'sını bu ayrımla okuyacağız: motor stratejiyi çalıştırır, kullandığı SDK piyasa verisi için işlevler sunar. HFT'nin referans build tanımı `HftSrvProd` çalıştırılabilir dosyasını üretir ve `MAItchSDK` ile `MAOrderSDK` kütüphanelerini arar. Ayrıntılı bağımlılık haritası [HFT servis belgesindedir](../../10-servisler/hftsrvprod/README.md).
+MTrader'da HFT motoru ile ITCH SDK'sını bu ayrımla okuyacağız: motor stratejiyi çalıştırır, kullandığı SDK piyasa verisi için işlevler sunar. HFT'nin referans build tanımı `HftSrvProd` çalıştırılabilir dosyasını üretir ve `MAItchSDK` ile `MAOrderSDK` kütüphanelerini arar. Ayrıntılı bağımlılık haritası [HFT servis belgesindedir](../../bilgi-tabani/10-servisler/hftsrvprod/README.md).
 
 ## “Güncelledik” dendiğinde hangi zinciri takip ederiz?
 
 Varsayımsal bir SDK değişikliği düşünelim: geliştirici düzeltmeyi commit'ledi, fakat test makinesinde eski kütüphane kullanılıyor. Kaynak kod doğru olsa da yeni davranış testte görünmeyebilir. Kontrol sırası **kaynak commit → build çıktısı → dağıtılan dosya/image → çalışan süreç → yüklenen config** olur.
 
-Bu sıra, MTrader'ın müşteri kabul sürecinin yerine geçmez. Teknik sürüm zinciri ile test/preprod/müşteri süreci farklı sorulara yanıt verir. Ortam ve dağıtım ayrıntıları [branch ve ortamlar](../../00-genel/branch-ve-ortamlar.md) ile sonraki sistem bölümünde ele alınacak.
+Bu sıra, MTrader'ın müşteri kabul sürecinin yerine geçmez. Teknik sürüm zinciri ile test/preprod/müşteri süreci farklı sorulara yanıt verir. Ortam ve dağıtım ayrıntıları [branch ve ortamlar](../../bilgi-tabani/00-genel/branch-ve-ortamlar.md) ile sonraki sistem bölümünde ele alınacak.
 
 ## Sorularımız ve netleşen noktalar
 

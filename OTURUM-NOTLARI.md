@@ -7,9 +7,40 @@ durum: taslak
 # Oturum notları
 
 Yeni oturuma başlayan agent **önce bunu okur**. Her oturumda karar alındıkça ve iş bittikçe güncellenir; oturum bitmeden "Şu an" ve "Sıradaki" bölümleri mutlaka güncel bırakılır.
-Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `ACIK-KONULAR.md`'de; burada tekrarlanmaz.
+Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `issues/ACIK-KONULAR.md`'de; burada tekrarlanmaz.
 
-## Şu an (2026-10-25)
+## Şu an (2026-10-28)
+
+**HFT revizyon hazırlığı:** Kullanıcının açık talebiyle Arbitraj oturumunun son kararları, aktif Excel yapıları ve HFT inceleme/issue kayıtları okundu. Hazırlık tamamlandı; [HFT revizyon planı](bilgi-tabani/test-incelemeleri/hft-inceleme-2026-10-26.md#güncel-hazırlık--28-ekim) güncel devam noktasıdır. Bu tur yalnız plan/not güncellendi; Excel, issue ve uygulama kodu değişmedi, yeni kaynak veya canlı test doğrulaması yapılmadı. Aşağıdaki HFT'ye geçiş için talep bekleme notları bu yeni talepten öncesine aittir.
+
+**Temettü yeniden incelemesi:** Kullanıcının özel talebiyle geliştirme geçmişi ve uzak motor dalları yeniden kontrol edildi. Faiz/Çift Vade Faiz emir fiyatına temettü ekleyen `f0c3b12` ve `0468428` güncel dallarda mevcut; GUI Faiz hesabında da kuruş dönüşümü var. Motorun yön/fark hesabı ham temettü kullandığından ölçek ayrımı sürüyor. Kanıt/kapsam [temettü kaydında](issues/sanity/arbitraj-toplu-issue.md#5-temettü-değerinin-fiyat-ve-yön-hesaplarında-farklı-ölçekle-kullanılması). Kod veya Excel sonucu değiştirilmedi. Sonraki adım kullanıcının değerlendirmesi; başka bulgu zinciri başlatılmaz.
+
+**Arbitraj değerlendirme sırası tamamlandı:** Kullanıcıyla sıraya alınan sanity bulgularının tamamı ele alındı. Yeni soru/inceleme zinciri başlatılmaz. Daha önce sonraya bırakılan altı geliştirme konusu [toplu issue dosyasında](issues/sanity/arbitraj-toplu-issue.md), ayrı veri temizliği konusu [K-263 kaydında](issues/arbitraj-30-gunluk-temizlik-veri-kaybi.md) durur. Bunlar inceleme sırasının bitmesiyle giderilmiş sayılmaz. Sonraki çalışma kullanıcı talebiyle seçilir; HFT'ye otomatik geçilmez.
+
+**Tavan süre sorusu (28 Ekim):** HftSrvProd fetch sonrası development `e64d49e` kodunda toplayınca saniye kuralı seçeneğinin normal `Second_Rule_Duration` süresini giriş sonrası çıkış kontrolünde kullandığı doğrulandı (`HftMaxPrice.cpp:1392–1405`); `Open_Position_Second_Rule` tavan bozulma zamanından ölçülen ayrı giriş kontrolüdür. Yalnız soru yanıtlandı; canlı test veya uygulama değişikliği yok. Sıradaki: kullanıcının yeni talebi; otomatik inceleme başlatılmaz.
+
+
+
+
+
+
+**Klasör düzeni:** Ana taşıma ve commit öncesi dosya kontrolü tamamlandı; ayrıntı [klasör düzeni kaydında](_surec/klasor-duzeni-2026-10-27.md#commit-öncesi-durum). Bitmiş geçici çalışmalar ve eski teslimler yerel arşivde, aktif belgeler/testler kendi alanlarında. Açık bırakılan teslim ve güncel teslim yerinde korundu. Kullanıcı commit hazırlıyor; stage/commit/push yapılmadı. Sıradaki Arbitraj konusu ancak kullanıcının devam talebiyle ele alınır; HFT'ye otomatik geçilmez.
+
+
+
+**Arbitraj D04 ve sıradaki karar:** Kâr TL gösterilir; komisyon ve fonlama maliyeti düşülmez. D04 için ek kullanıcı kararı beklenmez; eksik Net Kar verisi ve Toplam Kar ölçek sorunları [issue kaydında](issues/sanity/arbitraj-toplu-issue.md#kâr-alanlarının-kaynak-ve-ölçeği) açıktır, geliştirme sonraya bırakılmıştır. Anlık açık pozisyon kârı yeni özellik olarak varsayılmaz. F10 için ilk bacak vadeli emirlerin panel akışına dahil olmadığı kodla doğrulandı; ikinci/dayanak bacakta bekleyen emir ve aktif aboneliğe rağmen veri kaybı henüz doğrulanmadı. Güncel kaynak ve ayrıntı [F10 kaydında](issues/sanity/arbitraj-toplu-issue.md#9-pasif-emirler-paneline-veri-gelmemesi). F10 mevcut issue’da inceleme/geliştirme için bekler; bu konu üzerinden yeni soru zinciri başlatılmaz. Arbitraj değerlendirme sırası tamamdır; bu açık geliştirmeler yalnız kullanıcı talebiyle yeniden ele alınır. Uygulama kodu değiştirilmez.
+
+**Arbitraj güncel kapsam:** Aktif Excel 3.0: 52 test (5 ön koşul, 32 ana sanity, 15 genişletilmiş), 36 ayar/hazırlık açıklaması. Sorun ve karar takibi yalnız [issue dosyasında](issues/sanity/arbitraj-toplu-issue.md); Excel kullanıcı testleri içindir. Kalan test sonuçları ve kanıtlar korundu. Teslim: outputs/arbitraj-guncel-30/MTrader_Arbitraj_Sanity_Test.xlsx. Aktif dosya: testler/sanity/MTrader_Arbitraj_Sanity_Test.xlsx. Sonraki adım kullanıcının incelemesi veya yeni talebi; HFT veya açık bulgulardan otomatik devam edilmez. Uygulama kodu değiştirilmedi.
+
+**Arbitraj açık issue kaydı:** [Toplu issue](issues/sanity/arbitraj-toplu-issue.md) içinde Spread Otomatik (3), temettü ölçeği (5), durdurmada dayanak iptali (8), kaynak dosya/fonksiyon referanslarıyla yer alır. Bu üç uyumsuzluk mevcut K-205 kapsamındadır; yeniden mükerrer konu açılmaz. Ayrı 30 günlük temizlik sorunu K-263 dosyasındadır. Bu açık kayıtlar geliştirme için bekler; yeni inceleme veya HFT çalışması kullanıcı talebiyle başlar.
+
+**26 Ekim — Taban ilk sanity Excel tamamlandı:** Kullanıcının Tavan sonrası talebiyle yeni GUI development ve HftMinPrice kaynaklarından oluşturuldu. Sürümv1.0; 8 ön koşul,52 senaryo,20 regresyon,26 parametre; 80 test Test Edilmedi. Aktif dosya `testler/sanity/MTrader_Taban_Sanity_Test.xlsx`; ayrıntı `bilgi-tabani/test-incelemeleri/taban-inceleme-2026-10-26.md`, tek açık aday metni `issues/sanity/taban-toplu-issue.md`. Beş repoda fetch başarılı; K-259–K-262 eklendi. Paket/formül/geçici girdi, beş sekmenin yedi aralığında görsel ve native Excel salt okunur hesaplama kontrolleri geçti. Önceki Excel dosyaları değişmedi; canlı test/build/uzak issue/push yok. Aşağıdaki önceki strateji kayıtları tarihseldir.
+
+**26 Ekim — toplu issue metni:** Kullanıcının isteğiyle `issues/sanity/arbitraj-toplu-issue.md` hazırlandı. Yalnız bulgu, kodsal neden, olası etki ve P/R karşılıkları içerir; beklenen davranış, çözüm önerisi ve kabul ölçütü içermez. Altı inceleme başlığı ve ayrıca tatil/durdurma/emir bölme koşulları tek kayıtta toplandı. Kullanıcı kendisi issue açacak; bu tur uzak serviste issue açılmadı, Excel değişmedi. Önceki teknik kanıt kaydı ayrı korunur.
+
+Aktif Excel'ler `testler/sanity/` altında; önceki sürümler `_yedek_2026-10-26/` içinde. İki dosyada Genel, strateji senaryoları, Regresyon, Parametre Eşleştirme ve Listeler sekmeleri var. Arbitraj: 5 başarılı ön koşul; 57 senaryoda 15 Başarılı, 1 Başarısız, 3 Test Ediliyor, 1 Bloke, 37 Test Edilmedi; 19 regresyon testi Test Edilmedi. HFT: 8 ön koşul + 57 senaryo + 33 regresyon, toplam 98 testin tamamı Test Edilmedi. Bunlar dosyada kayıtlı sonuçlardır; bu oturumun test kanıtı değildir.
+
+Son konuşma, kod karşılaştırmasıyla iki Excel'in revize edildiğini; açılır listeler/formüller korunarak XML üzerinden düzenlendiğini kaydediyor. Önceki raporun ilk bulguları yerine son düzeltilmiş raporu esas al: HFT B07 değiştirilmedi, B10 kilit hatası sessiz değil; Arbitraj D04'te hesap formülü ile ekran ölçeği ayrıldı. Devamda mevcut kullanıcı sonuçları korunmalı. Konuşmada kalan işler: A02 emir geçmişi/yenileme sorunu için ayrı regresyon satırı, Arbitraj referans değerler senaryosu ve test edilen GUI/sürümün netleşmesi. Bunlar bu tur uygulanmadı. Rehberin mevcut içerik durumu aşağıdaki 25 Ekim kaydı ve `dersler/ilerleme.md` içinde geçerlidir.
 
 **Güncel devam noktası:** Kullanıcı önceki 14 konuyu okudu, ek değişiklik gerekmiyor dedi ve sıradaki bölümün tamamını istedi. Teknik Temeller'in 10 konusu taslak yazıldı; toplam 24 konu kitapta, 24 iskelet kaldı. Yayın 0.12 PDF/HTML/EPUB üretildi; 56 A4 sayfa, yeni teknik bölüm 37–56. sayfalarda. Görsel/yapısal ve EPUB bütünlük kontrolleri geçti. Önceki bölümlere kullanıcı inceleme tarihi eklendi; kod doğrulama etiketleri değiştirilmedi. Sıradaki: yeni teknik bölümün toplu kullanıcı revizyonları. Bizim Sistemimiz'e otomatik geçilmez. Tek güncel ayrıntı `dersler/ilerleme.md`; aşağıdaki önceki sıra/sürüm notları tarihseldir.
 
@@ -33,7 +64,7 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 **Güncel devam noktası:** Kullanıcı ilk bölüm revizyonlarını uygun buldu ve sıradaki bölüme geçilmesini istedi. Borsa temellerinin ilk konusu `dersler/02-borsa-temelleri/01-piyasalar-ve-urunler.md` yazıldı; Borsa İstanbul resmi kaynakları okundu. Üç konu kitapta, 45 konu iskelet; yayın 0.4. Yeni konu henüz okunmadı. Sıradaki dosya emir defteri ve eşleşme. Aşağıdaki bekleme/sürüm notları tarihsel; güncel takip `dersler/ilerleme.md`.
 
-**Son kullanıcı revizyonu işlendi:** Ürün MTrader (algoritmik işlem botu), şirket MeeApps; müşteriler aracı kurumlar ve günlük kullanıcıları onların traderları/fon yöneticileri. MeeApps düzenli trade yapmaz, geliştirme/test yapar. İş sürecinin tek kaydı `00-genel/urun-ve-gelistirme-sureci.md`; ana KB girişleri buna bağlandı. İkinci konu “Kullanıcılar ve geliştirme süreci” olarak yeniden yazıldı. Test → preprod düşük lot → kararlılık sonrası yüksek lot → bütün müşteriler akışı kullanıcı beyanı; teknik dağıtım kanıtı değildir. Önsöz kaldırıldı, bölüm başlıkları zenginleştirildi, ürün adı MTrader olarak düzeltildi. Yayın 0.3, 7 A4 sayfa; yeniden okuma bekleniyor. Aşağıdaki önceki tur sayfa sayıları/sıra notları tarihsel; güncel devam noktası `dersler/ilerleme.md`.
+**Son kullanıcı revizyonu işlendi:** Ürün MTrader (algoritmik işlem botu), şirket MeeApps; müşteriler aracı kurumlar ve günlük kullanıcıları onların traderları/fon yöneticileri. MeeApps düzenli trade yapmaz, geliştirme/test yapar. İş sürecinin tek kaydı `bilgi-tabani/00-genel/urun-ve-gelistirme-sureci.md`; ana KB girişleri buna bağlandı. İkinci konu “Kullanıcılar ve geliştirme süreci” olarak yeniden yazıldı. Test → preprod düşük lot → kararlılık sonrası yüksek lot → bütün müşteriler akışı kullanıcı beyanı; teknik dağıtım kanıtı değildir. Önsöz kaldırıldı, bölüm başlıkları zenginleştirildi, ürün adı MTrader olarak düzeltildi. Yayın 0.3, 7 A4 sayfa; yeniden okuma bekleniyor. Aşağıdaki önceki tur sayfa sayıları/sıra notları tarihsel; güncel devam noktası `dersler/ilerleme.md`.
 
 **Güncel devam noktası: ilk bölüm tamamlandı, kullanıcı revizyonları bekleniyor.** Uygulamanın amacı ve kullanıcılar/örnek iş günü iki ayrı taslak olarak kitapta; sürüm 0.2, toplam 8 A4 sayfa. Kullanıcı okuyup revizyon verecek; şimdilik borsa temellerine geçilmez. Görsel tasarıma olumlu geri bildirim var, içerik onayı yok. Son durumun tek özeti `dersler/ilerleme.md`; aşağıdaki eski tur özetleri tarihsel bağlamdır.
 
@@ -45,7 +76,7 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 **Rehber ana çalışma konusu.** Ana okuyucu kullanıcının kendisi; sonrasında görevi devralan/yeni katılan kişiler için şirket içi bilgi aktarım kaynağı olacak. Mantık ve davranış ana metinde, gerektiğinde kısa kod; derin ayrıntılar ayrı bölümde. Mevcut hatalar rehberde anlatılmayacak; teknik takip ayrı kalacak, düzeltme doğrulanınca rehber güncellemesi kapanışta kontrol edilecek. Düzelmemiş hedef davranış çalışıyormuş gibi yazılmaz. Kararlar `dersler/kararlar.md` içinde; yazıma başlamak için zorunlu açık tercih yok. İlk konu `dersler/01-uygulama/01-ne-yapiyoruz.md` taslak olarak yazıldı; kullanıcı okuma onayı yok. Sıradaki konu kullanıcılar ve örnek iş günü.
 
-**Aktif kapsam: konu bazlı insan rehberinin yazımı.** Kullanıcı önceki ders düzeninden vazgeçip gelecekte yazılı dokümana dönüştürülebilecek bir rehber istedi. Yeni sıra ve kararlar `dersler/kararlar.md`, ayrıntılı indeks `dersler/README.md`, devam noktası `dersler/ilerleme.md` içinde. Altı bölümdeki 48 konudan ilki taslak yazıldı, 47 konu iskelet. Eski 11 dosya `dersler/arsiv/` altında tarihsel olarak korundu. Konu bazlı soru/yanıt kaydı, kaynak ve görsel kuralları `dersler/calisma-duzeni.md`, agent talimatları `dersler/AGENTS.md` içinde. Bu tur internet/kod araştırması veya uygulama testi yok.
+**Aktif kapsam: konu bazlı insan rehberinin yazımı.** Kullanıcı önceki ders düzeninden vazgeçip gelecekte yazılı dokümana dönüştürülebilecek bir rehber istedi. Yeni sıra ve kararlar `dersler/kararlar.md`, ayrıntılı indeks `dersler/README.md`, devam noktası `dersler/ilerleme.md` içinde. Altı bölümdeki 48 konudan ilki taslak yazıldı, 47 konu iskelet. Eski 11 dosya `arsiv/eski-dersler/` altında tarihsel olarak korundu. Konu bazlı soru/yanıt kaydı, kaynak ve görsel kuralları `dersler/calisma-duzeni.md`, agent talimatları `dersler/AGENTS.md` içinde. Bu tur internet/kod araştırması veya uygulama testi yok.
 
 Önceki push otomatik onay incelemesince reddedildi; kullanıcı henüz uzak depoya gönderim onayı vermedi. Bu tur push tekrar denenmez. Teknik incelemenin ilk aşama kapanışı aşağıdaki tarihsel kapsamıyla geçerlidir.
 
@@ -53,11 +84,11 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 ## Tamamlanan teknik takip (tarihsel kayıt)
 
-- K-240 SDK kaynağı bulundu: warrant-open-quote-log-pp e800b3d; extended callback HFT f20b5f2 ile eşleşiyor. Aynı adlı SDK hft_warrant_advanced dalında API yok. Ayrıntı `10-servisler/itch-sdk/quote-executed-feature.md`; kaynak zinciri tamam, artifact/header/library ve dağıtım açık. SDK fetch/pull sonrası development/master aynı. QuoteBuyer çıkarımı ve sıfır miktarlı geç bildirim belgelendi.
+- K-240 SDK kaynağı bulundu: warrant-open-quote-log-pp e800b3d; extended callback HFT f20b5f2 ile eşleşiyor. Aynı adlı SDK hft_warrant_advanced dalında API yok. Ayrıntı `bilgi-tabani/10-servisler/itch-sdk/quote-executed-feature.md`; kaynak zinciri tamam, artifact/header/library ve dağıtım açık. SDK fetch/pull sonrası development/master aynı. QuoteBuyer çıkarımı ve sıfır miktarlı geç bildirim belgelendi.
 
-- K-240 GUI–motor kaynak eşleşmesi bulundu: GUI d2c35c7 ↔ HFT hft_warrant_advanced f20b5f2. Parser/miktar/snapshot ve maliyet kapanışı incelendi; yeni executed_ex callback ve quote alanları SDK bağımlılığı getiriyor. Ayrıntı `20-stratejiler/varant-toplu.md`; K-240 SDK/dağıtım kapsamıyla açık. Development/master değişmedi; build/canlı test yok.
+- K-240 GUI–motor kaynak eşleşmesi bulundu: GUI d2c35c7 ↔ HFT hft_warrant_advanced f20b5f2. Parser/miktar/snapshot ve maliyet kapanışı incelendi; yeni executed_ex callback ve quote alanları SDK bağımlılığı getiriyor. Ayrıntı `bilgi-tabani/20-stratejiler/varant-toplu.md`; K-240 SDK/dağıtım kapsamıyla açık. Development/master değişmedi; build/canlı test yok.
 
-- Teorik feature 26ce9b2 statik delta incelemesi tamamlandı. HFT fetch/pull sonrası development/master aynı, commit yalnız feature dalında; açılış bildirimi, own-state guard, sıfır denge ve reverse Expected_Price farkları `20-stratejiler/teorik-fiyat.md` içinde. K-04 değişmedi; runtime/build yok.
+- Teorik feature 26ce9b2 statik delta incelemesi tamamlandı. HFT fetch/pull sonrası development/master aynı, commit yalnız feature dalında; açılış bildirimi, own-state guard, sıfır denge ve reverse Expected_Price farkları `bilgi-tabani/20-stratejiler/teorik-fiyat.md` içinde. K-04 değişmedi; runtime/build yok.
 
 - K-241/K-242 development 4275ccc gövdeleriyle yerelde sınandı: beş senaryo beklendiği gibi. MSVC senkron ret yeniden kilidinde istisna; iki satış ACK'i sonrası son token'a toplam miktarla replace gözlendi. Kanıt `_surec/dogrulama-varant-2026-10-24.md`; adaylar açık, tam entegrasyon/canlı test veya uygulama düzeltmesi yok.
 
@@ -84,7 +115,7 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 - AlgoProd kalan AKD/Overall/stop-loss ve paket/hedge statik alt turu tamamlandı. Bugün yalnız AlgorithmicTrading yeniden fetch/pull edildi; dev/master aynı. K-205/K-206 sürüyor, yeni sorun numarası yok. Bugünkü kanıt ve sınırlar `_surec/kaynak-karsilastirmasi-2026-10-24.md` içinde; önceki 15 repo kontrolü 23 Ekim tarihidir.
 
-- AlgoProd ikinci turunun ilk alt turu tamamlandı: fetch/pull sonrası uçlar aynı. K-194 Q>L koşuluyla daraltıldı; K-195 faiz branch farkı tekrar görüldü. VWAP incelenen strateji/command kaynakları iki branch'te aynı. Fon sepet ret/completion ve Arbitraj başlatma/ret yolları kontrol edildi; prod binary/config sonucu çıkarılmadı.
+- AlgoProd ikinci turunun ilk alt turu tamamlandı: fetch/pull sonrası uçlar aynı. K-194 Q>L koşuluyla daraltıldı; VWAP incelenen strateji/command kaynakları iki branch'te aynı. Fon sepet ret/completion ve Arbitraj başlatma/ret yolları kontrol edildi; prod binary/config sonucu çıkarılmadı.
 
 - Varant (13)/Teorik Fiyat statik ikinci turu tamamlandı; HFT yeniden fetch/pull sonrası uçlar aynı. K-241 senkron ret/recursive olmayan mutex, K-242 tek satış token'ı/parçalı fill sınırı eklendi. Teorik ilk eşleşme feature bfe65e2 incelendi, referans davranışına geçirilmedi; K-04 devam ediyor.
 
@@ -98,9 +129,9 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 
 - FIX şifre/config/ret alt turu tamamlandı; order-service ve SDK yeniden fetch/pull sonrası aynı uçlarda. K-233 (1409'suz Logon SDK/host ayrımı), K-234 (manuel adayda DB yazma hatasına rağmen arm) kaydedildi; crash-safe garanti ifadesi daraltıldı. K-120 ortak ret sınırı açık. Statik inceleme, şifre değişimi/canlı test yok.
 
-- Legacy FIX fill/replay ve replace alt turu tamamlandı. order-service/SDK yeniden fetch/pull sonrası aynı uçlarda. K-121'in master'da da olduğu teyit edildi; K-232 legacy geçmiş fill'in yeniden pozisyon kuyruğuna girmesi adayı kaydedildi. Ayrıntı `10-servisler/order-service/fix-branch-karsilastirmasi.md`. Kaynak branch bulguları; prod sonucu/canlı test yok.
+- Legacy FIX fill/replay ve replace alt turu tamamlandı. order-service/SDK yeniden fetch/pull sonrası aynı uçlarda. K-121'in master'da da olduğu teyit edildi; K-232 legacy geçmiş fill'in yeniden pozisyon kuyruğuna girmesi adayı kaydedildi. Ayrıntı `bilgi-tabani/10-servisler/order-service/fix-branch-karsilastirmasi.md`. Kaynak branch bulguları; prod sonucu/canlı test yok.
 
-- Replay/combiner ve SDK development/main ana fark turu tamamlandı: yeni süreç adopt'u ile süreç içi reconnect ayrıldı; K-106 açıklaması düzeltildi, K-231 main hard-cap koşulu eklendi. SDK yeniden fetch/pull sonrası aynı uçlarda. Ayrıntı `10-servisler/maordersdk/branch-ve-replay-kontrolu.md`; statik inceleme, canlı test yok.
+- Replay/combiner ve SDK development/main ana fark turu tamamlandı: yeni süreç adopt'u ile süreç içi reconnect ayrıldı; K-106 açıklaması düzeltildi, K-231 main hard-cap koşulu eklendi. SDK yeniden fetch/pull sonrası aynı uçlarda. Ayrıntı `bilgi-tabani/10-servisler/maordersdk/branch-ve-replay-kontrolu.md`; statik inceleme, canlı test yok.
 
 - HFT/SDK callback-token alt turu tamamlandı; altı ilgili repoda yeniden fetch/development pull yapıldı, uçlar aynı. K-56 daraltıldı; iki HFT branch'inde GUI kuyruğu/rekey sorunu adayı K-230 kaydedildi. Statik inceleme; canlı/zamanlamalı test yok.
 
@@ -112,6 +143,28 @@ Doküman değişikliklerinin ayrıntısı `CHANGELOG.md`'de, açık sorunlar `AC
 - Önceki yerel commit'ler `00a6c99` (admin) ve `3c86c9b` (genel kontrol) henüz push edilmedi. Mevcut remote `seyfullah-meeapps/algo-docs`; önceki otomatik onay reddi nedeniyle bu oturumda push denenmedi.
 
 ## Sıradaki
+
+**Öncelikli güncel devam — HFT:** [Hazırlanan plan](bilgi-tabani/test-incelemeleri/hft-inceleme-2026-10-26.md#güncel-hazırlık--28-ekim) üzerinden kullanıcı testlerini sınıflandırmak ve kâr al/stop-loss alanlarından başlayarak güncel GUI/motor kaynaklarını salt okunur karşılaştırmak. Arbitrajın son Excel yaklaşımı esas; stratejiye özel kararları HFT'ye otomatik taşıma. Önceki Arbitraj soru sıraları ve HFT talebi bekleme kayıtları aktif sıra değildir. Bu tur yalnız hazırlık istendi ve tamamlandı.
+
+**Güncel devam:** Arbitraj ürün soruları kullanıcıyla netleştiriliyor. Otomatik Spread mevcut GUI/motor eşlemesinde desteklenmiyor; temettü fiyat/yön ölçekleri çelişkili. Durdurmanın iki bacağın bekleyen emirlerini iptal etmesi ürün beklentisi; kaynak yalnız vadeliye iptal gönderiyor. Bu konular için kullanıcıdan aynı cevabı tekrar isteme; kod bulgularını raporla. Sonraki konular: kâr birimi/masraflar, Çift Vade çarpanı, alan kuralları, tutar limiti, yeniden açılış, toplu iptal/panel silme kapsamı ve ortam kanıtları. Arbitraj bitmeden HFT incelemesine geçilmez. Diğer repolar yalnız okunur.
+
+**Dosya düzeni sonrası:** Arbitraj 1.3 için kullanıcı değerlendirmesi bekleniyor. `outputs/arbitraj-sanity-20261027/` içindeki dosya kullanıcı isteğiyle açık bırakıldı; kapandığında değişiklikleri `testler/sanity/` altındaki aktif dosyayla karşılaştırmadan silme/üzerine yazma. Eski çalışma ve yedeklerden otomatik görev başlatma. Güncel konumlar kök README'de.
+
+**Güncel sanity devamı:** Arbitraj 1.3 kullanıcının incelemesini bekliyor. Kullanıcı beğenirse aynı yaklaşım diğer stratejilere ayrı talebiyle uygulanır; otomatik geçiş yok. Excel'ler kullanıcı işlemlerini ve ekranda görülebilen sonuçları anlatır; teknik/kod/repo incelemeleri ayrı belgelerde kalır. Revize adımlar yeniden çalıştırılmadan eski sonuçlar yeni test kanıtı sayılmaz.
+
+**Güncel Taban devamı:** İlk dosya hazır; kullanıcının incelemesi, ürün kararları veya manuel test kanıtıyla devam edilir. Kod bulguları test sonucu değildir. Sonraki yeni açık konu numarası263. Başka strateji veya uygulama düzeltmesi otomatik başlamaz; aşağıdaki önceki sıra/numara notları tarihseldir.
+
+**Güncel Tavan devamı:** İlk Excel hazırlığı tamamlandı. Kullanıcının incelemesi, ürün kararları veya manuel test sonuçlarıyla devam edilir. Özellikle R01 tolerans0/−1 ve R02 yeni strateji saatleri test ön koşullarından ayrılmalıdır; kod bulgusu başarılı/başarısız test sonucu sayılmaz. Sonraki yeni açık konu numarası259. Taban veya uygulama düzeltmesi otomatik başlamaz; toplu issue yerel taslaktır, uzak issue/push yapılmadı.
+
+**Güncel HFT devamı:** Excel ve yerel issue taslağı hazırlama işi tamamlandı. Kullanıcının ürün kararları, manuel test gözlemleri veya seçtiği düzeltme ile devam edilir; motor/frontend geliştirmesi ve diğer stratejiler otomatik başlamaz. Sonraki yeni açık konu numarası 254. HFT eski iddialarının kapanması başarılı manuel test anlamına gelmez. Uzak issue açılmadı ve önceki push engeli nedeniyle push denenmedi.
+
+**Güncel takip:** Açık bulgular toplu issue metninde tutulur. Kullanıcı ürün kararı verdikçe geçersiz bulgu açık içerikten çıkarılır, Excel/yerel karar kaydı güncellenir. Düzeltmelerde kod değişikliği tek başına kapanış değildir; tekrar test/kanıt korunur. Kullanıcı sonraki bulguyu seçene kadar motor/frontend geliştirmesi veya manuel test başlatılmaz. K-250 ve R20 tekrar kullanılmaz; sonraki yeni açık konu numarası 252.
+
+**Excel temizliği sonrası:** Arbitraj dosya düzenleme kapsamı kapandı; manuel testlere kullanıcı istediğinde devam edilir. R20, eksik adımları notlanmış beş Kısmen kayıt ve önceden devam eden/koşulmamış senaryolar gelecekteki test kapsamıdır; otomatik koşulmaz. Toplu issue'yu kullanıcı açacak ve alt issue/ürün kararlarını kendisi yönlendirecek. HFT Excel revizyonu ayrı sonraki talep bekler.
+
+**Toplu issue devamı:** Kullanıcı `issues/sanity/arbitraj-toplu-issue.md` içeriğini tek issue olarak açacak; sonraki kullanıcı yönlendirmesiyle bulgular alt issue'lara ayrılıp ele alınacak. Beklenen ürün davranışlarını kullanıcı/ekip belirleyecek. Kod incelemesi bulguları otomatik başarısız test veya kesin bug sayılmaz; bu tur uygulama geliştirmesi başlatılmaz.
+
+**Arbitraj güncel devamı:** Yeni GUI esas alınır. F10 için ilk bacak vadeli emirlerin panel akışına dahil olmadığı kodla doğrulandı; ikinci/dayanak bacakta bekleyen emir ve aktif aboneliğe rağmen veri kaybı henüz doğrulanmadı. Güncel kaynak ve ayrıntı [F10 kaydında](issues/sanity/arbitraj-toplu-issue.md#9-pasif-emirler-paneline-veri-gelmemesi). F10 mevcut issue’da inceleme/geliştirme için bekler; bu konu üzerinden yeni soru zinciri başlatılmaz. Sıradaki konu kullanıcının seçimiyle kalan Arbitraj açık başlıklarıdır; uygulama kodu değiştirilmez. P32/R01 otomatik yön ve P19/R02 saat sözleşmesi issue kayıtlarında açıktır. Temettü ve durdurma teknik sorunları issue dosyasında; gerçek container saati yerel kaynaklardan kapanamaz. R06 toplu kaydetme eski hata iddiasından ayrıldı, uçtan uca test bekliyor. Kodla açıklığı kapatmayı başarılı canlı test sayma; HFT veya diğer stratejilere otomatik geçme. Kullanıcıya inceleme sonucu ve önerilen ilk çalışma sunulur; önceki “geliştirme talebi beklenir” notu bu yeni taleple değişti.
 
 **Rehber için:** İlk bölümün iki taslağı tamamlandı. Kullanıcı okuyup revizyon verecek; gelen soruları/değişiklikleri işle, şimdilik borsa temellerine geçme. Kullanıcı devam dediğinde ilk yeni dosya `dersler/02-borsa-temelleri/01-piyasalar-ve-urunler.md`. Eski Ders 06 planı geçersiz. Önce `dersler/AGENTS.md`, kararlar, indeks, ilerleme ve çalışma düzenini oku. Konuşulan gerçek soruları ilgili konuya tarihli kaydet; yazılmışı okunmuş/onaylanmış sayma. Güncel borsa iddialarını içerik yazılırken resmi kaynaklardan doğrula. Açık bug araştırması bu kapsamla otomatik açılmadı.
 
@@ -132,7 +185,7 @@ Boşluk analizi (2026-10-22): yeni KB ~3.100 satır, eski `meeapps-ai` ~25.000 s
 9. ~~Doğrulamalar~~ ✅ 2026-10-22 (K-04 kasıt sorusu açık)
 10. Kullanıcı taslakları gözden geçirdikçe `durum: dogrulandi`.
 11. ~~AlgoProd derinleştirme~~ ✅ 2026-10-23
-12. ~~`30-akislar/` yeniden doğrulama/genişletme~~ ✅ 2026-10-23
+12. ~~`bilgi-tabani/30-akislar/` yeniden doğrulama/genişletme~~ ✅ 2026-10-23
 13. ~~Admin paneli (`mtrader-frontend-apps`) derinleştirme~~ ✅ 2026-10-23
 
 ## Kararlar
@@ -146,7 +199,7 @@ Kullanıcıyla alınmış kararlar; aksi söylenmedikçe geçerli.
 - **Referans branch:** `development`; akış `development → preprod → master`. Prod farkları `⚠ master'da yok` ile işaretlenir. İstisnalar `manifest.yaml`'da.
 - **Eğitim kapsamı (2026-10-24):** Önceki kişisel dersler kapsam dışı kararı kullanıcı talebiyle değişti. İnsan için dersler `dersler/` altında; öncelik HFT → Arbitraj → Toplu Emirler → Tavan → Taban, BYF en son. Toplu Emirler, Varant Toplu'dan ayrıdır. Teknik kaynaklar mevcut yerinde kalır; eğitim katmanı anlatım, örnek ve gerçek konuşma notlarını tutar.
 - **Kapsam dışı:** mate, Backoffice, Kripdome/DTA, Algo-GUI (en eski arayüz), `mtrader-new` (yeni GUI'nin kişisel öncül reposu, artık `mtrader-trade-ui` development'ta).
-- **Eski ve yeni GUI:** İkisi de prod'da (parçalı geçiş); ikisi de belgelenir. Müşteri ↔ GUI tablosu `00-genel/branch-ve-ortamlar.md`'de.
+- **Eski ve yeni GUI:** İkisi de prod'da (parçalı geçiş); ikisi de belgelenir. Müşteri ↔ GUI tablosu `bilgi-tabani/00-genel/branch-ve-ortamlar.md`'de.
 - **Kullanılmayan stratejiler** (OrderChase, Warrant Tracker, AKD, MovingAverage): tek satırla "kullanılmıyor", ayrıntı yazılmaz.
 - **Tazelik (2026-10-23 kullanıcı isteği):** İkinci inceleme development ile birlikte master/main güncel origin uçlarına karşı yapılır. Başlangıçta fetch, temiz referans çalışma branch'inde pull --ff-only; yerel değişiklikler ezilmez. Manifest istisnaları korunur.
 - **Klonlar:** Okuma `C:\Users\Seyf\algo-workspace`'teki taze klonlardan; masaüstündeki klonlara dokunulmaz.
@@ -157,7 +210,7 @@ Kullanıcıyla alınmış kararlar; aksi söylenmedikçe geçerli.
 - **Push:** Her adımdan sonra `main` commit'lenip push edilir (onay beklenmez). İşi biten branch'ler silinebilir.
 - **Öncelik:** Önce doküman tamamlanır; sorun düzeltme/inceleme (ACIK-KONULAR bug?/iş) sonra.
 - **Servis klasör yapısı:** Servis tek README'ye sığmıyorsa konu başına alt dosya; README giriş + indeks, ayrıntı alt dosyada (tekrar yok).
-- **Not tutma:** Açık sorunlar `ACIK-KONULAR.md`'de tek satır + link; oturum devamlılığı bu dosyada.
+- **Not tutma:** Açık sorunlar `issues/ACIK-KONULAR.md`'de tek satır + link; oturum devamlılığı bu dosyada.
 
 ## Geçmiş
 
@@ -175,8 +228,8 @@ En yeni en üstte; oturum başına birkaç satır.
 - **2026-10-23 (Codex devam):** Transkript ve çalışma ağacı karşılaştırıldı. Madde 12 tamamlandı; yedi akış, README indeks ve çapraz düzeltmeler, K-208–K-220. Kritik yollar kaynak kodla kontrol edildi; canlı kurtarma denenmedi. Sıradaki madde 13.
 
 
-- **2026-10-23 (6. oturum, devam):** Kullanım limitinden sonra devam. AlgoProd (madde 11) derinleştirildi; K-194–K-207. master'da olmayan iki strateji düzeltmesi (K-194, K-195) prod'u etkiliyor.
-- **2026-10-22 (3. oturum):** Kullanıcının `dogrulama-2026-10-22` branch'i main'e alındı (borsa kuralları, sözlük, ❓ temizliği — bkz. CHANGELOG). `ACIK-KONULAR.md` ve bu dosya açıldı. Push kuralı kondu; transkript silindi. Öncelik: doküman tamamlama (boşluk analizi). trade-data-app ve HftSrvProd derinleştirildi; HftSrvProd sonrası kullanıcı isteğiyle duruldu.
+- **2026-10-23 (6. oturum, devam):** Kullanım limitinden sonra devam. AlgoProd (madde 11) derinleştirildi; K-194–K-207. Fon Takibi kaynak farkı (K-194) belgelendi; kurulu prod binary etkisi doğrulanmadı.
+- **2026-10-22 (3. oturum):** Kullanıcının `dogrulama-2026-10-22` branch'i main'e alındı (borsa kuralları, sözlük, ❓ temizliği — bkz. CHANGELOG). `issues/ACIK-KONULAR.md` ve bu dosya açıldı. Push kuralı kondu; transkript silindi. Öncelik: doküman tamamlama (boşluk analizi). trade-data-app ve HftSrvProd derinleştirildi; HftSrvProd sonrası kullanıcı isteğiyle duruldu.
 - **2026-10-22 (5. oturum, bulut):** Kaynak repolar salt okunur bağlandı. itch-sdk derinleştirildi (3 alt dosya, K-126–K-148); K-06 kapandı, K-01 teşhisi düzeltildi. ouch-sdk/network-sdk derinleştirildi (K-149–K-162); K-07 kapandı. mtrader-trade-ui derinleştirildi (K-163–K-178).
 - **2026-10-22 (6. oturum):** Doğrulamalar (madde 9): borsa kuralları resmi prosedürden, K-10–K-12 kapandı, K-04 netleşti (K-192, K-193).
 - **2026-10-22 (6. oturum):** Operasyon (madde 8) derinleştirildi: kurulum, config indeksi + AlgoProd config, log imzaları, sabah kontrolleri (K-179–K-191); K-05, K-09, K-175 kapandı.

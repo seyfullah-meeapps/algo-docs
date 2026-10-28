@@ -46,7 +46,7 @@ Tablo genel anlamları anlatır; MTrader'ın her endpoint'inde bu kodların tama
 
 **Abonelik**, uygulama düzeyinde “şu ürünün/hesabın olaylarını istiyorum” seçimidir. Bağlantı kurulmuş olsa bile ilgili abonelik kurulmamışsa beklenen olay gelmeyebilir. **Push**, sunucunun her olay için yeni bir istemci isteği beklemeden veri göndermesidir.
 
-MTrader'ın referans hub kodunda ayrı WebSocket yolları vardır; örneğin `/ws/v1/orders/start` ve `/ws/v1/strategy/start`. GUI servis sözleşmesi HTTP eşlemelerini de tanımlar. Ekrandaki liste isteği ile canlı olay hattını ayrı gözlemlemek anlamlıdır. Gerçek sözleşmeler [hub API](../../10-servisler/trade-data-app/api.md) ve [veri akışı](../../10-servisler/trade-data-app/veri-akisi.md) belgelerindedir.
+MTrader'ın referans hub kodunda ayrı WebSocket yolları vardır; örneğin `/ws/v1/orders/start` ve `/ws/v1/strategy/start`. GUI servis sözleşmesi HTTP eşlemelerini de tanımlar. Ekrandaki liste isteği ile canlı olay hattını ayrı gözlemlemek anlamlıdır. Gerçek sözleşmeler [hub API](../../bilgi-tabani/10-servisler/trade-data-app/api.md) ve [veri akışı](../../bilgi-tabani/10-servisler/trade-data-app/veri-akisi.md) belgelerindedir.
 
 ## Sayfa açılıyor ama fiyatlar donuyor: nasıl düşünürüz?
 

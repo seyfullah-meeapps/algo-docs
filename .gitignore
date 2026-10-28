@@ -1,6 +1,11 @@
 .tools/
 tmp/
 output/
+outputs/
+yayinlar/mtrader-rehberi/
+arsiv/calisma/
 dersler/yayin/.build/
 dersler/yayin/.preview/
 __pycache__/
+~$*
+*.tmp

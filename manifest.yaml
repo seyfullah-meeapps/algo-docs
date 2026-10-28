@@ -3,6 +3,7 @@
 # dogrulanan_commit: dokümanların bu repo için en son tam olarak kontrol edildiği commit.
 #   Tek tek dosyaların kendi frontmatter'ı daha yeni bir commit gösterebilir.
 # Güncelleme yaparken: _surec/guncelleme.md
+# 2026-10-27: yalnız dokuman yolları bilgi-tabani/ altına taşındı; kaynak doğrulama tarihleri değişmedi.
 
 olusturma: 2026-10-22
 son_guncelleme: 2026-10-24
@@ -21,7 +22,7 @@ repolar:
     branch: development
     dogrulanan_commit: 4275ccc031973bf3600b65ce3d4848e46f264ca1
     commit_tarihi: 2026-10-19
-    dokuman: 10-servisler/hftsrvprod/
+    dokuman: bilgi-tabani/10-servisler/hftsrvprod/
     durum: taslak
 
   - repo: AlgorithmicTrading
@@ -29,7 +30,7 @@ repolar:
     branch: development
     dogrulanan_commit: 0dc32a7da21b73a9ae1a61326ea6f4a58e61ea68
     commit_tarihi: 2026-10-13
-    dokuman: 10-servisler/algorithmic-trading/
+    dokuman: bilgi-tabani/10-servisler/algorithmic-trading/
     durum: taslak
 
   - repo: itch-sdk
@@ -37,7 +38,7 @@ repolar:
     branch: development
     dogrulanan_commit: 35a3b5c267cf50bdf186bb2de730a1a9e74f36ec
     commit_tarihi: 2026-10-07
-    dokuman: 10-servisler/itch-sdk/
+    dokuman: bilgi-tabani/10-servisler/itch-sdk/
     durum: taslak
 
   - repo: MAOrderSDK
@@ -45,7 +46,7 @@ repolar:
     branch: development
     dogrulanan_commit: a7887827a305e9f445adaa183d7a1c9498183518
     commit_tarihi: 2026-09-24
-    dokuman: 10-servisler/maordersdk/
+    dokuman: bilgi-tabani/10-servisler/maordersdk/
     durum: taslak
 
   - repo: order-service
@@ -53,7 +54,7 @@ repolar:
     branch: development
     dogrulanan_commit: b86c0cf8966661c0617a77b2cb56338d96324af6
     commit_tarihi: 2026-10-20
-    dokuman: 10-servisler/order-service/
+    dokuman: bilgi-tabani/10-servisler/order-service/
     durum: taslak
 
   - repo: ouch-sdk
@@ -61,7 +62,7 @@ repolar:
     branch: development
     dogrulanan_commit: 0c3589e015ab6471905434e95ab621a209c22105
     commit_tarihi: 2026-10-19
-    dokuman: 10-servisler/ouch-sdk/
+    dokuman: bilgi-tabani/10-servisler/ouch-sdk/
     durum: taslak
 
   - repo: network-sdk
@@ -69,7 +70,7 @@ repolar:
     branch: development
     dogrulanan_commit: 3c1b42f3e3d7baa03f31d4f92ebe526f5e86c495
     commit_tarihi: 2026-10-19
-    dokuman: 10-servisler/network-sdk/
+    dokuman: bilgi-tabani/10-servisler/network-sdk/
     durum: taslak
 
   - repo: performance-sdk
@@ -77,7 +78,7 @@ repolar:
     branch: development
     dogrulanan_commit: 6e47f203c6b0c8b9cf8a72085e9578d319a375ed
     commit_tarihi: 2026-09-14
-    dokuman: 10-servisler/performance-sdk/
+    dokuman: bilgi-tabani/10-servisler/performance-sdk/
     durum: taslak
 
   - repo: trade-data-app
@@ -85,7 +86,7 @@ repolar:
     branch: development
     dogrulanan_commit: 1cca9a8ff8ecd45a8c196ed3e40ffba1a73c0193
     commit_tarihi: 2026-10-21
-    dokuman: 10-servisler/trade-data-app/
+    dokuman: bilgi-tabani/10-servisler/trade-data-app/
     durum: taslak
     not: 2026-10-23 fetch sonrası master'da development'ta olmayan 9 commit var (6 merge dışı); master hotfix'leri ayrıca karşılaştırılmalı.
 
@@ -94,7 +95,7 @@ repolar:
     branch: development
     dogrulanan_commit: b0474c3f564a8f2513352014c3c1c80841d5a068
     commit_tarihi: 2026-10-22
-    dokuman: 10-servisler/mtrader-trade-ui/
+    dokuman: bilgi-tabani/10-servisler/mtrader-trade-ui/
     durum: taslak
     not: >
       development = yeni GUI (sıfırdan yazıldı, 2026-09-14'te development'a merge edildi, 7e14a00).
@@ -106,7 +107,7 @@ repolar:
     branch: main
     dogrulanan_commit: db10c12f2226821f35693b24b57bffd5a71204dc
     commit_tarihi: 2026-09-17
-    dokuman: 10-servisler/mtrader-frontend-apps/
+    dokuman: bilgi-tabani/10-servisler/mtrader-frontend-apps/
     durum: taslak
     not: development branch'i 2026-03'ten beri güncellenmiyor; canlı branch main.
 
@@ -115,7 +116,7 @@ repolar:
     branch: development
     dogrulanan_commit: 2a3c5d58a4615d2af431e95fc46be214a00e9698
     commit_tarihi: 2026-10-21
-    dokuman: 40-operasyon/
+    dokuman: bilgi-tabani/40-operasyon/
     durum: taslak
     not: Branch'ler ortamı temsil eder (development/preprod/main); birbirine merge edilmez.
 
@@ -124,7 +125,7 @@ repolar:
     branch: master
     dogrulanan_commit: ab35ddec50b80359332f9d15b06ff2252747c4af
     commit_tarihi: 2026-10-20
-    dokuman: 40-operasyon/
+    dokuman: bilgi-tabani/40-operasyon/
     durum: taslak
     not: development branch'i 2022'den beri güncellenmiyor; canlı branch master.
 
@@ -133,7 +134,7 @@ repolar:
     branch: main
     dogrulanan_commit: 582987f2993edf607188318653689c702f06b7dc
     commit_tarihi: 2026-10-20
-    dokuman: 10-servisler/warrant-selector/
+    dokuman: bilgi-tabani/10-servisler/warrant-selector/
     durum: taslak
 
   - repo: Itch-Replayer
@@ -141,7 +142,7 @@ repolar:
     branch: main
     dogrulanan_commit: c4b60294c059155439680efffa75d859093c0f9f
     commit_tarihi: 2026-09-02
-    dokuman: 10-servisler/itch-replayer/
+    dokuman: bilgi-tabani/10-servisler/itch-replayer/
     durum: taslak
 
 kapsam_disi:

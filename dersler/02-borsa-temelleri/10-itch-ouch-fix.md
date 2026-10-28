@@ -62,7 +62,7 @@ Mevcut bilgi tabanında piyasa verisi tarafı **itch-sdk**, doğrudan borsa emir
 
 ## Kaynaklar ve doğrulama
 
-BIST’in resmi ITCH, OUCH ve FIX tanıtım sayfaları 24 Ekim 2026’da okundu; web sayfalarında ayrı sürüm tarihi yoktur. Teknik belge kataloğunda sürümler bulunduğu görüldü, çalışan sistemin bu sürümlerden hangisini kullandığı bu tur doğrulanmadı. Proje eşlemesi mevcut [sözlük](../../00-genel/sozluk.md), [itch-sdk](../../10-servisler/itch-sdk/README.md), [MAOrderSDK](../../10-servisler/maordersdk/README.md) ve [ouch-sdk](../../10-servisler/ouch-sdk/README.md) taslaklarına dayanır.
+BIST’in resmi ITCH, OUCH ve FIX tanıtım sayfaları 24 Ekim 2026’da okundu; web sayfalarında ayrı sürüm tarihi yoktur. Teknik belge kataloğunda sürümler bulunduğu görüldü, çalışan sistemin bu sürümlerden hangisini kullandığı bu tur doğrulanmadı. Proje eşlemesi mevcut [sözlük](../../bilgi-tabani/00-genel/sozluk.md), [itch-sdk](../../bilgi-tabani/10-servisler/itch-sdk/README.md), [MAOrderSDK](../../bilgi-tabani/10-servisler/maordersdk/README.md) ve [ouch-sdk](../../bilgi-tabani/10-servisler/ouch-sdk/README.md) taslaklarına dayanır.
 
 Bu tur MTrader kaynak kodu veya canlı sistem test edilmedi. Proje karşılıkları mevcut KB taslaklarının kavramsal özetidir; güncel prod davranışı olarak sunulmaz.
 

@@ -37,7 +37,7 @@ Bir raporda yalnız “p99 30 µs” görmek yerine olay sayısı, yük, süre, 
 
 **Colocation**, sunucuyu borsanın erişim altyapısına yakın bir veri merkezi ortamında konumlandırmaktır. Şehrin öbür ucundan gelen kurye yerine yakın depodan sevkiyat gibi düşünebiliriz. Fiziksel yol ve ağ düzeni gecikmeyi etkiler; yakınlık fırsatı ilk gören veya emri ilk gerçekleşen olmayı tek başına garanti etmez.
 
-İşlem sırası, uygulama kuyruğu, borsa kontrolleri ve başka katılımcıların davranışı da sonucu etkiler. Bu yüzden colocation ile kârlılık veya sıra önceliği arasında otomatik eşitlik kurmayız. MTrader'ın gerçek dağıtım ve bağlantı haritası [sistem haritasında](../../00-genel/sistem-haritasi.md) ve operasyon belgelerinde kalır; burada fiziksel yakınlığın anlamını öğreniyoruz.
+İşlem sırası, uygulama kuyruğu, borsa kontrolleri ve başka katılımcıların davranışı da sonucu etkiler. Bu yüzden colocation ile kârlılık veya sıra önceliği arasında otomatik eşitlik kurmayız. MTrader'ın gerçek dağıtım ve bağlantı haritası [sistem haritasında](../../bilgi-tabani/00-genel/sistem-haritasi.md) ve operasyon belgelerinde kalır; burada fiziksel yakınlığın anlamını öğreniyoruz.
 
 ## Hot path ile cold path
 
@@ -63,7 +63,7 @@ Kernel bypass tek bir ürünün adı değildir. Örneğin Linux AF_XDP, paketler
 
 HFT referans worker kodunda koşullu CPU affinity ayarı bulunur. Bunun bulunması, incelenen makinede pinning'in açık veya başarılı olduğunu kanıtlamaz. Ayar, çalışma log'u ve gerçek CPU yerleşimi birlikte değerlendirilir.
 
-Mevcut KB, performans ölçüm bileşenini [performance-sdk](../../10-servisler/performance-sdk/README.md) altında anlatır. Metrik ismini gördüğümüzde başlangıç/bitiş noktalarını oradan ve çağıran koddan takip ederiz. Ekranın yenilenme süresi ile motorun karar gecikmesini aynı sayı gibi karşılaştırmayız.
+Mevcut KB, performans ölçüm bileşenini [performance-sdk](../../bilgi-tabani/10-servisler/performance-sdk/README.md) altında anlatır. Metrik ismini gördüğümüzde başlangıç/bitiş noktalarını oradan ve çağıran koddan takip ederiz. Ekranın yenilenme süresi ile motorun karar gecikmesini aynı sayı gibi karşılaştırmayız.
 
 ## Sorularımız ve netleşen noktalar
 
